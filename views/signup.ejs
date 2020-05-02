@@ -29,10 +29,15 @@ crossorigin="anonymous">
 				
 		<div class="col-md-6 box_in"> 
 					
+
 			<form action="/sign_up" method="post">
 
 				<img src="images/logo.png" class="logo-holder">
 				<h2 align="center">Register</h2><br>
+
+				<%- include('partials/messages') %>
+
+				<br>
 				<div class="form-group">
 				  <input type="text" class="form_input" id="name" name="name" placeholder="Name">
 				  <small id="emailHelp" class="form-text text-muted"></small>
