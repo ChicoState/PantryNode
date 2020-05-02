@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title> Signup Form</title> 
+		
+		
+<link rel="stylesheet"
+href= 
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+integrity= 
+"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+crossorigin="anonymous">	 
+
+<link rel="stylesheet" href= "stylesheets/style.css">	 
+
+		
+		
+</head> 
+<body> 
+	
+	<br> 
+	<br> 
+	<br> 
+	<div class="container " > 
+		<div class="row"> 
+		<div class="col-md-3"> 
+					
+		</div> 
+				
+		<div class="col-md-6 box_in"> 
+					
+			<form action="/sign_up" method="post">
+
+				<img src="images/logo.png" class="logo-holder">
+				<h2 align="center">Register</h2><br>
+				<div class="form-group">
+				  <input type="text" class="form_input" id="name" name="name" placeholder="Name">
+				  <small id="emailHelp" class="form-text text-muted"></small>
+				</div>
+
+				<div class="form-group">
+					<input type="email" class="form_input" id="email" name="email" aria-describedby="emailHelp" placeholder="E-mail">
+				  </div>
+				
+				  
+				  <div class="form-group">
+					<input type="text" class="form_input" id="phone" name="phone" placeholder="Phone Number">
+				  </div>
+				  
+				<div class="form-group">
+				  <input type="password" class="form_input" id="password" name="password" placeholder="Password">
+				</div>
+	
+				<button type="submit"  id="submitDetails"  
+				name="submitDetails" class="btn form_input red font-white">Register</button>
+              </form>
+              <br>
+              <small id="SignUp" class="form-text text-muted" style="width: 100%; text-align: center;" >
+                <a href="/">Already have an account?</a>
+            </small>
+					
+		</div> 
+				
+				
+		<div class="col-md-3"> 
+		</div> 
+				
+	</div> 
+	</div> 
+</body> 
+</html>	 
+
