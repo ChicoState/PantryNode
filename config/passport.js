@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 
-module.exports = function (passport) {
+module.exports = function(passport) {
     passport.use(
 
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
@@ -15,13 +15,12 @@ module.exports = function (passport) {
                         return done(null, false, { message: 'User does not exist' });
                     }
 
-                    bcrypt.compare(password, user.password, (err, isMatch) => {
+                    bcrypt.compare(password + email, user.password, (err, isMatch) => {
                         if (err) throw err;
 
                         if (isMatch) {
                             return done(null, user);
-                        }
-                        else {
+                        } else {
                             return done(null, false, { message: 'User does not exist' });
                         }
 
@@ -32,12 +31,12 @@ module.exports = function (passport) {
 
     );
 
-    passport.serializeUser(function (user, done) {
+    passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
 
-    passport.deserializeUser(function (id, done) {
-        User.findById(id, function (err, user) {
+    passport.deserializeUser(function(id, done) {
+        User.findById(id, function(err, user) {
             done(err, user);
         });
     });
