@@ -35,7 +35,7 @@
             <div class="col-md-12">
                 <div class="box_out" style="min-height: 650px;">
 
-                    <%- include('partials/header') %>
+                    <%- include('partials/header_2') %>
 
                         <div class="inWrap">
                             <br><br>
@@ -55,32 +55,51 @@
                                             <br>
 
 
+                                            <button type="button" class="btn btn-outline-secondary">Anonymous</button>
+                                            <a href="/donor"><button type="button" class="btn btn-outline-primary">Donor</button></a>
+                                            <button type="button" class="btn btn-outline-success">Pantry Stock</button>
+
+                                            <br><br>
+
                                             <div class="form-group">
-                                                <input type="text" class="form_input" id="name" name="name" placeholder="Item Name">
-                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <input type="text" class="form_input" id="itemName" name="itemName" placeholder="Item Name">
                                             </div>
 
                                             <div class="form-group ">
-                                                <select class="form-control" id="type" name="type">
-                                                        <option disabled selected>Select Type</option>
-                                                        <option value="0">Personal</option>
-                                                        <option value="1">Organization</option>
-                                                        <option value="2">Anonymous</option>
+                                                <select class="form-control" id="itemType" name="itemType">
+                                                        <option disabled selected>Select Category</option>
+                                                    
+
+                                                     
+                                                        <% if(typeof data.categories != 'undefined'){ %>
+                                                            <% data.categories.forEach(function(cat){ %>
+                                                                <option value=" <%= cat._id %> ">
+
+                                                                <%= cat.categoryName %>
+                                                            </option>
+                                                                    <% }); %>
+                                                                        <% } %>
+
                                                       </select>
+
+
+
                                             </div>
 
                                             <div class="form-group">
-                                                <input type="email" class="form_input" id="quantity" name="quantity" placeholder="Quantity">
+                                                <input type="text" class="form_input" id="quantity" name="quantity" placeholder="Quantity">
                                             </div>
 
 
                                             <div class="form-group">
-                                                <input type="date" class="form_input" id="date" name="date" placeholder="Expiry Date">
+                                                <input type="date" class="form_input" id="dateExp" name="dateExp" placeholder="Expiry Date">
                                             </div>
 
                                             <div class="form-group">
                                                 <input type="text" class="form_input" id="price" name="price" placeholder="Price">
                                             </div>
+
+                                            <input type="text" name="donor_id" style="visibility: hidden;display: none;" value="<%= data.donorId %>">
 
 
 
@@ -89,10 +108,38 @@
 
                                     </div>
 
-                                    <div class="col-md-8 ">
+                                    <div class="col-md-4 ">
 
 
 
+                                    </div>
+
+                                    <div class="col-md-4 ">
+
+
+                                        <form action="/add_cat" method="post">
+
+
+                                            <div class="hHold">
+                                                Add Category
+                                            </div>
+                                            <br>
+
+
+                                            <div class="form-group">
+                                                <input type="text" class="form_input" id="categoryName" name="categoryName" placeholder="Category Name">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                            </div>
+
+
+
+
+
+
+
+
+                                            <button type="submit" id="submitDetails" name="submitDetails" class="btn form_input red font-white">Add</button>
+                                        </form>
 
                                     </div>
 

@@ -4,6 +4,12 @@ var router = express.Router();
 const bcrypt = require('bcryptjs');
 var passport = require('passport');
 const Donor = require('../models/Donor');
+
+const Item = require('../models/Item');
+const Stock = require('../models/Stock');
+const Category = require('../models/Category');
+
+
 const mongoose = require('mongoose');
 var db = require('../config/keys').MongoURI;
 
@@ -93,9 +99,30 @@ router.get('/stock', ensureAuthenticated, function(req, res) {
         let errors = [];
         res.redirect('index', { errors });
     } else {
-        res.render('stock', {
-            name: req.user.name
+
+        var donor;
+        if (Object.keys(req.query).length !== 0) {
+            donor = req.query.id;
+        }
+        console.log(donor);
+        Category.find({}, function(err, allCategories) {
+            if (err) {
+                console.log(err);
+            } else {
+
+
+                res.render('stock', {
+                    data: { name: req.user.name, categories: allCategories, donorId: donor }
+                })
+
+
+
+
+            }
         })
+
+
+
     }
 
 });
@@ -103,41 +130,59 @@ router.get('/stock', ensureAuthenticated, function(req, res) {
 
 
 router.post('/add_stock', function(req, res) {
-    // const { name, email, location, type, phone } = req.body;
 
-    // Donor.findOne({ email: email })
-    //     .then(user => {
-    //         if (user) {
-    //             res.redirect('/donor?error=User Exists!');
+    const { itemName, itemType, quantity, dateExp, price } = req.body;
 
-    //             // return res.redirect('register', { errors });
-    //         } else {
-    //             const newUser = new Donor({
-    //                 name,
-    //                 email,
-    //                 location,
-    //                 type,
-    //                 phone
-    //             });
 
-    //             newUser.save();
 
-    //             console.log(newUser);
-    //             res.redirect('/donor');
-    //         }
+    const newStock = new Stock({
+        quantity,
+        itemType,
+        dateExp,
+        price
+    });
 
-    //     });;
+    var stockID = newStock._id;
 
-    console.log("Received");
 
-    if (!req.isAuthenticated()) {
-        let errors = [];
-        res.redirect('index', { errors });
-    } else {
-        res.render('stock', {
-            name: req.user.name
-        })
-    }
+    const newItem = new Item({
+        itemName,
+        itemType,
+        stockID,
+        dateExp
+    });
+
+    newStock.save();
+    newItem.save();
+
+    // console.log(newStock);
+    // console.log(newItem);
+
+    res.redirect('/stock');
+
+
+
+});
+
+router.post('/add_cat', function(req, res) {
+
+    const { categoryName } = req.body;
+
+
+
+    const newCat = new Category({
+        categoryName
+    });
+
+
+
+    newCat.save();
+
+    // console.log(newStock);
+    // console.log(newItem);
+
+    res.redirect('/stock');
+
 
 
 });

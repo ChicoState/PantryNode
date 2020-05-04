@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 
 const StockSchema = new mongoose.Schema({
 
-    stockID: {
+
+    quantity: {
         type: String,
         required: true
     },
-    count: {
-        type: Integer,
+    itemType: {
+        type: String,
         required: true
     },
     dateExp: {

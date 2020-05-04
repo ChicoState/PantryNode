@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
 
-    itemID: {
-        type: String,
-        required: true
-    },
+
     itemName: {
         type: String,
         required: true
@@ -15,7 +12,15 @@ const ItemSchema = new mongoose.Schema({
         required: true
     },
     stockID: {
+        type: String,
+        required: true
+    },
+    dateExp: {
         type: Date
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 
