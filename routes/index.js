@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
         let errors = [];
         res.render('index', { errors });
     } else {
-        res.redirect('/home', { title: 'Express' });
+        res.redirect('/home', { title: 'Home' });
     }
 
 });

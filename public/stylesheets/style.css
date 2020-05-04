@@ -115,7 +115,7 @@ a:hover {
 }
 
 .p-grid {
-    padding-top: 30%;
+    padding-top: 32%;
     text-align: center;
     width: 100%;
     margin: 2px;
@@ -249,4 +249,41 @@ a:hover {
     background-size: cover;
     opacity: .7;
     font-size: 0px;
+}
+
+.dash-bg {
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+    background-color: #8c2332;
+    font-size: 1em;
+    font-weight: 700;
+    opacity: 1;
+    min-height: 150px;
+    padding-top: 38%;
+}
+
+.dash-bg:hover {
+    background-color: #6a111f;
+}
+
+.tb_dn {
+    cursor: pointer;
+}
+
+.tb_dn:hover {
+    background-color: #faebed;
+}
+
+.hHold {
+    background-color: #8c2332;
+    padding: .75rem;
+    border-bottom: 2px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    border-spacing: 2px;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    font-weight: bold;
 }

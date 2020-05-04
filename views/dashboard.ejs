@@ -33,89 +33,116 @@
         <div class="row">
 
             <div class="col-md-12">
+
                 <div class="box_out" style="min-height: 650px;">
 
-                    <div class="red-bg">
-                        <img src="images/logo_w2.png" class="logo-holder float-left-logo">
+                    <%- include('partials/header') %>
 
-                        <div class="inNav">
-                            <a href="#">Home</a>
-                            <a href="">Profile</a>
-                            <a href="">Sale</a>
-                            <a href="/logout">Logout</a>
-                            <a href="">Welcome <%= name %>
-                            </a>
-
-                        </div>
-                    </div>
-
-                    <div class="inWrap">
-                        <br><br>
+                        <div class="inWrap">
+                            <br><br>
 
 
-                        <div class="container">
+                            <div class="container">
 
-                            <div class="row">
-                                <div class="col-md-3 ">
-                                    <div class="p-grid redd-bg">
-                                        Fruits
+                                <div class="row">
+
+                                    <div class="col-md-7">
+
+                                        <div class="row">
+
+                                            <div class="col-md-4 ">
+                                                <div class="p-grid dash-bg">
+                                                    Checkout
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <a href="/stock">
+                                                    <div class="p-grid dash-bg">
+                                                        Add Stock
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-4  ">
+                                                <a href="/donor">
+                                                    <div class="p-grid dash-bg">
+                                                        Add Donor
+                                                    </div>
+                                                </a>
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="row mt-2">
+
+                                            <div class="col-md-4 ">
+                                                <div class="p-grid dash-bg">
+                                                    Expiry Check
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <a href="/sale">
+                                                    <div class="p-grid dash-bg">
+                                                        Sale Report
+                                                    </div>
+                                                </a>
+                                            </div>
+
+
+                                        </div>
+
+
+
+
                                     </div>
-                                </div>
-                                <div class="col-md-3 ">
-                                    <div class="p-grid orange-bg">
-                                        Vegetables
+
+                                    <div class="col-md-5 ">
+
+
+                                        <table class="table ">
+                                            <thead class=" ">
+                                                <tr style="background-color: #8c2332; color: white; ">
+                                                    <th scope="col ">#</th>
+                                                    <th scope="col ">Feed</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Milk stock no. #er445 is about to expire please check.</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Banana stock no. #er4a67 is about to expire please check.</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
                                     </div>
+
+
                                 </div>
-                                <div class="col-md-3  ">
-                                    <div class="p-grid yellow-bg">
-                                        Dairy
-                                    </div>
-                                </div>
-                                <div class="col-md-3 ">
-                                    <div class="p-grid green-bg">
-                                        Meat
-                                    </div>
-                                </div>
+
+
                             </div>
 
-                            <div class="row mt-3 ">
-
-                                <div class="col-md-3 ">
-                                    <div class="p-grid blue-bg">
-                                        Bakery
-                                    </div>
-                                </div>
-                                <div class="col-md-3 ">
-                                    <div class="p-grid violet-bg">
-                                        Ready
-                                    </div>
-                                </div>
-                                <div class="col-md-3  ">
-                                    <div class="p-grid grey-bg">
-                                        Stationary
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-
-
                         </div>
-
-
-                    </div>
-
                 </div>
             </div>
         </div>
-    </div>
 
-    <footer class="footer mt-5">
-        <div class="container">
-            <span></span>
-        </div>
-    </footer>
+        <footer class="footer mt-5">
+            <div class="container">
+                <span></span>
+            </div>
+        </footer>
 
 </body>
 
