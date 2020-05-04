@@ -49,8 +49,9 @@ router.post('/add_donor', function(req, res) {
                     location,
                     type,
                     phone
-                });
 
+                });
+                console.log(newUser);
                 newUser.save();
 
                 console.log(newUser);
