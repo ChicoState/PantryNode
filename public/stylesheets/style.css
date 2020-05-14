@@ -83,7 +83,12 @@ a:hover {
     padding: 2%;
     background-color: #6a111f;
     color: white;
+    position: fixed;
+    left: 0;
     bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
 }
 
 .footer>span {
@@ -259,12 +264,21 @@ a:hover {
     font-size: 1em;
     font-weight: 700;
     opacity: 1;
-    min-height: 150px;
-    padding-top: 38%;
+    width: 75%;
+    min-height: 50px;
+    padding-top: 5%;
+    margin-bottom: 5%;
+    float: right;
 }
 
 .dash-bg:hover {
     background-color: #6a111f;
+}
+
+.dash-bg-img {
+    float: left;
+    width: 16%;
+    margin-top: 2%;
 }
 
 .tb_dn {

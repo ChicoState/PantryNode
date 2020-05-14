@@ -8,7 +8,7 @@ const Donor = require('../models/Donor');
 const Item = require('../models/Item');
 const Stock = require('../models/Stock');
 const Category = require('../models/Category');
-
+const Donation = require('../models/Donation');
 
 const mongoose = require('mongoose');
 var db = require('../config/keys').MongoURI;
@@ -132,7 +132,7 @@ router.get('/stock', ensureAuthenticated, function(req, res) {
 
 router.post('/add_stock', function(req, res) {
 
-    const { itemName, itemType, quantity, dateExp, price } = req.body;
+    const { itemName, itemType, quantity, dateExp, price, donorID } = req.body;
 
 
 
@@ -153,11 +153,16 @@ router.post('/add_stock', function(req, res) {
         dateExp
     });
 
+
+
+    const newDonation = new Donation({
+        donorID,
+        stockID,
+    });
+
     newStock.save();
     newItem.save();
-
-    // console.log(newStock);
-    // console.log(newItem);
+    newDonation.save();
 
     res.redirect('/stock');
 
