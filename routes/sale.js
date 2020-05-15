@@ -280,6 +280,23 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
                     })
 
 
+                } else if (chicoId.length != 9) {
+                    let errors = [];
+
+                    errors.push({ msg: 'Invalid Chico State ID' });
+
+                    Item.find({}, function(err, allItems) {
+                        if (err) {
+                            console.log("THIS IS ERRROR " + err);
+                        } else {
+
+                            res.render('checkoutdetails', {
+                                data: { name: req.user.name, items: allItems, errors }
+                            })
+
+                        }
+                    })
+
                 } else {
                     console.log("Active  Items....");
                     Stock.findOne({ _id: item.stockID })
