@@ -225,7 +225,34 @@ router.get('/checkout', ensureAuthenticated,function(req, res) {
 
 
 
+router.get('/charts', ensureAuthenticated,function(req, res) {
+  if (!req.isAuthenticated()) {
+      let errors = [];
+      res.redirect('index', { errors });
+  } else {
+        console.log("IN CHARTS ");
+        Stock.find({}, function(err, allItems) {
+            if (err) {
+                console.log("THIS IS ERRROR " + err);
+            } else {
+                dataList = []
+                labels = []
+                console.log("STOCK => " + allItems);
+                for (var i = 0; i < allItems.length; i++) {
+                  dataList.push(allItems[i]['quantity']);
+                  labels.push(i);
+                }
+                console.log("DATALIST=> " + dataList + " labels => " + labels);
+                dataObj = {"labels": labels, "series": dataList };
+                res.render('charts', {
+                    data: { name:req.user.name, dataList: dataObj}
+                })
+          }
+  })
+}
 
+
+});
 
 
 
