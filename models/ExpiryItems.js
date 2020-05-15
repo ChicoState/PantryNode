@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ItemSchema = new mongoose.Schema({
+const ExpiryItemsS = new mongoose.Schema({
 
 
     itemName: {
@@ -17,17 +17,10 @@ const ItemSchema = new mongoose.Schema({
     },
     dateExp: {
         type: Date
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    },
-    expTimeRemain: {
-        type: Date
-
     }
+
 });
 
-const Item = mongoose.model('Item', ItemSchema);
+const ExpiryItems = mongoose.model('ExpiryItems', ExpiryItemsS);
 
-module.exports = Item;
+module.exports = ExpiryItems;

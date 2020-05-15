@@ -15,7 +15,7 @@
 
     <style>
         /* Make the image fully responsive */
-        
+
         .carousel-inner img {
             width: 100%;
             height: 100%;
@@ -63,12 +63,12 @@
                                                     Select Items from the Menu
                                                     <select class="form-control" id="itemId" name="itemId" onchange="selectItem(this)">
                                                   <option disabled selected>Select Item</option>
-    
+
                                                   <% for (var i = 0; i < (data.items).length; i++) {%>
                                                           <option value="<%=data.items[i]['_id']%>"><%=data.items[i]['itemName']%></option>
                                                         <% } %>
-    
-    
+
+
                                                 </select>
                                                 </div>
 
@@ -117,13 +117,7 @@
             <span></span>
         </div>
     </footer>
-    <script>
-        function selectItem(sel) {
-
-            document.getElementById("selectItemId").value = sel.selectedIndex;
-            document.getElementById("selectItemNmeID").value = sel.options[sel.selectedIndex].text;
-        }
-    </script>
+  
 </body>
 
 </html>

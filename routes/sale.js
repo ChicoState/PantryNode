@@ -9,6 +9,7 @@ const Item = require('../models/Item');
 const Stock = require('../models/Stock');
 const Category = require('../models/Category');
 const Donation = require('../models/Donation');
+const ExpiryItems = require('../models/ExpiryItems');
 
 const mongoose = require('mongoose');
 var db = require('../config/keys').MongoURI;
@@ -145,12 +146,16 @@ router.post('/add_stock', function(req, res) {
 
     var stockID = newStock._id;
 
+    const date1 = new Date(dateExp);
+    const expTimeRemain = new Date(dateExp);
 
+    expTimeRemain.setDate(date1.getDate() + 2);
     const newItem = new Item({
         itemName,
         itemType,
         stockID,
-        dateExp
+        dateExp,
+        expTimeRemain
     });
 
 
@@ -160,9 +165,14 @@ router.post('/add_stock', function(req, res) {
         stockID,
     });
 
+
+
+
+
     newStock.save();
     newItem.save();
     newDonation.save();
+
 
     res.redirect('/stock');
 
@@ -194,72 +204,123 @@ router.post('/add_cat', function(req, res) {
 });
 
 
-router.post('/checkout', function(req, res) {
+router.post('/checkout'  , ensureAuthenticated, function(req, res) {
 
-
+    console.log("IN BASE...");
     let errors = [];
 
     const { itemId, quantityX, chicoId } = req.body;
 
-    console.log(itemId);
+    console.log("kkkk  => " + itemId);
 
 
     Item.findOne({ '_id': itemId })
         .then(item => {
             if (item) {
-                console.log(item.stockID);
+                console.log("stk ID=> " + item.stockID + " default date => " + new Date() + " exp date => " + item.dateExp );
+                const  diff = Math.abs(new Date() - new Date(item.dateExp));
+                console.log("DIFF DATES => " + diff);
+                if (diff >= 0) {
+                  console.log("Expired Items....");
+                  itemName = item.itemName;
+                  itemType = item.itemType;
+                  stockID = item.stockID;
+                  dateExp = item.dateExp;
+                  const expItems = new ExpiryItems({
+                        itemName,
+                        itemType,
+                        stockID,
+                        dateExp
+
+                  });
+                  expItems.save();
+                  console.log("Item Table entry before removal : " + item._id);
+                  Item.deleteOne({'stockID': (item.stockID)});
+
+                //  Stock.remove({'_id': (item.stockID)});
+                  Item.find({}, function(err, allItems) {
+                      if (err) {
+                          console.log("THIS IS ERRROR " + err);
+                      } else {
+
+                        errors.push({ msg: 'The item date for  ' + itemName + ' has expired. Select other item.' });
+                        res.render('checkoutdetails', {
+                            data: { name: req.user.name, items: allItems, errors }
+                        })
+
+                      }
 
 
-                Stock.findOne({ _id: item.stockID })
-                    .then(stk => {
-                        if (stk) {
+                  })
 
 
-                            if (parseInt(stk.quantity) < parseInt(quantityX)) {
-                                console.log("Error!");
-                                console.log("CC: " + stk.quantity);
-                                console.log("Q: " + quantityX);
+                } else {
+                  console.log("Active  Items....");
+                  Stock.findOne({ _id: item.stockID })
+                      .then(stk => {
+                          if (stk) {
 
 
-                                errors.push({ msg: 'There are only ' + stk.quantity + ' in Pantry!' });
-
-                                Item.find({}, function(err, allItems) {
-                                    if (err) {
-                                        console.log("THIS IS ERRROR " + err);
-                                    } else {
-
-                                        res.render('checkoutdetails', {
-                                            data: { name: 'Subhed', items: allItems, errors }
-                                        })
-
-                                    }
+                              if (parseInt(stk.quantity) < parseInt(quantityX)) {
+                                  console.log("Error!");
+                                  console.log("CC: " + stk.quantity);
+                                  console.log("Q: " + quantityX);
 
 
-                                })
+                                  errors.push({ msg: 'There are only ' + stk.quantity + ' in Pantry!' });
 
-                            } else if (parseInt(stk.quantity) >= parseInt(quantityX)) {
-                                console.log("Case 2!");
+                                  Item.find({}, function(err, allItems) {
+                                      if (err) {
+                                          console.log("THIS IS ERRROR " + err);
+                                      } else {
 
-                                console.log(stk.quantity);
-                                console.log(quantityX);
+                                          res.render('checkoutdetails', {
+                                              data: { name: "jayesh", items: allItems, errors }
+                                          })
 
-                                Stock.update({ _id: stk._id }, { quantity: stk.quantity - quantityX }, function(err, res) {
-                                    if (err) throw err;
-                                    console.log("1 document updated");
-                                });
-
-                                res.redirect('/checkout_success');
-                            } else {
-                                res.redirect('/checkout');
-
-                            }
+                                      }
 
 
+                                  })
+
+                              } else if (parseInt(stk.quantity) >= parseInt(quantityX)) {
+                                  console.log("Case 2!");
+
+                                  console.log(stk.quantity);
+                                  console.log(quantityX);
+
+                                  Stock.update({ _id: stk._id }, { quantity: parseInt(stk.quantity) - parseInt(quantityX) }, function(err, res) {
+                                      if (err) throw err;
+                                      console.log("1 document updated");
+                                  });
+                                  Item.find({}, function(err, allItems) {
+                                      if (err) {
+                                          console.log("THIS IS ERRROR " + err);
+                                      } else {
+
+                                           console.log(" ALL ITEMS => " + allItems);
+                                          res.render('checkout_success', {
+                                              data: { name: "jayesh", items: allItems, errors }
+                                          })
+
+                                      }
 
 
-                        }
+                                  })
+                                  //res.render('checkout_success', {data: {}});
+                              } else {
+                                  res.redirect('/checkout');
 
-                    });;
+                              }
+
+
+
+
+                          }
+
+                      });;
+                }
+
 
             }
         });;
@@ -275,8 +336,9 @@ router.get('/checkout', function(req, res) {
     // if (!req.isAuthenticated()) {
     //     let errors = [];
     //     res.redirect('index', { errors });
-    // } else 
+    // } else
     {
+
 
         Item.find({}, function(err, allItems) {
             if (err) {
@@ -287,7 +349,7 @@ router.get('/checkout', function(req, res) {
                 // console.log(allItems);
 
                 res.render('checkoutdetails', {
-                    data: { name: 'Subhed', items: allItems }
+                    data: { name: "jayesh", items: allItems }
                 })
             }
 
@@ -307,21 +369,25 @@ router.get('/charts', ensureAuthenticated,function(req, res) {
       res.redirect('index', { errors });
   } else {
         console.log("IN CHARTS ");
-        Stock.find({}, function(err, allItems) {
+        Item.find({}, function(err, allItems) {
             if (err) {
                 console.log("THIS IS ERRROR " + err);
             } else {
                 dataList = []
                 labels = []
                 console.log("STOCK => " + allItems);
-                for (var i = 0; i < allItems.length; i++) {
+                /*for (var i = 0; i < allItems.length; i++) {
                   dataList.push(allItems[i]['quantity']);
-                  labels.push(i);
-                }
-                console.log("DATALIST=> " + dataList + " labels => " + labels);
-                dataObj = {"labels": labels, "series": dataList };
+                  labels.push(i + "abc");
+                }*/
+                //console.log("DATALIST=> " + dataList + " labels => " + labels);
+              //  dataObj = {"labels": labels, "series": dataList };
+              expItems = {}
+
+
+
                 res.render('charts', {
-                    data: { name:req.user.name, dataList: dataObj}
+                    data: { name:req.user.name, dataList: allItems}
                 })
           }
   })
