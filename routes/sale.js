@@ -430,43 +430,39 @@ router.get('/charts', ensureAuthenticated, function(req, res) {
     } else {
         console.log("IN CHARTS ");
 
-
         Checkout.find({}, function(err, allItems) {
             if (err) {
                 console.log("THIS IS ERRROR " + err);
             } else {
-                console.log(allItems);
 
-                for (var i = 0; i < allItems.length; i++) {
+                Category.find({}, function(err, result) {
+                    if (err) throw err;
+                    else {
 
-                    Category.find({}, function(err, result) {
-                        if (err) throw err;
-                        else {
+                        Stock.find({}, function(err, allItems0) {
+                            if (err) {
+                                console.log("THIS IS ERRROR " + err);
+                            } else {
+                                console.log(allItems0);
 
+                                Item.find({}, function(err, allItems1) {
+                                    if (err) {
+                                        console.log("THIS IS ERRROR " + err);
+                                    } else {
+                                        // console.log(allItems1);
 
+                                        res.render('charts', {
+                                            data: { name: req.user.name, allItems, cat: result, stock: allItems0, items: allItems1 }
+                                        })
 
-                            Stock.find({}, function(err, allItems0) {
-                                if (err) {
-                                    console.log("THIS IS ERRROR " + err);
-                                } else {
-                                    console.log(allItems0);
+                                        return;
 
-                                    Item.find({}, function(err, allItems1) {
-                                        if (err) {
-                                            console.log("THIS IS ERRROR " + err);
-                                        } else {
-                                            // console.log(allItems1);
-
-                                            res.render('charts', {
-                                                data: { name: req.user.name, allItems, cat: result, stock: allItems0, items: allItems1 }
-                                            })
-
-                                        }
-                                    });
+                                    }
+                                });
 
 
-                                }
-                            });
+                            }
+                        })
 
 
 
@@ -477,13 +473,14 @@ router.get('/charts', ensureAuthenticated, function(req, res) {
 
 
 
-                        }
-                    });
-                }
+                    }
+                });
+
             }
         })
     }
 });
+
 
 
 
