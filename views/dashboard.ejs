@@ -15,7 +15,7 @@
 
     <style>
         /* Make the image fully responsive */
-
+        
         .carousel-inner img {
             width: 100%;
             height: 100%;
@@ -36,7 +36,7 @@
 
                 <div class="box_out" style="min-height: 650px;">
 
-                    <%- include('partials/header') %>
+                    <%- include('partials/header_2') %>
 
                         <div class="inWrap">
                             <br><br>
@@ -52,11 +52,11 @@
 
                                             <div class="col-md-6 ">
                                                 <img src="/images/assets/cart.png" class="dash-bg-img">
-                                                  <a href="/checkout">
-                                                <div class="p-grid dash-bg">
-                                                    <img> Checkout
-                                                </div>
-                                              </a>
+                                                <a href="/checkout">
+                                                    <div class="p-grid dash-bg">
+                                                        <img> Checkout
+                                                    </div>
+                                                </a>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <a href="/stock">
@@ -118,17 +118,25 @@
                                             </thead>
                                             <tbody>
 
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Milk stock no. #er445 is about to expire please check.</td>
+                                                <% if(typeof data.expItems != 'undefined'){ var xc =1;%>
+                                                    <% data.expItems.forEach(function(item){ %>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <%= xc %>
+                                                            </th>
+                                                            <td>
+                                                                <b><%= item['itemName'] %> </b> getting expired on
+                                                                <%  var d = item['dateExp'].toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                    <b><%= d[0] %> </b>
+                                                            </td>
 
-                                                </tr>
+                                                        </tr>
+                                                        <% xc=xc+1; }); %>
+                                                            <% } %>
 
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Banana stock no. #er4a67 is about to expire please check.</td>
 
-                                                </tr>
+
+
                                             </tbody>
                                         </table>
 
