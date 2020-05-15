@@ -241,7 +241,7 @@
                                     <div class="col-md-6">
 
                                         <b>Waste Management</b>
-
+                                        <br>
 
 
                                         <br><br>
@@ -250,37 +250,42 @@
                                                 <tr style="background-color: #8c2332; color: white; ">
                                                     <th scope="col ">#</th>
                                                     <th scope="col ">Name</th>
-                                                    <th scope="col ">Quantity</th>
                                                     <th scope="col ">Date</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
 
-                                                <% for(var i=0; i<(data.expired).length; i++) {%>
+
+                                                <% var exc=1; 
+                                                for(var i=0; i<(data.items).length; i++) { %>
                                                     <tr class="tb_dn ">
-                                                        <th scope="row ">
-                                                            <%= i+1 %>
-                                                        </th>
-                                                        <td style="text-transform: capitalize; ">
-                                                            <%= data.expired[i].itemName %>
-                                                        </td>
-                                                        <td style="text-transform: capitalize; ">
-                                                            <%= data.expired[i].quantity %>
-                                                        </td>
-                                                        <%  var d = data.expired[i].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
-                                                            <td style="text-transform: capitalize; ">
-                                                                <%= d[0] %>
-                                                            </td>
 
+                                                        <%  const oneDay = 24 * 60 * 60 * 1000;
+                                                              const diff = Math.round(Math.abs((new Date() - new Date(data.items[i].dateExp)) / oneDay));
+                                                                console.log("Days:" + diff);%>
 
+                                                            <%   if(diff<=2){ %>
+                                                                <th scope="row ">
+                                                                    <%= exc %>
+                                                                </th>
+                                                                <td style="text-transform: capitalize; ">
+                                                                    <%= data.items[i].itemName %>
+                                                                </td>
 
-
-
-
+                                                                <%  var d = data.items[i].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                    <td style="text-transform: capitalize; ">
+                                                                        <%= d[0] %>
+                                                                    </td>
 
                                                     </tr>
-                                                    <% } %>
+                                                    <% exc=exc+1;}} %>
+
+
+
+
+
+
 
                                             </tbody>
                                         </table>
