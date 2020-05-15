@@ -6,6 +6,10 @@ const DonationSchema = new mongoose.Schema({
     donorID: {
         type: String,
     },
+    quantity: {
+        type: String,
+        required: true
+    },
     stockID: {
         type: String,
         required: true

@@ -11,11 +11,14 @@ const ExpiryItemsS = new mongoose.Schema({
         type: String,
         required: true
     },
+    quantity: {
+        type: String,
+        required: true
+    },
     stockID: {
         type: String,
         required: true
     },
-    
     dateExp: {
         type: Date
     }

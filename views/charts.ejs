@@ -178,6 +178,119 @@
                                     </div>
 
 
+                                    <div class="col-md-6">
+
+                                        <b>Waste Management</b>
+                                        <br> Total Expired:
+
+                                        <% var cdx = 0 %>
+                                            <% for(var j=0; j<(data.expired).length; j++) {%>
+                                                <% cdx = cdx+ parseInt(data.expired[j].quantity) %>
+
+                                                    <% } %>
+                                                        <%= cdx %>
+                                                            <br><br>
+                                                            <table class="table ">
+                                                                <thead class=" ">
+                                                                    <tr style="background-color: #8c2332; color: white; ">
+                                                                        <th scope="col ">#</th>
+                                                                        <th scope="col ">Name</th>
+                                                                        <th scope="col ">Quantity</th>
+                                                                        <th scope="col ">Date</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <% for(var i=0; i<(data.expired).length; i++) {%>
+                                                                        <tr class="tb_dn ">
+                                                                            <th scope="row ">
+                                                                                <%= i+1 %>
+                                                                            </th>
+                                                                            <td style="text-transform: capitalize; ">
+                                                                                <%= data.expired[i].itemName %>
+                                                                            </td>
+                                                                            <td style="text-transform: capitalize; ">
+                                                                                <%= data.expired[i].quantity %>
+                                                                            </td>
+                                                                            <%  var d = data.expired[i].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                                <td style="text-transform: capitalize; ">
+                                                                                    <%= d[0] %>
+                                                                                </td>
+
+
+
+
+
+
+
+                                                                        </tr>
+                                                                        <% } %>
+
+                                                                </tbody>
+                                                            </table>
+
+
+
+
+
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+
+                                        <b>Waste Management</b>
+
+
+
+                                        <br><br>
+                                        <table class="table ">
+                                            <thead class=" ">
+                                                <tr style="background-color: #8c2332; color: white; ">
+                                                    <th scope="col ">#</th>
+                                                    <th scope="col ">Name</th>
+                                                    <th scope="col ">Quantity</th>
+                                                    <th scope="col ">Date</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <% for(var i=0; i<(data.expired).length; i++) {%>
+                                                    <tr class="tb_dn ">
+                                                        <th scope="row ">
+                                                            <%= i+1 %>
+                                                        </th>
+                                                        <td style="text-transform: capitalize; ">
+                                                            <%= data.expired[i].itemName %>
+                                                        </td>
+                                                        <td style="text-transform: capitalize; ">
+                                                            <%= data.expired[i].quantity %>
+                                                        </td>
+                                                        <%  var d = data.expired[i].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                            <td style="text-transform: capitalize; ">
+                                                                <%= d[0] %>
+                                                            </td>
+
+
+
+
+
+
+
+                                                    </tr>
+                                                    <% } %>
+
+                                            </tbody>
+                                        </table>
+
+
+
+
+
+
+                                    </div>
                                 </div>
 
 

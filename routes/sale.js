@@ -166,7 +166,8 @@ router.post('/add_stock', function(req, res) {
 
     const newDonation = new Donation({
         donorID,
-        stockID,
+        quantity,
+        stockID
     });
 
 
@@ -233,15 +234,25 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
                     stockID = item.stockID;
                     dateExp = item.dateExp;
 
-                    const expItems = new ExpiryItems({
-                        itemName,
-                        itemType,
-                        stockID,
-                        dateExp
 
-                    });
+                    Stock.findOne({ _id: stockID })
+                        .then(stk => {
+                            var quantity = stk.quantity;
 
-                    expItems.save();
+                            const expItems = new ExpiryItems({
+                                itemName,
+                                itemType,
+                                quantity,
+                                stockID,
+                                dateExp
+
+                            });
+
+                            expItems.save();
+                        })
+
+
+
 
                     console.log("Item Table entry before removal : " + item._id);
                     Item.deleteOne({
@@ -253,14 +264,14 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
 
                         });
 
-                    // Stock.deleteOne({
-                    //         '_id': item.stockID
-                    //     },
-                    //     function(err, res) {
-                    //         if (err) throw err;
-                    //         console.log("1 Stock deleted");
+                    Stock.deleteOne({
+                            '_id': item.stockID
+                        },
+                        function(err, res) {
+                            if (err) throw err;
+                            console.log("1 Stock deleted");
 
-                    //     });
+                        });
 
                     //  Stock.remove({'_id': (item.stockID)});
 
@@ -451,11 +462,23 @@ router.get('/charts', ensureAuthenticated, function(req, res) {
                                     } else {
                                         // console.log(allItems1);
 
-                                        res.render('charts', {
-                                            data: { name: req.user.name, allItems, cat: result, stock: allItems0, items: allItems1 }
-                                        })
 
-                                        return;
+                                        ExpiryItems.find({}, function(err, expItems) {
+                                            if (err) {
+                                                console.log("THIS IS ERRROR " + err);
+                                            } else {
+                                                // console.log(allItems1);
+
+                                                res.render('charts', {
+                                                    data: { name: req.user.name, allItems, cat: result, stock: allItems0, items: allItems1, expired: expItems }
+                                                })
+
+                                                return;
+
+                                            }
+                                        });
+
+
 
                                     }
                                 });
