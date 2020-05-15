@@ -10,6 +10,7 @@ const Stock = require('../models/Stock');
 const Category = require('../models/Category');
 const Donation = require('../models/Donation');
 const ExpiryItems = require('../models/ExpiryItems');
+const Checkout = require('../models/Checkout');
 
 const mongoose = require('mongoose');
 var db = require('../config/keys').MongoURI;
@@ -217,15 +218,18 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
     Item.findOne({ '_id': itemId })
         .then(item => {
             if (item) {
-                console.log("stk ID=> " + item.stockID + " default date => " + new Date() + " exp date => " + item.dateExp);
-                const diff = Math.abs(new Date() - new Date(item.dateExp));
-                console.log("DIFF DATES => " + diff);
-                if (diff >= 0) {
+
+                const oneDay = 24 * 60 * 60 * 1000;
+                const diff = Math.round(Math.abs((new Date() - new Date(item.dateExp)) / oneDay));
+                console.log("Days:" + diff);
+
+                if (diff <= 2) {
                     console.log("Expired Items....");
                     itemName = item.itemName;
                     itemType = item.itemType;
                     stockID = item.stockID;
                     dateExp = item.dateExp;
+
 
                     const expItems = new ExpiryItems({
                         itemName,
@@ -295,7 +299,7 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
                                         } else {
 
                                             res.render('checkoutdetails', {
-                                                data: { name: "jayesh", items: allItems, errors }
+                                                data: { name: req.user.name, items: allItems, errors }
                                             })
 
                                         }
@@ -320,7 +324,7 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
 
                                                 console.log(" ALL ITEMS => " + allItems);
                                                 res.render('checkout_success', {
-                                                    data: { name: "jayesh", items: allItems, errors }
+                                                    data: { name: req.user.name, items: allItems, errors }
                                                 })
 
                                             }
