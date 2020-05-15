@@ -48,51 +48,55 @@
 
                                     <div class="col-md-6">
 
-                                        Purchase
-                                        <br><br>
-                                        <table class="table ">
-                                            <thead class=" ">
-                                                <tr style="background-color: #8c2332; color: white; ">
-                                                    <th scope="col ">#</th>
-                                                    <th scope="col ">Name</th>
-                                                    <th scope="col ">Type</th>
-                                                    <th scope="col ">Quantity</th>
-                                                    <th scope="col ">Date</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <% for(var i=0; i<(data.allItems).length; i++) {%>
-                                                    <tr class="tb_dn ">
-                                                        <th scope="row ">
-                                                            <%= i+1 %>
-                                                        </th>
-                                                        <td style="text-transform: capitalize; ">
-                                                            <%= data.allItems[i].itemName %>
-                                                        </td>
-                                                        <td style="text-transform: capitalize; ">
-                                                            <%= data.allItems[i].itemType %>
-                                                        </td>
-                                                        <td style="text-transform: capitalize; ">
-                                                            <%= data.allItems[i].quantity %>
-                                                        </td>
-                                                        <%  var d = data.allItems[i].datePur.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
-                                                            <td style="text-transform: capitalize; ">
-                                                                <%= d[0] %>
-                                                            </td>
+                                        <b>Purchase</b>
+                                        <br> Total Checkout:
+                                        <%= (data.allItems).length %>
 
 
-
-
-
-
+                                            <br><br>
+                                            <table class="table ">
+                                                <thead class=" ">
+                                                    <tr style="background-color: #8c2332; color: white; ">
+                                                        <th scope="col ">#</th>
+                                                        <th scope="col ">Name</th>
+                                                        <th scope="col ">Type</th>
+                                                        <th scope="col ">Quantity</th>
+                                                        <th scope="col ">Date</th>
 
                                                     </tr>
-                                                    <% } %>
+                                                </thead>
+                                                <tbody>
 
-                                            </tbody>
-                                        </table>
+                                                    <% for(var i=0; i<(data.allItems).length; i++) {%>
+                                                        <tr class="tb_dn ">
+                                                            <th scope="row ">
+                                                                <%= i+1 %>
+                                                            </th>
+                                                            <td style="text-transform: capitalize; ">
+                                                                <%= data.allItems[i].itemName %>
+                                                            </td>
+                                                            <td style="text-transform: capitalize; ">
+                                                                <%= data.allItems[i].itemType %>
+                                                            </td>
+                                                            <td style="text-transform: capitalize; ">
+                                                                <%= data.allItems[i].quantity %>
+                                                            </td>
+                                                            <%  var d = data.allItems[i].datePur.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                <td style="text-transform: capitalize; ">
+                                                                    <%= d[0] %>
+                                                                </td>
+
+
+
+
+
+
+
+                                                        </tr>
+                                                        <% } %>
+
+                                                </tbody>
+                                            </table>
 
 
 
@@ -103,58 +107,66 @@
 
                                     <div class="col-md-6 ">
 
-                                        Current Stock<br><br>
-                                        <table class="table ">
-                                            <thead class=" ">
-                                                <tr style="background-color: #8c2332; color: white; ">
-                                                    <th scope="col ">#</th>
-                                                    <th scope="col ">Name</th>
-                                                    <th scope="col ">Type</th>
-                                                    <th scope="col ">Stocked Date</th>
-                                                    <th scope="col ">Expiry Date</th>
+                                        <b>Current Stock</b>
+                                        <br> Total Items in Stock:
+                                        <% var cc = 0 %>
+                                            <% for(var j=0; j<(data.stock).length; j++) {%>
+                                                <% cc = cc+ parseInt(data.stock[j].quantity) %>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <% for(var i=0; i<(data.items).length; i++) {%>
-                                                    <tr class="tb_dn ">
-
-                                                        <th scope="row ">
-                                                            <%= i+1 %>
-                                                        </th>
-
-                                                        <td style="text-transform: capitalize; ">
-                                                            <%= data.items[i].itemName %>
-
-                                                        </td>
-
-                                                        <td>
-                                                            <% for(var j=0; j<(data.stock).length; j++) {%>
-                                                                <% if (data.items[i].stockID == data.stock[j]._id) { %>
-                                                                    <%= data.stock[j].quantity %>
-                                                                        <% break %>
-                                                                            <% }  %>
-
-                                                                                <% } %>
-
-                                                        </td>
-
-                                                        <td>
-                                                            <%  var d = data.stock[j].date.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
-                                                                <%= d[0] %>
-
-                                                        </td>
-                                                        <td>
-                                                            <%  var d =data.stock[j].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
-                                                                <%= d[0] %>
-
-                                                        </td>
-                                                    </tr>
                                                     <% } %>
+                                                        <%= cc %>
+                                                            <br><br>
+                                                            <table class="table ">
+                                                                <thead class=" ">
+                                                                    <tr style="background-color: #8c2332; color: white; ">
+                                                                        <th scope="col ">#</th>
+                                                                        <th scope="col ">Name</th>
+                                                                        <th scope="col ">Type</th>
+                                                                        <th scope="col ">Stocked Date</th>
+                                                                        <th scope="col ">Expiry Date</th>
 
-                                            </tbody>
-                                        </table>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <% for(var i=0; i<(data.items).length; i++) {%>
+                                                                        <tr class="tb_dn ">
+
+                                                                            <th scope="row ">
+                                                                                <%= i+1 %>
+                                                                            </th>
+
+                                                                            <td style="text-transform: capitalize; ">
+                                                                                <%= data.items[i].itemName %>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <% for(var j=0; j<(data.stock).length; j++) {%>
+                                                                                    <% if (data.items[i].stockID == data.stock[j]._id) { %>
+                                                                                        <%= data.stock[j].quantity %>
+                                                                                            <% break %>
+                                                                                                <% }  %>
+
+                                                                                                    <% } %>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <%  var d = data.stock[j].date.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                                    <%= d[0] %>
+
+                                                                            </td>
+                                                                            <td>
+                                                                                <%  var d =data.stock[j].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                                    <%= d[0] %>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% } %>
+
+                                                                </tbody>
+                                                            </table>
 
 
                                     </div>
