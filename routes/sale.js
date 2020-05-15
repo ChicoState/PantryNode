@@ -315,6 +315,23 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
                                     console.log(stk.quantity);
                                     console.log(quantityX);
 
+                                    var itemName = item.itemName;
+                                    var itemType = item.itemType;
+                                    var stockID = stk._id;
+                                    var quantity = quantityX;
+                                    var chicoStateId = chicoId;
+                                    const checkU = new Checkout({
+                                        chicoStateId,
+                                        itemName,
+                                        itemType,
+                                        stockID,
+                                        quantity
+                                    });
+                                    console.log(checkU);
+                                    checkU.save();
+
+                                    console.log(checkU);
+
                                     Stock.update({ _id: stk._id }, { quantity: parseInt(stk.quantity) - parseInt(quantityX) }, function(err, res) {
                                         if (err) throw err;
                                         console.log("1 document updated");
@@ -375,7 +392,7 @@ router.get('/checkout', function(req, res) {
                 // console.log(allItems);
 
                 res.render('checkoutdetails', {
-                    data: { name: "jayesh", items: allItems }
+                    data: { name: "Subhed", items: allItems }
                 })
             }
 
@@ -395,39 +412,61 @@ router.get('/charts', ensureAuthenticated, function(req, res) {
         res.redirect('index', { errors });
     } else {
         console.log("IN CHARTS ");
-        Item.find({}, function(err, allItems) {
+
+
+        Checkout.find({}, function(err, allItems) {
             if (err) {
                 console.log("THIS IS ERRROR " + err);
             } else {
-                dataList = []
-                labels = []
-                console.log("STOCK => " + allItems);
-                /*for (var i = 0; i < allItems.length; i++) {
-                  dataList.push(allItems[i]['quantity']);
-                  labels.push(i + "abc");
-                }*/
-                //console.log("DATALIST=> " + dataList + " labels => " + labels);
-                //  dataObj = {"labels": labels, "series": dataList };
-                expItems = {}
+                console.log(allItems);
+
+                for (var i = 0; i < allItems.length; i++) {
+
+                    Category.find({}, function(err, result) {
+                        if (err) throw err;
+                        else {
 
 
 
-                res.render('charts', {
-                    data: { name: req.user.name, dataList: allItems }
-                })
+                            Stock.find({}, function(err, allItems0) {
+                                if (err) {
+                                    console.log("THIS IS ERRROR " + err);
+                                } else {
+                                    console.log(allItems0);
+
+                                    Item.find({}, function(err, allItems1) {
+                                        if (err) {
+                                            console.log("THIS IS ERRROR " + err);
+                                        } else {
+                                            // console.log(allItems1);
+
+                                            res.render('charts', {
+                                                data: { name: req.user.name, allItems, cat: result, stock: allItems0, items: allItems1 }
+                                            })
+
+                                        }
+                                    });
+
+
+                                }
+                            });
+
+
+
+
+
+
+
+
+
+
+                        }
+                    });
+                }
             }
         })
     }
-
-
 });
-
-
-
-
-
-
-
 
 
 

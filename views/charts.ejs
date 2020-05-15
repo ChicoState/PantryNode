@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -10,16 +9,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="stylesheets/style.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-      <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="icon" href="https://www.csuchico.edu/style-guide/visual/_images/CSUCHICO-Seal-Color.png">
 
     <style>
         /* Make the image fully responsive */
-
+        
         .carousel-inner img {
             width: 100%;
             height: 100%;
@@ -33,49 +29,153 @@
     <br>
     <br>
     <br>
-    <div class="row">
+    <div class=" " style="padding: 2%;">
+        <div class="row" style="width: 100%;">
 
-        <div class="col-md-12">
-            <div class="box_out" style="min-height: 650px;">
+            <div class="">
 
-                  <%- include('partials/header_2'); %>
+                <div class="box_out" style="min-height: 650px;">
 
-                    <div class="inWrap">
-                        <br><br>
+                    <%- include('partials/header_2') %>
 
-                        <div class="container">
-                            <div class="row">
-                              <div class="col-md-8 ">
-		                              <div class="ct-chart ct-perfect-fourth" id="budget"></div>
+                        <div class="inWrap">
+                            <br><br>
+
+
+                            <div class="">
+
+                                <div class="row">
+
+                                    <div class="col-md-5">
+
+                                        Purchase
+                                        <br><br>
+                                        <table class="table ">
+                                            <thead class=" ">
+                                                <tr style="background-color: #8c2332; color: white; ">
+                                                    <th scope="col ">#</th>
+                                                    <th scope="col ">Name</th>
+                                                    <th scope="col ">Type</th>
+                                                    <th scope="col ">Quantity</th>
+                                                    <th scope="col ">Date</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <% for(var i=0; i<(data.allItems).length; i++) {%>
+                                                    <tr class="tb_dn ">
+                                                        <th scope="row ">
+                                                            <%= i+1 %>
+                                                        </th>
+                                                        <td style="text-transform: capitalize; ">
+                                                            <%= data.allItems[i].itemName %>
+                                                        </td>
+                                                        <td style="text-transform: capitalize; ">
+                                                            <%= data.allItems[i].itemType %>
+                                                        </td>
+                                                        <td style="text-transform: capitalize; ">
+                                                            <%= data.allItems[i].quantity %>
+                                                        </td>
+                                                        <%  var d = data.allItems[i].datePur.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                            <td style="text-transform: capitalize; ">
+                                                                <%= d[0] %>
+                                                            </td>
+
+
+
+
+
+
+
+                                                    </tr>
+                                                    <% } %>
+
+                                            </tbody>
+                                        </table>
+
+
+                                        Current Stock<br><br>
+                                        <table class="table ">
+                                            <thead class=" ">
+                                                <tr style="background-color: #8c2332; color: white; ">
+                                                    <th scope="col ">#</th>
+                                                    <th scope="col ">Name</th>
+                                                    <th scope="col ">Type</th>
+                                                    <th scope="col ">Stocked Date</th>
+                                                    <th scope="col ">Expiry Date</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <% for(var i=0; i<(data.items).length; i++) {%>
+                                                    <tr class="tb_dn ">
+
+                                                        <th scope="row ">
+                                                            <%= i+1 %>
+                                                        </th>
+
+                                                        <td style="text-transform: capitalize; ">
+                                                            <%= data.items[i].itemName %>
+
+                                                        </td>
+
+                                                        <td>
+                                                            <% for(var j=0; j<(data.stock).length; j++) {%>
+                                                                <% if (data.items[i].stockID == data.stock[j]._id) { %>
+                                                                    <%= data.stock[j].quantity %>
+                                                                        <% break %>
+                                                                            <% }  %>
+
+                                                                                <% } %>
+
+                                                        </td>
+
+                                                        <td>
+                                                            <%  var d = data.stock[j].date.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                <%= d[0] %>
+
+                                                        </td>
+                                                        <td>
+                                                            <%  var d =data.stock[j].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                <%= d[0] %>
+
+                                                        </td>
+                                                    </tr>
+                                                    <% } %>
+
+                                            </tbody>
+                                        </table>
+
+
+
+                                    </div>
+
+                                    <div class="col-md-7 ">
+
+
+
+
+                                    </div>
+
+
                                 </div>
+
+
                             </div>
+
                         </div>
-                      </div>
+                </div>
             </div>
+        </div>
+
+        <footer class="footer mt-5">
+            <div class="container">
+                <span></span>
             </div>
-            </div>
-<script>
-  var options = {
-  seriesBarDistance: 20,
-   width: 500,
-  height: 325,
-  title: 'LABEL'
+        </footer>
 
-};
-
-var responsiveOptions = [
-  ['screen and (max-width: 640px)', {
-    seriesBarDistance: 5,
-    axisX: {
-      labelInterpolationFnc: function (value) {
-        return value[0];
-      }
-    }
-  }]
-];
-
-new Chartist.Bar('#budget', '<%=dataList%>', options, responsiveOptions);
-
-</script>
 </body>
+
 </html>

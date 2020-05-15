@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const CheckoutSchema = new mongoose.Schema({
 
 
+    chicoStateId: {
+        type: String,
+        required: true
+    },
     itemName: {
         type: String,
         required: true
@@ -23,6 +27,7 @@ const CheckoutSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
+
 
 });
 
