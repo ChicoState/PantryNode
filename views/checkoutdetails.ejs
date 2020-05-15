@@ -15,7 +15,7 @@
 
     <style>
         /* Make the image fully responsive */
-
+        
         .carousel-inner img {
             width: 100%;
             height: 100%;
@@ -35,7 +35,7 @@
             <div class="col-md-12">
                 <div class="box_out" style="min-height: 650px;">
 
-                      <%- include('partials/header_2'); %>
+                    <%- include('partials/header_2'); %>
 
                         <div class="inWrap">
                             <br><br>
@@ -53,46 +53,46 @@
                                                 Checkout Details
                                             </div>
                                             <br>
+                                            <%- include('partials/messages_2') %>
+
+                                                <br>
 
 
 
-
-                                            <div class="form-group">
-                                                Item Id # <input type="text" class="form_input" id="selectItemId" name="selectedItem" placeholder="# Item Id">
-                                            </div>
-
-                                            <div class="form-group">
-                                                Item Name <input type="text" class="form_input" id="selectItemNmeID" name="selectedItemNm" placeholder="Select Item from adjacent list">
-                                            </div>
-
-                                            <div class="form-group">
-                                                Item Quantity <input type="text" class="form_input" id="quantity" name="quantity" placeholder="Quantity">
-                                            </div>
-
-
+                                                <div class="form-group ">
+                                                    Select Items from the Menu
+                                                    <select class="form-control" id="itemId" name="itemId" onchange="selectItem(this)">
+                                                  <option disabled selected>Select Item</option>
+    
+                                                  <% for (var i = 0; i < (data.items).length; i++) {%>
+                                                          <option value="<%=data.items[i]['_id']%>"><%=data.items[i]['itemName']%></option>
+                                                        <% } %>
+    
+    
+                                                </select>
+                                                </div>
 
 
 
+                                                <!-- <div class="form-group">
+                                                    Item Name <input type="text" class="form_input" id="selectItemNmeID" name="selectedItemNm" placeholder="Select Item from adjacent list">
+                                                </div> -->
 
-                                            <button type="submit" id="submitDetails" name="submitDetails" class="btn form_input red font-white">Checkout</button>
+                                                <div class="form-group">
+                                                    Item Quantity <input type="text" class="form_input" id="quantityX" name="quantityX" placeholder="Quantity">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    Chico State Id <input type="text" class="form_input" id="chicoId" name="chicoId" placeholder="Chico State Id">
+                                                </div>
+
+
+
+                                                <input type="submit" id="submitDetails" name="submitDetails" class="btn form_input red font-white"></input>
                                         </form>
 
                                     </div>
 
-                                    <div class="col-md-4 ">
-                                      <div class="form-group ">
-                                      Select Items from the Menu
-                                      <select class="form-control" id="itemId" name="itemType" onchange="selectItem(this)">
-                                              <option disabled selected>Select Item</option>
-
-                                              <% for (var i = 0; i < (data.items).length; i++) {%>
-                                                      <option value="<%=data.items[i]['_id']%>"><%=data.items[i]['itemName']%></option>
-                                                    <% } %>
-
-
-                                            </select>
-                                          </div>
-                                    </div>
 
 
 
@@ -118,12 +118,11 @@
         </div>
     </footer>
     <script>
-    function selectItem(sel) {
+        function selectItem(sel) {
 
-      document.getElementById("selectItemId").value=sel.selectedIndex;
-      document.getElementById("selectItemNmeID").value=sel.options[sel.selectedIndex].text;
-    }
-
+            document.getElementById("selectItemId").value = sel.selectedIndex;
+            document.getElementById("selectItemNmeID").value = sel.options[sel.selectedIndex].text;
+        }
     </script>
 </body>
 

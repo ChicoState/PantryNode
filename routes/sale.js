@@ -193,35 +193,111 @@ router.post('/add_cat', function(req, res) {
 
 });
 
-router.get('/checkout', ensureAuthenticated,function(req, res) {
-  if (!req.isAuthenticated()) {
-      let errors = [];
-      res.redirect('index', { errors });
-  } else {
 
-            Item.find({}, function(err, allItems) {
-                if (err) {
-                    console.log("THIS IS ERRROR " + err);
-                } else {
-
-          console.log(" forward to checkout");
-          console.log(allItems);
+router.post('/checkout', function(req, res) {
 
 
+    let errors = [];
+
+    const { itemId, quantityX, chicoId } = req.body;
+
+    console.log(itemId);
+
+
+    Item.findOne({ '_id': itemId })
+        .then(item => {
+            if (item) {
+                console.log(item.stockID);
+
+
+                Stock.findOne({ _id: item.stockID })
+                    .then(stk => {
+                        if (stk) {
+
+
+                            if (parseInt(stk.quantity) < parseInt(quantityX)) {
+                                console.log("Error!");
+                                console.log("CC: " + stk.quantity);
+                                console.log("Q: " + quantityX);
+
+
+                                errors.push({ msg: 'There are only ' + stk.quantity + ' in Pantry!' });
+
+                                Item.find({}, function(err, allItems) {
+                                    if (err) {
+                                        console.log("THIS IS ERRROR " + err);
+                                    } else {
+
+                                        res.render('checkoutdetails', {
+                                            data: { name: 'Subhed', items: allItems, errors }
+                                        })
+
+                                    }
+
+
+                                })
+
+                            } else if (parseInt(stk.quantity) >= parseInt(quantityX)) {
+                                console.log("Case 2!");
+
+                                console.log(stk.quantity);
+                                console.log(quantityX);
+
+                                Stock.update({ _id: stk._id }, { quantity: stk.quantity - quantityX }, function(err, res) {
+                                    if (err) throw err;
+                                    console.log("1 document updated");
+                                });
+
+                                res.redirect('/checkout_success');
+                            } else {
+                                res.redirect('/checkout');
+
+                            }
+
+
+
+
+                        }
+
+                    });;
+
+            }
+        });;
+
+
+
+
+
+});
+
+
+router.get('/checkout', function(req, res) {
+    // if (!req.isAuthenticated()) {
+    //     let errors = [];
+    //     res.redirect('index', { errors });
+    // } else 
+    {
+
+        Item.find({}, function(err, allItems) {
+            if (err) {
+                console.log("THIS IS ERRROR " + err);
+            } else {
+
+                // console.log(" forward to checkout");
+                // console.log(allItems);
 
                 res.render('checkoutdetails', {
-                    data: { name:req.user.name, items: allItems }
+                    data: { name: 'Subhed', items: allItems }
                 })
+            }
 
-                }
 
+            console.log("OUTSIDE");
 
-          console.log("OUTSIDE");
+        })
 
-            })
-
-}
-        });
+    }
+});
 
 
 

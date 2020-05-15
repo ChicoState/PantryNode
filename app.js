@@ -72,6 +72,17 @@ app.post('/add_cat', saleRouter);
 app.get('/checkout', saleRouter);
 app.get('/charts', saleRouter);
 
+
+
+app.get('/checkout_success', function(req, res, next) {
+
+    res.render('checkout_success', { title: 'Success' });
+
+});
+
+
+
+
 app.get('/s', function(req, res, next) {
 
     res.render('signup_success', { title: 'Home' });
