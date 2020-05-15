@@ -204,7 +204,7 @@ router.post('/add_cat', function(req, res) {
 });
 
 
-router.post('/checkout'  , ensureAuthenticated, function(req, res) {
+router.post('/checkout', ensureAuthenticated, function(req, res) {
 
     console.log("IN BASE...");
     let errors = [];
@@ -217,108 +217,128 @@ router.post('/checkout'  , ensureAuthenticated, function(req, res) {
     Item.findOne({ '_id': itemId })
         .then(item => {
             if (item) {
-                console.log("stk ID=> " + item.stockID + " default date => " + new Date() + " exp date => " + item.dateExp );
-                const  diff = Math.abs(new Date() - new Date(item.dateExp));
+                console.log("stk ID=> " + item.stockID + " default date => " + new Date() + " exp date => " + item.dateExp);
+                const diff = Math.abs(new Date() - new Date(item.dateExp));
                 console.log("DIFF DATES => " + diff);
                 if (diff >= 0) {
-                  console.log("Expired Items....");
-                  itemName = item.itemName;
-                  itemType = item.itemType;
-                  stockID = item.stockID;
-                  dateExp = item.dateExp;
-                  const expItems = new ExpiryItems({
+                    console.log("Expired Items....");
+                    itemName = item.itemName;
+                    itemType = item.itemType;
+                    stockID = item.stockID;
+                    dateExp = item.dateExp;
+
+                    const expItems = new ExpiryItems({
                         itemName,
                         itemType,
                         stockID,
                         dateExp
 
-                  });
-                  expItems.save();
-                  console.log("Item Table entry before removal : " + item._id);
-                  Item.deleteOne({'stockID': (item.stockID)});
+                    });
 
-                //  Stock.remove({'_id': (item.stockID)});
-                  Item.find({}, function(err, allItems) {
-                      if (err) {
-                          console.log("THIS IS ERRROR " + err);
-                      } else {
+                    expItems.save();
 
-                        errors.push({ msg: 'The item date for  ' + itemName + ' has expired. Select other item.' });
-                        res.render('checkoutdetails', {
-                            data: { name: req.user.name, items: allItems, errors }
-                        })
+                    console.log("Item Table entry before removal : " + item._id);
+                    Item.deleteOne({
+                            'stockID': item.stockID
+                        },
+                        function(err, res) {
+                            if (err) throw err;
+                            console.log("1 Item deleted");
 
-                      }
+                        });
+
+                    // Stock.deleteOne({
+                    //         '_id': item.stockID
+                    //     },
+                    //     function(err, res) {
+                    //         if (err) throw err;
+                    //         console.log("1 Stock deleted");
+
+                    //     });
+
+                    //  Stock.remove({'_id': (item.stockID)});
+
+                    Item.find({}, function(err, allItems) {
+                        if (err) {
+                            console.log("THIS IS ERRROR " + err);
+                        } else {
+
+                            errors.push({ msg: 'The item date for  ' + itemName + ' has expired. Select other item.' });
+                            res.render('checkoutdetails', {
+                                data: { name: req.user.name, items: allItems, errors }
+                            })
+
+                        }
 
 
-                  })
+                    })
 
 
                 } else {
-                  console.log("Active  Items....");
-                  Stock.findOne({ _id: item.stockID })
-                      .then(stk => {
-                          if (stk) {
+                    console.log("Active  Items....");
+                    Stock.findOne({ _id: item.stockID })
+                        .then(stk => {
+                            if (stk) {
 
 
-                              if (parseInt(stk.quantity) < parseInt(quantityX)) {
-                                  console.log("Error!");
-                                  console.log("CC: " + stk.quantity);
-                                  console.log("Q: " + quantityX);
+                                if (parseInt(stk.quantity) < parseInt(quantityX)) {
+                                    console.log("Error!");
+                                    console.log("CC: " + stk.quantity);
+                                    console.log("Q: " + quantityX);
 
 
-                                  errors.push({ msg: 'There are only ' + stk.quantity + ' in Pantry!' });
+                                    errors.push({ msg: 'There are only ' + stk.quantity + ' in Pantry!' });
 
-                                  Item.find({}, function(err, allItems) {
-                                      if (err) {
-                                          console.log("THIS IS ERRROR " + err);
-                                      } else {
+                                    Item.find({}, function(err, allItems) {
+                                        if (err) {
+                                            console.log("THIS IS ERRROR " + err);
+                                        } else {
 
-                                          res.render('checkoutdetails', {
-                                              data: { name: "jayesh", items: allItems, errors }
-                                          })
+                                            res.render('checkoutdetails', {
+                                                data: { name: "jayesh", items: allItems, errors }
+                                            })
 
-                                      }
-
-
-                                  })
-
-                              } else if (parseInt(stk.quantity) >= parseInt(quantityX)) {
-                                  console.log("Case 2!");
-
-                                  console.log(stk.quantity);
-                                  console.log(quantityX);
-
-                                  Stock.update({ _id: stk._id }, { quantity: parseInt(stk.quantity) - parseInt(quantityX) }, function(err, res) {
-                                      if (err) throw err;
-                                      console.log("1 document updated");
-                                  });
-                                  Item.find({}, function(err, allItems) {
-                                      if (err) {
-                                          console.log("THIS IS ERRROR " + err);
-                                      } else {
-
-                                           console.log(" ALL ITEMS => " + allItems);
-                                          res.render('checkout_success', {
-                                              data: { name: "jayesh", items: allItems, errors }
-                                          })
-
-                                      }
+                                        }
 
 
-                                  })
-                                  //res.render('checkout_success', {data: {}});
-                              } else {
-                                  res.redirect('/checkout');
+                                    })
 
-                              }
+                                } else if (parseInt(stk.quantity) >= parseInt(quantityX)) {
+                                    console.log("Case 2!");
+
+                                    console.log(stk.quantity);
+                                    console.log(quantityX);
+
+                                    Stock.update({ _id: stk._id }, { quantity: parseInt(stk.quantity) - parseInt(quantityX) }, function(err, res) {
+                                        if (err) throw err;
+                                        console.log("1 document updated");
+                                    });
+                                    Item.find({}, function(err, allItems) {
+                                            if (err) {
+                                                console.log("THIS IS ERRROR " + err);
+                                            } else {
+
+                                                console.log(" ALL ITEMS => " + allItems);
+                                                res.render('checkout_success', {
+                                                    data: { name: "jayesh", items: allItems, errors }
+                                                })
+
+                                            }
+
+
+                                        })
+                                        //res.render('checkout_success', {data: {}});
+                                } else {
+                                    res.redirect('/checkout');
+
+                                }
 
 
 
 
-                          }
+                            }
 
-                      });;
+                        });;
                 }
 
 
@@ -363,11 +383,11 @@ router.get('/checkout', function(req, res) {
 
 
 
-router.get('/charts', ensureAuthenticated,function(req, res) {
-  if (!req.isAuthenticated()) {
-      let errors = [];
-      res.redirect('index', { errors });
-  } else {
+router.get('/charts', ensureAuthenticated, function(req, res) {
+    if (!req.isAuthenticated()) {
+        let errors = [];
+        res.redirect('index', { errors });
+    } else {
         console.log("IN CHARTS ");
         Item.find({}, function(err, allItems) {
             if (err) {
@@ -381,17 +401,17 @@ router.get('/charts', ensureAuthenticated,function(req, res) {
                   labels.push(i + "abc");
                 }*/
                 //console.log("DATALIST=> " + dataList + " labels => " + labels);
-              //  dataObj = {"labels": labels, "series": dataList };
-              expItems = {}
+                //  dataObj = {"labels": labels, "series": dataList };
+                expItems = {}
 
 
 
                 res.render('charts', {
-                    data: { name:req.user.name, dataList: allItems}
+                    data: { name: req.user.name, dataList: allItems }
                 })
-          }
-  })
-}
+            }
+        })
+    }
 
 
 });
