@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Chico State Pantry</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="https://www.csuchico.edu/style-guide/visual/_images/CSUCHICO-Seal-Color.png">
+
+    <style>
+        /* Make the image fully responsive */
+
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <br>
+    <br>
+    <br>
+    <div class="container ">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="box_out" style="min-height: 650px;">
+
+                      <%- include('partials/header_2'); %>
+
+                        <div class="inWrap">
+                            <br><br>
+
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-5 ">
+
+
+                                        <form action="/checkout" method="post">
+
+
+                                            <div class="hHold">
+                                                Checkout Details
+                                            </div>
+                                            <br>
+
+
+
+
+                                            <div class="form-group">
+                                                Item Id # <input type="text" class="form_input" id="selectItemId" name="selectedItem" placeholder="# Item Id">
+                                            </div>
+
+                                            <div class="form-group">
+                                                Item Name <input type="text" class="form_input" id="selectItemNmeID" name="selectedItemNm" placeholder="Select Item from adjacent list">
+                                            </div>
+
+                                            <div class="form-group">
+                                                Item Quantity <input type="text" class="form_input" id="quantity" name="quantity" placeholder="Quantity">
+                                            </div>
+
+
+
+
+
+
+                                            <button type="submit" id="submitDetails" name="submitDetails" class="btn form_input red font-white">Checkout</button>
+                                        </form>
+
+                                    </div>
+
+                                    <div class="col-md-4 ">
+                                      <div class="form-group ">
+                                      Select Items from the Menu
+                                      <select class="form-control" id="itemId" name="itemType" onchange="selectItem(this)">
+                                              <option disabled selected>Select Item</option>
+
+                                              <% for (var i = 0; i < (data.items).length; i++) {%>
+                                                      <option value="<%=data.items[i]['_id']%>"><%=data.items[i]['itemName']%></option>
+                                                    <% } %>
+
+
+                                            </select>
+                                          </div>
+                                    </div>
+
+
+
+
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5">
+        <div class="container">
+            <span></span>
+        </div>
+    </footer>
+    <script>
+    function selectItem(sel) {
+
+      document.getElementById("selectItemId").value=sel.selectedIndex;
+      document.getElementById("selectItemNmeID").value=sel.options[sel.selectedIndex].text;
+    }
+
+    </script>
+</body>
+
+</html>

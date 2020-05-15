@@ -193,6 +193,48 @@ router.post('/add_cat', function(req, res) {
 
 });
 
+router.get('/checkout', ensureAuthenticated,function(req, res) {
+  if (!req.isAuthenticated()) {
+      let errors = [];
+      res.redirect('index', { errors });
+  } else {
+
+            Item.find({}, function(err, allItems) {
+                if (err) {
+                    console.log("THIS IS ERRROR " + err);
+                } else {
+
+          console.log(" forward to checkout");
+          console.log(allItems);
+
+
+
+                res.render('checkoutdetails', {
+                    data: { name:req.user.name, items: allItems }
+                })
+
+                }
+
+
+          console.log("OUTSIDE");
+
+            })
+
+}
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

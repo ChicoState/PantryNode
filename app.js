@@ -69,6 +69,7 @@ app.post('/add_donor', saleRouter);
 app.post('/add_stock', saleRouter);
 app.post('/add_cat', saleRouter);
 
+app.get('/checkout', saleRouter);
 
 
 app.get('/s', function(req, res, next) {
