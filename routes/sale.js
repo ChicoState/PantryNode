@@ -104,8 +104,11 @@ router.get('/stock', ensureAuthenticated, function(req, res) {
     } else {
 
         var donor;
+        var donor_name;
+
         if (Object.keys(req.query).length !== 0) {
             donor = req.query.id;
+            donor_name = req.query.name;
         }
         console.log(donor);
         Category.find({}, function(err, allCategories) {
@@ -115,7 +118,7 @@ router.get('/stock', ensureAuthenticated, function(req, res) {
 
 
                 res.render('stock', {
-                    data: { name: req.user.name, categories: allCategories, donorId: donor }
+                    data: { name: req.user.name, categories: allCategories, donorId: donor, donorName: donor_name }
                 })
 
 
@@ -165,8 +168,6 @@ router.post('/add_stock', function(req, res) {
         donorID,
         stockID,
     });
-
-
 
 
 
@@ -229,7 +230,6 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
                     itemType = item.itemType;
                     stockID = item.stockID;
                     dateExp = item.dateExp;
-
 
                     const expItems = new ExpiryItems({
                         itemName,
