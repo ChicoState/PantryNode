@@ -240,7 +240,7 @@
 
                                     <div class="col-md-6">
 
-                                        <b>Waste Management</b>
+                                        <b>Soon to Expire</b>
                                         <br>
 
 
@@ -250,6 +250,7 @@
                                                 <tr style="background-color: #8c2332; color: white; ">
                                                     <th scope="col ">#</th>
                                                     <th scope="col ">Name</th>
+                                                    <th scope="col ">Days Remaining</th>
                                                     <th scope="col ">Date</th>
 
                                                 </tr>
@@ -271,6 +272,9 @@
                                                                 </th>
                                                                 <td style="text-transform: capitalize; ">
                                                                     <%= data.items[i].itemName %>
+                                                                </td>
+                                                                <td>
+                                                                    <%=  diff+1 %>
                                                                 </td>
 
                                                                 <%  var d = data.items[i].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
