@@ -1,4 +1,4 @@
-<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" width=400 alt="ChicoPantry" style="width:400px; float:right;"></a>
+<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo_w.png" title="ChicoPantry" width=400 alt="ChicoPantry" style="width:400px; float:right;"></a>
 <br>
 # Chico State Food Pantry 
 
@@ -21,7 +21,7 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- **[MIT license](LICENSE)**
 - Copyright 2020 © <a href="https://github.com/ChicoState/" target="https://github.com/ChicoState/">ChicoState</a>.
 
 ## Continous Integration 
@@ -71,8 +71,17 @@ $ nodemon bin/www
 > Brower
 
 ```shell
-    http://localhost:3000/
+  http://localhost:3000/
 ```
+
+
+## Old UML Diagram
+
+<img src="public/images/uml/old.jpeg" alt="Pantry Node Old UML" size=450>
+
+## New UML Diagram
+
+<img src="public/images/uml/new.jpeg" alt="Pantry Node Old UML" size=450>
 
 
 ## Contributing
