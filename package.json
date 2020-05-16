@@ -17,8 +17,10 @@
     "express": "^4.16.4",
     "express-favicon": "^2.0.1",
     "express-session": "^1.17.1",
+    "fontawesome": "^5.6.3",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jshint-reporter-badge": "^0.1.0",
     "jslint": "^0.12.1",
     "mongoose": "^5.9.11",
     "morgan": "~1.9.1",
@@ -27,5 +29,8 @@
     "passport-local": "^1.0.0",
     "randomstring": "^1.1.5",
     "session-file-store": "^1.4.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.11.1"
   }
 }
