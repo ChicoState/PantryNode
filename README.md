@@ -1,7 +1,6 @@
-<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" width=400 alt="ChicoPantry" style="width:400px; float:r;"></a>
+<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" width=400 alt="ChicoPantry" style="width:400px; float:right;"></a>
 <br>
-
-##
+# Chico Pantry 
 
 > CSCI-630 Software Design and Maintainance
 
