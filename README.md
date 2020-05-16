@@ -98,7 +98,7 @@ $ nodemon bin/www
 
 > Contributors
 
-| <a href="http://fvcproductions.com" target="_blank">**Subhed Chavan**</a> | <a href="http://fvcproductions.com" target="_blank">**Jayesh Sathe**</a> | <a href="http://fvcproductions.com" target="_blank">**Gopal Raigoni**</a> |
+| <a href="ttp://github.com/subhed" target="_blank">**Subhed Chavan**</a> | <a href="ttp://github.com/Jayesh-sathe" target="_blank">**Jayesh Sathe**</a> | <a href="ttp://github.com/goaplsingh112" target="_blank">**Gopal Raigoni**</a> |
 | :---: |:---:| :---:|
 
 | <a href="http://github.com/subhed" target="_blank">`github.com/subhed`</a> | <a href="http://github.com/Jayesh-sathe" target="_blank">`github.com//Jayesh-sathe`</a> | <a href="http://github.com/goaplsingh112" target="_blank">`github.com/goaplsingh112`</a> |
