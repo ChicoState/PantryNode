@@ -74,7 +74,6 @@ $ nodemon bin/www
   http://localhost:3000/
 ```
 
-
 ## Old UML Diagram
 
 <img src="public/images/uml/old.jpeg" alt="Pantry Node Old UML" size=400>
