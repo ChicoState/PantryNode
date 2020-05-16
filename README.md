@@ -9,7 +9,7 @@
 > California State University, Chico
 
 
-[![NPM](https://badge.fury.io/js/nodejs.svg)](https://badge.fury.io/js/nodejs.svg)
+[![NPM](https://img.shields.io/npm/v/npm/latest)](https://img.shields.io/npm/v/npm/latest)
 [![NodeJS](https://img.shields.io/github/languages/top/badges/shields.svg)](https://img.shields.io/github/languages/top/badges/shields.svg)
 
 
@@ -33,6 +33,21 @@ In this project, we have implemented food pantry management using web-frameworks
 [![License](https://travis-ci.org/ChicoState/PantryNode.svg?branch=master)](http://badges.mit-license.org)
 
 - **[Travis-CI](https://travis-ci.org)**
+
+## Technology Stack
+
+> Back-End
+
+- MongoDB
+- Express JS
+- JavaScript
+
+> Front-End
+
+- EJS
+- CSS
+- BootStrap
+- jQuery
 
 ## Installation
 
@@ -103,8 +118,9 @@ $ nodemon bin/www
 
 -  The sales report allows the admin or the pantry organization to visualize the stock, expiry, and waste management. It also helps to keep the count of various parameters such as students count, expired item count, available item count, and utilized item count.
 
+## Static Code Analysis Tool 
 
-
+- JS Lint
 
 ## Contributing
 
