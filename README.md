@@ -23,7 +23,8 @@
 ### Clone
 
 - Clone this repo to your local machine using `git clone https://github.com/ChicoState/PantryNode`
-- ```shell
+
+```shell
 $ cd PantryNode
 ```
 
