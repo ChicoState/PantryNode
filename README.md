@@ -137,7 +137,7 @@ $ nodemon bin/www
 
 > Contributors
 
-| <a href="http://github.com/subhed" target="_blank">**Subhed Chavan**</a> | <a href="http://github.com/Jayesh-sathe" target="_blank">**Jayesh Sathe**</a> | <a href="http://github.com/goaplsingh112" target="_blank">**Gopal Raigoni**</a> |
+| <a href="http://github.com/subhed" target="_blank">**Subhed Chavan**</a> | <a href="http://github.com/Jayesh-sathe" target="_blank">**Jayesh Sathe**</a> | <a href="http://github.com/gopalsingh112" target="_blank">**Gopal Raigoni**</a> |
 | :---: |:---:| :---:|
 
 | <a href="http://github.com/subhed" target="_blank">`github.com/subhed`</a> | <a href="http://github.com/Jayesh-sathe" target="_blank">`github.com//Jayesh-sathe`</a> | <a href="http://github.com/gopalsingh112" target="_blank">`github.com/gopalsingh112`</a> |
