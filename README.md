@@ -15,6 +15,10 @@
 [![NodeJS](https://img.shields.io/github/languages/top/badges/shields.svg)](https://img.shields.io/github/languages/top/badges/shields.svg)
 
 
+## Code of Conduct
+
+- Code of conduct for this project is given in ![Code of Conduct](Code_of_Conduct.md).
+
 
 ## Installation
 
