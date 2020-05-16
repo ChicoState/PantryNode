@@ -1,4 +1,4 @@
-<a href="https://chicopantry.herokuapp.com/"><img src="public/images/log.png" title="ChicoPantry" width=400 alt="ChicoPantry" style="width:400px; float:right;display:inline;"  align="right"></a>
+<a href="https://chicopantry.herokuapp.com/"><img src="public/images/log.png" title="ChicoPantry" width=200 alt="ChicoPantry" style="width:200px; float:right;display:inline;"  align="right"></a>
 <br>
 # Chico State Food Pantry 
 
@@ -76,11 +76,11 @@ $ nodemon bin/www
 
 ## Old UML Diagram
 
-<img src="public/images/uml/old.jpeg" alt="Pantry Node Old UML" width=550>
+<img src="public/images/uml/old.jpeg" alt="Pantry Node Old UML" width=750>
 
 ## New UML Diagram
 
-<img src="public/images/uml/new.jpeg" alt="Pantry Node Old UML" width=550>
+<img src="public/images/uml/new.jpeg" alt="Pantry Node Old UML" width=750>
 
 
 ## Contributing
