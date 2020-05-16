@@ -1,6 +1,6 @@
-<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" width=300 alt="ChicoPantry" style="width:300px;"></a>
+<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" width=400 alt="ChicoPantry" style="width:400px;"></a>
 
-# Chico Pantry 
+<!-- # Chico Pantry  -->
 
 > CSCI-630 Software Design and Maintainance
 
@@ -23,12 +23,12 @@
 ### Clone
 
 - Clone this repo to your local machine using `git clone https://github.com/ChicoState/PantryNode`
-- cd PantryNode
+- ```shell
+$ cd PantryNode
+```
 
 
 ### Setup
-
-- If you want more syntax highlighting, format your code like this:
 
 > now install npm packages
 
