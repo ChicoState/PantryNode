@@ -94,3 +94,16 @@ $ nodemon bin/www
 - 🔃 Create a new pull request using <a href="https://github.com/ChicoState/PantryNode" target="_blank">`https://github.com/ChicoState/PantryNode`</a>.
 
 
+## Team
+
+> Contributors
+
+| <a href="http://fvcproductions.com" target="_blank">**Subhed Chavan**</a> | <a href="http://fvcproductions.com" target="_blank">**Jayesh Sathe**</a> | <a href="http://fvcproductions.com" target="_blank">**Gopal Raigoni**</a> |
+| :---: |:---:| :---:|
+| [![Subhed Chavan](https://avatars2.githubusercontent.com/u/13158380?s=100&u=714479005791b3a1818309ce1711cb721cff2c48&v=4)](http://fvcproductions.com)    | [![Jayesh Sathe](https://avatars3.githubusercontent.com/u/58150531?s=100&v=4)](http://fvcproductions.com) | [![Gopal Raigoni](https://avatars3.githubusercontent.com/u/43721542?s=100&u=8ec3379d5af7c71b547d7323c3621bf661848524&v=4)](http://fvcproductions.com)  |
+| <a href="http://github.com/subhed" target="_blank">`github.com/subhed`</a> | <a href="http://github.com/Jayesh-sathe" target="_blank">`github.com//Jayesh-sathe`</a> | <a href="http://github.com/goaplsingh112" target="_blank">`github.com/goaplsingh112`</a> |
+
+- You can just grab their GitHub profile image URL
+- You should probably resize their picture using `?s=200` at the end of the image URL.
+
+---
