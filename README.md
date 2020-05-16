@@ -1,6 +1,6 @@
-<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" width=400 alt="ChicoPantry" style="width:400px;"></a>
-
-<!-- # Chico Pantry  -->
+<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" width=400 alt="ChicoPantry" style="width:400px; float:r;"></a>
+<br>
+# Chico Pantry 
 
 > CSCI-630 Software Design and Maintainance
 
@@ -17,8 +17,14 @@
 
 ## Code of Conduct
 
-- Code of conduct for this project is given in ![Code of Conduct](Code_of_Conduct.md).
+- Code of conduct for this project is given in [Code of Conduct](Code_of_Conduct.md).
 
+## License
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright 2015 © <a href="http://fvcproductions.com" target="_blank">FVCproductions</a>.
 
 ## Installation
 
