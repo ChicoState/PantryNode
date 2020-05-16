@@ -74,19 +74,9 @@ $ nodemon bin/www
 
 > To get started.
 
-### Step 1
+- 🍴 Fork this repo!
 
-- **Option 1**
-    - 🍴 Fork this repo!
-
-- **Option 2**
-    - 💻 Clone this repo to your local machine using `https://github.com/ChicoState/PantryNode`
-
-### Step 2
-
-- **Contribute** 🔨
-
-### Step 3
+- 💻 Clone this repo to your local machine using `https://github.com/ChicoState/PantryNode`
 
 - 🔃 Create a new pull request using <a href="https://github.com/ChicoState/PantryNode" target="_blank">`https://github.com/ChicoState/PantryNode`</a>.
 
