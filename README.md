@@ -135,6 +135,13 @@ $ nodemon bin/www
 
 ## Team
 
+> Professor
+
+| <a href="http://github.com/kbuffardi" target="_blank">**Kevin Buffardi**</a> 
+| :---: |
+| <a href="http://github.com/kbuffardi" target="_blank">`github.com/kbuffardi`</a> 
+
+
 > Contributors
 
 | <a href="http://github.com/subhed" target="_blank">**Subhed Chavan**</a> | <a href="http://github.com/Jayesh-sathe" target="_blank">**Jayesh Sathe**</a> | <a href="http://github.com/gopalsingh112" target="_blank">**Gopal Raigoni**</a> |
