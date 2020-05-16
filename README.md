@@ -1,6 +1,6 @@
 <a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" width=400 alt="ChicoPantry" style="width:400px; float:right;"></a>
 <br>
-# Chico Pantry 
+# Chico State Food Pantry 
 
 > CSCI-630 Software Design and Maintainance
 
@@ -9,7 +9,6 @@
 > California State University, Chico
 
 
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) 
 [![NPM](https://badge.fury.io/js/nodejs.svg)](https://badge.fury.io/js/nodejs.svg)
 [![NodeJS](https://img.shields.io/github/languages/top/badges/shields.svg)](https://img.shields.io/github/languages/top/badges/shields.svg)
 
@@ -60,13 +59,19 @@ $ npm start
 > Alternative to `npm start`
 
 ```shell
-$ npm install nodemom
+$ npm install nodemon
 ```
 
 > Run Nodemom
 
 ```shell
 $ nodemon bin/www
+```
+
+> Brower
+
+```shell
+    http://localhost:3000/
 ```
 
 
