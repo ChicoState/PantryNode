@@ -1,4 +1,4 @@
-<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" alt="ChicoPantry" style="width:450px;"></a>
+<a href="https://chicopantry.herokuapp.com/"><img src="public/images/logo.png" title="ChicoPantry" width=300 alt="ChicoPantry" style="width:300px;"></a>
 
 # Chico Pantry 
 
