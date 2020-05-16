@@ -139,6 +139,7 @@ $ nodemon bin/www
 
 | <a href="http://github.com/kbuffardi" target="_blank">**Kevin Buffardi**</a> 
 | :---: |
+
 | <a href="http://github.com/kbuffardi" target="_blank">`github.com/kbuffardi`</a> 
 
 
