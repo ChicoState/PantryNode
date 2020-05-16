@@ -25,6 +25,12 @@
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright 2020 © <a href="https://github.com/ChicoState/" target="https://github.com/ChicoState/">ChicoState</a>.
 
+## Continous Integration 
+
+[![License](https://travis-ci.org/ChicoState/PantryNode.svg?branch=master)](http://badges.mit-license.org)
+
+- **[Travis-CI](https://travis-ci.org)**
+
 ## Installation
 
 - All the `code` required to get started
@@ -36,7 +42,6 @@
 ```shell
 $ cd PantryNode
 ```
-
 
 ### Setup
 
@@ -63,8 +68,6 @@ $ npm install nodemom
 ```shell
 $ nodemon bin/www
 ```
-
-
 
 
 ## Contributing
