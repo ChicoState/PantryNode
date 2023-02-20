@@ -1,12 +1,4 @@
-<a href="https://chicopantry.herokuapp.com/"><img src="public/images/log.png" title="ChicoPantry" width=200 alt="ChicoPantry" style="width:200px; float:right;display:inline;"  align="right"></a>
-<br>
-# Chico State Food Pantry 
-
-> CSCI-630 Software Design and Maintainance
-
-> Department of Computer Science
-
-> California State University, Chico
+# PantryNode
 
 
 [![NPM](https://img.shields.io/npm/v/npm/latest)](https://img.shields.io/npm/v/npm/latest)
@@ -15,7 +7,7 @@
 
 ## Description
 
-In this project, we have implemented food pantry management using web-frameworks. This project allows the university to keep track of the food items available and utilized by the students. It ensures the control of pantry services for the staff and administration. The application helps to keep track of donations from various sources and effectively visualize the records.
+In this project, we have implemented food pantry management using a NodeJS-based web framework. This project allows the organizations to keep track of the food items available and utilized by community members. It ensures the control of pantry services for the staff and administration. The application also helps to keep track of donations from various sources and effectively visualize the records.
 
 ## Code of Conduct
 
@@ -26,7 +18,6 @@ In this project, we have implemented food pantry management using web-frameworks
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - **[MIT license](LICENSE)**
-- Copyright 2020 © <a href="https://github.com/ChicoState/" target="https://github.com/ChicoState/">ChicoState</a>.
 
 ## Continous Integration 
 
@@ -93,14 +84,6 @@ $ nodemon bin/www
   http://localhost:3000/
 ```
 
-## Old UML Diagram
-
-<img src="public/images/uml/old.jpeg" alt="Pantry Node Old UML" width=750>
-
-## New UML Diagram
-
-<img src="public/images/uml/new.jpeg" alt="Pantry Node Old UML" width=750>
-
 
 ## Features
 
@@ -124,29 +107,4 @@ $ nodemon bin/www
 
 ## Contributing
 
-> To get started.
-
-- 🍴 Fork this repo!
-
-- 💻 Clone this repo to your local machine using `https://github.com/ChicoState/PantryNode`
-
-- 🔃 Create a new pull request using <a href="https://github.com/ChicoState/PantryNode" target="_blank">`https://github.com/ChicoState/PantryNode`</a>.
-
-
-## Team
-
-> Professor
-
-| <a href="http://github.com/kbuffardi" target="_blank">**Kevin Buffardi**</a> 
-| :---: |
-| <a href="http://github.com/kbuffardi" target="_blank">`github.com/kbuffardi`</a> 
-
-
-> Contributors
-
-| <a href="http://github.com/subhed" target="_blank">**Subhed Chavan**</a> | <a href="http://github.com/Jayesh-sathe" target="_blank">**Jayesh Sathe**</a> | <a href="http://github.com/gopalsingh112" target="_blank">**Gopal Raigoni**</a> |
-| :---: |:---:| :---:|
-| <a href="http://github.com/subhed" target="_blank">`github.com/subhed`</a> | <a href="http://github.com/Jayesh-sathe" target="_blank">`github.com//Jayesh-sathe`</a> | <a href="http://github.com/gopalsingh112" target="_blank">`github.com/gopalsingh112`</a> |
-
-
----
+See the [Contributing](contributing.md) guide to contribute to the project!
