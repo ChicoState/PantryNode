@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const CheckoutSchema = new mongoose.Schema({
 
 
-    chicoStateId: {
+    userId: {
         type: String,
         required: true
     },

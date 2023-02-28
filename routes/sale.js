@@ -214,7 +214,7 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
     console.log("IN BASE...");
     let errors = [];
 
-    const { itemId, quantityX, chicoId } = req.body;
+    const { itemId, quantityX, userId } = req.body;
 
     console.log("kkkk  => " + itemId);
 
@@ -291,10 +291,10 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
                     })
 
 
-                } else if (chicoId.length != 9) {
+                } else if (userId.length != 9) {
                     let errors = [];
 
-                    errors.push({ msg: 'Invalid Chico State ID' });
+                    errors.push({ msg: 'Invalid User ID' });
 
                     Item.find({}, function(err, allItems) {
                         if (err) {
@@ -347,9 +347,9 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
                                     var itemType = item.itemType;
                                     var stockID = stk._id;
                                     var quantity = quantityX;
-                                    var chicoStateId = chicoId;
+                                    var userId = userId;
                                     const checkU = new Checkout({
-                                        chicoStateId,
+                                        userId,
                                         itemName,
                                         itemType,
                                         stockID,
