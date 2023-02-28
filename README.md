@@ -83,7 +83,13 @@ $ nodemon bin/www
 ```shell
   http://localhost:3000/
 ```
+### Docker setup
 
+> Docker containerization 
+`docker build -t node-container .` 
+
+> Docker run
+`docker run -p 3000:3000 -it node-container`
 
 ## Features
 
