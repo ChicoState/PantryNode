@@ -84,6 +84,16 @@ $ nodemon bin/www
   http://localhost:3000/
 ```
 
+### Setup with docker
+> Docker-compose
+```
+docker-compose up
+```
+> Brower
+
+```shell
+  http://localhost:3000/
+```
 
 ## Features
 
