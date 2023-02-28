@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build project
-        run: npm start
+        run: npm install && npm start
