@@ -18,7 +18,7 @@ var db = require('../config/keys').MongoURI;
 const { ensureAuthenticated } = require('../config/auth');
 
 
-mongoose.connect(db, { useNewUrlParser: true });
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 

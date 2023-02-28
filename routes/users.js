@@ -6,7 +6,7 @@ const User = require('../models/User');
 const mongoose = require('mongoose');
 var db = require('../config/keys').MongoURI;
 
-mongoose.connect(db, { useNewUrlParser: true });
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true });
 
 router.get('/register', function (req, res, next) {
   if (!req.isAuthenticated()) {
