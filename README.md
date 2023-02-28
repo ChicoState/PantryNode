@@ -86,14 +86,14 @@ $ nodemon bin/www
 ### Docker setup
 
 > Docker containerization 
-`docker build -t node-container .` 
+`docker build -t my-app --platform linux/amd64 .` 
 
 > Docker run
-`docker run -p 3000:3000 -it node-container`
+`docker run -p 3000:3000 my-app:linux-amd64`
 
 > **Warning**
-> You'll need your Mongo DB to connect to the app.
-> You'll need to update the Mongo URI to connect to your Mongo DB.
+> You'll need your Mongo DB to connect to the app and
+> you'll need to update the Mongo URI to connect to your Mongo DB.
 
 ### Docker Compose Setup
 > Docker-compose
