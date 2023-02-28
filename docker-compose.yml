@@ -15,6 +15,7 @@ services:
       dockerfile: Dockerfile
       target: node
     container_name: node
+    platform: linux/amd64
     depends_on:
       - database
     restart: always
