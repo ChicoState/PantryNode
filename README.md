@@ -89,7 +89,7 @@ $ nodemon bin/www
 `docker build -t my-app --platform linux/amd64 .` 
 
 > Docker run
-`docker run -p 3000:3000 my-app:linux-amd64`
+`docker run -p 3000:3000 my-app`
 
 > **Warning**
 > You'll need your Mongo DB to connect to the app and
