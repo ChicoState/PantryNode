@@ -52,6 +52,23 @@ In this project, we have implemented food pantry management using a NodeJS-based
 $ cd PantryNode
 ```
 
+### DB Setup
+
+> DB requires docker and docker-compose
+
+> Update docker-compose.yml variables POSTGRES_PASSWORD, PGADMIN_DEFAULT_EMAIL, PGADMIN_DEFAULT_PASSWORD to desired values
+
+```shell
+$ docker-complose up
+```
+> Open http://localhost:82 in a web broswer
+
+> login using the credentials define in the docker-compose file
+
+> add a new server to the management console using db_sandbox as the host name/address field and the POSTGRES_PASSWORD value
+
+> Note that the default username for postgres is postgres
+
 ### Setup
 
 > now install npm packages
