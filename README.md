@@ -78,7 +78,7 @@ $ npm install nodemon
 $ nodemon bin/www
 ```
 
-> Brower
+> Browser
 
 ```shell
   http://localhost:3000/
@@ -89,7 +89,7 @@ $ nodemon bin/www
 ```
 docker-compose up
 ```
-> Brower
+> Browser
 
 ```shell
   http://localhost:3000/
