@@ -31,8 +31,6 @@ db.once('open', function(callback) {
     console.log("connection succeeded");
 })
 
-kjhgvbihbkjhnljknbl
-
 // view engine setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
