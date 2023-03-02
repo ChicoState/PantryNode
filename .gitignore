@@ -131,3 +131,7 @@ dist
 
 # Postgres
 ./postgres-data
+./tmp
+
+# MacOS
+.DS_Store
