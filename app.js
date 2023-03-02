@@ -23,7 +23,7 @@ var app = express();
 var db = require('./config/keys').MongoURI;
 
 const mongoose = require('mongoose');
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(db, { useNewUrlParser: true });
 
 var db = mongoose.connection;
 db.on('error', console.log.bind(console, "connection error"));
