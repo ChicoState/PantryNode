@@ -6,8 +6,8 @@ CREATE TABLE Storage_type (
 
 CREATE TABLE Site (
   site_id serial,
-  addr_id int NOT NULL,
-  name text,
+  addr_id int,
+  name text NOT NULL,
   PRIMARY KEY (site_id)
 );
 
@@ -112,7 +112,7 @@ CREATE TABLE Shelf_contents (
 );
 
 CREATE TABLE Address (
-  person_id int NOT NULL,
+  person_id int,
   addr_id serial,
   addr_1 text NOT NULL,
   addr_2 text,
