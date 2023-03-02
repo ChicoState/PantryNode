@@ -1,6 +1,6 @@
 CREATE TABLE Storage_type (
   stor_id serial,
-  stor_type text NOT NULL,
+  stor_type text UNIQUE NOT NULL,
   PRIMARY KEY (stor_id)
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE Shelf (
 CREATE TYPE category AS ENUM ('produce', 'fruit', 'meat', 'dairy', 'baked goods', 'canned', 'snacks', 'beverage', 'condiments & spices', 'processed foods', 'other' );
 CREATE TABLE Item (
   item_id serial,
-  name text,
+  name text UNIQUE,
   category category,
   stor_id int NOT NULL,
   size int,
