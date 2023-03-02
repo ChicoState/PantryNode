@@ -12,8 +12,8 @@ CREATE TABLE Site (
 );
 
 CREATE TABLE Aisle (
-  site_id serial,
-  aisle_id int NOT NULL,
+  site_id int NOT NULL,
+  aisle_id serial,
   info text,
   PRIMARY KEY (aisle_id),
   CONSTRAINT FK_Aisle_site_id

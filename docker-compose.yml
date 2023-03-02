@@ -6,11 +6,12 @@ services:
     volumes: 
       - ./postgres-data:/var/lib/postgresql/data
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./sql/dummy_data.sql:/docker-entrypoint-initdb.d/dummy_data.sql
     ports:
       - "5432:5432"
     restart: always
     environment:
-      POSTGRES_DB: 
+      POSTGRES_DB: pantrynode
       POSTGRES_PASSWORD: 
   db_admin:
     image: dpage/pgadmin4
