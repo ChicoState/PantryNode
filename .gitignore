@@ -130,8 +130,8 @@ dist
 .pnp.*
 
 # Postgres
-./postgres-data
-./tmp
+postgres-data/
+tmp/
 
 # MacOS
 .DS_Store
