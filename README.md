@@ -83,7 +83,29 @@ $ nodemon bin/www
 ```shell
   http://localhost:3000/
 ```
+### Docker setup
 
+> Docker containerization 
+`docker build -t my-app --platform linux/amd64 .` 
+
+> Docker run
+`docker run -p 3000:3000 my-app`
+
+> **Warning**
+> You'll need your Mongo DB to connect to the app and
+> you'll need to update the Mongo URI to connect to your Mongo DB.
+
+### Docker Compose Setup
+> Docker-compose
+```
+docker-compose up
+```
+> Brower
+```shell
+ http://localhost:3000/
+```
+> **Note**
+> Created a docker based Mongo DB, just to avoid the Mongo DB setup
 
 ## Features
 
