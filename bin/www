@@ -4,6 +4,13 @@
  * Module dependencies.
  */
 
+let start_and_kill = false;
+process.argv.forEach(arg => {
+  if (arg === "--start-and-kill") {
+    start_and_kill = true;
+  }
+})
+
 var app = require('../app');
 var debug = require('debug')('project:server');
 var http = require('http');
@@ -20,6 +27,13 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+/** Short circuit if we only want to build but not start up the whole thing **/
+if (start_and_kill === true) {
+  console.log("INFO: 'start and kill' argument is set, preventing server from starting.")
+  server.close();
+  process.exit();
+}
 
 /**
  * Listen on provided port, on all network interfaces.
