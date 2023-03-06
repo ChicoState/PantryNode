@@ -19,11 +19,9 @@ In this project, we have implemented food pantry management using a NodeJS-based
 
 - **[MIT license](LICENSE)**
 
-## Continous Integration 
+## Continous Integration with GitHub Actions 
 
-[![License](https://travis-ci.org/ChicoState/PantryNode.svg?branch=master)](http://badges.mit-license.org)
-
-- **[Travis-CI](https://travis-ci.org)**
+[![Build Node](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml/badge.svg)](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml)
 
 ## Technology Stack
 
