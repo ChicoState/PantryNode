@@ -108,3 +108,5 @@ $ nodemon bin/www
 ## Contributing
 
 See the [Contributing](contributing.md) guide to contribute to the project!
+
+[![Build Node](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml/badge.svg)](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml)
