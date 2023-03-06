@@ -1,8 +1,6 @@
 name: ES Lint
 
 on:
-  push:
-    branches: [linter]
   pull_request:
     branches: [main]
 
