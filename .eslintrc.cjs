@@ -13,6 +13,6 @@ module.exports = {
         "no-extra-semi": "off",
         "@typescript-eslint/no-extra-semi": "warn",
         "no-undef": "off",
-        "@typescript-eslint/no-undef": "warn"
+        "no-undef": "warn"
     }
 };
