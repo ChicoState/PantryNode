@@ -1,3 +1,4 @@
+var { Sequelize } = require('sequelize');
 var createError = require('http-errors');
 var express = require('express');
 const session = require('express-session');
@@ -20,17 +21,16 @@ var saleRouter = require('./routes/sale');
 
 var app = express();
 
-var db = require('./config/keys').MongoURI;
+var con_string = require('../config/keys').PostgresURI;
+const sequelize = new Sequelize(con_string)
 
-const mongoose = require('mongoose');
-mongoose.connect(db, { useNewUrlParser: true });
-
-var db = mongoose.connection;
-db.on('error', console.log.bind(console, "connection error"));
-db.once('open', function(callback) {
-    console.log("connection succeeded");
-})
-
+try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+  
 // view engine setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

@@ -1,15 +1,18 @@
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+import { initModels, person } from "../models-test/init-models";
 
-const User = require('../models/User');
+var con_string = require('../config/keys').PostgresURI;
+const sequelize = new Sequelize(con_string)
 
+initModels(sequelize);
 
 module.exports = function (passport) {
     passport.use(
 
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-            User.findOne({ email: email })
+            person.findOne({where : { email: email }})
                 .then(user => {
                     if (!user) {
                         return done(null, false, { message: 'User does not exist' });
