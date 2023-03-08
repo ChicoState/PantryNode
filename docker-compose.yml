@@ -8,16 +8,16 @@ services:
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
       - ./sql/dummy_data.sql:/docker-entrypoint-initdb.d/dummy_data.sql
     ports:
-      - "5432:5432"
+      - '5432:${DB_PORT}'
     restart: always
     environment:
-      POSTGRES_DB: pantrynode
-      POSTGRES_PASSWORD: pantrynode
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
   db_admin:
     image: dpage/pgadmin4
     ports:
       - "82:80"
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL:
-      PGADMIN_DEFAULT_PASSWORD:
+      - PGADMIN_DEFAULT_EMAIL=$PGADMIN_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD=$PGADMIN_PASSWORD

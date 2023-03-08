@@ -56,7 +56,18 @@ $ cd PantryNode
 
 > DB requires docker and docker-compose
 
-> Update docker-compose.yml variables POSTGRES_PASSWORD, PGADMIN_DEFAULT_EMAIL, PGADMIN_DEFAULT_PASSWORD to desired values
+> Create a .env file with the following contents
+
+#DB CONFIG
+DB_USER='postgres'
+DB_HOST='db_sandbox'
+DB_NAME='pantrynode'
+DB_PASSWORD=Update Password
+DB_PORT=5432
+
+#DB ADMIN
+PGADMIN_EMAIL='admin@admin.com'
+PGADMIN_PASSWORD=Update Password
 
 ```shell
 $ docker-complose up
