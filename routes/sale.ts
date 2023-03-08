@@ -11,6 +11,7 @@ const Category = require('../models/Category');
 const Donation = require('../models/Donation');
 const ExpiryItems = require('../models/ExpiryItems');
 const Checkout = require('../models/Checkout');
+
 var { Sequelize } = require('sequelize');
 
 import { initModels, person, item } from "../models-test/init-models";
@@ -20,7 +21,6 @@ const sequelize = new Sequelize(con_string)
 initModels(sequelize);
 
 const { ensureAuthenticated } = require('../config/auth');
-
 
 
 router.get('/sale', ensureAuthenticated, function(req, res) {
@@ -94,7 +94,6 @@ router.get('/stock', ensureAuthenticated, function(req, res) {
             donor_name = req.query.name;
         }
         console.log(donor);
-
         const allCategories = item.getAttributes().category?.defaultValue;
         res.render('stock', {
             data: { name: req.user.name, categories: allCategories, donorId: donor, donorName: donor_name }
