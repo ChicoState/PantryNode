@@ -105,13 +105,13 @@ $ nodemon bin/www
 #### Install ESLint dependencies
 
 ```shell
-$ npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
 ```
 
 #### Run ESLint Locally
 
 ```shell
-$ npx eslint .
+npx eslint .
 ```
 
 ## Contributing
