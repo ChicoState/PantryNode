@@ -60,7 +60,7 @@ $ cd PantryNode
 
 #DB CONFIG
 DB_USER='postgres'
-DB_HOST='db_sandbox'
+DB_HOST='localhost'
 DB_NAME='pantrynode'
 DB_PASSWORD=Update Password
 DB_PORT=5432
