@@ -76,7 +76,7 @@ $ npm install nodemon
 $ nodemon bin/www
 ```
 
-> Brower
+> Browser
 
 ```shell
   http://localhost:3000/
@@ -102,13 +102,13 @@ $ nodemon bin/www
 ## Static Code Analysis Tool 
 
 ### ESLint
-#### Install ESLint dependencies
+> Install ESLint dependencies
 
 ```shell
 npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
 ```
 
-#### Run ESLint Locally
+> Run ESLint Locally
 
 ```shell
 npx eslint .
