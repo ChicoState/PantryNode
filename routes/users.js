@@ -46,7 +46,7 @@ router.post('/sign_up', function (req, res) {
       }
 
     });
-  ;
+
 });
 
 

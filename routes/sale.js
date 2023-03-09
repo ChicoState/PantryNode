@@ -60,7 +60,7 @@ router.post('/add_donor', function(req, res) {
                 res.redirect('/donor');
             }
 
-        });;
+        });
 });
 
 
@@ -389,12 +389,12 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
 
                             }
 
-                        });;
+                        });
                 }
 
 
             }
-        });;
+        });
 
 
 
