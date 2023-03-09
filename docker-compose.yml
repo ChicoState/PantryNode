@@ -13,6 +13,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
+      - PGDATA=/var/lib/pg_data
   db_admin:
     image: dpage/pgadmin4
     ports:
