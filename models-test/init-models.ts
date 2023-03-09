@@ -1,30 +1,50 @@
-import type { Sequelize } from "sequelize";
-import { address as _address } from "./address";
-import type { addressAttributes, addressCreationAttributes } from "./address";
-import { aisle as _aisle } from "./aisle";
-import type { aisleAttributes, aisleCreationAttributes } from "./aisle";
-import { empl_info as _empl_info } from "./empl_info";
-import type { empl_infoAttributes, empl_infoCreationAttributes } from "./empl_info";
-import { item as _item } from "./item";
-import type { itemAttributes, itemCreationAttributes } from "./item";
-import { permissions as _permissions } from "./permissions";
-import type { permissionsAttributes, permissionsCreationAttributes } from "./permissions";
-import { person as _person } from "./person";
-import type { personAttributes, personCreationAttributes } from "./person";
-import { section as _section } from "./section";
-import type { sectionAttributes, sectionCreationAttributes } from "./section";
-import { shelf as _shelf } from "./shelf";
-import type { shelfAttributes, shelfCreationAttributes } from "./shelf";
-import { shelf_contents as _shelf_contents } from "./shelf_contents";
-import type { shelf_contentsAttributes, shelf_contentsCreationAttributes } from "./shelf_contents";
-import { site as _site } from "./site";
-import type { siteAttributes, siteCreationAttributes } from "./site";
-import { storage_type as _storage_type } from "./storage_type";
-import type { storage_typeAttributes, storage_typeCreationAttributes } from "./storage_type";
-import { trans_items as _trans_items } from "./trans_items";
-import type { trans_itemsAttributes, trans_itemsCreationAttributes } from "./trans_items";
-import { transaction as _transaction } from "./transaction";
-import type { transactionAttributes, transactionCreationAttributes } from "./transaction";
+// import type { Sequelize } from "sequelize";
+const { Sequelize } = require("sequelize");
+const { address: _address } = require("./address");
+const { aisle: _aisle } = require("./aisle");
+const { empl_info: _empl_info } = require("./empl_info");
+const { item: _item } = require("./item");
+const { permissions: _permissions } = require("./permissions");
+const { person: _person } = require("./person");
+const { section: _section } = require("./section");
+const { shelf: _shelf } = require("./shelf");
+const { shelf_contents: _shelf_contents } = require("./shelf_contents");
+const { site: _site } = require("./site");
+const { storage_type: _storage_type } = require("./storage_type");
+const { trans_items: _trans_items } = require("./trans_items");
+const { transaction: _transaction } = require("./transaction");
+
+const {
+  addressAttributes,
+  addressCreationAttributes,
+} = require("./address");
+const { aisleAttributes, aisleCreationAttributes } = require("./aisle");
+const {
+  empl_infoAttributes,
+  empl_infoCreationAttributes,
+} = require("./empl_info");
+const { itemAttributes, itemCreationAttributes } = require("./item");
+const {
+  permissionsAttributes,
+  permissionsCreationAttributes,
+} = require("./permissions");
+const { personAttributes, personCreationAttributes } = require("./person");
+const { sectionAttributes, sectionCreationAttributes } = require("./section");
+const { shelfAttributes, shelfCreationAttributes } = require("./shelf");
+const {
+  shelf_contentsAttributes,
+  shelf_contentsCreationAttributes,
+} = require("./shelf_contents");
+const { siteAttributes, siteCreationAttributes } = require("./site");
+const {
+  storage_typeAttributes,
+  storage_typeCreationAttributes,
+} = require("./storage_type");
+const { trans_itemsAttributes, trans_itemsCreationAttributes } = require("./trans_items");
+const {
+  transactionAttributes,
+  transactionCreationAttributes,
+} = require("./transaction");
 
 export {
   _address as address,
@@ -71,7 +91,7 @@ export type {
   transactionCreationAttributes,
 };
 
-export function initModels(sequelize: Sequelize) {
+export function initModels(sequelize: typeof Sequelize) {
   const address = _address.initModel(sequelize);
   const aisle = _aisle.initModel(sequelize);
   const empl_info = _empl_info.initModel(sequelize);

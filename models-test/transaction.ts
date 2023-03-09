@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize';
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, Optional, InferAttributes } from 'sequelize';
 import type { person, personId } from './person';
 import type { site, siteId } from './site';
 import type { trans_items, trans_itemsId } from './trans_items';
@@ -7,7 +7,7 @@ import type { trans_items, trans_itemsId } from './trans_items';
 export interface transactionAttributes {
   trans_id: number;
   person_id?: number;
-  date: Date;
+  date?: Date;
   trans_type?: "donation" | "purchase" | "throw out";
   site: number;
 }
@@ -20,7 +20,7 @@ export type transactionCreationAttributes = Optional<transactionAttributes, tran
 export class transaction extends Model<transactionAttributes, transactionCreationAttributes> implements transactionAttributes {
   trans_id!: number;
   person_id?: number;
-  date!: Date;
+  date?: Date;
   trans_type?: "donation" | "purchase" | "throw out";
   site!: number;
 
@@ -40,7 +40,7 @@ export class transaction extends Model<transactionAttributes, transactionCreatio
   setTrans_items!: Sequelize.HasManySetAssociationsMixin<trans_items, trans_itemsId>;
   addTrans_item!: Sequelize.HasManyAddAssociationMixin<trans_items, trans_itemsId>;
   addTrans_items!: Sequelize.HasManyAddAssociationsMixin<trans_items, trans_itemsId>;
-  createTrans_item!: Sequelize.HasManyCreateAssociationMixin<trans_items>;
+  createTrans_item!: Sequelize.HasManyCreateAssociationMixin<trans_items, 'trans_id'>;
   removeTrans_item!: Sequelize.HasManyRemoveAssociationMixin<trans_items, trans_itemsId>;
   removeTrans_items!: Sequelize.HasManyRemoveAssociationsMixin<trans_items, trans_itemsId>;
   hasTrans_item!: Sequelize.HasManyHasAssociationMixin<trans_items, trans_itemsId>;
@@ -65,7 +65,8 @@ export class transaction extends Model<transactionAttributes, transactionCreatio
     },
     date: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      defaultValue: DataTypes.NOW
     },
     trans_type: {
       type: DataTypes.ENUM("donation","purchase","throw out"),
