@@ -5,27 +5,23 @@ const session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var bodyParser = require('body-parser');
 var passport = require('passport');
-var FileStore = require('session-file-store')(session);
-const flash = require('connect-flash');
 
-require('./config/passport')(passport);
-
-
+// var { passport} =  require('./config/passport');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
-
+var pg = require('pg');
 
 
 var app = express();
 
-var con_string = require('../config/keys').PostgresURI;
+var con_string = require('./config/keys').PostgresURI;
+
 const sequelize = new Sequelize(con_string)
 
 try {
-    await sequelize.authenticate();
+    sequelize.authenticate();
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
@@ -51,7 +47,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use('/', indexRouter);
 app.get('/home', indexRouter);
