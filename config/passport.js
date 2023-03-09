@@ -1,9 +1,9 @@
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-import { initModels, person } from "../models-test/init-models";
-
-var con_string = require('../config/keys').PostgresURI;
+var { initModels, person } =  require("../models-test/init-models");
+var { Sequelize } = require('sequelize');
+var con_string = require('./keys').PostgresURI;
 const sequelize = new Sequelize(con_string)
 
 initModels(sequelize);
