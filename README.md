@@ -101,7 +101,18 @@ $ nodemon bin/www
 
 ## Static Code Analysis Tool 
 
-- JSLint
+### ESLint
+#### Install ESLint dependencies
+
+```shell
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
+```
+
+#### Run ESLint Locally
+
+```shell
+npx eslint .
+```
 
 ## Contributing
 
