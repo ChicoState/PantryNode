@@ -85,7 +85,7 @@ export class person extends Model<personAttributes, personCreationAttributes> im
       unique: "person_email_key"
     },
     phone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: true
     },
     pri_addr_id: {

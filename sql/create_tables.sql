@@ -62,7 +62,7 @@ CREATE TABLE Person (
   lname text NOT NULL,
   password text NOT NULL,
   email text UNIQUE NOT NULL,
-  phone int,
+  phone bigint,
   pri_addr_id int,
   empl_id int,
   PRIMARY KEY (person_id)
