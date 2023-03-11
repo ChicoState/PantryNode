@@ -43,9 +43,9 @@ module.exports = function (passport) {
     });
 
     passport.deserializeUser(function (person_id, done) {
-        User.findByPk(person_id, function (err, user) {
+        person.findByPk(person_id).then((user, err) => {
             done(err, user);
-        });
+        })
     });
 
 }
