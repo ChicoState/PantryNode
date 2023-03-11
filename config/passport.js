@@ -39,11 +39,11 @@ module.exports = function (passport) {
     );
 
     passport.serializeUser(function (user, done) {
-        done(null, user.id);
+        done(null, user.person_id);
     });
 
-    passport.deserializeUser(function (id, done) {
-        User.findById(id, function (err, user) {
+    passport.deserializeUser(function (person_id, done) {
+        User.findByPk(person_id, function (err, user) {
             done(err, user);
         });
     });
