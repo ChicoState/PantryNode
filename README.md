@@ -58,16 +58,16 @@ $ cd PantryNode
 
 > Create a .env file with the following contents
 
-#DB CONFIG
-DB_USER='postgres'
-DB_HOST='localhost'
-DB_NAME='pantrynode'
-DB_PASSWORD=Update Password
-DB_PORT=5432
+#DB CONFIG  
+DB_USER='postgres'  
+DB_HOST='localhost'  
+DB_NAME='pantrynode'  
+DB_PASSWORD=Update Password  
+DB_PORT=5432  
 
-#DB ADMIN
-PGADMIN_EMAIL='admin@admin.com'
-PGADMIN_PASSWORD=Update Password
+#DB ADMIN  
+PGADMIN_EMAIL='admin@admin.com'  
+PGADMIN_PASSWORD=Update Password  
 
 ```shell
 $ docker-complose up
@@ -82,7 +82,7 @@ $ docker-complose up
 
 ### Setup
 
-> now install npm packages
+> install npm packages
 
 ```shell
 $ npm install
