@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
 var passport = require('passport');
+const { authSignupController } = require('../controllers/auth');
 const User = require('../models/User');
 const mongoose = require('mongoose');
 var db = require('../config/keys').MongoURI;
@@ -18,36 +19,7 @@ router.get('/register', function (req, res, next) {
   }
 });
 
-router.post('/sign_up', function (req, res) {
-  const { name, email, password, phone } = req.body;
-
-  User.findOne({ email: email })
-    .then(user => {
-      if (user) {
-        let errors = [];
-        errors.push({ msg: 'User Exist!' });
-        res.render('signup', { errors });
-      }
-      else {
-        const newUser = new User({
-          name,
-          email,
-          password,
-          phone
-        });
-
-        bcrypt.genSalt(10, (err, salt) =>
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            newUser.password = hash;
-            newUser.save();
-          }))
-        console.log(newUser);
-        return res.render('./signup_success', { title: 'Express' });
-      }
-
-    });
-  ;
-});
+router.post('/sign_up', authSignupController);
 
 
 router.get('/login', function (req, res, next) {
