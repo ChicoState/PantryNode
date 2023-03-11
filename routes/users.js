@@ -25,10 +25,15 @@ router.get('/register', function (req, res, next) {
 
 router.post('/sign_up', function (req, res) {
   const { name, email, password, phone } = req.body;
-  
   person.findOrCreate({
     where: {
       email: email
+    },
+    defaults: {
+      fname: name,
+      lname: name,
+      password: "placeholder",
+      phone: phone
     }
   }).then(([user, created]) => {
       if (!created) {
@@ -37,15 +42,15 @@ router.post('/sign_up', function (req, res) {
         res.render('signup', { errors });
       }
       else {
-        user.set({
-          fname: name,
-          phone: phone,
-        });
         bcrypt.genSalt(10, (err, salt) =>
-          bcrypt.hash(password, salt, (err, hash) => {
-            user.password = hash;
-            user.save();
+          bcrypt.hash(password, salt, async (err, hash) => {
+            user.set({
+              password: hash,
+            });
+            await user.save();
           }))
+
+        
         console.log(user);
         return res.render('./signup_success', { title: 'Express' });
       }
