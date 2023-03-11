@@ -52,9 +52,9 @@ In this project, we have implemented food pantry management using a NodeJS-based
 $ cd PantryNode
 ```
 
-### DB Setup
+### Setup
 
-> DB requires docker and docker-compose
+> Requires docker and node
 
 > Create a .env file with the following contents
 
@@ -70,17 +70,8 @@ PGADMIN_EMAIL='admin@admin.com'
 PGADMIN_PASSWORD=Update Password  
 
 ```shell
-$ docker-complose up
+$ docker-compose up
 ```
-> Open http://localhost:82 in a web broswer
-
-> login using the credentials define in the docker-compose file
-
-> add a new server to the management console using db_sandbox as the host name/address field and the POSTGRES_PASSWORD value
-
-> Note that the default username for postgres is postgres
-
-### Setup
 
 > install npm packages
 
@@ -106,6 +97,15 @@ $ node bin/www
   http://localhost:3000/
 ```
 
+### DB Backend Console
+
+> Open http://localhost:82 in a web broswer
+
+> login using the credentials define in the docker-compose file
+
+> add a new server to the management console using db_sandbox as the host name/address field and the POSTGRES_PASSWORD value
+
+> Note that the default username for postgres is postgres
 
 ## Features
 
