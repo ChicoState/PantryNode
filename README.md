@@ -88,22 +88,16 @@ $ docker-complose up
 $ npm install
 ```
 
-> now start the server
+> compile the Typescript
 
 ```shell
-$ npm start
+$ tsc
 ```
 
-> Alternative to `npm start`
+> start the application
 
 ```shell
-$ npm install nodemon
-```
-
-> Run Nodemom
-
-```shell
-$ nodemon bin/www
+$ node bin/www
 ```
 
 > Brower
