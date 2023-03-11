@@ -15,17 +15,20 @@ module.exports = function (passport) {
             person.findOne({where : { email: email }})
                 .then(user => {
                     if (!user) {
-                        return done(null, false, { message: 'User does not exist' });
+                        console.log("user does not exist");
+                        return done(null, false, { message: 'Username or password is incorrect' });
                     }
 
                     bcrypt.compare(password, user.password, (err, isMatch) => {
                         if (err) throw err;
 
                         if (isMatch) {
+                            console.log("Login matched user");
                             return done(null, user);
                         }
                         else {
-                            return done(null, false, { message: 'User does not exist' });
+                            console.log("password is incorrect");
+                            return done(null, false, { message: 'Username or password is incorrect' });
                         }
 
                     });
