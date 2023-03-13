@@ -19,11 +19,9 @@ In this project, we have implemented food pantry management using a NodeJS-based
 
 - **[MIT license](LICENSE)**
 
-## Continous Integration 
+## Continous Integration with GitHub Actions 
 
-[![License](https://travis-ci.org/ChicoState/PantryNode.svg?branch=master)](http://badges.mit-license.org)
-
-- **[Travis-CI](https://travis-ci.org)**
+[![Build Node](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml/badge.svg)](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml)
 
 ## Technology Stack
 
@@ -74,6 +72,7 @@ docker run -p 3000:3000 my-app
 ```
 docker-compose up
 ```
+
 > Browser
 ```shell
  http://localhost:3000/
@@ -99,7 +98,18 @@ docker-compose up
 
 ## Static Code Analysis Tool 
 
-- JSLint
+### ESLint
+> Install ESLint dependencies
+
+```shell
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
+```
+
+> Run ESLint Locally
+
+```shell
+npx eslint .
+```
 
 ## Contributing
 
