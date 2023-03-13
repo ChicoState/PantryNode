@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
 var passport = require('passport');
-var { initModels, person } = require( "../models-test/init-models");
-const mongoose = require('mongoose');
+var { initModels, person } = require( "../models/init-models");
 var { Sequelize } = require('sequelize');
 
 

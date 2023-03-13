@@ -1,20 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-const bcrypt = require('bcryptjs');
-var passport = require('passport');
-const Donor = require('../models/Donor');
-
-const Item = require('../models/Item');
-const Stock = require('../models/Stock');
-const Category = require('../models/Category');
-const Donation = require('../models/Donation');
-const ExpiryItems = require('../models/ExpiryItems');
-const Checkout = require('../models/Checkout');
+//Keeping to help with conversion process
+const Item = require('../models-old/Item');
+const Stock = require('../models-old/Stock');
+const Category = require('../models-old/Category');
+const ExpiryItems = require('../models-old/ExpiryItems');
+const Checkout = require('../models-old/Checkout');
 
 var { Sequelize } = require('sequelize');
 
-var { initModels, person, item, trans_items, transaction } = require("../models-test/init-models");
+var { initModels, person, item, trans_items, transaction } = require("../models/init-models");
 
 var con_string = require('../config/keys').PostgresURI;
 const sequelize = new Sequelize(con_string)
