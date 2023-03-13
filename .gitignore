@@ -133,5 +133,8 @@ dist
 postgres-data/
 tmp/
 
+# Compiled JS Files
+models/*.js
+
 # MacOS
 .DS_Store
