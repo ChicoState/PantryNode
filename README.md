@@ -19,11 +19,9 @@ In this project, we have implemented food pantry management using a NodeJS-based
 
 - **[MIT license](LICENSE)**
 
-## Continous Integration 
+## Continous Integration with GitHub Actions 
 
-[![License](https://travis-ci.org/ChicoState/PantryNode.svg?branch=master)](http://badges.mit-license.org)
-
-- **[Travis-CI](https://travis-ci.org)**
+[![Build Node](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml/badge.svg)](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml)
 
 ## Technology Stack
 
@@ -52,15 +50,11 @@ In this project, we have implemented food pantry management using a NodeJS-based
 $ cd PantryNode
 ```
 
-### Setup
-
-> Requires docker and node
-
 > Create a .env file with the following contents
 
 #DB CONFIG  
 DB_USER='postgres'  
-DB_HOST='localhost'  
+DB_HOST='database'  
 DB_NAME='pantrynode'  
 DB_PASSWORD=Update Password  
 DB_PORT=5432  
@@ -69,32 +63,17 @@ DB_PORT=5432
 PGADMIN_EMAIL='admin@admin.com'  
 PGADMIN_PASSWORD=Update Password  
 
+### Docker setup
+
+> Docker containerization 
+
 ```shell
 $ docker-compose up
 ```
 
-> install npm packages
-
+> Browser
 ```shell
-$ npm install
-```
-
-> compile the Typescript
-
-```shell
-$ tsc
-```
-
-> start the application
-
-```shell
-$ node bin/www
-```
-
-> Brower
-
-```shell
-  http://localhost:3000/
+ http://localhost:3000/
 ```
 
 ### DB Backend Console
@@ -125,7 +104,18 @@ $ node bin/www
 
 ## Static Code Analysis Tool 
 
-- JSLint
+### ESLint
+> Install ESLint dependencies
+
+```shell
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
+```
+
+> Run ESLint Locally
+
+```shell
+npx eslint .
+```
 
 ## Contributing
 
