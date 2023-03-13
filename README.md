@@ -69,6 +69,7 @@ docker run -p 3000:3000 my-app
 > you'll need to update the Mongo URI to connect to your Mongo DB.
 
 ### Docker Compose Setup
+
 > Docker-compose
 ```
 docker-compose up
