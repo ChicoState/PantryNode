@@ -52,44 +52,17 @@ In this project, we have implemented food pantry management using a NodeJS-based
 $ cd PantryNode
 ```
 
-### Setup
-
-> now install npm packages
-
-```shell
-$ npm install
-```
-
-> now start the server
-
-```shell
-$ npm start
-```
-
-> Alternative to `npm start`
-
-```shell
-$ npm install nodemon
-```
-
-> Run Nodemom
-
-```shell
-$ nodemon bin/www
-```
-
-> Brower
-
-```shell
-  http://localhost:3000/
-```
 ### Docker setup
 
 > Docker containerization 
-`docker build -t my-app --platform linux/amd64 .` 
+```shell
+docker build -t my-app --platform linux/amd64 .
+``` 
 
 > Docker run
-`docker run -p 3000:3000 my-app`
+```shell
+docker run -p 3000:3000 my-app
+````
 
 > **Warning**
 > You'll need your Mongo DB to connect to the app and
