@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "build": "node ./bin/www --start-and-kill"
+    "start": "ts-node bin/www",
+    "build": "tsc -p ."
   },
   "dependencies": {
     "@types/passport": "^1.0.12",
