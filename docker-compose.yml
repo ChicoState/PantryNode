@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+
+  database:
+    image: mongo:latest
+    restart: always
+    container_name: database
+    networks:
+      - local
+
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: node
+    container_name: node
+    platform: linux/amd64
+    depends_on:
+      - database
+    restart: always
+    networks:
+      - local
+    ports:
+      - 3000:3000
+      
+networks:
+  local:
