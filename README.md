@@ -86,6 +86,12 @@ $ docker-compose up
 
 > Note that the default username for postgres is postgres
 
+### Updating Codebase
+
+> Currently no live mounts are used for the docker comtainer because of this you must rebuild the container to sync code changes
+```shell
+ docker compose build
+```
 ## Features
 
 > Dashboard System 
