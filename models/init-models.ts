@@ -1,4 +1,3 @@
-// import type { Sequelize } from "sequelize";
 const { Sequelize } = require("sequelize");
 const { address: _address } = require("./address");
 const { aisle: _aisle } = require("./aisle");
@@ -10,6 +9,7 @@ const { section: _section } = require("./section");
 const { shelf: _shelf } = require("./shelf");
 const { shelf_contents: _shelf_contents } = require("./shelf_contents");
 const { site: _site } = require("./site");
+const { stock: _stock } = require("./stock");
 const { storage_type: _storage_type } = require("./storage_type");
 const { trans_items: _trans_items } = require("./trans_items");
 const { transaction: _transaction } = require("./transaction");
@@ -36,6 +36,7 @@ const {
   shelf_contentsCreationAttributes,
 } = require("./shelf_contents");
 const { siteAttributes, siteCreationAttributes } = require("./site");
+const { stockAttributes, stockCreationAttributes } = require("./stock");
 const {
   storage_typeAttributes,
   storage_typeCreationAttributes,
@@ -57,6 +58,7 @@ export {
   _shelf as shelf,
   _shelf_contents as shelf_contents,
   _site as site,
+  _stock as stock,
   _storage_type as storage_type,
   _trans_items as trans_items,
   _transaction as transaction,
@@ -83,6 +85,8 @@ export type {
   shelf_contentsCreationAttributes,
   siteAttributes,
   siteCreationAttributes,
+  stockAttributes,
+  stockCreationAttributes,
   storage_typeAttributes,
   storage_typeCreationAttributes,
   trans_itemsAttributes,
@@ -102,10 +106,11 @@ export function initModels(sequelize: typeof Sequelize) {
   const shelf = _shelf.initModel(sequelize);
   const shelf_contents = _shelf_contents.initModel(sequelize);
   const site = _site.initModel(sequelize);
+  const stock = _stock.initModel(sequelize);
   const storage_type = _storage_type.initModel(sequelize);
   const trans_items = _trans_items.initModel(sequelize);
   const transaction = _transaction.initModel(sequelize);
-
+  
   person.belongsTo(address, { as: "pri_addr", foreignKey: "pri_addr_id"});
   address.hasMany(person, { as: "pri_addr_people", foreignKey: "pri_addr_id"});
   site.belongsTo(address, { as: "addr", foreignKey: "addr_id"});
@@ -146,6 +151,7 @@ export function initModels(sequelize: typeof Sequelize) {
     shelf: shelf,
     shelf_contents: shelf_contents,
     site: site,
+    stock: stock,
     storage_type: storage_type,
     trans_items: trans_items,
     transaction: transaction,
