@@ -8,7 +8,8 @@
     "scripts",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
-    "src/**/*.js", "src/**/*.jsx",
+    "src/**/*.js",
+    "src/**/*.jsx"
   ],
   "compilerOptions": {
     "target": "es5",
@@ -28,8 +29,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    ""
+    "jsx": "react-jsx"
   },
   "include": ["src"]
 }
