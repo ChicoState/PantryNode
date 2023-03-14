@@ -1,4 +1,15 @@
 {
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "coverage",
+    "public",
+    "scripts",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.js", "src/**/*.jsx",
+  ],
   "compilerOptions": {
     "target": "es5",
     "lib": ["es6", "dom", "dom.iterable", "esnext"],
@@ -17,7 +28,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    ""
   },
   "include": ["src"]
 }
