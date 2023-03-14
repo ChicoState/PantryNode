@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    backend:
+      name: backend
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
@@ -17,7 +17,7 @@ jobs:
             node-version: 16
         - run: npm ci
         - run: npm run build
-    frontend:
+      name: frontend
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
