@@ -1,4 +1,4 @@
-var { Sequelize } = require('sequelize');
+const { Sequelize } = require('sequelize');
 var createError = require('http-errors');
 var express = require('express');
 const session = require('express-session');
@@ -17,8 +17,9 @@ var con_string = require('./config/keys').PostgresURI;
 const sequelize = new Sequelize(con_string)
 
 try {
-    sequelize.authenticate();
-    console.log('Connection has been established successfully.');
+    sequelize.authenticate().then(results => {
+        console.log('Connection has been established successfully.')
+    }) 
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
