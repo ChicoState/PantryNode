@@ -28,9 +28,7 @@ export class stock extends Model<stockAttributes> {
           freezeTableName: true,
           validate :{
             readOnly() {
-              if (1 == 1) {
-                throw new Error('Stock model is read only');
-              }
+              throw new Error('Stock model is read only');
             }
           }
         });
