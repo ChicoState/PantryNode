@@ -15,8 +15,9 @@ jobs:
         with:
           node-version: 16
       - run: |
-          cd PantryNodeReact && npm ci 
           npm ci
+          cd PantryNodeReact && npm ci
+
       - run: |
-          cd PantryNodeReact && npm run build
           npm run build
+          cd PantryNodeReact && npm run build
