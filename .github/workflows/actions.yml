@@ -2,9 +2,9 @@ name: Build Node
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -14,5 +14,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm run build
+      - run: |
+          cd PantryNodeReact && npm ci 
+          npm ci
+      - run: |
+          cd PantryNodeReact && npm run build
+          npm run build
