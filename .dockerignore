@@ -1,0 +1,17 @@
+# Git files
+.git/
+.gitignore
+
+# IDE files
+.idea/
+
+# CI configuration files
+.travis.yml
+
+# Repo-Only Files
+docs/
+README.md
+
+# Build files
+package-lock.json
+node_modules/

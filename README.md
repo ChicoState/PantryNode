@@ -19,11 +19,9 @@ In this project, we have implemented food pantry management using a NodeJS-based
 
 - **[MIT license](LICENSE)**
 
-## Continous Integration 
+## Continous Integration with GitHub Actions 
 
-[![License](https://travis-ci.org/ChicoState/PantryNode.svg?branch=master)](http://badges.mit-license.org)
-
-- **[Travis-CI](https://travis-ci.org)**
+[![Build Node](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml/badge.svg)](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml)
 
 ## Technology Stack
 
@@ -52,55 +50,30 @@ In this project, we have implemented food pantry management using a NodeJS-based
 $ cd PantryNode
 ```
 
-### Setup
-
-> now install npm packages
-
-```shell
-$ npm install
-```
-
-> now start the server
-
-```shell
-$ npm start
-```
-
-> Alternative to `npm start`
-
-```shell
-$ npm install nodemon
-```
-
-> Run Nodemom
-
-```shell
-$ nodemon bin/www
-```
-
-> Brower
-
-```shell
-  http://localhost:3000/
-```
 ### Docker setup
 
 > Docker containerization 
-`docker build -t my-app --platform linux/amd64 .` 
+```shell
+docker build -t my-app --platform linux/amd64 .
+``` 
 
 > Docker run
-`docker run -p 3000:3000 my-app`
+```shell
+docker run -p 3000:3000 my-app
+````
 
 > **Warning**
 > You'll need your Mongo DB to connect to the app and
 > you'll need to update the Mongo URI to connect to your Mongo DB.
 
 ### Docker Compose Setup
+
 > Docker-compose
 ```
 docker-compose up
 ```
-> Brower
+
+> Browser
 ```shell
  http://localhost:3000/
 ```
@@ -125,7 +98,18 @@ docker-compose up
 
 ## Static Code Analysis Tool 
 
-- JSLint
+### ESLint
+> Install ESLint dependencies
+
+```shell
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
+```
+
+> Run ESLint Locally
+
+```shell
+npx eslint .
+```
 
 ## Contributing
 

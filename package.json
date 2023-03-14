@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "node ./bin/www --start-and-kill"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
