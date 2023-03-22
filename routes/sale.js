@@ -33,7 +33,7 @@ router.get('/sale', ensureAuthenticated, function(req, res) {
 
 
 router.post('/add_donor', function(req, res) {
-    const { name, email, location, type, phone } = req.body;
+    const { name, email, phone } = req.body;
     person.findOrCreate({
         where: {
           email: email
