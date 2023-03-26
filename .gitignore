@@ -128,3 +128,13 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Postgres
+postgres-data/
+tmp/
+
+# Compiled JS Files
+models/*.js
+
+# MacOS
+.DS_Store

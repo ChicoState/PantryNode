@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# ignoring build files
+src/**/*.js 
+src/**/*.jsx
+
 # testing
 /coverage
 
