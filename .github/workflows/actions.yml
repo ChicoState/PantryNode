@@ -2,12 +2,12 @@ name: Build Node
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build:
+  backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,3 +16,16 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm run build
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          cd PantryNodeReact 
+          npm ci
+      - run: |
+          cd PantryNodeReact
+          npm run build

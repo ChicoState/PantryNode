@@ -1,36 +1,29 @@
+const { Sequelize } = require('sequelize');
 var createError = require('http-errors');
 var express = require('express');
 const session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var bodyParser = require('body-parser');
 var passport = require('passport');
-var FileStore = require('session-file-store')(session);
-const flash = require('connect-flash');
-
 require('./config/passport')(passport);
-
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
-
-
-
 var app = express();
 
-var db = require('./config/keys').MongoURI;
+var con_string = require('./config/keys').PostgresURI;
 
-const mongoose = require('mongoose');
-mongoose.connect(db, { useNewUrlParser: true });
+const sequelize = new Sequelize(con_string)
 
-var db = mongoose.connection;
-db.on('error', console.log.bind(console, "connection error"));
-db.once('open', function(callback) {
-    console.log("connection succeeded");
-})
-
+try {
+    sequelize.authenticate().then(results => {
+        console.log('Connection has been established successfully.')
+    }) 
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+  
 // view engine setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -51,7 +44,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use('/', indexRouter);
 app.get('/home', indexRouter);
@@ -99,7 +91,7 @@ app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+    console.log(err);
     // render the error page
     res.status(err.status || 500);
     res.render('error');

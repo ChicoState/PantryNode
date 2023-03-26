@@ -1,3 +1,12 @@
+const dotenv = require("dotenv")
+dotenv.config();
+
+let user = process.env.DB_USER ;
+let pass = process.env.DB_PASSWORD;
+let host = process.env.DB_HOST;
+let name = process.env.DB_NAME;
+let port = process.env.DB_PORT;
+
 module.exports = {
-    MongoURI: 'mongodb+srv://subhed:Smart%40123@cluster0-fy0po.mongodb.net/test?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
+    PostgresURI: `postgres://${user}:${pass}@${host}:${port}/${name}`
 }
