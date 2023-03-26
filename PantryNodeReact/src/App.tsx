@@ -15,10 +15,11 @@ function App() {
 
   return (
     <Routes>
-      <Route index element={<Index />} />
       <Route path="/login" element={<Login />} />
+
       {/* All the routes that are restricted and need authorization */}
       <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+        <Route index element={<Index />} />
         <Route path="/stock" element={<Stock />} />
         <Route path="/summary" element={<Summary />} />
         <Route path="donor" element={<Donor />} />
