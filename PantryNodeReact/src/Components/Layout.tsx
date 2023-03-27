@@ -4,14 +4,22 @@ import Navigation from "./Navigation/index";
 
 const Layout = ({ children }: any) => {
   return (
-    <Box sx={{ display: "flex", maxWidth: "1200px" }}>
-      <Navigation />
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}>
-        {children}
+    <div
+      style={{
+        maxWidth: "1200px",
+        position: "relative",
+        // border: "1px solid green",
+        margin: "0px auto",
+      }}>
+      <Box sx={{ display: "flex" }}>
+        <Navigation />
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}>
+          {children}
+        </Box>
       </Box>
-    </Box>
+    </div>
   );
 };
 export default Layout;
