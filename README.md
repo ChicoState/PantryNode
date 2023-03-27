@@ -55,15 +55,16 @@ DB_USER='postgres'
 DB_HOST='database'  
 DB_NAME='pantrynode'  
 DB_PASSWORD=Update Password  
-DB_PORT=5432
+
+DB_PORT=5432  
 
 #DB ADMIN  
 PGADMIN_EMAIL='admin@admin.com'  
-PGADMIN_PASSWORD=Update Password
+PGADMIN_PASSWORD=Update Password  
 
 ### Docker setup
 
-> Docker containerization
+> Docker containerization 
 
 ```shell
 $ docker-compose up
