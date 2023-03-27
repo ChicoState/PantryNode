@@ -99,8 +99,9 @@ router.get('/stock', ensureAuthenticated, function(req, res) {
 
 
 router.post('/add_stock', function(req, res) {
+    
 
-    var { itemName, itemType, quantity, dateExp, price, donorID } = req.body;
+    const { itemName, itemType, quantity, dateExp, price, donorID } = req.body;
     item.findOrCreate({
         where: {
           name: itemName,
@@ -162,7 +163,7 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
     const { itemId, quantityX, chicoId } = req.body;
 
     console.log("kkkk  => " + itemId);
-
+    const stockID = 1;
 
     Item.findOne({ '_id': itemId })
         .then(item => {
