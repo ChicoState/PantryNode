@@ -1,9 +1,7 @@
 # PantryNode
 
-
 [![NPM](https://img.shields.io/npm/v/npm/latest)](https://img.shields.io/npm/v/npm/latest)
 [![NodeJS](https://img.shields.io/github/languages/top/badges/shields.svg)](https://img.shields.io/github/languages/top/badges/shields.svg)
-
 
 ## Description
 
@@ -19,7 +17,7 @@ In this project, we have implemented food pantry management using a NodeJS-based
 
 - **[MIT license](LICENSE)**
 
-## Continous Integration with GitHub Actions 
+## Continous Integration with GitHub Actions
 
 [![Build Node](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml/badge.svg)](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml)
 
@@ -57,21 +55,22 @@ DB_USER='postgres'
 DB_HOST='database'  
 DB_NAME='pantrynode'  
 DB_PASSWORD=Update Password  
-DB_PORT=5432  
+DB_PORT=5432
 
 #DB ADMIN  
 PGADMIN_EMAIL='admin@admin.com'  
-PGADMIN_PASSWORD=Update Password  
+PGADMIN_PASSWORD=Update Password
 
 ### Docker setup
 
-> Docker containerization 
+> Docker containerization
 
 ```shell
 $ docker-compose up
 ```
 
 > Browser
+
 ```shell
  http://localhost:3000/
 ```
@@ -89,28 +88,31 @@ $ docker-compose up
 ### Updating Codebase
 
 > Currently no live mounts are used for the docker comtainer because of this you must rebuild the container to sync code changes
+
 ```shell
  docker compose build
 ```
+
 ## Features
 
-> Dashboard System 
+> Dashboard System
 
--  This project implements a dashboard system for various operations, like checkout students, stock management, and donation tracking.
+- This project implements a dashboard system for various operations, like checkout students, stock management, and donation tracking.
 
-> Stock Management 
+> Stock Management
 
-- This functionality allows to add the stock and maintain the record for various type of donations by category i.e., Anonymous, Organization, and Pantry Purchased. 
+- This functionality allows to add the stock and maintain the record for various type of donations by category i.e., Anonymous, Organization, and Pantry Purchased.
 
 - Additionally, Allowing to manage the purchase and expiry of the stock.
 
-> Sales Report 
+> Sales Report
 
--  The sales report allows the admin or the pantry organization to visualize the stock, expiry, and waste management. It also helps to keep the count of various parameters such as students count, expired item count, available item count, and utilized item count.
+- The sales report allows the admin or the pantry organization to visualize the stock, expiry, and waste management. It also helps to keep the count of various parameters such as students count, expired item count, available item count, and utilized item count.
 
-## Static Code Analysis Tool 
+## Static Code Analysis Tool
 
 ### ESLint
+
 > Install ESLint dependencies
 
 ```shell
