@@ -6,7 +6,7 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { ListItemIcon } from "@mui/material";
 import paths from "./paths";
@@ -35,14 +35,16 @@ const Navigation = () => {
       }}
       variant="permanent"
       anchor="left">
-      <Typography
-        textAlign={"center"}
-        variant="h4"
-        paddingY="1rem"
-        color="primary"
-        fontWeight="bold">
-        Pantry Node
-      </Typography>
+      <NavLink style={{ textDecorationLine: "none" }} to="/">
+        <Typography
+          textAlign={"center"}
+          variant="h4"
+          paddingY="1rem"
+          color="primary"
+          fontWeight="bold">
+          Pantry Node
+        </Typography>
+      </NavLink>
       <Divider />
       <List
         component="nav"
