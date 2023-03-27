@@ -98,6 +98,8 @@ router.get('/stock', ensureAuthenticated, function(req, res) {
 });
 let itemName=item.itemName;
 let itemType=item.itemType;
+let dateExp = item.dateExp;
+
 router.post('/add_stock', function(req, res) {
     
 
