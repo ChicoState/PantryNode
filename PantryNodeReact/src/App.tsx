@@ -7,6 +7,7 @@ import Login from "./pages/login";
 import Sale from "./pages/sale";
 import Stock from "./pages/stock";
 import Summary from "./pages/summary";
+import Signup from "./pages/register";
 import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
 
       {/* All the routes that are restricted and need authorization */}
       <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
