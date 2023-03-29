@@ -9,7 +9,6 @@ module.exports = {
   root: true,
   rules: {
     "@typescript-eslint/no-var-requires": "warn",
-    "@typescript-eslint/no-extra-semi": "warn",
     "no-undef": "warn",
   },
 };
