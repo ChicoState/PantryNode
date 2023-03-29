@@ -2,11 +2,15 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
 var passport = require('passport');
-const User = require('../models/User');
-const mongoose = require('mongoose');
-var db = require('../config/keys').MongoURI;
+var { initModels, person } = require( "../models/init-models");
+var { Sequelize } = require('sequelize');
 
-mongoose.connect(db, { useNewUrlParser: true });
+
+
+var con_string = require('../config/keys').PostgresURI;
+const sequelize = new Sequelize(con_string)
+
+initModels(sequelize);
 
 router.get('/register', function (req, res, next) {
   if (!req.isAuthenticated()) {
@@ -20,33 +24,37 @@ router.get('/register', function (req, res, next) {
 
 router.post('/sign_up', function (req, res) {
   const { name, email, password, phone } = req.body;
-
-  User.findOne({ email: email })
-    .then(user => {
-      if (user) {
+  person.findOrCreate({
+    where: {
+      email: email
+    },
+    defaults: {
+      fname: name,
+      lname: name,
+      password: "placeholder",
+      phone: phone
+    }
+  }).then(([user, created]) => {
+      if (!created) {
         let errors = [];
-        errors.push({ msg: 'User Exist!' });
+        errors.push('User Exist!' );
         res.render('signup', { errors });
       }
       else {
-        const newUser = new User({
-          name,
-          email,
-          password,
-          phone
-        });
-
         bcrypt.genSalt(10, (err, salt) =>
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            newUser.password = hash;
-            newUser.save();
+          bcrypt.hash(password, salt, async (err, hash) => {
+            user.set({
+              password: hash,
+            });
+            await user.save();
           }))
-        console.log(newUser);
+
+        
+        console.log(user);
         return res.render('./signup_success', { title: 'Express' });
       }
 
     });
-
 });
 
 
@@ -55,7 +63,6 @@ router.get('/login', function (req, res, next) {
 });
 
 router.post('/login', (req, res, next) => {
-
   passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/',

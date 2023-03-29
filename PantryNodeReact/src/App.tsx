@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Donor from "./pages/donor";
+import Expiry from "./pages/expiry";
+import Index from "./pages/index";
+import Login from "./pages/login";
+import Sale from "./pages/sale";
+import Stock from "./pages/stock";
+import Summary from "./pages/summary";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
+  // this needs to be replaced with a check to see if the user is logged in from state
+  const isLoggedIn = true;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+
+      {/* All the routes that are restricted and need authorization */}
+      <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+        <Route index element={<Index />} />
+        <Route path="/stock" element={<Stock />} />
+        <Route path="/summary" element={<Summary />} />
+        <Route path="donor" element={<Donor />} />
+        <Route path="sale" element={<Sale />} />
+        <Route path="expiry" element={<Expiry />} />
+      </Route>
+    </Routes>
   );
 }
 

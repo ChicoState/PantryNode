@@ -1,28 +1,33 @@
 const LocalStrategy = require('passport-local').Strategy;
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+var { initModels, person } =  require("../models/init-models");
+var { Sequelize } = require('sequelize');
+var con_string = require('./keys').PostgresURI;
+const sequelize = new Sequelize(con_string)
 
-const User = require('../models/User');
-
+initModels(sequelize);
 
 module.exports = function (passport) {
     passport.use(
 
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-            User.findOne({ email: email })
+            person.findOne({where : { email: email }})
                 .then(user => {
                     if (!user) {
-                        return done(null, false, { message: 'User does not exist' });
+                        console.log("user does not exist");
+                        return done(null, false, { message: 'Username or password is incorrect' });
                     }
 
                     bcrypt.compare(password, user.password, (err, isMatch) => {
                         if (err) throw err;
 
                         if (isMatch) {
+                            console.log("Login matched user");
                             return done(null, user);
                         }
                         else {
-                            return done(null, false, { message: 'User does not exist' });
+                            console.log("password is incorrect");
+                            return done(null, false, { message: 'Username or password is incorrect' });
                         }
 
                     });
@@ -33,13 +38,13 @@ module.exports = function (passport) {
     );
 
     passport.serializeUser(function (user, done) {
-        done(null, user.id);
+        done(null, user.person_id);
     });
 
-    passport.deserializeUser(function (id, done) {
-        User.findById(id, function (err, user) {
+    passport.deserializeUser(function (person_id, done) {
+        person.findByPk(person_id).then((user, err) => {
             done(err, user);
-        });
+        })
     });
 
 }

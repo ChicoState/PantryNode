@@ -1,25 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-const bcrypt = require('bcryptjs');
-var passport = require('passport');
-const Donor = require('../models/Donor');
+//Keeping to help with conversion process
+const Item = require('../models-old/Item');
+const Stock = require('../models-old/Stock');
+const Category = require('../models-old/Category');
+const ExpiryItems = require('../models-old/ExpiryItems');
+const Checkout = require('../models-old/Checkout');
 
-const Item = require('../models/Item');
-const Stock = require('../models/Stock');
-const Category = require('../models/Category');
-const Donation = require('../models/Donation');
-const ExpiryItems = require('../models/ExpiryItems');
-const Checkout = require('../models/Checkout');
+var { Sequelize } = require('sequelize');
 
-const mongoose = require('mongoose');
-var db = require('../config/keys').MongoURI;
+var { initModels, person, item, trans_items, transaction } = require("../models/init-models");
+
+var con_string = require('../config/keys').PostgresURI;
+const sequelize = new Sequelize(con_string)
+initModels(sequelize);
 
 const { ensureAuthenticated } = require('../config/auth');
-
-
-mongoose.connect(db, { useNewUrlParser: true });
-
 
 
 router.get('/sale', ensureAuthenticated, function(req, res) {
@@ -37,29 +34,23 @@ router.get('/sale', ensureAuthenticated, function(req, res) {
 
 router.post('/add_donor', function(req, res) {
     const { name, email, location, type, phone } = req.body;
-
-    Donor.findOne({ email: email })
-        .then(user => {
-            if (user) {
-                res.redirect('/donor?error=User Exists!');
-
-                // return res.redirect('register', { errors });
-            } else {
-                const newUser = new Donor({
-                    name,
-                    email,
-                    location,
-                    type,
-                    phone
-
-                });
-                console.log(newUser);
-                newUser.save();
-
-                console.log(newUser);
-                res.redirect('/donor');
-            }
-
+    person.findOrCreate({
+        where: {
+          email: email
+        }
+      }).then(([user, created]) => {
+          if (!created) {
+            res.redirect('/donor?error=User Exists!');
+          }
+          else {
+            user.set({
+              fname: name,
+              phone: phone,
+            });
+            console.log(user);
+            return res.redirect('/donor');
+          }
+    
         });
 });
 
@@ -71,30 +62,18 @@ router.get('/donor', ensureAuthenticated, function(req, res) {
     } else {
         let errors = [];
         if (Object.keys(req.query).length !== 0) {
-            errors.push({ msg: req.query.error });
+            errors.push(req.query.error);
         }
-
-        Donor.find({}, function(err, allDonors) {
-            if (err) {
-                console.log(err);
-            } else {
-
-                if (errors.length > 0) {
-                    res.render('donor', {
-                        data: { name: req.user.name, donors: allDonors, errors }
-                    })
-                } else {
-                    res.render('donor', {
-                        data: { name: req.user.name, donors: allDonors }
-                    })
-                }
-
-            }
-        })
-
-
+        person.findAll({
+            where: {
+                empl_id: undefined
+              }
+        }).then(allDonors => {
+            res.render('donor', {
+                data: { name: req.user.name, donors: allDonors }
+            })
+        }).catch(err => console.log(err)); 
     }
-
 });
 
 router.get('/stock', ensureAuthenticated, function(req, res) {
@@ -111,80 +90,46 @@ router.get('/stock', ensureAuthenticated, function(req, res) {
             donor_name = req.query.name;
         }
         console.log(donor);
-        Category.find({}, function(err, allCategories) {
-            if (err) {
-                console.log(err);
-            } else {
-
-
-                res.render('stock', {
-                    data: { name: req.user.name, categories: allCategories, donorId: donor, donorName: donor_name }
-                })
-
-
-
-
-            }
+        const allCategories = item.getAttributes().category?.defaultValue;
+        res.render('stock', {
+            data: { name: req.user.name, categories: allCategories, donorId: donor, donorName: donor_name }
         })
-
-
-
     }
-
 });
-
 
 
 router.post('/add_stock', function(req, res) {
 
-    const { itemName, itemType, quantity, dateExp, price, donorID } = req.body;
-
-
-
-    const newStock = new Stock({
-        quantity,
-        itemType,
-        dateExp,
-        price
-    });
-
-    var stockID = newStock._id;
-
-    const date1 = new Date(dateExp);
-    const expTimeRemain = new Date(dateExp);
-
-    expTimeRemain.setDate(date1.getDate() + 2);
-    const newItem = new Item({
-        itemName,
-        itemType,
-        stockID,
-        dateExp,
-        expTimeRemain
-    });
-
-
-
-    const newDonation = new Donation({
-        donorID,
-        quantity,
-        stockID
-    });
-
-
-
-
-
-    newStock.save();
-    newItem.save();
-    newDonation.save();
-
-
+    var { itemName, itemType, quantity, dateExp, price, donorID } = req.body;
+    item.findOrCreate({
+        where: {
+          name: itemName,
+        }
+        }).then(([new_item, created]) => {
+            if (created) {
+                new_item.set({
+                    stor_id: 1, //WILL NEED TO CHANGE ONCE FRONT END IT UPDATED
+                });
+                new_item.save();
+                console.log(new_item);
+          }
+        transaction.create({
+            person_id: donorID,
+            site: 1,
+            trans_type: 'donation',
+        }).then(trans => {
+            trans_items.create({
+                item_id: new_item.item_id,
+                expiration: dateExp,
+                quantity: quantity,
+                trans_id: trans.trans_id
+            }) 
+        })  
+        });
     res.redirect('/stock');
-
-
-
 });
 
+// will need to think of a way to implement this since cat is an enum
 router.post('/add_cat', function(req, res) {
 
     const { categoryName } = req.body;

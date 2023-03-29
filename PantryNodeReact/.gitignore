@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# ignoring build files
+src/**/*.js 
+src/**/*.jsx
+
 # testing
 /coverage
 
@@ -21,3 +25,5 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+package-lock.json
