@@ -12,10 +12,9 @@ import { useNavigate } from "react-router-dom";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '../Components/Copyright';
 
-const theme = createTheme();
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -29,7 +28,7 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -78,7 +77,7 @@ export default function Login() {
               sx={{ mt: 3, mb: 2, py:2 }}
               onClick={() => navigate("/")}
               style={{
-                backgroundColor: "#8C2332"
+                backgroundColor: "primary"
               }}
             >
               Login
@@ -99,6 +98,5 @@ export default function Login() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
   );
 }
