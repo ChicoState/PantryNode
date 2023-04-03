@@ -4,7 +4,7 @@ import Navigation from "./Navigation/index";
 
 const Layout = ({ children }: any) => {
   return (
-    <Box sx={{ display: "flex", maxWidth: "1200px" }}>
+    <Box sx={{ display: "flex", maxWidth: "1920px" }}>
       <Navigation />
       <Box
         component="main"
