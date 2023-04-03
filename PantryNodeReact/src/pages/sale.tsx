@@ -22,9 +22,9 @@ import Paper from '@mui/material/Paper';
 const sale = () => {
 
   const categoryList = [
-    { id: 1, category_name: "Fruits", image_url: "images/icons/fruit.png"},
+    { id: 1, category_name: "Fruits", image_url: "/images/icons/fruit.png"},
     { id: 2, category_name: "Vegetables", image_url: "images/icons/vege.png" },
-    { id: 3, category_name: "Dairy", image_url: "images/icons/book.png" },
+    { id: 3, category_name: "Dairy", image_url: "images/icons/dairy.png" },
     { id: 4, category_name: "Meat", image_url: "images/icons/meat.png" },
     { id: 5, category_name: "Bakery", image_url: "images/icons/bread.png" },
     { id: 6, category_name: "Ready", image_url: "images/icons/ready.png" },
