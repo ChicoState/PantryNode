@@ -13,45 +13,40 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import Paper from '@mui/material/Paper';
+
 const sale = () => {
 
-
   const categories = [
-    { id: 1, category_name: "Fruits", image_url: "/images/icons/fruit.png" },
-    { id: 1, category_name: "Vegetables", image_url: "/images/icons/vege.png" },
-    { id: 1, category_name: "Dairy", image_url: "/images/icons/fruit.png" },
-    { id: 1, category_name: "Meat", image_url: "/images/icons/meat.png" },
-    { id: 1, category_name: "Bakery", image_url: "/images/icons/bread.png" },
-    { id: 1, category_name: "Ready", image_url: "/images/icons/ready.png" },
-    { id: 1, category_name: "Stationary", image_url: "/images/icons/pencil.png" },
+    { id: 1, category_name: "Fruits", image_url: "images/icons/fruit.png"},
+    { id: 2, category_name: "Vegetables", image_url: "images/icons/vege.png" },
+    { id: 3, category_name: "Dairy", image_url: "images/icons/book.png" },
+    { id: 4, category_name: "Meat", image_url: "images/icons/meat.png" },
+    { id: 5, category_name: "Bakery", image_url: "images/icons/bread.png" },
+    { id: 6, category_name: "Ready", image_url: "images/icons/ready.png" },
+    { id: 7, category_name: "Stationary", image_url: "images/icons/pencil.png" },
   ];
 
-
-  //return <div>Sales Report</div>;
-
   return (
-    <Container component="main" maxWidth="xs">
-      <Grid container spacing={3}>
-        {categories.map((category) => (
-            <Grid item xs={12} sm={8} md={4} key={category.id}>
-              <Card className="">
-                <CardMedia
-                  className=""
-                  image={process.env.PUBLIC_URL + category.image_url}
-                  title={category.category_name}
-                />
-                <CardContent>
-                  <Typography variant="h6" align="center" gutterBottom>
-                    {category.category_name}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+    <Box >
+    <Grid container spacing={2}>
+     <Grid item xs={2} md={8}>
+       
+        {categories.map((item) => (
+          <div>
+            <img src={item.image_url} />
+            {item.category_name}
+          </div>
+        ))}
+        
       </Grid>
-    </Container>
-  );
+    </Grid>
+  </Box>
 
-};
+)};
 
 export default sale;
