@@ -21,7 +21,7 @@ import Paper from '@mui/material/Paper';
 
 const sale = () => {
 
-  const categories = [
+  const categoryList = [
     { id: 1, category_name: "Fruits", image_url: "images/icons/fruit.png"},
     { id: 2, category_name: "Vegetables", image_url: "images/icons/vege.png" },
     { id: 3, category_name: "Dairy", image_url: "images/icons/book.png" },
@@ -32,18 +32,25 @@ const sale = () => {
   ];
 
   return (
-    <Box >
-    <Grid container spacing={2}>
-     <Grid item xs={2} md={8}>
-       
-        {categories.map((item) => (
-          <div>
-            <img src={item.image_url} />
-            {item.category_name}
-          </div>
-        ))}
-        
+    <Box sx={{ width: '100%' }}>
+    <Grid container spacing={2} rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
+
+      {categoryList.map((category) =>(
+        <Grid item xs={3} md={4} key={category.id}>
+        <img
+          src={category.image_url}
+          alt={category.category_name}
+          style={{width:200}}
+        />
+        <Typography
+          variant="h6"
+          align="center"
+        >
+          {category.category_name}
+        </Typography>
       </Grid>
+      ))}
+      
     </Grid>
   </Box>
 
