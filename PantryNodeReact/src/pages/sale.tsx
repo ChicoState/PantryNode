@@ -42,15 +42,12 @@ const sale = () => {
           alt={category.category_name}
           style={{width:200}}
         />
-        <Typography
-          variant="h6"
-          align="center"
-        >
+        <Typography variant="h6" align="center" sx={{ color: "#8c2332" }}>
           {category.category_name}
         </Typography>
       </Grid>
       ))}
-      
+
     </Grid>
   </Box>
 
