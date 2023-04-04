@@ -44,6 +44,7 @@ export default function Login() {
     const emailValue = data.get("email") as string;
     const passwordValue = data.get("password") as string;
 
+    // email
     if (emailValue.trim() === "") {
       setEmailError("Email is required");
       return;
@@ -53,9 +54,18 @@ export default function Login() {
       setEmailError("Email is invalid");
       return;
     }
-  
+    
+    // password
     if (passwordValue.trim() === "") {
       setPasswordError("Password is required");
+      return;
+    }
+    if (passwordValue.length < 8){
+      setPasswordError("Password must be at least 8 characters long");
+      return;
+    }
+    if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
+      setPasswordError("Password must contain at least one number and one special character");
       return;
     }
 
