@@ -88,12 +88,7 @@ export default function SignUp() {
       return;
     }
 
-
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    console.log("trying to navigate")
+    // to do: redirect to success page after built
     navigate("/")
   };
   

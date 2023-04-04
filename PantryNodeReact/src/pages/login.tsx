@@ -74,10 +74,7 @@ export default function Login() {
       return;
     }
 
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    // to do: redirect to success page after built
     navigate("/")
   };
 
