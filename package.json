@@ -5,7 +5,7 @@
   "scripts": {
     "start": "ts-node bin/www",
     "build": "tsc -p .",
-    "test": "jest --passWithNoTests"
+    "test": "jest"
   },
   "dependencies": {
     "@types/passport": "^1.0.12",
@@ -45,7 +45,6 @@
     "@types/jest": "^29.5.0",
     "jest": "^29.5.0",
     "jshint": "^2.11.1",
-    "node": "^19.8.1",
     "ts-jest": "^29.0.5"
   }
 }
