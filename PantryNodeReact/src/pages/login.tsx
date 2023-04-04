@@ -13,20 +13,60 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Copyright from '../Components/Copyright';
-
+import { useState } from "react";
 
 
 export default function Login() {
+
+  // validation
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name === "email") {
+      setEmail(value);
+      setEmailError("");
+    } else if (name === "password") {
+      setPassword(value);
+      setPasswordError("");
+    }
+  };
+
+
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    const emailValue = data.get("email") as string;
+    const passwordValue = data.get("password") as string;
+
+    if (emailValue.trim() === "") {
+      setEmailError("Email is required");
+      return;
+    }
+  
+    if (!/\S+@\S+\.\S+/.test(emailValue)) {
+      setEmailError("Email is invalid");
+      return;
+    }
+  
+    if (passwordValue.trim() === "") {
+      setPasswordError("Password is required");
+      return;
+    }
+
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
     navigate("/")
   };
+
+  
 
   return (
     
@@ -56,6 +96,10 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={handleChange}
+              error={Boolean(emailError)}
+              helperText={emailError}
             />
             <TextField
               margin="normal"
@@ -66,6 +110,10 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={handleChange}
+              error={Boolean(passwordError)}
+              helperText={passwordError}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
