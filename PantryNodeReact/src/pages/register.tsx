@@ -13,14 +13,78 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Copyright from '../Components/Copyright';
+import { useState } from "react";
 
 
 
 export default function SignUp() {
-     const navigate = useNavigate();
+  
+  // validation
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name === "email") {
+      setEmail(value);
+      setEmailError("");
+    } else if (name === "password") {
+      setPassword(value);
+      setPasswordError("");
+    } else if (name === "phoneNumber") {
+      setPhoneNumber(value);
+      setPhoneNumberError("");
+    }
+  };
+  
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    const emailValue = data.get("email") as string;
+    const passwordValue = data.get("password") as string;
+    const phoneNumberValue = data.get("phoneNumber") as string;
+
+    // email
+    if (emailValue.trim() === "") {
+      setEmailError("Email is required");
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(emailValue)) {
+      setEmailError("Email is invalid");
+      return;
+    }
+    
+    // password
+    if (passwordValue.trim() === "") {
+      setPasswordError("Password is required");
+      return;
+    }
+    if (passwordValue.length < 8){
+      setPasswordError("Password must be at least 8 characters long");
+      return;
+    }
+
+    // phoneNumber
+    if (phoneNumberValue.trim() === "") {
+      setPhoneNumberError("Please enter your phone number");
+      return;
+    }
+    if (!/^[0-9]+$/.test(phoneNumberValue)) {
+      setPhoneNumberError("Please enter a valid phone number");
+      return;
+    }
+    if (phoneNumberValue.length !==10){
+      setPhoneNumberError("Phone number must be 10 Digits");
+      return;
+    }
+
+
     console.log({
       email: data.get('email'),
       password: data.get('password'),
@@ -49,14 +113,25 @@ export default function SignUp() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} >
+              <Grid item xs={6} >
                 <TextField
                   autoComplete="given-name"
-                  name="Name"
+                  name="First Name"
                   required
                   fullWidth
-                  id="Name"
-                  label="Name"
+                  id="FirstName"
+                  label="FirstName"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={6} >
+                <TextField
+                  autoComplete="given-name"
+                  name="Last Name"
+                  required
+                  fullWidth
+                  id="LastName"
+                  label="LastName"
                   autoFocus
                 />
               </Grid>
@@ -68,6 +143,10 @@ export default function SignUp() {
                   label="Phone Number"
                   name="phoneNumber"
                   autoComplete="phone-number"
+                  value={phoneNumber}
+                  onChange={handleChange}
+                  error={Boolean(phoneNumberError)}
+                  helperText={phoneNumberError}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -78,6 +157,10 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={handleChange}
+                  error={Boolean(emailError)}
+                  helperText={emailError}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -89,6 +172,10 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={handleChange}
+                  error={Boolean(passwordError)}
+                  helperText={passwordError}
                 />
               </Grid>
               
