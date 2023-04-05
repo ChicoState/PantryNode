@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useAppSelector,useAppDispatch } from '../hooks'
-import { login } from '../features/user';
+import { login } from '../redux-features/user';
 
 const Stock = () => {
   const dispatch = useAppDispatch();
