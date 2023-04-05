@@ -3,8 +3,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -13,20 +13,72 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Copyright from '../Components/Copyright';
-
+import { useState } from "react";
 
 
 export default function Login() {
+
+  // validation
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [remember, setRemember] = useState(false);
+
+  const handleRememberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRemember(event.target.checked);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name === "email") {
+      setEmail(value);
+      setEmailError("");
+    } else if (name === "password") {
+      setPassword(value);
+      setPasswordError("");
+    }
+  };
+
+
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const emailValue = data.get("email") as string;
+    const passwordValue = data.get("password") as string;
+
+    // email
+    if (emailValue.trim() === "") {
+      setEmailError("Email is required");
+      return;
+    }
+  
+    if (!/\S+@\S+\.\S+/.test(emailValue)) {
+      setEmailError("Email is invalid");
+      return;
+    }
+    
+    // password
+    if (passwordValue.trim() === "") {
+      setPasswordError("Password is required");
+      return;
+    }
+    if (passwordValue.length < 8){
+      setPasswordError("Password must be at least 8 characters long");
+      return;
+    }
+    if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
+      setPasswordError("Password must contain at least one number and one special character");
+      return;
+    }
+
+    // to do: redirect to success page after built
     navigate("/")
   };
+
+  
 
   return (
     
@@ -56,6 +108,10 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={handleChange}
+              error={Boolean(emailError)}
+              helperText={emailError}
             />
             <TextField
               margin="normal"
@@ -66,11 +122,15 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={handleChange}
+              error={Boolean(passwordError)}
+              helperText={passwordError}
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+            <FormControlLabel
+              control={<Checkbox checked={remember} onChange={handleRememberChange} color="primary" />}
               label="Remember me"
-            /> */}
+            />
             <Button
               type="submit"
               fullWidth
