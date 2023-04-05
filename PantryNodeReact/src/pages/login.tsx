@@ -14,10 +14,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Copyright from '../Components/Copyright';
 
+import { useAppDispatch } from '../hooks'
+import { login } from '../features/user';
+
 
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,6 +29,13 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    //After Successful login
+    let payload = {
+      name:"Kevin Buffardi",
+      email:"kb@gmail.com",
+      token:"tokengotfromapicall"
+    }
+    dispatch(login(payload));
     navigate("/")
   };
 
