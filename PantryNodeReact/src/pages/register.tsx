@@ -14,11 +14,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Copyright from '../Components/Copyright';
 import { useState } from "react";
-
+import Success from "./success";
 
 
 export default function SignUp() {
-  
+
   // validation
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +26,7 @@ export default function SignUp() {
   const [passwordError, setPasswordError] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -40,8 +41,7 @@ export default function SignUp() {
       setPhoneNumberError("");
     }
   };
-  
-  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -59,13 +59,13 @@ export default function SignUp() {
       setEmailError("Email is invalid");
       return;
     }
-    
+
     // password
     if (passwordValue.trim() === "") {
       setPasswordError("Password is required");
       return;
     }
-    if (passwordValue.length < 8){
+    if (passwordValue.length < 8) {
       setPasswordError("Password must be at least 8 characters long");
       return;
     }
@@ -83,17 +83,20 @@ export default function SignUp() {
       setPhoneNumberError("Please enter a valid phone number");
       return;
     }
-    if (phoneNumberValue.length !==10){
+    if (phoneNumberValue.length !== 10) {
       setPhoneNumberError("Phone number must be 10 Digits");
       return;
     }
 
     // to do: redirect to success page after built
-    navigate("/")
+    // navigate("/")
+    setIsRegistered(true);
   };
-  
 
-  return (
+  if (isRegistered) {
+    return <Success />;
+  } else {
+    return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -177,15 +180,15 @@ export default function SignUp() {
                   helperText={passwordError}
                 />
               </Grid>
-              
+
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-                          sx={{ mt: 3, mb: 2, py:2 }}
-                          
-                            style={{
+              sx={{ mt: 3, mb: 2, py: 2 }}
+
+              style={{
                 backgroundColor: "primary"
               }}
             >
@@ -202,5 +205,8 @@ export default function SignUp() {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-  );
+    );
+  }
+
+
 }
