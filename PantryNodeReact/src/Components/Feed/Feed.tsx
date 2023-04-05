@@ -35,11 +35,11 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                     margin: "10px",
                     borderBottom: index !== sortedFeedList.length - 1 ? "1px solid #ccc" : "none" 
                   }}>
-                <Typography>
-                    {item.item} {isExpiring ? "expiring soon" : isExpired ? "expired on" : "getting expiring on"} {item.expiry_date}
+                <Typography style={{ width: "70%" }}>
+                    {item.item} {isExpiring ? "expiring soon" : isExpired ? "expired on" : "expiring on"} {item.expiry_date}
                 </Typography>
                 
-                <Typography>
+                <Typography style={{ width:"30%" }}>
                     <strong>Stock Quantity:{item.quantity}</strong>
                 </Typography>
             </div>
