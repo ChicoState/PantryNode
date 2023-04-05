@@ -13,7 +13,7 @@ interface SaleTableProps {
 
 const SaleTable = ({category}: SaleTableProps) => {
   return (
-    <Typography variant="h6" align="center" sx={{  }}>
+    <Typography variant="h6" align="center">
     {category.name}
   </Typography>
   )

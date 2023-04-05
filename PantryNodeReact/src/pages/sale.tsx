@@ -22,7 +22,7 @@ const Sale = () => {
     <Box sx={{ width: '100%' }}>
       <Grid container columns={categoryList.length} justifyContent={"space-evenly"} flexWrap={"wrap"} gap={2} marginBottom={5}>
         {categoryList.map((category) => (
-          <Grid item width={"150px"}>
+          <Grid key={category.id} item width={"150px"}>
             <Button key={category.id} onClick={() => setSelectedCategory(category)} sx={{ display: "flex", flexDirection: "column", gap: 2, width: "100%", backgroundColor: selectedCategory.id === category.id ? "#f0e1e3" : "transparent", color: "#8c2332", padding: 2, paddingInline: 4, borderRadius: "30px", "&:hover": { backgroundColor: "#f0e1e3", cursor: "pointer", } }} >
               <img
                 src={category.image_url}
@@ -32,7 +32,8 @@ const Sale = () => {
               <Typography variant="h6" align="center" sx={{}}>
                 {category.name}
               </Typography>
-            </Button></Grid>
+            </Button>
+          </Grid>
         ))}
       </Grid>
 

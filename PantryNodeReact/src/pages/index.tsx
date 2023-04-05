@@ -51,22 +51,18 @@ const index = () => {
                     borderBottom: index !== sortedFeedList.length - 1 ? "1px solid #ccc" : "none" 
                   }}>
               
-                    <Typography key={item.id}>
+                    <Typography>
                       {item.item} {isExpiring ? "expiring soon" : isExpired ? "expired on" : "getting expiring on"} {item.expiry_date}
                     </Typography>
                     
-                    <Typography key={item.id}>
+                    <Typography>
                       <strong>Stock Quantity:{item.quantity}</strong>
                     </Typography>
-
-              
-            
             </div>
           );
         })}
 
       </div>
-
     </Box>
   );
 };
