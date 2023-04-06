@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Chico State Pantry</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="https://www.csuchico.edu/style-guide/visual/_images/CSUCHICO-Seal-Color.png">
+
+    <style>
+        /* Make the image fully responsive */
+        
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $("#anoBtn").click(function() {
+
+                $("#donorID").val('');
+                $("#donoHold").html('Anonymous');
+                $("#donorBtn").attr('class', 'btn  btn-outline-primary');
+                $("#ptrBtn").attr('class', 'btn btn-outline-success');
+                $("#anoBtn").attr('class', 'btn  btn-secondary');
+
+
+            });
+
+            $("#ptrBtn").click(function() {
+
+                $("#donorID").val('0');
+                $("#donoHold").html('Anonymous');
+                $("#anoBtn").attr('class', 'btn btn-outline-secondary');
+                $("#donorBtn").attr('class', 'btn  btn-outline-primary');
+                $("#ptrBtn").attr('class', 'btn btn-success');
+                $("#donoHold").html('Pantry Stock Purchase');
+
+
+
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <br>
+    <br>
+    <br>
+    <div class="container ">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="box_out" style="min-height: 650px;">
+
+                    <%- include('partials/header_2') %>
+
+                        <div class="inWrap">
+                            <br><br>
+
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4 ">
+
+
+                                        <form action="/add_stock" method="post">
+
+
+                                            <div class="hHold">
+                                                Add Stock
+                                            </div>
+                                            <br>
+
+
+                                            <button type="button" id="anoBtn" class="btn btn-outline-secondary">Anonymous</button>
+                                            <% if(typeof data.donorName != 'undefined'){ %>
+
+                                                <a href="/donor"><button type="button" id="donorBtn" class="btn btn-primary">Donor</button></a>
+
+                                                <% } else{ %>
+                                                    <a href="/donor"><button type="button" id="donorBtn" class="btn btn-outline-primary">Donor</button></a>
+
+                                                    <% } %>
+
+
+                                                        <button type="button" id="ptrBtn" class="btn btn-outline-success">Pantry Stock</button>
+
+                                                        <br><br>
+
+                                                        <span style="font-size: 1.3em;">
+                                                            Donor:
+                                                            <span id="donoHold">
+                                                        <% if(typeof data.donorName != 'undefined'){ %>
+
+                                                           <%= data.donorName %>
+                                                        <% } %>
+                                                    </span>
+                                                        </span>
+                                                        <br><br>
+
+
+                                                        <div class="form-group">
+                                                            <input type="text" class="form_input" id="itemName" name="itemName" placeholder="Item Name">
+                                                        </div>
+
+                                                        <div class="form-group ">
+                                                            <select class="form-control" id="itemType" name="itemType">
+                                                        <option disabled selected>Select Category</option>
+                                                    
+
+                                                     
+                                                        <% if(typeof data.categories != 'undefined'){ %>
+                                                            <% data.categories.forEach(function(cat){ %>
+                                                                <option value="<%= cat._id %>">
+
+                                                                <%= cat.categoryName %>
+                                                            </option>
+                                                                    <% }); %>
+                                                                        <% } %>
+
+                                                      </select>
+
+
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <input type="text" class="form_input" id="quantity" name="quantity" placeholder="Quantity">
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <input type="date" class="form_input" id="dateExp" name="dateExp" placeholder="Expiry Date">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <input type="text" class="form_input" id="price" name="price" placeholder="Price">
+                                                        </div>
+
+                                                        <input type="text" id="donorID" name="donorID" style="visibility: hidden;display: none; " value="<%= data.donorId %>">
+
+
+                                                        <button type="submit" id="submitDetails" name="submitDetails" class="btn form_input red font-white">Add</button>
+                                        </form>
+
+                                    </div>
+
+                                    <div class="col-md-4 ">
+
+
+
+                                    </div>
+
+                                    <div class="col-md-4 ">
+
+
+                                        <form action="/add_cat" method="post">
+
+
+                                            <div class="hHold">
+                                                Add Category
+                                            </div>
+                                            <br>
+
+
+                                            <div class="form-group">
+                                                <input type="text" class="form_input" id="categoryName" name="categoryName" placeholder="Category Name">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                            </div>
+
+
+
+
+
+
+
+
+                                            <button type="submit" id="submitDetails" name="submitDetails" class="btn form_input red font-white">Add</button>
+                                        </form>
+
+                                    </div>
+
+
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5">
+        <div class="container">
+            <span></span>
+        </div>
+    </footer>
+
+</body>
+
+</html>
