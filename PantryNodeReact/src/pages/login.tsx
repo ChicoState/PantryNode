@@ -13,9 +13,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Copyright from '../Components/Copyright';
+import axios from 'axios';
 
-
-
+//tis has an api request
 export default function Login() {
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -25,6 +25,20 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    axios.post('http://localhost:3000/login', {
+      name: 'Preston',
+    email: 'johndoe@example.com'
+}, {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+.then(response => {
+  console.log(response);
+})
+.catch(error => {
+  console.error(error);
+});
     navigate("/")
   };
 
