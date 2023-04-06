@@ -2,7 +2,7 @@ name: ES Lint
 
 on:
   pull_request:
-    branches: [containerize-React] #Remove before merge main
+    branches: [main]
 jobs:
   lint:
     runs-on: ubuntu-latest
