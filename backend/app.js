@@ -13,7 +13,6 @@ var saleRouter = require('./routes/sale');
 var app = express();
 
 var con_string = require('./config/keys').PostgresURI;
-console.log(con_string);
 const sequelize = new Sequelize(con_string)
 
 try {
