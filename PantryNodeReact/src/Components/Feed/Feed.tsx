@@ -15,18 +15,21 @@ type FeedProps = {
 const Feed = ({ sortedFeedList }: FeedProps) => {
   return (
     <Box sx={{ width: '100%', bgcolor: '', p: 2 }}>
-        <Typography variant="h4" gutterBottom style={{ textAlign: "center" }}>
-            Feed
-        </Typography>
+        <Typography variant="h4" gutterBottom style={{ textAlign: "center" }}>Feed</Typography>
         <div style={{ display: "flex", flexWrap:"wrap" }}>
             <div style={{ width: "50%" }}>
-                <Typography variant="h5" gutterBottom>
-                    Expiring Soon Items
-                </Typography>
+                <Typography variant="h5" gutterBottom style={{ textAlign: "center" }}>Expiring Soon Items </Typography>
                 {sortedFeedList.map((item, index) => {
                     const expiryDate = new Date(item.expiry_date).getTime();
                     const currentDate = new Date().getTime();
                     const isExpiring = expiryDate > currentDate;
+                    
+                    const formattedExpiringDate = new Intl.DateTimeFormat("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      }).format(new Date(item.expiry_date));
+
                     if(isExpiring){
                         return (
                             <div key={item.id} 
@@ -44,7 +47,7 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                                     Added on: {item.added_date}
                                 </Typography>
                                 <Typography style={{ width: "70%" }}>
-                                    {item.item} expiring on {item.expiry_date}
+                                    <b>{item.item}</b> expiring on <b>{formattedExpiringDate}</b>
                                 </Typography>
                                 
                                 <Typography style={{ width:"30%" }}>
@@ -57,13 +60,18 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
             </div>
 
             <div style={{ width: "50%" }}>
-                <Typography variant="h5" gutterBottom>
-                    Expired Items
-                </Typography>
+                <Typography variant="h5" gutterBottom style={{ textAlign: "center" }}>Expired Items</Typography>
                 {sortedFeedList.map((item, index) => {
                     const expiryDate = new Date(item.expiry_date).getTime();
                     const currentDate = new Date().getTime();
                     const isExpired = expiryDate < currentDate;
+
+                    const formattedExpiredDate = new Intl.DateTimeFormat("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      }).format(new Date(item.expiry_date));
+
                     if (isExpired){
                         return (
                             <div key={item.id} 
@@ -82,7 +90,7 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                                     Added on: {item.added_date}
                                 </Typography>
                                 <Typography style={{ width: "70%" }}>
-                                    {item.item} expired on {item.expiry_date}
+                                    <b>{item.item}</b> expired on <b>{formattedExpiredDate}</b>
                                 </Typography>
                                 
                                 <Typography style={{ width:"30%" }}>
