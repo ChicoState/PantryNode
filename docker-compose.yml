@@ -54,6 +54,8 @@ services:
     ports:
       - "3000:3000"
     container_name: react
+    networks:
+      - local
     volumes:
        - ./PantryNodeReact:/app/frontend
        - /app/frontend/node_modules
