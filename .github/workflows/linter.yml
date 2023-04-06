@@ -3,6 +3,7 @@ name: ES Lint
 on:
   pull_request:
     branches: [main]
+    branches: [containerize-React] #Remove before merge main
 
 jobs:
   lint:
@@ -13,7 +14,9 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
       - name: Install dependencies
-        run: npm init @eslint/config
+        run: |
+          cd backend
+          npm init @eslint/config
       - name: Install typescript and eslint
         run: npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
       - name: Lint it
