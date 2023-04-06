@@ -9,21 +9,32 @@ type FeedProps = {
         added_date: string; 
         quantity: number 
     }[];
+    
+    sortedExpiredFeedList: { 
+        id: number; 
+        item: string; 
+        expiry_date: string;
+        added_date: string; 
+        quantity: number 
+    }[];
   };
   
 
-const Feed = ({ sortedFeedList }: FeedProps) => {
+const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
   return (
     <Box sx={{ width: '100%', bgcolor: '', p: 2 }}>
         <Typography variant="h4" gutterBottom style={{ textAlign: "center" }}>Feed</Typography>
         <div style={{ display: "flex", flexWrap:"wrap" }}>
+
+            {/* Expiring feed list section */}
             <div style={{ width: "50%" }}>
                 <Typography variant="h5" gutterBottom style={{ textAlign: "center" }}>Expiring Soon Items </Typography>
                 {sortedFeedList.map((item, index) => {
                     const expiryDate = new Date(item.expiry_date).getTime();
                     const currentDate = new Date().getTime();
-                    const isExpiring = expiryDate > currentDate;
+                    const isExpiring = expiryDate >= currentDate;
                     
+                    // to change date format 2023-05-04 => May 4, 2023
                     const formattedExpiringDate = new Intl.DateTimeFormat("en-US", {
                         month: "short",
                         day: "numeric",
@@ -58,14 +69,16 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                     }
                 })}
             </div>
-
+            
+            {/* Expired feed list section */}
             <div style={{ width: "50%" }}>
                 <Typography variant="h5" gutterBottom style={{ textAlign: "center" }}>Expired Items</Typography>
-                {sortedFeedList.map((item, index) => {
+                {sortedExpiredFeedList.map((item, index) => {
                     const expiryDate = new Date(item.expiry_date).getTime();
                     const currentDate = new Date().getTime();
                     const isExpired = expiryDate < currentDate;
-
+                    
+                    // to change date format 2023-05-04 => May 4, 2023
                     const formattedExpiredDate = new Intl.DateTimeFormat("en-US", {
                         month: "short",
                         day: "numeric",
@@ -83,7 +96,7 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                                     padding: "25px",
                                     backgroundColor: "#f9b2b2",
                                     margin: "10px",
-                                    borderBottom: index !== sortedFeedList.length - 1 ? "1px solid #ccc" : "none" 
+                                    borderBottom: index !== sortedExpiredFeedList.length - 1 ? "1px solid #ccc" : "none" 
                                     }}>
                                 
                                 <Typography variant="caption" style={{ position:"absolute", top: "5px", right: "10px" }}>
@@ -101,9 +114,9 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                     }
                 })}
             </div>
+
         </div>
     </Box>
-
   )
 }
 

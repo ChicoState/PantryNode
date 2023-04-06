@@ -15,16 +15,25 @@ const index = () => {
     { id: 9, item: "Whole grain cereals", expiry_date: "2023-10-03", quantity:5, added_date:"2023-09-27" },
     { id: 10, item: "Ramen", expiry_date: "2023-03-12", quantity:7, added_date:"2023-03-01" },
     { id: 11, item: "Oranges", expiry_date: "2023-02-24", quantity:13, added_date:"2023-02-14" },
-    { id: 12, item: "Apples", expiry_date: "2023-10-15", quantity:15, added_date:"2023-10-04" },
+    { id: 12, item: "Apples", expiry_date: "2022-10-15", quantity:15, added_date:"2023-10-04" },
+    { id: 13, item: "Chilies", expiry_date: "2023-05-14", quantity:15, added_date:"2023-05-04" },
   ];
 
-  // sort by ascending dates
-  const sortedFeedList = feedList.sort((a, b) => {
+  // copy of feedList array
+  const feedListCopy = [...feedList];
+
+  // sort feeds by latest date to oldest future expiring date
+  const sortedFeedList = feedListCopy.sort((a, b) => {
     return new Date(a.expiry_date).getTime() - new Date(b.expiry_date).getTime();
   });
 
+  // sort feeds by latest expired to oldest expired date 
+  const sortedExpiredFeedList = feedList.sort((a, b) => {
+    return new Date(b.expiry_date).getTime() - new Date(a.expiry_date).getTime();
+  });
+
   return (
-    <Feed sortedFeedList={sortedFeedList} />
+    <Feed sortedFeedList={sortedFeedList} sortedExpiredFeedList={sortedExpiredFeedList} />
   );
 };
 
