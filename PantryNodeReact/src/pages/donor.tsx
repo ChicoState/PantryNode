@@ -13,8 +13,12 @@ var Donor = () => {
     location: string;
   }
 
+  const initialData: Entry[] = [
+    { name: 'John', email: 'john@gmail.com', location: 'USA' },
+  ];
+  
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [data, setData] = useState<Entry[]>([]);
+  const [data, setData] = useState<Entry[]>(initialData);
   const [newEntry, setNewEntry] = useState<Entry>({ name: '', email: '', location: '' });
 
   const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
