@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "jest",
     "start": "npx ts-node bin/www",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "test": "jest"
   },
   "dependencies": {
     "@types/passport": "^1.0.12",
