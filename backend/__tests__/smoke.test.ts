@@ -4,7 +4,7 @@ describe('smoke test', () => {
   });
 
   test('can import entry point without errors', () => {
-    expect(() => require('../backend/routes/index.js')).not.toThrow();
+    expect(() => require('../routes/index.js')).not.toThrow();
   });
   
 });
