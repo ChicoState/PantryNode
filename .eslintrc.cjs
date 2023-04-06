@@ -6,6 +6,10 @@ module.exports = {
     rules: {
         "@typescript-eslint/no-var-requires": "warn",
         "@typescript-eslint/no-extra-semi": "warn",
-        "no-undef":"warn"
-    }
+    },
+
+    
+      "ignorePatterns": ["eslintrc.js"],
+        //add rules
+
 };
