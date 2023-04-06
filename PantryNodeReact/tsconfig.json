@@ -31,5 +31,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "public/quagga/quagga.js"]
 }

@@ -10,7 +10,12 @@ require('./config/passport')(passport);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
+
 var app = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 var con_string = require('./config/keys').PostgresURI;
 
@@ -72,9 +77,7 @@ app.get('/checkout_success', function(req, res, next) {
 
 });
 
-
-
-
+  
 app.get('/s', function(req, res, next) {
 
     res.render('signup_success', { title: 'Home' });
@@ -96,5 +99,6 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
 
 module.exports = app;

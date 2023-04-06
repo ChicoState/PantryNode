@@ -57,6 +57,10 @@ router.get('/home', ensureAuthenticated, function(req, res) {
   }
 });
 
+router.get('/scanner', function(req, res) {
+  res.render('scanner');
+});
+
 
 
 
