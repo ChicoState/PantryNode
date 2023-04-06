@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Chico State Pantry</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="https://www.csuchico.edu/style-guide/visual/_images/CSUCHICO-Seal-Color.png">
+
+    <style>
+        /* Make the image fully responsive */
+        
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <br>
+    <br>
+    <br>
+    <div class=" " style="padding: 2%;">
+        <div class="row" style="width: 100%;">
+
+            <div class="">
+
+                <div class="box_out" style="min-height: 650px;">
+
+                    <%- include('partials/header_2') %>
+
+                        <div class="inWrap">
+                            <br><br>
+
+
+                            <div class="">
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+
+                                        <b>Purchase</b>
+                                        <br> Total Checkout:
+                                        <%= (data.allItems).length %>
+
+                                            <% var cd = 0 %>
+                                                <% for(var j=0; j<(data.allItems).length; j++) {%>
+                                                    <% cd = cd+ parseInt(data.allItems[j].quantity) %>
+
+                                                        <% } %>
+                                                            | Total Quantity Checked Out:
+                                                            <%= cd %>
+                                                                <br><br>
+                                                                <table class="table ">
+                                                                    <thead class=" ">
+                                                                        <tr style="background-color: #8c2332; color: white; ">
+                                                                            <th scope="col ">#</th>
+                                                                            <th scope="col ">Name</th>
+                                                                            <th scope="col ">Type</th>
+                                                                            <th scope="col ">Quantity</th>
+                                                                            <th scope="col ">Date</th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                        <% for(var i=0; i<(data.allItems).length; i++) {%>
+                                                                            <tr class="tb_dn ">
+                                                                                <th scope="row ">
+                                                                                    <%= i+1 %>
+                                                                                </th>
+                                                                                <td style="text-transform: capitalize; ">
+                                                                                    <%= data.allItems[i].itemName %>
+                                                                                </td>
+                                                                                <td style="text-transform: capitalize; ">
+                                                                                    <%= data.allItems[i].itemType %>
+                                                                                </td>
+                                                                                <td style="text-transform: capitalize; ">
+                                                                                    <%= data.allItems[i].quantity %>
+                                                                                </td>
+                                                                                <%  var d = data.allItems[i].datePur.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                                    <td style="text-transform: capitalize; ">
+                                                                                        <%= d[0] %>
+                                                                                    </td>
+
+
+
+
+
+
+
+                                                                            </tr>
+                                                                            <% } %>
+
+                                                                    </tbody>
+                                                                </table>
+
+
+
+
+
+
+                                    </div>
+
+                                    <div class="col-md-6 ">
+
+                                        <b>Current Stock</b>
+                                        <br> Total Items in Stock:
+                                        <% var cc = 0 %>
+                                            <% for(var j=0; j<(data.stock).length; j++) {%>
+                                                <% cc = cc+ parseInt(data.stock[j].quantity) %>
+
+                                                    <% } %>
+                                                        <%= cc %>
+                                                            <br><br>
+                                                            <table class="table ">
+                                                                <thead class=" ">
+                                                                    <tr style="background-color: #8c2332; color: white; ">
+                                                                        <th scope="col ">#</th>
+                                                                        <th scope="col ">Name</th>
+                                                                        <th scope="col ">Type</th>
+                                                                        <th scope="col ">Stocked Date</th>
+                                                                        <th scope="col ">Expiry Date</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <% for(var i=0; i<(data.items).length; i++) {%>
+                                                                        <tr class="tb_dn ">
+
+                                                                            <th scope="row ">
+                                                                                <%= i+1 %>
+                                                                            </th>
+
+                                                                            <td style="text-transform: capitalize; ">
+                                                                                <%= data.items[i].itemName %>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <% for(var j=0; j<(data.stock).length; j++) {%>
+                                                                                    <% if (data.items[i].stockID == data.stock[j]._id) { %>
+                                                                                        <%= data.stock[j].quantity %>
+                                                                                            <% break %>
+                                                                                                <% }  %>
+
+                                                                                                    <% } %>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <%  var d = data.stock[j].date.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                                    <%= d[0] %>
+
+                                                                            </td>
+                                                                            <td>
+                                                                                <%  var d =data.stock[j].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                                    <%= d[0] %>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% } %>
+
+                                                                </tbody>
+                                                            </table>
+
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+
+                                        <b>Waste Management</b>
+                                        <br> Total Expired:
+
+                                        <% var cdx = 0 %>
+                                            <% for(var j=0; j<(data.expired).length; j++) {%>
+                                                <% cdx = cdx+ parseInt(data.expired[j].quantity) %>
+
+                                                    <% } %>
+                                                        <%= cdx %>
+                                                            <br><br>
+                                                            <table class="table ">
+                                                                <thead class=" ">
+                                                                    <tr style="background-color: #8c2332; color: white; ">
+                                                                        <th scope="col ">#</th>
+                                                                        <th scope="col ">Name</th>
+                                                                        <th scope="col ">Quantity</th>
+                                                                        <th scope="col ">Date</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <% for(var i=0; i<(data.expired).length; i++) {%>
+                                                                        <tr class="tb_dn ">
+                                                                            <th scope="row ">
+                                                                                <%= i+1 %>
+                                                                            </th>
+                                                                            <td style="text-transform: capitalize; ">
+                                                                                <%= data.expired[i].itemName %>
+                                                                            </td>
+                                                                            <td style="text-transform: capitalize; ">
+                                                                                <%= data.expired[i].quantity %>
+                                                                            </td>
+                                                                            <%  var d = data.expired[i].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                                <td style="text-transform: capitalize; ">
+                                                                                    <%= d[0] %>
+                                                                                </td>
+
+
+
+
+
+
+
+                                                                        </tr>
+                                                                        <% } %>
+
+                                                                </tbody>
+                                                            </table>
+
+
+
+
+
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+
+                                        <b>Soon to Expire</b>
+                                        <br>
+
+
+                                        <br><br>
+                                        <table class="table ">
+                                            <thead class=" ">
+                                                <tr style="background-color: #8c2332; color: white; ">
+                                                    <th scope="col ">#</th>
+                                                    <th scope="col ">Name</th>
+                                                    <th scope="col ">Days Remaining</th>
+                                                    <th scope="col ">Date</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                                <% var exc=1; 
+                                                for(var i=0; i<(data.items).length; i++) { %>
+                                                    <tr class="tb_dn ">
+
+                                                        <%  const oneDay = 24 * 60 * 60 * 1000;
+                                                              const diff = Math.round(Math.abs((new Date() - new Date(data.items[i].dateExp)) / oneDay));
+                                                                console.log("Days:" + diff);%>
+
+                                                            <%   if(diff<=2){ %>
+                                                                <th scope="row ">
+                                                                    <%= exc %>
+                                                                </th>
+                                                                <td style="text-transform: capitalize; ">
+                                                                    <%= data.items[i].itemName %>
+                                                                </td>
+                                                                <td>
+                                                                    <%=  diff+1 %>
+                                                                </td>
+
+                                                                <%  var d = data.items[i].dateExp.toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/\..+/, '').split(' ');   %>
+                                                                    <td style="text-transform: capitalize; ">
+                                                                        <%= d[0] %>
+                                                                    </td>
+
+                                                    </tr>
+                                                    <% exc=exc+1;}} %>
+
+
+
+
+
+
+
+                                            </tbody>
+                                        </table>
+
+
+
+
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+
+</body>
+
+</html>

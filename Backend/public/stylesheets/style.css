@@ -1,0 +1,303 @@
+body {
+    background-image: url("../images/magenta.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box_out {
+    background-color: white;
+    display: block;
+    padding: 3%;
+    border: 1px solid #d3d3d3;
+}
+
+.box_in {
+    background-color: white;
+    display: block;
+    padding: 5%;
+    border: 1px solid #d3d3d3;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+a {
+    color: #8a3542;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #6a111f;
+    text-decoration: none;
+}
+
+.form_input {
+    margin-left: auto;
+    margin-right: auto;
+    height: 20%;
+    width: 100%;
+    padding: 2%;
+}
+
+.font-white {
+    color: white;
+}
+
+.red {
+    background-color: #8c2332;
+}
+
+.red-bg {
+    background-color: #8c2332;
+    width: 100%;
+    width: auto;
+    padding: 2%;
+}
+
+.red:hover {
+    color: white;
+    background-color: #8a3542;
+    -moz-box-shadow: inset 0 0 10px #6a111f;
+    -webkit-box-shadow: inset 0 0 10px #6a111f;
+    box-shadow: inset 0 0 10px #6a111f;
+}
+
+.logo-holder {
+    width: 100%;
+    height: auto;
+}
+
+.float-left-logo {
+    width: 40%;
+    display: inline;
+}
+
+.inWrap {
+    margin-top: 2%;
+    padding: 0%;
+}
+
+.footer {
+    padding: 2%;
+    background-color: #6a111f;
+    color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.footer>span {
+    color: white;
+}
+
+.inNav {
+    background-color: transparent;
+    display: inline;
+    float: right;
+    margin: 3%;
+    width: auto;
+}
+
+.inNav>a {
+    background-color: ;
+    height: 20px;
+    width: auto;
+    color: white;
+    margin-left: 10px;
+    cursor: pointer;
+    padding: 6px;
+}
+
+.inNav>a:hover {
+    background-color: #6a111f;
+    color: white;
+    cursor: pointer;
+}
+
+.p-grid {
+    padding-top: 32%;
+    text-align: center;
+    width: 100%;
+    margin: 2px;
+    min-height: 200px;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.redd-bg {
+    background-image: url("../images/icons/fruit.png");
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+    background-color: #ff9999;
+    font-size: 40px;
+    font-weight: 600;
+    opacity: .5;
+    text-shadow: 1px 1px white, -1px -1px #999999;
+}
+
+.orange-bg {
+    background-image: url("../images/icons/vege.png");
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+    background-color: #ffd699;
+    font-size: 40px;
+    font-weight: 600;
+    opacity: .5;
+    text-shadow: 1px 1px white, -1px -1px #999999;
+}
+
+.yellow-bg {
+    background-image: url("../images/icons/dairy.png");
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+    background-color: #e6b3b3;
+    font-size: 40px;
+    font-weight: 600;
+    opacity: .5;
+    text-shadow: 1px 1px white, -1px -1px #999999;
+}
+
+.green-bg {
+    background-image: url("../images/icons/meat.png");
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+    background-color: #99ff99;
+    font-size: 40px;
+    font-weight: 600;
+    opacity: .5;
+    text-shadow: 1px 1px white, -1px -1px #999999;
+}
+
+.blue-bg {
+    background-image: url("../images/icons/bread.png");
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+    background-color: #99c2ff;
+    font-size: 40px;
+    font-weight: 600;
+    opacity: .5;
+    text-shadow: 1px 1px white, -1px -1px #999999;
+}
+
+.violet-bg {
+    background-image: url("../images/icons/ready.png");
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+    background-color: #bb99ff;
+    font-size: 40px;
+    font-weight: 600;
+    opacity: .5;
+    text-shadow: 1px 1px white, -1px -1px #999999;
+}
+
+.grey-bg {
+    background-image: url("../images/icons/book.png");
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+    background-color: #cccccc;
+    font-size: 40px;
+    font-weight: 600;
+    opacity: .5;
+    text-shadow: 1px 1px white, -1px -1px #999999;
+}
+
+.redd-bg:hover {
+    background-size: cover;
+    opacity: .7;
+    font-size: 0px;
+}
+
+.orange-bg:hover {
+    background-size: cover;
+    opacity: .7;
+    font-size: 0px;
+}
+
+.yellow-bg:hover {
+    background-size: cover;
+    opacity: .7;
+    font-size: 0px;
+}
+
+.green-bg:hover {
+    background-size: cover;
+    opacity: .7;
+    font-size: 0px;
+}
+
+.blue-bg:hover {
+    background-size: cover;
+    opacity: .7;
+    font-size: 0px;
+}
+
+.violet-bg:hover {
+    background-size: cover;
+    opacity: .7;
+    font-size: 0px;
+}
+
+.grey-bg:hover {
+    background-size: cover;
+    opacity: .7;
+    font-size: 0px;
+}
+
+.dash-bg {
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+    background-color: #8c2332;
+    font-size: 1em;
+    font-weight: 700;
+    opacity: 1;
+    width: 75%;
+    min-height: 50px;
+    padding-top: 5%;
+    margin-bottom: 5%;
+    float: right;
+}
+
+.dash-bg:hover {
+    background-color: #6a111f;
+}
+
+.dash-bg-img {
+    float: left;
+    width: 16%;
+    margin-top: 2%;
+}
+
+.tb_dn {
+    cursor: pointer;
+}
+
+.tb_dn:hover {
+    background-color: #faebed;
+}
+
+.hHold {
+    background-color: #8c2332;
+    padding: .75rem;
+    border-bottom: 2px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    border-spacing: 2px;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
