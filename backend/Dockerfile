@@ -1,6 +1,6 @@
 FROM node:alpine as node
 WORKDIR /app/backend
-COPY ./package.json .
-RUN npm install --only=prod
+COPY package*.json ./
+RUN npm install
 
 CMD ["npm", "start"]
