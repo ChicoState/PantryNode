@@ -5,7 +5,8 @@ type FeedProps = {
     sortedFeedList: { 
         id: number; 
         item: string; 
-        expiry_date: string; 
+        expiry_date: string;
+        added_date: string; 
         quantity: number 
     }[];
   };
@@ -30,6 +31,7 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                         return (
                             <div key={item.id} 
                                     style={{ 
+                                    position:"relative",
                                     display: "flex",
                                     justifyContent: "space-between", 
                                     alignItems: "center", 
@@ -38,12 +40,15 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                                     margin: "10px",
                                     borderBottom: index !== sortedFeedList.length - 1 ? "1px solid #ccc" : "none" 
                                     }}>
+                                <Typography variant="caption" style={{ position:"absolute", top: "5px", right: "10px" }}>
+                                    Added on: {item.added_date}
+                                </Typography>
                                 <Typography style={{ width: "70%" }}>
-                                    {item.item} expiring soon on {item.expiry_date}
+                                    {item.item} expiring on {item.expiry_date}
                                 </Typography>
                                 
                                 <Typography style={{ width:"30%" }}>
-                                    <strong>Stock Quantity:{item.quantity}</strong>
+                                    <strong>Stock Quantity: { item.quantity<1?"Not available": item.quantity} </strong>
                                 </Typography>
                             </div>
                         );
@@ -63,6 +68,7 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                         return (
                             <div key={item.id} 
                                     style={{ 
+                                    position:"relative",
                                     display: "flex",
                                     justifyContent: "space-between", 
                                     alignItems: "center", 
@@ -71,12 +77,16 @@ const Feed = ({ sortedFeedList }: FeedProps) => {
                                     margin: "10px",
                                     borderBottom: index !== sortedFeedList.length - 1 ? "1px solid #ccc" : "none" 
                                     }}>
+                                
+                                <Typography variant="caption" style={{ position:"absolute", top: "5px", right: "10px" }}>
+                                    Added on: {item.added_date}
+                                </Typography>
                                 <Typography style={{ width: "70%" }}>
                                     {item.item} expired on {item.expiry_date}
                                 </Typography>
                                 
                                 <Typography style={{ width:"30%" }}>
-                                    <strong>Stock Quantity:{item.quantity}</strong>
+                                    <strong>Stock Quantity:{ item.quantity<1?"Not available": item.quantity}</strong>
                                 </Typography>
                             </div>
                         );
