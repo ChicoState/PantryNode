@@ -2,12 +2,7 @@ name: ES Lint
 
 on:
   pull_request:
-    branches: [main]
-<<<<<<< HEAD
     branches: [containerize-React] #Remove before merge main
-=======
-    branches: [main] #Remove before merge main
->>>>>>> 0b51ce03bc6fef7245a2a8d7d8bbc8ed4964842c
 
 jobs:
   lint:
