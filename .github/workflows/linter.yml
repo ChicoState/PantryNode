@@ -4,7 +4,6 @@ on:
   pull_request:
     branches: [main]
     branches: [containerize-React] #Remove before merge main
-
 jobs:
   lint:
     runs-on: ubuntu-latest
