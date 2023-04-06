@@ -32,6 +32,8 @@ services:
       dockerfile: ./Dockerfile
       target: node
     container_name: node
+    volumes:
+       - ./backend:/app/backend
     platform: linux/amd64
     depends_on:
       - database
@@ -45,7 +47,15 @@ services:
     networks:
       - local
     ports:
-      - 3000:3000
-      
+      - 3001:3001
+  react:
+    build:
+      context: ./PantryNodeReact
+    ports:
+      - "3000:3000"
+    container_name: react
+    volumes:
+       - ./PantryNodeReact:/app/frontend
+       - /app/frontend/node_modules
 networks:
   local:
