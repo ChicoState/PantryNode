@@ -40,11 +40,11 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
-    "@typescript-eslint/eslint-plugin": "^5.57.0",
-    "@typescript-eslint/parser": "^5.57.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
     "eslint": "^8.0.0",
     "eslint-config-react-app": "^7.0.1",
     "jshint": "^2.11.1",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.3"
   }
 }

@@ -22,6 +22,7 @@ router.get('/register', function (req, res, next) {
   }
 });
 
+
 router.post('/sign_up', function (req, res) {
   const { name, email, password, phone } = req.body;
   person.findOrCreate({
