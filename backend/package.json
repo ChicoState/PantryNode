@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "ts-node bin/www",
+    "start": "npx ts-node bin/www",
     "build": "tsc -p .",
     "test": "jest"
   },
