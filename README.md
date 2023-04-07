@@ -25,7 +25,7 @@ In this project, we have implemented food pantry management using a NodeJS-based
 
 > Back-End
 
-- MongoDB
+- Postgres
 - Express JS
 - JavaScript
 
@@ -47,6 +47,22 @@ In this project, we have implemented food pantry management using a NodeJS-based
 ```shell
 $ cd PantryNode
 ```
+
+### Git LFS
+
+- If images or other large files are needed install [Git LFS](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage)
+
+- After installation run the follow commands to pull the images and not just text pointers
+
+```shell
+$ git lfs fetch --all
+```
+
+```shell
+$ git lfs pull
+```
+
+### .env Setup
 
 > Create a .env file with the following contents
 
