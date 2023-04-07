@@ -1,23 +1,47 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
+import axiosInstance from '../util/axiosInstance'
+
+// First, create the thunk
+export const login = createAsyncThunk(
+    'user/login',
+    async (payload: FormData, { fulfillWithValue, rejectWithValue }) =>
+        axiosInstance.post("auth/login", payload)
+        .then((res: any) => fulfillWithValue(res))
+        .catch((err: any) => rejectWithValue(err))
+
+)
+
 
 const initialState = {
     name: "",
     email: "",
-    token: ""
+    token: "",
+    status: 'idle',
+    error: ''
 }
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        login: (state, action: PayloadAction<{name: string, email: string, token: string}>) => {
-            state.name = action.payload.name
+    },
+    extraReducers: (builder) => {
+        builder.addCase(login.pending, (state, action) => {
+            state.status = 'loading'
+
+        }).addCase(login.fulfilled, (state, action) => {
             state.email = action.payload.email
+            state.name = action.payload.name
             state.token = action.payload.token
-        }
+            state.status = 'idle'
+        }).addCase(login.rejected, (state, action) => {
+            state.status = 'failed'
+            state.error = action.error.message!
+        })
     }
 })
 
-export const { login } = userSlice.actions
+export const selectStatus = (state: any) => state.user.status
+export const { } = userSlice.actions
 export default userSlice.reducer

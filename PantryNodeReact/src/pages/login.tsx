@@ -14,8 +14,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Copyright from '../Components/Copyright';
 
-import { useAppDispatch } from '../hooks'
-import { login } from '../redux-features/user';
+import { useAppDispatch, useAppSelector } from '../hooks'
+import { login, selectStatus } from '../redux-features/user';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 import { useState } from "react";
@@ -85,19 +86,23 @@ export default function Login() {
     }
 
     //After Successful login
-    let payload = {
-      name: "Kevin Buffardi",
-      email: "kb@gmail.com",
-      token: "tokengotfromapicall"
-    }
-    dispatch(login(payload));
+    // let payload = {
+    //   name: "Kevin Buffardi",
+    //   email: "kb@gmail.com",
+    //   token: "tokengotfromapicall"
+    // }
+    dispatch(login(data)).unwrap().then(res => {
+      navigate("/")
+
+    }).catch(err => {
+      console.log(err)
+    });
 
     // to do: redirect to success page after built
-    navigate("/")
   };
 
 
-
+  const loading = useAppSelector((state) => state.user.status)
   return (
 
     <Container component="main" maxWidth="xs">
@@ -159,6 +164,7 @@ export default function Login() {
             }}
           >
             Login
+            {loading === 'loading' && <CircularProgress />}
           </Button>
           <Grid container>
             <Grid item xs>
