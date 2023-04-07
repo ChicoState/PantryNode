@@ -1,7 +1,14 @@
 import React from "react";
 
-const stock = () => {
-  return <div>stock</div>;
+import { useAppSelector,useAppDispatch } from '../hooks'
+import { login } from '../redux-features/user';
+
+const Stock = () => {
+ 
+  return (
+    <div>
+      stock
+    </div>);
 };
 
-export default stock;
+export default Stock;

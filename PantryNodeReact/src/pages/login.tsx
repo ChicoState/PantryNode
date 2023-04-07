@@ -13,6 +13,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Copyright from '../Components/Copyright';
+
+import { useAppDispatch, useAppSelector } from '../hooks'
+import { login, selectStatus } from '../redux-features/user';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 import { useState } from "react";
 
 
@@ -42,9 +48,14 @@ export default function Login() {
 
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
 
     const emailValue = data.get("email") as string;
     const passwordValue = data.get("password") as string;
@@ -54,18 +65,18 @@ export default function Login() {
       setEmailError("Email is required");
       return;
     }
-  
+
     if (!/\S+@\S+\.\S+/.test(emailValue)) {
       setEmailError("Email is invalid");
       return;
     }
-    
+
     // password
     if (passwordValue.trim() === "") {
       setPasswordError("Password is required");
       return;
     }
-    if (passwordValue.length < 8){
+    if (passwordValue.length < 8) {
       setPasswordError("Password must be at least 8 characters long");
       return;
     }
@@ -74,89 +85,102 @@ export default function Login() {
       return;
     }
 
+    //After Successful login
+    // let payload = {
+    //   name: "Kevin Buffardi",
+    //   email: "kb@gmail.com",
+    //   token: "tokengotfromapicall"
+    // }
+    dispatch(login(data)).unwrap().then(res => {
+      navigate("/")
+
+    }).catch(err => {
+      console.log(err)
+    });
+
     // to do: redirect to success page after built
-    navigate("/")
   };
 
-  
 
+  const loading = useAppSelector((state) => state.user.status)
   return (
-    
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: '#8C2332' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
+
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: '#8C2332' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Login
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            value={email}
+            onChange={handleChange}
+            error={Boolean(emailError)}
+            helperText={emailError}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={handleChange}
+            error={Boolean(passwordError)}
+            helperText={passwordError}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={remember} onChange={handleRememberChange} color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, py: 2 }}
+            style={{
+              backgroundColor: "primary"
+            }}
+          >
             Login
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={email}
-              onChange={handleChange}
-              error={Boolean(emailError)}
-              helperText={emailError}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={handleChange}
-              error={Boolean(passwordError)}
-              helperText={passwordError}
-            />
-            <FormControlLabel
-              control={<Checkbox checked={remember} onChange={handleRememberChange} color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, py:2 }}
-              style={{
-                backgroundColor: "primary"
-              }}
-            >
-              Login
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
+            {loading === 'loading' && <CircularProgress />}
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
             </Grid>
-          </Box>
+            <Grid item>
+              <Link href="/signup" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
+      </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
   );
 }
