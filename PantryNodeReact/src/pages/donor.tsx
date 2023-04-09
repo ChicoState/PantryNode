@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Typography from '@mui/material/Typography';
 import { Button, Table, TableBody, TableHead, TableRow, TableContainer, Paper, TableCell, DialogTitle, TextField, DialogContent, Dialog, DialogActions } from '@mui/material';
 
 var Donor = () => {
@@ -62,9 +63,21 @@ var Donor = () => {
 
   return <div>
 
-    <Button variant="contained" color="primary" onClick={() => setShowModal(true)}>
-      Add Entry
-    </Button>
+    <div style={{ width: '100%', display: 'flex' }}>
+      <div style={{ flex: '1', textAlign: 'left' }}>
+
+        <Typography variant="h6" align="left" sx={{ color: "#8c2332" }}>
+          <h2> Donar List</h2>
+        </Typography>
+      </div>
+
+      <div style={{ display: 'flex', flex: '1', textAlign: 'right', flexDirection: 'column', justifyContent: 'center' }}>
+        <Button variant="contained" color="primary" onClick={() => setShowModal(true)} sx={{ marginLeft: 'auto', paddingRight: 2 }} >
+          Add Donar Entry
+        </Button>
+      </div>
+    </div>
+
 
     <Dialog open={showModal} onClose={() => setShowModal(false)}>
       <DialogTitle>Add New Entry</DialogTitle>
@@ -108,7 +121,7 @@ var Donor = () => {
       </DialogContent>
     </Dialog>
 
-    <TableContainer component={Paper} style={{ marginTop: '1rem' }}>
+    <TableContainer component={Paper} style={{ marginTop: '1rem', boxShadow: 'none' }}>
       <Table>
         <TableHead>
           <TableRow>
@@ -152,7 +165,7 @@ var Donor = () => {
         </TableBody>
       </Table>
     </TableContainer>
-  </div>;
+  </div >;
 };
 
 export default Donor;
