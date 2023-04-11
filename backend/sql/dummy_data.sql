@@ -5,8 +5,9 @@ INSERT INTO Storage_type (stor_type) VALUES
   ('Frozen');
 
 -- Insert test data for Person
+-- Password for user is password
 INSERT INTO Person (fname, lname, password, email, phone)
-VALUES ('John', 'Doe', 'password', 'johndoe@example.com', 1234567890);
+VALUES ('John', 'Doe', '$2a$10$p3igL0pzl1DyxOmMYu7qFOvnffCqn.X1xOkfeEEKOrFwJB5B9Kcsy', 'johndoe@example.com', 1234567890);
 
 -- Insert test data for Address
 INSERT INTO Address (person_id, addr_1, city, state, zip, country)
@@ -16,8 +17,9 @@ UPDATE Person SET pri_addr_id = (SELECT MAX(addr_id) FROM Address)
 WHERE email = 'johndoe@example.com';
 
 -- Insert test data for Person
+-- Password for user is password
 INSERT INTO Person (fname, lname, password, email, phone)
-VALUES ('Jane', 'Smith', 'password', 'janesmith@example.com', 1234567890);
+VALUES ('Jane', 'Smith', '$2a$10$p3igL0pzl1DyxOmMYu7qFOvnffCqn.X1xOkfeEEKOrFwJB5B9Kcsy', 'janesmith@example.com', 1234567890);
 
 -- Insert test data for Address
 INSERT INTO Address (person_id, addr_1, city, state, zip, country)
