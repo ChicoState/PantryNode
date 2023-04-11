@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { PayloadAction } from '@reduxjs/toolkit'
 import axiosInstance from '../util/axiosInstance'
 
 //Docs: https://redux-toolkit.js.org/api/createAsyncThunk
@@ -9,11 +8,10 @@ export const login = createAsyncThunk(
     'user/login',
     async (payload: FormData, { fulfillWithValue, rejectWithValue }) =>
         axiosInstance.post("auth/login", payload)
-        .then((res: any) => fulfillWithValue(res))
-        .catch((err: any) => rejectWithValue(err))
+            .then((res: any) => fulfillWithValue(res))
+            .catch((err: any) => rejectWithValue(err))
 
 )
-
 
 const initialState = {
     name: "",
