@@ -13,5 +13,4 @@ docs/
 README.md
 
 # Build files
-package-lock.json
 node_modules/

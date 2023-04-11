@@ -18,7 +18,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 var con_string = require('./config/keys').PostgresURI;
-
 const sequelize = new Sequelize(con_string)
 
 try {
