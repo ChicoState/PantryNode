@@ -9,7 +9,6 @@ initModels(sequelize);
 
 module.exports = function (passport) {
     passport.use(
-
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
             person.findOne({where : { email: email }})
                 .then(user => {
@@ -18,23 +17,23 @@ module.exports = function (passport) {
                         return done(null, false, { message: 'Username or password is incorrect' });
                     }
 
-                    bcrypt.compare(password, user.password, (err, isMatch) => {
-                        if (err) throw err;
+                    // TODO(#118): Properly compare with hashed password (not plaintext)
+                    // bcrypt.compare(password, user.password, (err, isMatch) => {
+                    if (password === user.password){
+                        // if (err) throw err;
 
-                        if (isMatch) {
-                            console.log("Login matched user");
-                            return done(null, user);
-                        }
-                        else {
-                            console.log("password is incorrect");
-                            return done(null, false, { message: 'Username or password is incorrect' });
-                        }
-
-                    });
+                        // if (isMatch) {
+                        console.log("Login matched user");
+                        return done(null, user);
+                    }
+                    else {
+                        console.log("user found, password is incorrect");
+                        return done(null, false, { message: 'Username or password is incorrect' });
+                    }
+                    // });
                 })
-                .catch(err => console.log(err));
+                .catch(err => console.log("error finding person:", err));
         })
-
     );
 
     passport.serializeUser(function (user, done) {

@@ -15,31 +15,32 @@ import Container from '@mui/material/Container';
 import Copyright from '../Components/Copyright';
 import axios from 'axios';
 
-//tis has an api request
 export default function Login() {
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+
+    // TODO(#119): Set use configuration / EnvVar for backend address.
+    axios.post('http://localhost:3001/login', {
       email: data.get('email'),
       password: data.get('password'),
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(response => {
+      // TODO(#118): Remove logs and handle success correctly.
+      console.log("login success");
+      console.log(response);
+    })
+    .catch(error => {
+      // TODO(#118): Remove logs and handle error correctly.
+      console.error("login error: " + error);
     });
-    axios.post('http://localhost:3000/login', {
-      name: 'Preston',
-    email: 'johndoe@example.com'
-}, {
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
-.then(response => {
-  console.log(response);
-})
-.catch(error => {
-  console.error(error);
-});
-    navigate("/")
+    // TODO(#118): Navigate to where post tells us to.
+    // navigate("/");
   };
 
   return (
@@ -69,6 +70,8 @@ export default function Login() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              // TODO(#118): Remove this value
+              value="johndoe@example.com"
               autoFocus
             />
             <TextField
@@ -80,6 +83,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              // TODO(#118): Remove this value
+              value="password"
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
