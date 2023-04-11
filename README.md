@@ -25,16 +25,18 @@ In this project, we have implemented food pantry management using a NodeJS-based
 
 > Back-End
 
-- MongoDB
 - Express JS
-- JavaScript
+- TypeScript
+- PostGres
+- Sequelize
+
 
 > Front-End
 
-- EJS
+- Material UI
 - CSS
-- BootStrap
-- jQuery
+- React
+- Axios
 
 ## Installation
 
