@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
+import AddIcon from '@mui/icons-material/Add';
 import { Button, Table, TableBody, TableHead, TableRow, TableContainer, Paper, TableCell, DialogTitle, TextField, DialogContent, Dialog, DialogActions } from '@mui/material';
 
 var Donor = () => {
@@ -21,11 +22,14 @@ var Donor = () => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [data, setData] = useState<Entry[]>(initialData);
+  const [emailError, setEmailError] = useState("");
+  const [isEmailError, setIsEmailError] = useState(false);
   const [newEntry, setNewEntry] = useState<Entry>({ name: '', email: '', location: '' });
   const [sortConfig, setSortConfig] = useState<SortConfig>({ key: null, direction: null });
 
   const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(data, "Forma data");
     setData([...data, newEntry]);
     setNewEntry({ name: '', email: '', location: '' });
     setShowModal(false);
@@ -33,6 +37,26 @@ var Donor = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
+    console.log(e.target.value, "test");
+  };
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
+    console.log(e.target.value, "email");
+    let emailValue = e.target.value;
+
+    if (emailValue.trim() === "") {
+      setEmailError("Email is required");
+      setIsEmailError(true);
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(emailValue)) {
+      setEmailError("Email is invalid");
+      setIsEmailError(true);
+      return;
+    }
+    setEmailError("");
+    setIsEmailError(false);
+
   };
 
   const onSort = (key: keyof Entry) => {
@@ -67,13 +91,13 @@ var Donor = () => {
       <div style={{ flex: '1', textAlign: 'left' }}>
 
         <Typography variant="h6" align="left" sx={{ color: "#8c2332" }}>
-          <h2> Donar List</h2>
+          <h2> Donor List</h2>
         </Typography>
       </div>
 
       <div style={{ display: 'flex', flex: '1', textAlign: 'right', flexDirection: 'column', justifyContent: 'center' }}>
         <Button variant="contained" color="primary" onClick={() => setShowModal(true)} sx={{ marginLeft: 'auto', paddingRight: 2 }} >
-          Add Donar Entry
+          <AddIcon />Add Donor
         </Button>
       </div>
     </div>
@@ -97,7 +121,10 @@ var Donor = () => {
             label="Email"
             name="email"
             value={newEntry.email}
-            onChange={handleChange}
+            autoComplete="email"
+            onChange={handleEmailChange}
+            error={Boolean(emailError)}
+            helperText={emailError}
             fullWidth
           />
           <TextField
@@ -113,7 +140,7 @@ var Donor = () => {
             <Button onClick={() => setShowModal(false)} color="primary">
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button type="submit" color="primary" disabled={isEmailError || newEntry.location == '' || newEntry.name == ''}>
               Add
             </Button>
           </DialogActions>
