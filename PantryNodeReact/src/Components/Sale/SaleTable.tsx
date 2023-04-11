@@ -1,36 +1,13 @@
-// import { Typography } from '@mui/material'
-// import React from 'react'
-
-// type categoryListType = {
-//     id: Number,
-//     name: string,
-//     image_url: string
-//   }
-  
-// interface SaleTableProps {
-//     category: categoryListType
-// }
-
-// const SaleTable = ({category}: SaleTableProps) => {
-//   return (
-//     <Typography variant="h6" align="center">
-//     {category.name}
-//   </Typography>
-//   )
-// }
-
-// export default SaleTable
-
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import React from 'react';
 
-type categoryListType = {
+interface categoryListType {
   id: number;
   name: string;
   image_url: string;
 };
 
-type productType = {
+interface productType {
   id: number;
   name: string;
   price: number;
@@ -73,4 +50,3 @@ const SaleTable = ({ category, products }: SaleTableProps) => {
 };
 
 export default SaleTable;
-
