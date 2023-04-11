@@ -36,6 +36,7 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
                         const currentDate = new Date().getTime();
                         const isExpiring = expiryDate >= currentDate;
                        if(isExpiring) return item;
+                       return null;
                     } ).map((item, index)=>{
                                             // to change date format 2023-05-04 => May 4, 2023
                     const formattedExpiringDate = new Intl.DateTimeFormat("en-US", {
@@ -68,6 +69,7 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
                             </div>
                         );
                     })
+
                 }
             </div>
             
@@ -81,6 +83,7 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
                     const currentDate = new Date().getTime();
                     const isExpired = expiryDate < currentDate;
                     if(isExpired) return item;
+                    return null;
                 }).map((item, index) =>
                 {
                     const formattedExpiredDate = new Intl.DateTimeFormat("en-US", {
