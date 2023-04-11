@@ -112,6 +112,7 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
                             </div>
                         );
                     }
+                    return null;
                 })}
             </div>
 
