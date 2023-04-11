@@ -69,7 +69,7 @@ export default function SignUp() {
         errors.password = "Password must be at least 8 characters long";
       } else if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
         errors.password =
-          "Password must contain at least one number and one special character";
+          "Password must contain at least one uppercase, one number and one special character";
       }
 
       // phoneNumber
