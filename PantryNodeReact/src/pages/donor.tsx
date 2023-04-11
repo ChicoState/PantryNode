@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Button, Table, TableBody, TableHead, TableRow, TableContainer, Paper, TableCell, DialogTitle, TextField, DialogContent, Dialog, DialogActions } from '@mui/material';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 var Donor = () => {
   interface Entry {
@@ -116,19 +118,19 @@ var Donor = () => {
             <TableCell onClick={() => onSort('name')}>
               <strong>Name</strong>
               {sortConfig && sortConfig.key === 'name' && (
-                sortConfig.direction === 'ascending' ? ' 🔼' : ' 🔽'
+                sortConfig.direction === 'ascending' ? <ArrowUpwardIcon sx={{ fontSize:12 }}/> : <ArrowDownwardIcon sx={{ fontSize:12 }}/>
               )}
             </TableCell>
             <TableCell onClick={() => onSort('email')}>
               <strong>Email</strong>
               {sortConfig && sortConfig.key === 'email' && (
-                sortConfig.direction === 'ascending' ? ' 🔼' : ' 🔽'
+                sortConfig.direction === 'ascending' ? <ArrowUpwardIcon sx={{ fontSize:12 }}/> : <ArrowDownwardIcon sx={{ fontSize:12 }}/>
               )}
             </TableCell>
             <TableCell onClick={() => onSort('location')}>
               <strong>Location</strong>
               {sortConfig && sortConfig.key === 'location' && (
-                sortConfig.direction === 'ascending' ? ' 🔼' : ' 🔽'
+                sortConfig.direction === 'ascending' ? <ArrowUpwardIcon sx={{ fontSize:12 }}/> : <ArrowDownwardIcon sx={{ fontSize:12 }}/>
               )}
             </TableCell>
             <TableCell>Donation</TableCell>

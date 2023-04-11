@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { PayloadAction } from '@reduxjs/toolkit'
+//import { PayloadAction } from '@reduxjs/toolkit'
 import axiosInstance from '../util/axiosInstance'
 
 //Docs: https://redux-toolkit.js.org/api/createAsyncThunk
@@ -45,5 +45,5 @@ export const userSlice = createSlice({
 })
 
 export const selectStatus = (state: any) => state.user.status
-export const { } = userSlice.actions
+export const userAction = userSlice.actions
 export default userSlice.reducer
