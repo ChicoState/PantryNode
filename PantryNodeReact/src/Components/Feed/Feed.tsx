@@ -29,19 +29,20 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
             {/* Expiring feed list section */}
             <div style={{ width: "50%" }}>
                 <Typography variant="h5" gutterBottom style={{ textAlign: "center" }}>Expiring Soon Items </Typography>
-                {sortedFeedList.map((item, index) => {
-                    const expiryDate = new Date(item.expiry_date).getTime();
-                    const currentDate = new Date().getTime();
-                    const isExpiring = expiryDate >= currentDate;
-                    
-                    // to change date format 2023-05-04 => May 4, 2023
+
+                {
+                    sortedFeedList.filter((item) => {
+                        const expiryDate = new Date(item.expiry_date).getTime();
+                        const currentDate = new Date().getTime();
+                        const isExpiring = expiryDate >= currentDate;
+                       if(isExpiring) return item;
+                    } ).map((item, index)=>{
+                                            // to change date format 2023-05-04 => May 4, 2023
                     const formattedExpiringDate = new Intl.DateTimeFormat("en-US", {
                         month: "short",
                         day: "numeric",
                         year: "numeric",
                       }).format(new Date(item.expiry_date));
-
-                    if(isExpiring){
                         return (
                             <div key={item.id} 
                                     style={{ 
@@ -50,7 +51,7 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
                                     justifyContent: "space-between", 
                                     alignItems: "center", 
                                     padding: "25px",
-                                    backgroundColor: isExpiring ? "#fff4b2" : "#eee8e8",
+                                    backgroundColor: "#fff4b2",
                                     margin: "10px",
                                     borderBottom: index !== sortedFeedList.length - 1 ? "1px solid #ccc" : "none" 
                                     }}>
@@ -66,26 +67,28 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
                                 </Typography>
                             </div>
                         );
-                    }
-                })}
+                    })
+                }
             </div>
             
             {/* Expired feed list section */}
             <div style={{ width: "50%" }}>
                 <Typography variant="h5" gutterBottom style={{ textAlign: "center" }}>Expired Items</Typography>
-                {sortedExpiredFeedList.map((item, index) => {
+
+                {
+                sortedExpiredFeedList.filter((item) => {
                     const expiryDate = new Date(item.expiry_date).getTime();
                     const currentDate = new Date().getTime();
                     const isExpired = expiryDate < currentDate;
-                    
-                    // to change date format 2023-05-04 => May 4, 2023
+                    if(isExpired) return item;
+                }).map((item, index) =>
+                {
                     const formattedExpiredDate = new Intl.DateTimeFormat("en-US", {
                         month: "short",
                         day: "numeric",
                         year: "numeric",
                       }).format(new Date(item.expiry_date));
 
-                    if (isExpired){
                         return (
                             <div key={item.id} 
                                     style={{ 
@@ -111,9 +114,8 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
                                 </Typography>
                             </div>
                         );
-                    }
-                    return null;
-                })}
+                }
+                )}
             </div>
 
         </div>
