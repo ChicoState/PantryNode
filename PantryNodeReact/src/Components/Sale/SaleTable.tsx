@@ -34,6 +34,7 @@ type productType = {
   id: number;
   name: string;
   price: number;
+  quantity: number;
 };
 
 interface SaleTableProps {
@@ -53,6 +54,7 @@ const SaleTable = ({ category, products }: SaleTableProps) => {
             <TableRow>
               <TableCell>Product Name</TableCell>
               <TableCell>Price</TableCell>
+              <TableCell>Quantity</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -60,6 +62,7 @@ const SaleTable = ({ category, products }: SaleTableProps) => {
               <TableRow key={product.id}>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
+                <TableCell>{product.quantity}</TableCell>
               </TableRow>
             ))}
           </TableBody>
