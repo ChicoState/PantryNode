@@ -88,7 +88,7 @@ $ docker-compose up
 
 > login using the credentials define in the docker-compose file
 
-> add a new server to the management console using db_sandbox as the host name/address field and the POSTGRES_PASSWORD value
+> add a new server to the management console using *database* as the host name/address field and the POSTGRES_PASSWORD value
 
 > Note that the default username for postgres is postgres
 
