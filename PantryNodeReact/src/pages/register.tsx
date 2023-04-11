@@ -13,6 +13,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Copyright from "../Components/Copyright";
+import IconButton from "@mui/material/IconButton";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
 import Success from "./success";
 import { useFormik } from "formik";
@@ -23,10 +26,12 @@ type RegisterFormInput = {
   phone?: string;
   email?: string;
   password?: string;
+  confirmPassword?: string;
 };
 
 export default function SignUp() {
   const [isRegistered, setIsRegistered] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -34,6 +39,7 @@ export default function SignUp() {
       phone: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
     validate: (values) => {
       const {
@@ -42,6 +48,7 @@ export default function SignUp() {
         phone: phoneNumberValue,
         firstName: firstNameValue,
         lastName: lastNameValue,
+        confirmPassword: confirmPasswordValue,
       } = values;
       const errors: RegisterFormInput = {};
 
@@ -72,6 +79,11 @@ export default function SignUp() {
           "Password must contain at least one uppercase, one number and one special character";
       }
 
+      //confirmPassword
+      if (passwordValue !== confirmPasswordValue) {
+        errors.confirmPassword = "Passwords do not match";
+      }
+
       // phoneNumber
       if (phoneNumberValue.trim() === "") {
         errors.phone = "Please enter your phone number";
@@ -91,6 +103,9 @@ export default function SignUp() {
       setIsRegistered(true);
     },
   });
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   if (isRegistered) {
     return <Success />;
@@ -192,7 +207,7 @@ export default function SignUp() {
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
@@ -204,6 +219,38 @@ export default function SignUp() {
                   helperText={
                     formik.touched.password ? formik.errors.password : ""
                   }
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton onClick={handleTogglePassword}>
+                        {showPassword ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
+                      </IconButton>
+                    ),
+                  }}
+                
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  type="password"
+                  autoComplete="new-password"
+                  value={formik.values.confirmPassword}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                  formik.touched.confirmPassword &&
+                  formik.errors?.confirmPassword !== undefined
+                }
+                helperText={
+                  formik.touched.confirmPassword ? formik.errors.confirmPassword : ""
+                }
                 />
               </Grid>
             </Grid>
