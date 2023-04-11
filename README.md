@@ -127,6 +127,3 @@ npx eslint .
 ## Contributing
 
 See the [Contributing](contributing.md) guide to contribute to the project!
-
-
-curl -d '{"email":"test@test.test", "password":"test123123"}' -H "Content-Type: application/json" -X POST http://localhost:3000/login
