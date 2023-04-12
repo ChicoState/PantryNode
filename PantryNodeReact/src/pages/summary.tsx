@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Button,
   Table,
   TableBody,
   TableHead,
@@ -18,20 +17,20 @@ var summary = () => {
     date: string;
   }
 
-  interface currentStockInterface  {
+  interface currentStockInterface {
     name: string;
     type: string;
     stockedDate: string;
     expiryDate: string;
   }
 
-  interface wasteManagementInterface  {
+  interface wasteManagementInterface {
     name: string;
     quantity: number;
     date: string;
   }
 
-  interface expiryInterface  {
+  interface expiryInterface {
     name: string;
     daysRemaining: number;
     date: string;
@@ -43,8 +42,18 @@ var summary = () => {
   ];
 
   const initialDataCurrentStock: currentStockInterface[] = [
-    { name: "John", type: "Food", stockedDate: "2021-10-10", expiryDate: "2021-10-10" },
-    { name: "Danny", type: "Food", stockedDate: "2021-10-10", expiryDate: "2021-10-10" },
+    {
+      name: "John",
+      type: "Food",
+      stockedDate: "2021-10-10",
+      expiryDate: "2021-10-10",
+    },
+    {
+      name: "Danny",
+      type: "Food",
+      stockedDate: "2021-10-10",
+      expiryDate: "2021-10-10",
+    },
   ];
 
   const initialDataWasteManagement: wasteManagementInterface[] = [
@@ -63,7 +72,8 @@ var summary = () => {
         <Grid item xs={10} md={6}>
           <strong>Purchases</strong>
           <br />
-          Total Checkout: 0 | Total Quantity Checked Out: 0{/*Purchase Table*/}
+          Total Checkout: 0 | Total Quantity Checked Out: 0
+          {/*Purchase Table*/}
           <TableContainer component={Paper} style={{ marginTop: "1rem" }}>
             <Table>
               <TableHead>
@@ -83,11 +93,22 @@ var summary = () => {
                   </TableCell>
                 </TableRow>
               </TableHead>
+              <TableBody>
+                {initialDataPurchase.map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.type}</TableCell>
+                    <TableCell>{row.quantity}</TableCell>
+                    <TableCell>{row.date}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </TableContainer>
         </Grid>
         <Grid item xs={10} md={6}>
-        <strong>Current Stock</strong>
+          <strong>Current Stock</strong>
           <br />
           Total Items in Stock: 0
           {/*Current Stock Table*/}
@@ -110,6 +131,18 @@ var summary = () => {
                   </TableCell>
                 </TableRow>
               </TableHead>
+              <TableBody>
+                {initialDataCurrentStock.map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.type}</TableCell>
+                    <TableCell>{row.stockedDate}</TableCell>
+
+                    <TableCell>{row.expiryDate}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </TableContainer>
         </Grid>
@@ -134,11 +167,21 @@ var summary = () => {
                   </TableCell>
                 </TableRow>
               </TableHead>
+              <TableBody>
+                {initialDataWasteManagement.map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.quantity}</TableCell>
+                    <TableCell>{row.date}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </TableContainer>
         </Grid>
         <Grid item xs={10} md={6}>
-        <strong>Soon to Expire</strong>
+          <strong>Soon to Expire</strong>
           <br />
           <br />
           {/*Soon to Expire Table*/}
@@ -158,6 +201,16 @@ var summary = () => {
                   </TableCell>
                 </TableRow>
               </TableHead>
+              <TableBody>
+                {initialDataExpiry.map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.daysRemaining}</TableCell>
+                    <TableCell>{row.date}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </TableContainer>
         </Grid>
