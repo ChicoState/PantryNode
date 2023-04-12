@@ -1,7 +1,7 @@
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //import { PayloadAction } from '@reduxjs/toolkit'
 import axiosInstance from "../util/axiosInstance";
-
 //Docs: https://redux-toolkit.js.org/api/createAsyncThunk
 //Docs: https://redux-toolkit.js.org/introduction/getting-started
 // First, create the thunk

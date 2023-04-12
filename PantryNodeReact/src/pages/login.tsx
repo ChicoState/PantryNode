@@ -13,21 +13,19 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Copyright from "../Components/Copyright";
-
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { login } from "../redux-features/user";
 import CircularProgress from "@mui/material/CircularProgress";
-
 import { useState } from "react";
 import { useFormik } from "formik";
 import axios from 'axios';
 
-import { AxiosResponse } from "axios";
 
-type LoginFormInput = {
+interface LoginFormInput {
   email?: string;
   password?: string;
 };
+
 export default function Login() {
   const [remember, setRemember] = useState(false);
 

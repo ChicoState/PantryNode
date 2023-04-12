@@ -49,6 +49,7 @@ const Donor = () => {
 
   const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(data, "Forma data");
     setData([...data, newEntry]);
     setNewEntry({ name: "", email: "", location: "" });
     setShowModal(false);
@@ -56,6 +57,26 @@ const Donor = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
+    console.log(e.target.value, "test");
+  };
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
+    console.log(e.target.value, "email");
+    let emailValue = e.target.value;
+
+    if (emailValue.trim() === "") {
+      setEmailError("Email is required");
+      setIsEmailError(true);
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(emailValue)) {
+      setEmailError("Email is invalid");
+      setIsEmailError(true);
+      return;
+    }
+    setEmailError("");
+    setIsEmailError(false);
+
   };
 
   const onSort = (key: keyof Entry) => {
@@ -202,6 +223,7 @@ const Donor = () => {
       </TableContainer>
     </div>
   );
+
 };
 
 export default Donor;
