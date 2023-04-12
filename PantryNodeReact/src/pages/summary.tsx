@@ -10,6 +10,7 @@ import {
   Grid,
 } from "@mui/material";
 import { Box } from "@mui/system";
+
 var summary = () => {
   interface purchaseInterface {
     name: string;
@@ -94,7 +95,7 @@ var summary = () => {
           <Box style={{maxHeight: '40vh', overflow: 'auto'}}>
             <TableContainer component={Paper} style={{ marginTop: "1rem" }}>
               <Table>
-                <TableHead>
+                <TableHead  sx={{ "& th": { color: "white", backgroundColor: "#8C2332" }}}>
                   <TableRow>
                     <TableCell>#</TableCell>
                     <TableCell>
@@ -113,7 +114,7 @@ var summary = () => {
                 </TableHead>
                 <TableBody>
                   {initialDataPurchase.map((row, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} style ={ index % 2? { background : "#fcfcfc" }:{ background : "white" }}>
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>{row.name}</TableCell>
                       <TableCell>{row.type}</TableCell>
@@ -134,7 +135,7 @@ var summary = () => {
           <Box style={{maxHeight: '40vh', overflow: 'auto'}}>
             <TableContainer component={Paper} style={{ marginTop: "1rem" }}>
               <Table>
-                <TableHead>
+                <TableHead  sx={{ "& th": { color: "white", backgroundColor: "#8C2332" }}}>
                   <TableRow>
                     <TableCell>#</TableCell>
                     <TableCell>
@@ -153,7 +154,7 @@ var summary = () => {
                 </TableHead>
                 <TableBody>
                   {initialDataCurrentStock.map((row, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} style ={ index % 2? { background : "#fcfcfc" }:{ background : "white" }}>
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>{row.name}</TableCell>
                       <TableCell>{row.type}</TableCell>
@@ -172,10 +173,9 @@ var summary = () => {
           Total Expired: {totalExpired}
           {/*Waste Management Table*/}
           <Box style={{maxHeight: '40vh', overflow: 'auto'}}>
-
             <TableContainer component={Paper} style={{ marginTop: "1rem" }}>
               <Table>
-                <TableHead>
+                <TableHead  sx={{ "& th": { color: "white", backgroundColor: "#8C2332" }}}>
                   <TableRow>
                     <TableCell>#</TableCell>
                     <TableCell>
@@ -191,7 +191,7 @@ var summary = () => {
                 </TableHead>
                 <TableBody>
                   {initialDataWasteManagement.map((row, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} style ={ index % 2? { background : "#fcfcfc" }:{ background : "white" }}>
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>{row.name}</TableCell>
                       <TableCell>{row.quantity}</TableCell>
@@ -211,7 +211,7 @@ var summary = () => {
           <Box style={{maxHeight: '40vh', overflow: 'auto'}}>
             <TableContainer component={Paper} style={{ marginTop: "1rem" }}>
               <Table>
-                <TableHead>
+                <TableHead  sx={{ "& th": { color: "white", backgroundColor: "#8C2332" }}}>
                   <TableRow>
                     <TableCell>#</TableCell>
                     <TableCell>
@@ -227,7 +227,7 @@ var summary = () => {
                 </TableHead>
                 <TableBody>
                   {initialDataExpiry.map((row, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} style ={ index % 2? { background : "#fcfcfc" }:{ background : "white" }}>
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>{row.name}</TableCell>
                       <TableCell>{row.daysRemaining}</TableCell>
