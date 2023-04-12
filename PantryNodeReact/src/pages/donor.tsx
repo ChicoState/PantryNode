@@ -142,7 +142,7 @@ var Donor = () => {
             <Button onClick={() => setShowModal(false)} color="primary">
               Cancel
             </Button>
-            <Button type="submit" color="primary" disabled={isEmailError || newEntry.location == '' || newEntry.name == ''}>
+            <Button type="submit" color="primary" disabled={isEmailError || newEntry.location === '' || newEntry.name === ''}>
               Add
             </Button>
           </DialogActions>
