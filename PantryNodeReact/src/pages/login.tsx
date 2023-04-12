@@ -20,6 +20,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { useState } from "react";
 import { useFormik } from "formik";
+import axios from 'axios';
 
 type LoginFormInput = {
   email?: string;
@@ -45,17 +46,30 @@ export default function Login() {
         email: formData.get("email"),
         password: formData.get("password"),
       });
-
-      dispatch(login(formData))
-        .unwrap()
-        .then((res) => {
-          navigate("/");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      // to do: redirect to success page after built
+  
+      axios.post('http://localhost:3001/login', {
+        email: formData.get('email'),
+        password: formData.get('password'),
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(response => {
+        console.log("login success");
+        console.log(response);
+        dispatch(login(formData))
+          .unwrap()
+          .then((res) => {
+            navigate("/");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch(error => {
+        console.error("login error: " + error);
+      });
     },
     validate: (values) => {
       const errors: LoginFormInput = {};
