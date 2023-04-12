@@ -1,18 +1,18 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
 // import FormControlLabel from '@mui/material/FormControlLabel';
 // import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Copyright from '../Components/Copyright';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Copyright from "../Components/Copyright";
 
 
 
@@ -22,10 +22,10 @@ export default function Login() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
     });
-    navigate("/")
+    navigate("/");
   };
 
   return (
@@ -35,12 +35,12 @@ export default function Login() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: '#8C2332' }}>
+          <Avatar sx={{ m: 1, bgcolor: "#8C2332" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

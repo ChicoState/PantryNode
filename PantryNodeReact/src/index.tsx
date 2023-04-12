@@ -11,8 +11,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-const rootElement = document.getElementById("root");
-const root = ReactDOM.createRoot(rootElement!);
+const rootElement = document.getElementById("root") as Element;
+const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
