@@ -12,8 +12,15 @@ var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
 var app = express();
 
-var con_string = require('./config/keys').PostgresURI;
 
+const cors = require('cors');
+// TODO(#119): Specifiy origin with an EnvVar.
+app.use(cors({
+    origin: '*'
+}));
+
+let keys = require('./config/keys');
+let con_string = keys.PostgresURI;
 const sequelize = new Sequelize(con_string)
 
 try {

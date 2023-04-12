@@ -337,12 +337,12 @@ router.post('/checkout', ensureAuthenticated, function(req, res) {
 
                             }
 
-                        });;
+                        });
                 }
 
 
             }
-        });;
+        });
 
 
 

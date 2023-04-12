@@ -1,25 +1,34 @@
 import React from "react";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import { Route, Routes } from "react-router-dom";
+import Donor from "./pages/donor";
+import Expiry from "./pages/expiry";
+import Index from "./pages/index";
+import Login from "./pages/login";
+import Sale from "./pages/sale";
+import Stock from "./pages/stock";
+import Summary from "./pages/summary";
+import Signup from "./pages/register";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
+  // this needs to be replaced with a check to see if the user is logged in from state
+  const isLoggedIn = true;
+
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Typography
-          variant="h3"
-          component="h1"
-          color="primary"
-          fontWeight="bold"
-          gutterBottom>
-          Pantry Node
-        </Typography>
-        <Typography variant="h5" component="p" color="gray">
-          A web application that allows you to manage your pantry.
-        </Typography>
-      </Box>
-    </Container>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+
+      {/* All the routes that are restricted and need authorization */}
+      <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+        <Route index element={<Index />} />
+        <Route path="/stock" element={<Stock />} />
+        <Route path="/summary" element={<Summary />} />
+        <Route path="donor" element={<Donor />} />
+        <Route path="sale" element={<Sale />} />
+        <Route path="expiry" element={<Expiry />} />
+      </Route>
+    </Routes>
   );
 }
 

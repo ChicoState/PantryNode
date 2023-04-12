@@ -8,7 +8,7 @@ export interface trans_itemsAttributes {
   trans_item_id: number;
   item_id: number;
   quantity: number;
-  expiration?: string;
+  expiration?: Date;
 }
 
 export type trans_itemsPk = "trans_item_id";
@@ -21,7 +21,7 @@ export class trans_items extends Model<trans_itemsAttributes, trans_itemsCreatio
   trans_item_id!: number;
   item_id!: number;
   quantity!: number;
-  expiration?: string;
+  expiration?: Date;
 
   // trans_items hasMany shelf_contents via trans_item_id
   shelf_contents!: shelf_contents[];
