@@ -16,24 +16,76 @@ const Sale = () => {
     { id: 7, name: "Stationary", image_url: "images/icons/pencil.png" },
   ];
 
-  const dummyData = [
-    {
-      item_id: 1,
-      quantity: 100,
-      expiration: "05-07-2023",
-      person_id: 5,
-      first_name: "sam1",
-      last_name: 'stewart',
-      name: 'apple',
-      price: 500
-    },
-    { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'apple', price: 500 },
-    { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'apple', price: 500 },
-    { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', price: 500 },
-    { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', price: 500 },
-    { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'apple', price: 500 },
-    { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'apple', price: 500 },
-  ];
+  const dummyData = {
+    "Fruits": [
+      {
+        item_id: 1,
+        quantity: 100,
+        expiration: "05-07-2023",
+        person_id: 5,
+        first_name: "sam1",
+        last_name: 'stewart',
+        name: 'apple',
+        price: 500
+      },
+      { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'apple', price: 500 },
+      { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'apple', price: 500 },
+      { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', price: 500 },
+      { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', price: 500 },
+      { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'apple', price: 500 },
+      { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'apple', price: 500 },
+    ],
+    "Vegetables": [
+
+      { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'carrot', price: 500 },
+      { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'carrot', price: 500 },
+      { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'carrot', price: 500 },
+      { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'carrot', price: 500 },
+      { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'carrot', price: 500 },
+      { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'carrot', price: 500 },
+    ],
+    "Dairy": [
+
+      { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'Amul', price: 500 },
+      { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'Amul', price: 500 },
+      { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'Amul', price: 500 },
+      { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'Amul', price: 500 },
+      { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'Amul', price: 500 },
+      { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'Amul', price: 500 },
+    ],
+    "Meat": [
+      { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'chicken', price: 500 },
+      { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'chicken', price: 500 },
+      { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'chicken', price: 500 },
+      { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'chicken', price: 500 },
+      { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'chicken', price: 500 },
+      { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'chicken', price: 500 },
+    ],
+    "Bakery": [
+      { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'bread', price: 500 },
+      { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'bread', price: 500 },
+      { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'bread', price: 500 },
+      { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'bread', price: 500 },
+      { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'bread', price: 500 },
+      { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'bread', price: 500 },
+    ],
+    "Ready": [
+      { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'burger', price: 500 },
+      { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'burger', price: 500 },
+      { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'burger', price: 500 },
+      { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'burger', price: 500 },
+      { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'burger', price: 500 },
+      { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'burger', price: 500 },
+    ],
+    "Stationary": [
+      { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'cereals', price: 500 },
+      { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'cereals', price: 500 },
+      { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'cereals', price: 500 },
+      { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'cereals', price: 500 },
+      { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'cereals', price: 500 },
+      { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'cereals', price: 500 },
+    ]
+  };
 
 
 
@@ -57,7 +109,7 @@ const Sale = () => {
           </Grid>
         ))}
       </Grid>
-      <SaleTable category={selectedCategory} categorydata={dummyData} />
+      <SaleTable category={selectedCategory} categorydata={dummyData[selectedCategory.name]} />
     </Box>
 
   )
