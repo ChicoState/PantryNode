@@ -34,6 +34,7 @@ services:
     container_name: node
     volumes:
        - ./backend:/app/backend
+       - /app/backend/node_modules
     platform: linux/amd64
     depends_on:
       - database
