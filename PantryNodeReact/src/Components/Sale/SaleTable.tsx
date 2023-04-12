@@ -1,18 +1,26 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
-import React from 'react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
+import React from "react";
 
 interface categoryListType {
   id: number;
   name: string;
   image_url: string;
-};
+}
 
 interface productType {
   id: number;
   name: string;
   price: number;
   quantity: number;
-};
+}
 
 interface SaleTableProps {
   category: categoryListType;

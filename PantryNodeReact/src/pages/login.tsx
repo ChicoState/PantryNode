@@ -20,6 +20,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import axios from 'axios';
 
+
 interface LoginFormInput {
   email?: string;
   password?: string;
@@ -36,16 +37,16 @@ export default function Login() {
       email: "",
       password: "",
     },
-    onSubmit: async (values) => {
+    onSubmit: async (values: { [x: string]: string | Blob }) => {
       const formData = new FormData();
-      for (let value in values) {
+      for (const value in values) {
         formData.append(value, values[value as keyof typeof values]);
       }
       console.log({
         email: formData.get("email"),
         password: formData.get("password"),
       });
-  
+
       axios.post('http://localhost:3001/login', {
         email: formData.get('email'),
         password: formData.get('password'),
@@ -107,8 +108,7 @@ export default function Login() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}
-      >
+        }}>
         <Avatar sx={{ m: 1, bgcolor: "#8C2332" }}>
           <LockOutlinedIcon />
         </Avatar>
@@ -166,8 +166,7 @@ export default function Login() {
             sx={{ mt: 3, mb: 2, py: 2 }}
             style={{
               backgroundColor: "primary",
-            }}
-          >
+            }}>
             Login
             {loading === "loading" && <CircularProgress />}
           </Button>
