@@ -9,6 +9,10 @@ import Stock from "./pages/stock";
 import Summary from "./pages/summary";
 import Signup from "./pages/register";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import PasswordReset from "./pages/passwordReset";
+import Code from "./pages/code";
+import Emailreset from "./pages/email_verify";
+import Passwordreset from "./pages/new_password";
 
 function App() {
   // this needs to be replaced with a check to see if the user is logged in from state
@@ -18,6 +22,10 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/code" element={<Code />} />
+      <Route path="/forgotPassword" element={<Emailreset />} />
+      <Route path="/newPassword" element={<Passwordreset />} />
+      <Route path="/passwordsuccessful" element={<PasswordReset />} />
 
       {/* All the routes that are restricted and need authorization */}
       <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
