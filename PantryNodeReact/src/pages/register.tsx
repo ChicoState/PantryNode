@@ -1,96 +1,110 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
 // import FormControlLabel from '@mui/material/FormControlLabel';
 // import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 // import { useNavigate } from "react-router-dom";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Copyright from '../Components/Copyright';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Copyright from "../Components/Copyright";
+import IconButton from "@mui/material/IconButton";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
 import Success from "./success";
+import { useFormik } from "formik";
 
+interface RegisterFormInput {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+};
 
 export default function SignUp() {
-
-  // validation
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [phoneNumberError, setPhoneNumberError] = useState("");
   const [isRegistered, setIsRegistered] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validate: (values) => {
+      const {
+        email: emailValue,
+        password: passwordValue,
+        phone: phoneNumberValue,
+        firstName: firstNameValue,
+        lastName: lastNameValue,
+        confirmPassword: confirmPasswordValue,
+      } = values;
+      const errors: RegisterFormInput = {};
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    if (name === "email") {
-      setEmail(value);
-      setEmailError("");
-    } else if (name === "password") {
-      setPassword(value);
-      setPasswordError("");
-    } else if (name === "phoneNumber") {
-      setPhoneNumber(value);
-      setPhoneNumberError("");
-    }
-  };
+      // firstName
+      if (firstNameValue.trim() === "") {
+        errors.firstName = "First name is required";
+      }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+      // lastName
+      if (lastNameValue.trim() === "") {
+        errors.lastName = "Last name is required";
+      }
 
-    const emailValue = data.get("email") as string;
-    const passwordValue = data.get("password") as string;
-    const phoneNumberValue = data.get("phoneNumber") as string;
+      // email
+      if (emailValue.trim() === "") {
+        errors.email = "Email is required";
+      } else if (!/\S+@\S+\.\S+/.test(emailValue)) {
+        errors.email = "Email is invalid";
+      }
 
-    // email
-    if (emailValue.trim() === "") {
-      setEmailError("Email is required");
-      return;
-    }
-    if (!/\S+@\S+\.\S+/.test(emailValue)) {
-      setEmailError("Email is invalid");
-      return;
-    }
+      // password
+      if (passwordValue.trim() === "") {
+        errors.password = "Password is required";
+      } else if (passwordValue.length < 8) {
+        errors.password = "Password must be at least 8 characters long";
+      } else if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
+        errors.password =
+          "Password must contain at least one uppercase, one number and one special character";
+      }
 
-    // password
-    if (passwordValue.trim() === "") {
-      setPasswordError("Password is required");
-      return;
-    }
-    if (passwordValue.length < 8) {
-      setPasswordError("Password must be at least 8 characters long");
-      return;
-    }
-    if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
-      setPasswordError("Password must contain at least one number and one special character");
-      return;
-    }
+      //confirmPassword
+      if (passwordValue !== confirmPasswordValue) {
+        errors.confirmPassword = "Passwords do not match";
+      }
 
-    // phoneNumber
-    if (phoneNumberValue.trim() === "") {
-      setPhoneNumberError("Please enter your phone number");
-      return;
-    }
-    if (!/^[0-9]+$/.test(phoneNumberValue)) {
-      setPhoneNumberError("Please enter a valid phone number");
-      return;
-    }
-    if (phoneNumberValue.length !== 10) {
-      setPhoneNumberError("Phone number must be 10 Digits");
-      return;
-    }
-
-    // to do: redirect to success page after built
-    // navigate("/")
-    setIsRegistered(true);
+      // phoneNumber
+      if (phoneNumberValue.trim() === "") {
+        errors.phone = "Please enter your phone number";
+      } else if (!/^[0-9]+$/.test(phoneNumberValue)) {
+        errors.phone = "Please enter a valid phone number";
+      } else if (phoneNumberValue.length !== 10) {
+        errors.phone = "Phone number must be 10 Digits";
+      }
+      return errors;
+    },
+    onSubmit: (values) => {
+      const data = new FormData();
+      for (let value in values) {
+        data.append(value, values[value as keyof typeof values]);
+      }
+      // navigate("/")
+      setIsRegistered(true);
+    },
+  });
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
   };
 
   if (isRegistered) {
@@ -102,67 +116,89 @@ export default function SignUp() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: '#8C2332' }}>
+          <Avatar sx={{ m: 1, bgcolor: "#8C2332" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={6} >
+              <Grid item xs={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="First Name"
+                  name="firstName"
                   required
                   fullWidth
-                  id="FirstName"
-                  label="FirstName"
-                  autoFocus
+                  label="First Name"
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.firstName &&
+                    formik.errors?.firstName !== undefined
+                  }
+                  helperText={
+                    formik.touched.firstName ? formik.errors.firstName : ""
+                  }
                 />
               </Grid>
-              <Grid item xs={6} >
+              <Grid item xs={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="Last Name"
+                  name="lastName"
                   required
                   fullWidth
-                  id="LastName"
-                  label="LastName"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} >
-                <TextField
-                  required
-                  fullWidth
-                  id="phoneNumber"
-                  label="Phone Number"
-                  name="phoneNumber"
-                  autoComplete="phone-number"
-                  value={phoneNumber}
-                  onChange={handleChange}
-                  error={Boolean(phoneNumberError)}
-                  helperText={phoneNumberError}
+                  label="Last Name"
+                  value={formik.values.lastName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.lastName &&
+                    formik.errors.lastName !== undefined
+                  }
+                  helperText={
+                    formik.touched.lastName
+                      ? formik.errors.lastName
+                      : formik.errors.lastName
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="email"
+                  label="Phone Number"
+                  name="phone"
+                  autoComplete="phone-number"
+                  value={formik.values.phone}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.phone && formik.errors?.phone !== undefined
+                  }
+                  helperText={formik.touched.phone ? formik.errors.phone : ""}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  value={email}
-                  onChange={handleChange}
-                  error={Boolean(emailError)}
-                  helperText={emailError}
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.email && formik.errors?.email !== undefined
+                  }
+                  helperText={formik.touched.email ? formik.errors.email : ""}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -171,25 +207,61 @@ export default function SignUp() {
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
-                  id="password"
+                  type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
-                  value={password}
-                  onChange={handleChange}
-                  error={Boolean(passwordError)}
-                  helperText={passwordError}
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.password &&
+                    formik.errors?.password !== undefined
+                  }
+                  helperText={
+                    formik.touched.password ? formik.errors.password : ""
+                  }
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton onClick={handleTogglePassword}>
+                        {showPassword ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
+                      </IconButton>
+                    ),
+                  }}
+                
                 />
               </Grid>
-
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  type="password"
+                  autoComplete="new-password"
+                  value={formik.values.confirmPassword}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                  formik.touched.confirmPassword &&
+                  formik.errors?.confirmPassword !== undefined
+                }
+                helperText={
+                  formik.touched.confirmPassword ? formik.errors.confirmPassword : ""
+                }
+                />
+              </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              disabled={!(formik.dirty && formik.isValid)}
               sx={{ mt: 3, mb: 2, py: 2 }}
-
               style={{
-                backgroundColor: "primary"
+                backgroundColor: "primary",
               }}
             >
               Sign Up
@@ -207,6 +279,4 @@ export default function SignUp() {
       </Container>
     );
   }
-
-
 }

@@ -6,6 +6,27 @@ import SaleTable from "../Components/Sale/SaleTable";
 
 const Sale = () => {
 
+  const products = [
+    {
+      id: 1,
+      name: "Product 1",
+      price: 10.99,
+      quantity: 10,
+    },
+    {
+      id: 2,
+      name: "Product 2",
+      price: 19.99,
+      quantity: 5,
+    },
+    {
+      id: 3,
+      name: "Product 3",
+      price: 5.99,
+      quantity: 2,
+    },
+  ];
+
   const categoryList = [
     { id: 1, name: "Fruits", image_url: "/images/icons/fruit.png" },
     { id: 2, name: "Vegetables", image_url: "images/icons/vege.png" },
@@ -37,7 +58,7 @@ const Sale = () => {
         ))}
       </Grid>
 
-      <SaleTable category={selectedCategory} />
+      <SaleTable category={selectedCategory} products={products}/>
     </Box>
 
   )

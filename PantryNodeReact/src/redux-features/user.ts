@@ -43,5 +43,5 @@ export const userSlice = createSlice({
 })
 
 export const selectStatus = (state: any) => state.user.status
-export const { } = userSlice.actions
+export const userAction = userSlice.actions
 export default userSlice.reducer

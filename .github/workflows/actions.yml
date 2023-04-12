@@ -14,8 +14,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm run build
+      - run: |
+          cd backend
+          npm ci
+      - run: |
+          cd backend
+          npm run build
   frontend:
     runs-on: ubuntu-latest
     steps:
