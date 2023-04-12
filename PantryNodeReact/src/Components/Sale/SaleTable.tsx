@@ -7,19 +7,23 @@ interface categoryListType {
   image_url: string;
 };
 
-interface productType {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
+interface categorydata {
+  item_id: number,
+  quantity: number,
+  person_id: number,
+  price: number,
+  expiration: string,
+  first_name: string,
+  last_name: string,
+  name: string,
 };
 
 interface SaleTableProps {
   category: categoryListType;
-  products: productType[];
+  categorydata: categorydata[];
 }
 
-const SaleTable = ({ category, products }: SaleTableProps) => {
+const SaleTable = ({ category, categorydata }: SaleTableProps) => {
   return (
     <>
       <Typography variant="h6" align="center">
@@ -35,8 +39,8 @@ const SaleTable = ({ category, products }: SaleTableProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.map((product) => (
-              <TableRow key={product.id}>
+            {categorydata.map((product) => (
+              <TableRow >
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
                 <TableCell>{product.quantity}</TableCell>
