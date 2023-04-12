@@ -5,20 +5,18 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 // import FormControlLabel from '@mui/material/FormControlLabel';
 // import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 //import { useNavigate } from "react-router-dom";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Copyright from '../Components/Copyright';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Copyright from "../Components/Copyright";
 import { useState } from "react";
 import Success from "./success";
 
-
 export default function SignUp() {
-
   // validation
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -70,7 +68,9 @@ export default function SignUp() {
       return;
     }
     if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
-      setPasswordError("Password must contain at least one number and one special character");
+      setPasswordError(
+        "Password must contain at least one number and one special character"
+      );
       return;
     }
 
@@ -105,8 +105,7 @@ export default function SignUp() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Avatar sx={{ m: 1, bgcolor: "#8C2332" }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -115,7 +114,7 @@ export default function SignUp() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={6} >
+              <Grid item xs={6}>
                 <TextField
                   autoComplete="given-name"
                   name="First Name"
@@ -126,7 +125,7 @@ export default function SignUp() {
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={6} >
+              <Grid item xs={6}>
                 <TextField
                   autoComplete="given-name"
                   name="Last Name"
@@ -137,7 +136,7 @@ export default function SignUp() {
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -180,18 +179,15 @@ export default function SignUp() {
                   helperText={passwordError}
                 />
               </Grid>
-
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, py: 2 }}
-
               style={{
-                backgroundColor: "primary"
-              }}
-            >
+                backgroundColor: "primary",
+              }}>
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
@@ -207,6 +203,4 @@ export default function SignUp() {
       </Container>
     );
   }
-
-
 }

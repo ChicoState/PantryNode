@@ -1,11 +1,10 @@
 import React from "react";
-import { Box, Button, Grid } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import { Box, Button, Grid } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import SaleTable from "../Components/Sale/SaleTable";
 
 const Sale = () => {
-
   const products = [
     {
       id: 1,
@@ -37,14 +36,37 @@ const Sale = () => {
     { id: 7, name: "Stationary", image_url: "images/icons/pencil.png" },
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState(categoryList[0])
+  const [selectedCategory, setSelectedCategory] = useState(categoryList[0]);
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Grid container columns={categoryList.length} justifyContent={"space-evenly"} flexWrap={"wrap"} gap={2} marginBottom={5}>
+    <Box sx={{ width: "100%" }}>
+      <Grid
+        container
+        columns={categoryList.length}
+        justifyContent={"space-evenly"}
+        flexWrap={"wrap"}
+        gap={2}
+        marginBottom={5}>
         {categoryList.map((category) => (
           <Grid key={category.id} item width={"150px"}>
-            <Button key={category.id} onClick={() => setSelectedCategory(category)} sx={{ display: "flex", flexDirection: "column", gap: 2, width: "100%", backgroundColor: selectedCategory.id === category.id ? "#f0e1e3" : "transparent", color: "#8c2332", padding: 2, paddingInline: 4, borderRadius: "30px", "&:hover": { backgroundColor: "#f0e1e3", cursor: "pointer", } }} >
+            <Button
+              key={category.id}
+              onClick={() => setSelectedCategory(category)}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                width: "100%",
+                backgroundColor:
+                  selectedCategory.id === category.id
+                    ? "#f0e1e3"
+                    : "transparent",
+                color: "#8c2332",
+                padding: 2,
+                paddingInline: 4,
+                borderRadius: "30px",
+                "&:hover": { backgroundColor: "#f0e1e3", cursor: "pointer" },
+              }}>
               <img
                 src={category.image_url}
                 alt={category.name}
@@ -58,10 +80,9 @@ const Sale = () => {
         ))}
       </Grid>
 
-      <SaleTable category={selectedCategory} products={products}/>
+      <SaleTable category={selectedCategory} products={products} />
     </Box>
-
-  )
+  );
 };
 
 export default Sale;

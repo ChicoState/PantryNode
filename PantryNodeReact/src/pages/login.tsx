@@ -21,6 +21,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 import { useFormik } from "formik";
 
+import { AxiosResponse } from "axios";
+
 type LoginFormInput = {
   email?: string;
   password?: string;
@@ -36,9 +38,9 @@ export default function Login() {
       email: "",
       password: "",
     },
-    onSubmit: async (values) => {
+    onSubmit: async (values: { [x: string]: string | Blob }) => {
       const formData = new FormData();
-      for (let value in values) {
+      for (const value in values) {
         formData.append(value, values[value as keyof typeof values]);
       }
       console.log({
@@ -48,10 +50,11 @@ export default function Login() {
 
       dispatch(login(formData))
         .unwrap()
-        .then((res) => {
+        .then((res: AxiosResponse) => {
+          console.log(res);
           navigate("/");
         })
-        .catch((err) => {
+        .catch((err: AxiosResponse) => {
           console.log(err);
         });
 
@@ -94,8 +97,7 @@ export default function Login() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}
-      >
+        }}>
         <Avatar sx={{ m: 1, bgcolor: "#8C2332" }}>
           <LockOutlinedIcon />
         </Avatar>
@@ -153,8 +155,7 @@ export default function Login() {
             sx={{ mt: 3, mb: 2, py: 2 }}
             style={{
               backgroundColor: "primary",
-            }}
-          >
+            }}>
             Login
             {loading === "loading" && <CircularProgress />}
           </Button>

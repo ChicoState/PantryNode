@@ -11,7 +11,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { store } from "./store";
-import { Provider } from 'react-redux'
+import { Provider } from "react-redux";
 const rootElement = document.getElementById("root") as Element;
 const root = ReactDOM.createRoot(rootElement);
 
