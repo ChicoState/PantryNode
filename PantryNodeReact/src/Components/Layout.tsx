@@ -4,10 +4,10 @@ import Navigation from "./Navigation/index";
 
 const Layout = ({ children }: React.PropsWithChildren) => {
   return (
-    <Box sx={{ display: "flex", maxWidth: "1200px" }}>
+    <Box sx={{ display: "flex", maxWidth: "1920px" }}>
       <Navigation />
       <Box
-        component="main"
+        // component="main"
         sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}>
         {children}
       </Box>
