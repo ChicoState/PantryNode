@@ -17,13 +17,22 @@ const Sale = () => {
   ];
 
   const dummyData = [
-    { item_id: 1, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam1", last_name: 'stewart', name: 'apple', size: 'L' },
-    { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'apple', size: 'L' },
-    { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'apple', size: 'L' },
-    { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', size: 'L' },
-    { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', size: 'L' },
-    { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'apple', size: 'L' },
-    { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'apple', size: 'L' },
+    {
+      item_id: 1,
+      quantity: 100,
+      expiration: "05-07-2023",
+      person_id: 5,
+      first_name: "sam1",
+      last_name: 'stewart',
+      name: 'apple',
+      price: 500
+    },
+    { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'apple', price: 500 },
+    { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'apple', price: 500 },
+    { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', price: 500 },
+    { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', price: 500 },
+    { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'apple', price: 500 },
+    { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'apple', price: 500 },
   ];
 
 
