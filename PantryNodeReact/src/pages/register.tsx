@@ -20,7 +20,7 @@ import { useState } from "react";
 import Success from "./success";
 import { useFormik } from "formik";
 
-type RegisterFormInput = {
+interface RegisterFormInput {
   firstName?: string;
   lastName?: string;
   phone?: string;
