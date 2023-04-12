@@ -6,27 +6,6 @@ import SaleTable from "../Components/Sale/SaleTable";
 
 const Sale = () => {
 
-  const products = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 10.99,
-      quantity: 10,
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 19.99,
-      quantity: 5,
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      price: 5.99,
-      quantity: 2,
-    },
-  ];
-
   const categoryList = [
     { id: 1, name: "Fruits", image_url: "/images/icons/fruit.png" },
     { id: 2, name: "Vegetables", image_url: "images/icons/vege.png" },
@@ -36,6 +15,18 @@ const Sale = () => {
     { id: 6, name: "Ready", image_url: "images/icons/ready.png" },
     { id: 7, name: "Stationary", image_url: "images/icons/pencil.png" },
   ];
+
+  const dummyData = [
+    { item_id: 1, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam1", last_name: 'stewart', name: 'apple', size: 'L' },
+    { item_id: 2, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam2", last_name: 'stewart', name: 'apple', size: 'L' },
+    { item_id: 3, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam3", last_name: 'stewart', name: 'apple', size: 'L' },
+    { item_id: 4, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', size: 'L' },
+    { item_id: 5, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam4", last_name: 'stewart', name: 'apple', size: 'L' },
+    { item_id: 6, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam54", last_name: 'stewart', name: 'apple', size: 'L' },
+    { item_id: 7, quantity: 100, expiration: "05-07-2023", person_id: 5, first_name: "sam5", last_name: 'stewart', name: 'apple', size: 'L' },
+  ];
+
+
 
   const [selectedCategory, setSelectedCategory] = useState(categoryList[0])
 
@@ -57,8 +48,7 @@ const Sale = () => {
           </Grid>
         ))}
       </Grid>
-
-      <SaleTable category={selectedCategory} products={products}/>
+      <SaleTable category={selectedCategory} categorydata={dummyData} />
     </Box>
 
   )
