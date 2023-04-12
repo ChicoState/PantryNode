@@ -37,23 +37,13 @@ var summary = () => {
   }
 
   const initialDataPurchase: purchaseInterface[] = [
-    { name: "John", type: "Food", quantity: 1, date: "2021-10-10" },
+    { name: "John", type: "Food", quantity: 3, date: "2021-10-10" },
     { name: "Danny", type: "Food", quantity: 1, date: "2021-10-10" },
   ];
 
   const initialDataCurrentStock: currentStockInterface[] = [
-    {
-      name: "John",
-      type: "Food",
-      stockedDate: "2021-10-10",
-      expiryDate: "2021-10-10",
-    },
-    {
-      name: "Danny",
-      type: "Food",
-      stockedDate: "2021-10-10",
-      expiryDate: "2021-10-10",
-    },
+    { name: "John", type: "Food", stockedDate: "2021-10-10", expiryDate: "2021-10-10" }, 
+    { name: "Danny", type: "Food", stockedDate: "2021-10-10", expiryDate: "2021-10-10" },
   ];
 
   const initialDataWasteManagement: wasteManagementInterface[] = [
@@ -66,13 +56,23 @@ var summary = () => {
     { name: "Danny", daysRemaining: 1, date: "2021-10-10" },
   ];
 
+  
+  var purchaseTotal = initialDataCurrentStock.length;
+  //Get sum of all quantities in purchases
+  var purchaseQuantityTotal = initialDataPurchase.reduce(
+    (acc, cur) => acc + cur.quantity, 
+    0
+  );
+  var currentStockTotal = initialDataCurrentStock.length;
+  var totalExpired = initialDataWasteManagement.length;
+
   return (
     <div>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={10} md={6}>
           <strong>Purchases</strong>
           <br />
-          Total Checkout: 0 | Total Quantity Checked Out: 0
+          Total Checkout: {purchaseTotal} | Total Quantity Checked Out: {purchaseQuantityTotal}
           {/*Purchase Table*/}
           <TableContainer component={Paper} style={{ marginTop: "1rem" }}>
             <Table>
@@ -110,7 +110,7 @@ var summary = () => {
         <Grid item xs={10} md={6}>
           <strong>Current Stock</strong>
           <br />
-          Total Items in Stock: 0
+          Total Items in Stock: {currentStockTotal}
           {/*Current Stock Table*/}
           <TableContainer component={Paper} style={{ marginTop: "1rem" }}>
             <Table>
@@ -149,7 +149,7 @@ var summary = () => {
         <Grid item xs={10} md={6}>
           <strong>Waste Management</strong>
           <br />
-          Total Expired: 0
+          Total Expired: {totalExpired}
           {/*Waste Management Table*/}
           <TableContainer component={Paper} style={{ marginTop: "1rem" }}>
             <Table>
