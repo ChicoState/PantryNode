@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import {
   Table,
   TableBody,
@@ -7,7 +9,6 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React from "react";
 
 interface categoryListType {
   id: number;
@@ -47,8 +48,8 @@ const SaleTable = ({ category, categorydata }: SaleTableProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {categorydata.map((product, idx) => (
-              <TableRow key={idx}>
+            {categorydata.map((product) => (
+              <TableRow key={product.item_id}>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
                 <TableCell>{product.quantity}</TableCell>

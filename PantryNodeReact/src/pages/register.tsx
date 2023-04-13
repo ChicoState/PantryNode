@@ -27,7 +27,7 @@ interface RegisterFormInput {
   email?: string;
   password?: string;
   confirmPassword?: string;
-};
+}
 
 export default function SignUp() {
   const [isRegistered, setIsRegistered] = useState(false);
@@ -96,7 +96,7 @@ export default function SignUp() {
     },
     onSubmit: (values) => {
       const data = new FormData();
-      for (let value in values) {
+      for (const value in values) {
         data.append(value, values[value as keyof typeof values]);
       }
       // navigate("/")
@@ -119,8 +119,7 @@ export default function SignUp() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Avatar sx={{ m: 1, bgcolor: "#8C2332" }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -230,7 +229,6 @@ export default function SignUp() {
                       </IconButton>
                     ),
                   }}
-                
                 />
               </Grid>
               <Grid item xs={12}>
@@ -245,12 +243,14 @@ export default function SignUp() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={
-                  formik.touched.confirmPassword &&
-                  formik.errors?.confirmPassword !== undefined
-                }
-                helperText={
-                  formik.touched.confirmPassword ? formik.errors.confirmPassword : ""
-                }
+                    formik.touched.confirmPassword &&
+                    formik.errors?.confirmPassword !== undefined
+                  }
+                  helperText={
+                    formik.touched.confirmPassword
+                      ? formik.errors.confirmPassword
+                      : ""
+                  }
                 />
               </Grid>
             </Grid>
@@ -262,8 +262,7 @@ export default function SignUp() {
               sx={{ mt: 3, mb: 2, py: 2 }}
               style={{
                 backgroundColor: "primary",
-              }}
-            >
+              }}>
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">

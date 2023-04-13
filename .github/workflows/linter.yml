@@ -11,11 +11,17 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup node
         uses: actions/setup-node@v3
-      - name: Install dependencies
+      - name: Install lint dependencies
         run: |
           cd backend
-          npm init @eslint/config
-      - name: Install typescript and eslint
-        run: npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
-      - name: Lint it
-        run: npx eslint .
+          npm ci
+          cd ../PantryNodeReact
+          npm ci
+      - name: Lint backend
+        run: |
+          cd backend
+          npm run lint
+      - name: Lint frontend
+        run: |
+          cd PantryNodeReact
+          npm run lint
