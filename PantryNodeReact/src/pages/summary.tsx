@@ -15,24 +15,31 @@ import { Box } from "@mui/system";
 import  SummaryBarChart from "../Components/Summary/BarChart";
 
 const Summary = () => {
-  const [alignment, setAlignment] = useState('web');
-  const [activeComponent, setActiveComponent] = useState<string>('tables');
-  const [tableVisibility, setTableVisibility] = useState<boolean>(true);
-  const [chartVisibility, setChartVisibility] = useState<boolean>(false);
+  const [alignment, setAlignment] = useState('web'); //Used for the purpose of MUI toggle button 
+  const [activeComponent, setActiveComponent] = useState<string>('tables'); 
+  const [tableVisibility, setTableVisibility] = useState<boolean>(true); //based on boolean data visibility changes, Tables have default visibility
+  const [chartVisibility, setChartVisibility] = useState<boolean>(false); //based on boolean data visibility changes,Chart is initially not visible
 
+
+ 
   const handleAlignmentChange = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string,
   ) => {
     setAlignment(newAlignment);
-  };
+  }; 
 
+ /**
+   * Sets tables as active component and makes the tables visible
+  */
   function handleTablesClick() {
     setActiveComponent('tables');
     setTableVisibility(true);
     setChartVisibility(false);
   }
-  
+  /**
+   * Sets tables as active component and makes the chart visible
+  */
   function handleChartClick() {
     setActiveComponent('chart');
     setTableVisibility(false);
@@ -132,7 +139,7 @@ const Summary = () => {
       <ToggleButton value="chart" onClick={handleChartClick}>Chart</ToggleButton>
 
     </ToggleButtonGroup>
-    {tableVisibility && (
+    {tableVisibility && ( // if tableVisibility state is set true, the following tables will be visible.
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={10} md={6}>
           <strong>Purchases</strong>
@@ -288,7 +295,9 @@ const Summary = () => {
         </Grid>
       </Grid>
     )}
-      {chartVisibility && (
+
+     
+      {chartVisibility && ( // if chartVisiblity state is set true, the following SummaryChart will be visible.
         <div>
           <strong>Visualized Data</strong>
           {/* Import Bar Chart */}
