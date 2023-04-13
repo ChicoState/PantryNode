@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,11 +8,37 @@ import {
   Paper,
   TableCell,
   Grid,
+  ToggleButton,
+  ToggleButtonGroup 
 } from "@mui/material";
 import { Box } from "@mui/system";
 import  SummaryBarChart from "../Components/Summary/BarChart";
 
-var summary = () => {
+const Summary = () => {
+  const [alignment, setAlignment] = useState('web');
+  const [activeComponent, setActiveComponent] = useState<string>('tables');
+  const [tableVisibility, setTableVisibility] = useState<boolean>(true);
+  const [chartVisibility, setChartVisibility] = useState<boolean>(false);
+
+  const handleAlignmentChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string,
+  ) => {
+    setAlignment(newAlignment);
+  };
+
+  function handleTablesClick() {
+    setActiveComponent('tables');
+    setTableVisibility(true);
+    setChartVisibility(false);
+  }
+  
+  function handleChartClick() {
+    setActiveComponent('chart');
+    setTableVisibility(false);
+    setChartVisibility(true);
+  }
+
   interface purchaseInterface {
     name: string;
     type: string;
@@ -94,6 +120,19 @@ var summary = () => {
 
   return (
     <div>
+
+  <ToggleButtonGroup
+      color="primary"
+      value={alignment}
+      exclusive
+      onChange={handleAlignmentChange}
+      aria-label="Platform"
+    >
+      <ToggleButton value="tables" onClick={handleTablesClick}>Tables</ToggleButton>
+      <ToggleButton value="chart" onClick={handleChartClick}>Chart</ToggleButton>
+
+    </ToggleButtonGroup>
+    {tableVisibility && (
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={10} md={6}>
           <strong>Purchases</strong>
@@ -248,12 +287,16 @@ var summary = () => {
           </Box>
         </Grid>
       </Grid>
-
-      <strong>Visualized Data</strong>
-      {/* Import Bar Chart */}
-      <SummaryBarChart data={data}/>
+    )}
+      {chartVisibility && (
+        <div>
+          <strong>Visualized Data</strong>
+          {/* Import Bar Chart */}
+           <SummaryBarChart data={data}/>
+       </div>
+      )}
     </div>
   );
 };
 
-export default summary;
+export default Summary;
