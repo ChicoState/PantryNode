@@ -10,6 +10,7 @@ import {
   Grid,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import  SummaryBarChart from "../Components/Summary/BarChart";
 
 var summary = () => {
   interface purchaseInterface {
@@ -75,6 +76,13 @@ var summary = () => {
 
   ];
   
+  const data = [
+    { name: 'Product A', value: 20 },
+    { name: 'Product B', value: 30 },
+    { name: 'Product C', value: 50 },
+    { name: 'Product D', value: 10 },
+  ];
+
   var purchaseTotal = initialDataCurrentStock.length;
   //Get sum of all quantities in purchases
   var purchaseQuantityTotal = initialDataPurchase.reduce(
@@ -240,6 +248,10 @@ var summary = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <strong>Visualized Data</strong>
+      {/* Import Bar Chart */}
+      <SummaryBarChart data={data}/>
     </div>
   );
 };
