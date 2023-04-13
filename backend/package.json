@@ -5,10 +5,10 @@
   "scripts": {
     "start": "npx ts-node bin/www",
     "build": "tsc -p .",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --fix --ext .ts,.js ."
   },
   "dependencies": {
-   
     "@types/passport": "^1.0.12",
     "axios": "^1.3.4",
     "bcrypt": "^5.0.0",
