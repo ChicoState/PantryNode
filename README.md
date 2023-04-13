@@ -70,10 +70,16 @@ PGADMIN_PASSWORD=Update Password
 $ docker-compose up
 ```
 
-> Browser
+> Browser for React
 
 ```shell
  http://localhost:3000/
+```
+
+> Browser for Legacy Backend
+
+```shell
+ http://localhost:3001/
 ```
 
 ### DB Backend Console
@@ -82,17 +88,9 @@ $ docker-compose up
 
 > login using the credentials define in the docker-compose file
 
-> add a new server to the management console using db_sandbox as the host name/address field and the POSTGRES_PASSWORD value
+> add a new server to the management console using *database* as the host name/address field and the POSTGRES_PASSWORD value
 
 > Note that the default username for postgres is postgres
-
-### Updating Codebase
-
-> Currently no live mounts are used for the docker comtainer because of this you must rebuild the container to sync code changes
-
-```shell
- docker compose build
-```
 
 ## Features
 

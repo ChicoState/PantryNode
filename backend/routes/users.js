@@ -63,9 +63,11 @@ router.get('/login', function (req, res, next) {
 });
 
 router.post('/login', (req, res, next) => {
+  // TODO(#118): Remove this log, return real data.
+  console.log("this is login: ", req.body);
   passport.authenticate('local', {
-    successRedirect: '/home',
-    failureRedirect: '/',
+    successRedirect: '/',
+    failureRedirect: '/login',
     failureFlash: false
   })(req, res, next);
 

@@ -116,14 +116,14 @@ const Summary = () => {
     { name: 'Product D', value: 10 },
   ];
 
-  var purchaseTotal = initialDataCurrentStock.length;
+  const purchaseTotal = initialDataCurrentStock.length;
   //Get sum of all quantities in purchases
-  var purchaseQuantityTotal = initialDataPurchase.reduce(
+  const purchaseQuantityTotal = initialDataPurchase.reduce(
     (acc, cur) => acc + cur.quantity, 
     0
   );
-  var currentStockTotal = initialDataCurrentStock.length;
-  var totalExpired = initialDataWasteManagement.length;
+  const currentStockTotal = initialDataCurrentStock.length;
+  const totalExpired = initialDataWasteManagement.length;
 
   return (
     <div>
