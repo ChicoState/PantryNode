@@ -26,15 +26,12 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=$PGADMIN_EMAIL
       - PGADMIN_DEFAULT_PASSWORD=$PGADMIN_PASSWORD
-  node:
+  server:
     build:
-      context: ./backend
+      context: .
       dockerfile: ./Dockerfile
-      target: node
-    container_name: node
-    volumes:
-       - ./backend:/app/backend
-       - /app/backend/node_modules
+      target: server
+    container_name: server
     platform: linux/amd64
     depends_on:
       - database
@@ -47,18 +44,21 @@ services:
     restart: always
     networks:
       - local
+    command: npm start
     ports:
       - 3001:3001
-  react:
+  web:
     build:
-      context: ./PantryNodeReact
+      context: .
+      dockerfile: ./Dockerfile
+      target: web
     ports:
       - "3000:3000"
-    container_name: react
+    container_name: web
+    depends_on:
+      - server
+    command: npm start
     networks:
       - local
-    volumes:
-       - ./PantryNodeReact:/app/frontend
-       - /app/frontend/node_modules
 networks:
   local:
