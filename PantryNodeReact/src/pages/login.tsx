@@ -18,13 +18,12 @@ import { login } from "../redux-features/user";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 import { useFormik } from "formik";
-import axios from 'axios';
-
+import axios from "axios";
 
 interface LoginFormInput {
   email?: string;
   password?: string;
-};
+}
 
 export default function Login() {
   const [remember, setRemember] = useState(false);
@@ -47,29 +46,34 @@ export default function Login() {
         password: formData.get("password"),
       });
 
-      axios.post('http://localhost:3001/login', {
-        email: formData.get('email'),
-        password: formData.get('password'),
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      .then(response => {
-        console.log("login success");
-        console.log(response);
-        dispatch(login(formData))
-          .unwrap()
-          .then((res) => {
-            navigate("/");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch(error => {
-        console.error("login error: " + error);
-      });
+      axios
+        .post(
+          "http://localhost:3001/login",
+          {
+            email: formData.get("email"),
+            password: formData.get("password"),
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          console.log("login success");
+          console.log(response);
+          dispatch(login(formData))
+            .unwrap()
+            .then((res) => {
+              navigate("/");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((error) => {
+          console.error("login error: " + error);
+        });
     },
     validate: (values) => {
       const errors: LoginFormInput = {};
@@ -124,7 +128,7 @@ export default function Login() {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
+            // autoFocus
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -167,8 +171,7 @@ export default function Login() {
             style={{
               backgroundColor: "primary",
             }}>
-            Login
-            {loading === "loading" && <CircularProgress />}
+            {loading === "loading" ? <CircularProgress /> : "Login"}
           </Button>
           <Grid container>
             <Grid item xs>
