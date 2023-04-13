@@ -10,6 +10,4 @@ module.exports = {
   rules: {
     "@typescript-eslint/no-var-requires": "warn",
   },
-  "ignorePatterns": ["eslintrc.js"],
-    //add rules
 };
