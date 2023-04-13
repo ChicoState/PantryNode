@@ -18,12 +18,11 @@ import { login } from "../redux-features/user";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 import { useFormik } from "formik";
-import axios from 'axios';
 
 interface LoginFormInput {
   email?: string;
   password?: string;
-};
+}
 
 export default function Login() {
   const [remember, setRemember] = useState(false);
@@ -37,38 +36,15 @@ export default function Login() {
       password: "",
     },
     onSubmit: async (values) => {
-      const formData = new FormData();
-      for (let value in values) {
-        formData.append(value, values[value as keyof typeof values]);
-      }
-      console.log({
-        email: formData.get("email"),
-        password: formData.get("password"),
-      });
-  
-      axios.post('http://localhost:3001/login', {
-        email: formData.get('email'),
-        password: formData.get('password'),
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      .then(response => {
-        console.log("login success");
-        console.log(response);
-        dispatch(login(formData))
-          .unwrap()
-          .then((res) => {
-            navigate("/");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch(error => {
-        console.error("login error: " + error);
-      });
+      dispatch(login(values))
+        .unwrap()
+        .then((res) => {})
+        .catch((error) => {
+          console.error("login error: " + error);
+        })
+        .finally(() => {
+          navigate("/");
+        });
     },
     validate: (values) => {
       const errors: LoginFormInput = {};
