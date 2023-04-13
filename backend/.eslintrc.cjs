@@ -4,7 +4,7 @@ module.exports = {
   plugins: ["@typescript-eslint"],
   root: true,
   rules: {
-    "@typescript-eslint/no-var-requires": "warn",
-    "no-undef": "warn",
+    "@typescript-eslint/no-var-requires": "off",
+    "no-undef": "off",
   },
 };

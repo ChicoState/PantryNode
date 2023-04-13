@@ -17,9 +17,9 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     // "tabs": ["warn", 2],
-    "linebreak-style": ["warn", "unix"],
-    "quotes": ["warn", "double"],
-    "semi": ["warn", "always"],
-    "@typescript-eslint/no-explicit-any": "off"
+    // "linebreak-style": ["warn", "unix"],
+    // "quotes": ["warn", "double"],
+    // "semi": ["warn", "always"],
+    // "@typescript-eslint/no-explicit-any": "off"
   }
 }
