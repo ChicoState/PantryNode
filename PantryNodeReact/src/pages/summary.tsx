@@ -160,8 +160,8 @@ const Summary = () => {
             <Box
               style={{ maxHeight: "40vh", overflow: "auto" }}
               sx={{
-                boxShadow: "0px -1px 10px #f5e9e9",
-                border: "solid 0.1px #f5e9e9",
+                boxShadow: "0px -1px 10px #eeeeee",
+                border: "solid 0.1px #e6e6e6",
                 borderRadius: "5px",
                 marginTop: "1rem",
               }}>
@@ -216,7 +216,8 @@ const Summary = () => {
             <Box
               style={{ maxHeight: "40vh", overflow: "auto" }}
               sx={{
-                boxShadow: "0px -1px 10px lightgray",
+                boxShadow: "0px -1px 10px #eeeeee",
+                border: "solid 0.1px #e6e6e6",
                 borderRadius: "5px",
                 marginTop: "1rem",
               }}>
@@ -271,7 +272,8 @@ const Summary = () => {
             <Box
               style={{ maxHeight: "40vh", overflow: "auto" }}
               sx={{
-                boxShadow: "0px -1px 10px lightgray",
+                boxShadow: "0px -1px 10px #eeeeee",
+                border: "solid 0.1px #e6e6e6",
                 borderRadius: "5px",
                 marginTop: "1rem",
               }}>
@@ -322,7 +324,8 @@ const Summary = () => {
             <Box
               style={{ maxHeight: "40vh", overflow: "auto" }}
               sx={{
-                boxShadow: "0px -1px 10px lightgray",
+                boxShadow: "0px -1px 10px #eeeeee",
+                border: "solid 0.1px #e6e6e6",
                 borderRadius: "5px",
                 marginTop: "1rem",
               }}>
