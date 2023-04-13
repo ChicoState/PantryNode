@@ -9,6 +9,5 @@ module.exports = {
   root: true,
   rules: {
     "@typescript-eslint/no-var-requires": "warn",
-    "no-undef": "warn",
   },
 };
