@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React,{  useState } from "react";
 import {
   Table,
   TableBody,
@@ -15,11 +15,10 @@ import { Box } from "@mui/system";
 import  SummaryBarChart from "../Components/Summary/BarChart";
 
 const Summary = () => {
-  const [alignment, setAlignment] = useState('web'); //Used for the purpose of MUI toggle button 
+  const [alignment, setAlignment] = useState('tables'); //Used for the purpose of MUI toggle button 
   const [activeComponent, setActiveComponent] = useState<string>('tables'); 
   const [tableVisibility, setTableVisibility] = useState<boolean>(true); //based on boolean data visibility changes, Tables have default visibility
   const [chartVisibility, setChartVisibility] = useState<boolean>(false); //based on boolean data visibility changes,Chart is initially not visible
-
 
  
   const handleAlignmentChange = (
@@ -134,6 +133,8 @@ const Summary = () => {
       exclusive
       onChange={handleAlignmentChange}
       aria-label="Platform"
+      sx={{ marginBottom: '20px' }}
+
     >
       <ToggleButton value="tables" onClick={handleTablesClick}>Tables</ToggleButton>
       <ToggleButton value="chart" onClick={handleChartClick}>Chart</ToggleButton>
@@ -300,7 +301,7 @@ const Summary = () => {
       {chartVisibility && ( // if chartVisiblity state is set true, the following SummaryChart will be visible.
         <div>
           <strong>Visualized Data</strong>
-          {/* Import Bar Chart */}
+           <br/><br/>
            <SummaryBarChart data={data}/>
        </div>
       )}
