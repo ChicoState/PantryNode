@@ -16,7 +16,7 @@ const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const path: String = location.pathname;
+  const path: string = location.pathname;
   const [activeLink, setActiveLink] = useState(path);
 
   const handleLogout = () => {

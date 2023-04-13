@@ -1,22 +1,30 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
-import React from 'react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
+import React from "react";
 
 interface categoryListType {
   id: number;
   name: string;
   image_url: string;
-};
+}
 
 interface categorydata {
-  item_id: number,
-  quantity: number,
-  person_id: number,
-  price: number,
-  expiration: string,
-  first_name: string,
-  last_name: string,
-  name: string,
-};
+  item_id: number;
+  quantity: number;
+  person_id: number;
+  price: number;
+  expiration: string;
+  first_name: string;
+  last_name: string;
+  name: string;
+}
 
 interface SaleTableProps {
   category: categoryListType;
@@ -39,8 +47,8 @@ const SaleTable = ({ category, categorydata }: SaleTableProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {categorydata.map((product) => (
-              <TableRow >
+            {categorydata.map((product, idx) => (
+              <TableRow key={idx}>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
                 <TableCell>{product.quantity}</TableCell>

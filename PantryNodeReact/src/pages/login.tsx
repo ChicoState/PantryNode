@@ -38,7 +38,9 @@ export default function Login() {
     onSubmit: async (values) => {
       dispatch(login(values))
         .unwrap()
-        .then((res) => {})
+        .then((res) => {
+          console.log(res);
+        })
         .catch((error) => {
           console.error("login error: " + error);
         })

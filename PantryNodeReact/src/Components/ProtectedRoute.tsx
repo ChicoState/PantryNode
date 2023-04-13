@@ -3,8 +3,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import Layout from "./Layout";
 
 type ProtectedRouteProps = {
-  isLoggedIn: Boolean;
-  redirectPath?: any;
+  isLoggedIn: boolean;
+  redirectPath?: string;
 };
 
 const ProtectedRoute = ({
