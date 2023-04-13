@@ -20,6 +20,7 @@ import {
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
+
 const Donor = () => {
   interface Entry {
     name: string;
@@ -51,6 +52,7 @@ const Donor = () => {
     direction: null,
   });
 
+
   const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(data, "Forma data");
@@ -67,6 +69,7 @@ const Donor = () => {
     setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
     console.log(e.target.value, "email");
     const emailValue = e.target.value;
+
 
     if (emailValue.trim() === "") {
       setEmailError("Email is required");
