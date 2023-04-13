@@ -14,3 +14,4 @@ README.md
 
 # Build files
 node_modules/
+**/node_modules/
