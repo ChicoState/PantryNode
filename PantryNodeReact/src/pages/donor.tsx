@@ -1,5 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
+import Typography from "@mui/material/Typography";
+import AddIcon from "@mui/icons-material/Add";
 import {
   Button,
   Table,
@@ -18,18 +20,18 @@ import {
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
-interface Entry {
-  name: string;
-  email: string;
-  location: string;
-}
-
-interface SortConfig {
-  key: keyof Entry | null;
-  direction: "ascending" | "descending" | null;
-}
-
 const Donor = () => {
+  interface Entry {
+    name: string;
+    email: string;
+    location: string;
+  }
+
+  interface SortConfig {
+    key: keyof Entry | null;
+    direction: "ascending" | "descending" | null;
+  }
+
   const initialData: Entry[] = [
     { name: "John", email: "john@gmail.com", location: "USA" },
     { name: "Danny", email: "danny@gmail.com", location: "USA" },
@@ -37,6 +39,8 @@ const Donor = () => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [data, setData] = useState<Entry[]>(initialData);
+  const [emailError, setEmailError] = useState("");
+  const [isEmailError, setIsEmailError] = useState(false);
   const [newEntry, setNewEntry] = useState<Entry>({
     name: "",
     email: "",
@@ -110,13 +114,33 @@ const Donor = () => {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => setShowModal(true)}
-      >
-        Add Entry
-      </Button>
+      <div style={{ width: "100%", display: "flex" }}>
+        <div style={{ flex: "1", textAlign: "left" }}>
+          <Typography variant="h6" align="left" sx={{ color: "#8c2332" }}>
+            <h2> Donor List</h2>
+          </Typography>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flex: "1",
+            textAlign: "right",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setShowModal(true)}
+            sx={{ marginLeft: "auto", paddingRight: 2 }}
+          >
+            <AddIcon />
+            Add Donor
+          </Button>
+        </div>
+      </div>
 
       <Dialog open={showModal} onClose={() => setShowModal(false)}>
         <DialogTitle>Add New Entry</DialogTitle>
@@ -136,7 +160,10 @@ const Donor = () => {
               label="Email"
               name="email"
               value={newEntry.email}
-              onChange={handleChange}
+              autoComplete="email"
+              onChange={handleEmailChange}
+              error={Boolean(emailError)}
+              helperText={emailError}
               fullWidth
             />
             <TextField
@@ -152,7 +179,13 @@ const Donor = () => {
               <Button onClick={() => setShowModal(false)} color="primary">
                 Cancel
               </Button>
-              <Button type="submit" color="primary">
+              <Button
+                type="submit"
+                color="primary"
+                disabled={
+                  isEmailError || newEntry.location == "" || newEntry.name == ""
+                }
+              >
                 Add
               </Button>
             </DialogActions>
@@ -160,7 +193,10 @@ const Donor = () => {
         </DialogContent>
       </Dialog>
 
-      <TableContainer component={Paper} style={{ marginTop: "1rem" }}>
+      <TableContainer
+        component={Paper}
+        style={{ marginTop: "1rem", boxShadow: "none" }}
+      >
         <Table>
           <TableHead>
             <TableRow>
