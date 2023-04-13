@@ -8,11 +8,12 @@ export interface itemAttributes {
   category?: "produce" | "fruit" | "meat" | "dairy" | "baked goods" | "canned" | "snacks" | "beverage" | "condiments & spices" | "processed foods" | "other";
   stor_id: number;
   size?: number;
+  barcode_num?:string;  // adding the barcode_num field
 }
 
 export type itemPk = "item_id";
 export type itemId = item[itemPk];
-export type itemOptionalAttributes = "item_id" | "name" | "category" | "size";
+export type itemOptionalAttributes = "item_id" | "name" | "category" | "size" | "barcode_num";
 export type itemCreationAttributes = Optional<itemAttributes, itemOptionalAttributes>;
 
 export class item extends Model<itemAttributes, itemCreationAttributes> implements itemAttributes {
@@ -21,13 +22,13 @@ export class item extends Model<itemAttributes, itemCreationAttributes> implemen
   category?: "produce" | "fruit" | "meat" | "dairy" | "baked goods" | "canned" | "snacks" | "beverage" | "condiments & spices" | "processed foods" | "other";
   stor_id!: number;
   size?: number;
-
+  barcode_num?: string;
   // item belongsTo storage_type via stor_id
   stor!: storage_type;
   getStor!: Sequelize.BelongsToGetAssociationMixin<storage_type>;
   setStor!: Sequelize.BelongsToSetAssociationMixin<storage_type, storage_typeId>;
   createStor!: Sequelize.BelongsToCreateAssociationMixin<storage_type>;
-
+  
   static initModel(sequelize: Sequelize.Sequelize): typeof item {
     return item.init({
     item_id: {
@@ -56,6 +57,10 @@ export class item extends Model<itemAttributes, itemCreationAttributes> implemen
     size: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    barcode_num: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     sequelize,
@@ -79,5 +84,10 @@ export class item extends Model<itemAttributes, itemCreationAttributes> implemen
       },
     ]
   });
+
+
+  static async LookUpbarcode(barcode_num: string): Promise<item | null> {
+    const result = await item.findOne({ where: { barcode_num } });
+    return result || null;
   }
 }
