@@ -1,5 +1,4 @@
 import { useState } from "react";
-import  BarChart from "../Components/Summary/BarChart";
 import {
   Table,
   TableBody,
