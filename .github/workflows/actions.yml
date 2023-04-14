@@ -29,11 +29,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install dependencies
-        run: |
-          cd PantryNodeReact 
+      - run: |
+          cd frontend 
           npm ci
-      - name: Build
-        run: |
-          cd PantryNodeReact
+      - run: |
+          cd frontend
           npm run build

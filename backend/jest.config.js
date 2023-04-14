@@ -1,10 +1,9 @@
 module.exports = {
-    preset: 'ts-jest',
-    testEnvironment: 'node',
-    testPathIgnorePatterns: [
-        //"/node_modules/",
-        //"\\.pc/",
-       "/PantryNodeReact/"
-      ],
-  };
-  
+  preset: "ts-jest",
+  testEnvironment: "node",
+  testPathIgnorePatterns: [
+    //"/node_modules/",
+    //"\\.pc/",
+    // "/frontend/",
+  ],
+};

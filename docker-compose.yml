@@ -3,14 +3,14 @@ version: "3.9"
 services:
   database:
     image: postgres:latest
-    volumes: 
+    volumes:
       - ./backend/postgres-data:/var/lib/postgresql/data
       - ./backend/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
       - ./backend/sql/dummy_data.sql:/docker-entrypoint-initdb.d/dummy_data.sql
     networks:
       - local
     ports:
-      - '5432:${DB_PORT}'
+      - "5432:${DB_PORT}"
     restart: always
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -33,7 +33,7 @@ services:
       target: node
     container_name: node
     volumes:
-       - ./backend/src:/app/backend/src
+      - ./backend/src:/app/backend/src
     platform: linux/amd64
     depends_on:
       - database
@@ -50,14 +50,14 @@ services:
       - 3001:3001
   react:
     build:
-      context: ./PantryNodeReact
+      context: ./frontend
     ports:
       - "3000:3000"
     container_name: react
     networks:
       - local
     volumes:
-       - ./PantryNodeReact/src:/app/frontend/src
-       - ./PantryNodeReact/public:/app/frontend/public
+      - ./frontend/src:/app/frontend/src
+      - ./frontend/public:/app/frontend/public
 networks:
   local:

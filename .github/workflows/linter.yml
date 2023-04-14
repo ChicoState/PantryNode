@@ -15,7 +15,7 @@ jobs:
         run: |
           cd backend
           npm ci
-          cd ../PantryNodeReact
+          cd ../frontend
           npm ci
       - name: Lint backend
         run: |
@@ -23,5 +23,5 @@ jobs:
           npm run lint
       - name: Lint frontend
         run: |
-          cd PantryNodeReact
+          cd frontend
           npm run lint

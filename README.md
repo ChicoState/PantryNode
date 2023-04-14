@@ -25,72 +25,62 @@ In this project, we have implemented food pantry management using a NodeJS-based
 
 > Back-End
 
-- MongoDB
-- Express JS
-- JavaScript
+- Express JS (New, Legacy)
+- PostgreSQL (New)
+- TypeScript (New)
+- MongoDB (Legacy)
+- JavaScript (Legacy)
 
 > Front-End
 
-- EJS
-- CSS
-- BootStrap
-- jQuery
+- React (New)
+- Material UI (New)
+- EJS (Legacy)
+- BootStrap (Legacy)
+- jQuery (Legacy)
 
-## Installation
+## Installation steps
 
 - All the `code` required to get started
 
-### Clone
+### 1. Clone
 
 - Clone this repo to your local machine using `git clone https://github.com/ChicoState/PantryNode`
 
 ```shell
-$ cd PantryNode
+cd PantryNode
 ```
 
-> Create a .env file with the following contents
+### 2. Install Dependencies
 
-#DB CONFIG  
-DB_USER='postgres'  
-DB_HOST='database'  
-DB_NAME='pantrynode'  
-DB_PASSWORD=Update Password  
-
-DB_PORT=5432  
-
-#DB ADMIN  
-PGADMIN_EMAIL='admin@admin.com'  
-PGADMIN_PASSWORD=Update Password  
-
-### Docker setup
-
-> Docker containerization 
+> Create a .env file with the contents .env.example
 
 ```shell
-$ docker-compose up
+cp .env.example .env
+```
+
+### 3. Docker setup
+
+> Docker containerization
+
+```shell
+docker-compose up
 ```
 
 > Browser for React
 
-```shell
- http://localhost:3000/
-```
+`http://localhost:3000/`
 
 > Browser for Legacy Backend
 
-```shell
- http://localhost:3001/
-```
+`http://localhost:3001/`
 
-### DB Backend Console
+### 4. DB Backend Console
 
-> Open http://localhost:82 in a web broswer
-
-> login using the credentials define in the docker-compose file
-
-> add a new server to the management console using *database* as the host name/address field and the POSTGRES_PASSWORD value
-
-> Note that the default username for postgres is postgres
+> Open `http://localhost:82` in a web broswer
+> Login using the credentials defined in the `docker-compose.yml` file
+> Add a new server to the management console using `database` as the host name/address field and the POSTGRES_PASSWORD value as the password field
+> Note that the default username for postgres is `postgres`
 
 ## Features
 
@@ -112,16 +102,10 @@ $ docker-compose up
 
 ### ESLint
 
-> Install ESLint dependencies
+> Run ESLint Locally in `backend/` or `frotend/`
 
 ```shell
-npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-react-app eslint@^8.0.0 typescript
-```
-
-> Run ESLint Locally
-
-```shell
-npx eslint .
+npm run lint
 ```
 
 ## Contributing
