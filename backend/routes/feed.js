@@ -30,34 +30,28 @@ router.get('/feed', ensureAuthenticated, function (req, res) {
             where: {
                 expiration: {
                     [Op.lte]: date_expired
-                },
-                include: [{
-                    model: transaction,
-                    as: 'transaction',   
-                    required: true, 
-                    attributes: ['date']
-                },
-                {
-                    model: item,
-                    as: 'item',
-                    required: true,
-                    attributes: ['name']
                 }
-            ],
-                attributes: ['trans_item_id', 'quantity', 'expiration'],
-            }
+            },
+            include: [{
+                model: transaction,
+                as: 'tran',
+                required: true,
+                attributes: ['date']
+            }, {
+                model: item,
+                as: 'item',
+                required: true,
+                attributes: ['name']
+            }],
+            attributes: ['trans_item_id', 'quantity', 'expiration'],
         }).then((allItems) => {
             if (allItems == null) {
                 console.log("THIS IS ERROR " + allItems);
             } else {
-                console.log("Check");
-                JSON.stringify(allItems)
+                res.json(JSON.stringify(allItems));
             }
         });
     }
 });
-
-
-
 
 module.exports = router;
