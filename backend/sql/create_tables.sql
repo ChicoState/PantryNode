@@ -93,7 +93,10 @@ CREATE TABLE Trans_items (
   PRIMARY KEY (trans_item_id),
   CONSTRAINT FK_Trans_items_trans_id
     FOREIGN KEY (trans_id)
-      REFERENCES Transaction(trans_id)
+      REFERENCES Transaction(trans_id),
+  CONSTRAINT FK_Trans_items_item_id
+    FOREIGN KEY (item_id)
+      REFERENCES Item(item_id)
 );
 
 CREATE TABLE Shelf_contents (

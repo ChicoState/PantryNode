@@ -139,6 +139,7 @@ export function initModels(sequelize: typeof Sequelize) {
   shelf_contents.belongsTo(trans_items, { as: "trans_item", foreignKey: "trans_item_id"});
   trans_items.hasMany(shelf_contents, { as: "shelf_contents", foreignKey: "trans_item_id"});
   trans_items.belongsTo(transaction, { as: "tran", foreignKey: "trans_id"});
+  trans_items.belongsTo(item, { as: "item", foreignKey: "item_id" });
   transaction.hasMany(trans_items, { as: "trans_items", foreignKey: "trans_id"});
 
   return {
