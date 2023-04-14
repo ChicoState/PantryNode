@@ -15,11 +15,11 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-      - run: |
+        run: |
           cd backend
           npm ci
       - name: Build
-      - run: |
+        run: |
           cd backend
           npm run build
   frontend:
@@ -30,10 +30,10 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-      - run: |
+        run: |
           cd PantryNodeReact 
           npm ci
       - name: Build
-      - run: |
+        run: |
           cd PantryNodeReact
           npm run build
