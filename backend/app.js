@@ -10,8 +10,11 @@ require('./config/passport')(passport);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
-var app = express();
 
+// v1 Backend API
+var apiV1_EmployeeRouter = require('./routes/api/v1/employee')
+
+var app = express();
 
 const cors = require('cors');
 // TODO(#119): Specifiy origin with an EnvVar.
@@ -74,19 +77,19 @@ app.post('/checkout', saleRouter);
 
 
 app.get('/checkout_success', function(req, res, next) {
-
     res.render('checkout_success', { title: 'Success' });
-
 });
-
-
-
 
 app.get('/s', function(req, res, next) {
-
     res.render('signup_success', { title: 'Home' });
-
 });
+
+
+// Backend API Endpoints
+// To add a new set of endpoints ("transaction," for example), use the same form
+// as "employee" below (see also ./routes/api/v1)
+app.use('/api/v1/employee', apiV1_EmployeeRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
