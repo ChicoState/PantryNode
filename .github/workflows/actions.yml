@@ -14,9 +14,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Install dependencies
       - run: |
           cd backend
           npm ci
+      - name: Build
       - run: |
           cd backend
           npm run build
@@ -27,9 +29,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Install dependencies
       - run: |
           cd PantryNodeReact 
           npm ci
+      - name: Build
       - run: |
           cd PantryNodeReact
           npm run build
