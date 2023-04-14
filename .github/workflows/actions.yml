@@ -2,9 +2,9 @@ name: Build Node
 
 on:
   push:
-    branches: [main]
+    branches: [main, frontend]
   pull_request:
-    branches: [main]
+    branches: [main, frontend]
 
 jobs:
   backend:
@@ -14,10 +14,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: |
+      - name: Install dependencies
+        run: |
           cd backend
           npm ci
-      - run: |
+      - name: Build
+        run: |
           cd backend
           npm run build
   frontend:
@@ -27,9 +29,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: |
-          cd PantryNodeReact 
+      - name: Install dependencies
+        run: |
+          cd frontend
           npm ci
-      - run: |
-          cd PantryNodeReact
+      - name: Build
+        run: |
+          cd frontend
           npm run build
