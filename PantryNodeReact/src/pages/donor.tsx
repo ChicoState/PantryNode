@@ -20,7 +20,6 @@ import {
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
-
 const Donor = () => {
   interface Entry {
     name: string;
@@ -52,7 +51,6 @@ const Donor = () => {
     direction: null,
   });
 
-
   const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(data, "Forma data");
@@ -69,7 +67,6 @@ const Donor = () => {
     setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
     console.log(e.target.value, "email");
     const emailValue = e.target.value;
-
 
     if (emailValue.trim() === "") {
       setEmailError("Email is required");
@@ -131,12 +128,14 @@ const Donor = () => {
             textAlign: "right",
             flexDirection: "column",
             justifyContent: "center",
-          }}>
+          }}
+        >
           <Button
             variant="contained"
             color="primary"
             onClick={() => setShowModal(true)}
-            sx={{ marginLeft: "auto", paddingRight: 2 }}>
+            sx={{ marginLeft: "auto", paddingRight: 2 }}
+          >
             <AddIcon />
             Add Donor
           </Button>
@@ -185,7 +184,8 @@ const Donor = () => {
                 color="primary"
                 disabled={
                   isEmailError || newEntry.location == "" || newEntry.name == ""
-                }>
+                }
+              >
                 Add
               </Button>
             </DialogActions>
@@ -195,7 +195,8 @@ const Donor = () => {
 
       <TableContainer
         component={Paper}
-        style={{ marginTop: "1rem", boxShadow: "none" }}>
+        style={{ marginTop: "1rem", boxShadow: "none" }}
+      >
         <Table>
           <TableHead>
             <TableRow>
@@ -247,7 +248,8 @@ const Donor = () => {
                     color="primary"
                     onClick={() =>
                       alert(`Donate button clicked for ${entry.name}`)
-                    }>
+                    }
+                  >
                     Donate
                   </Button>
                 </TableCell>

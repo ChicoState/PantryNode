@@ -18,13 +18,11 @@ import { login } from "../redux-features/user";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 import { useFormik } from "formik";
-import axios from "axios";
 
 interface LoginFormInput {
   email?: string;
   password?: string;
 }
-
 
 export default function Login() {
   const [remember, setRemember] = useState(false);
@@ -37,43 +35,17 @@ export default function Login() {
       email: "",
       password: "",
     },
-    onSubmit: async (values: { [x: string]: string | Blob }) => {
-      const formData = new FormData();
-      for (const value in values) {
-        formData.append(value, values[value as keyof typeof values]);
-      }
-      console.log({
-        email: formData.get("email"),
-        password: formData.get("password"),
-      });
-
-      axios
-        .post(
-          "http://localhost:3001/login",
-          {
-            email: formData.get("email"),
-            password: formData.get("password"),
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((response) => {
-          console.log("login success");
-          console.log(response);
-          dispatch(login(formData))
-            .unwrap()
-            .then((res) => {
-              navigate("/");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+    onSubmit: async (values) => {
+      dispatch(login(values))
+        .unwrap()
+        .then((res) => {
+          console.log(res);
         })
         .catch((error) => {
           console.error("login error: " + error);
+        })
+        .finally(() => {
+          navigate("/");
         });
     },
     validate: (values) => {
@@ -113,7 +85,8 @@ export default function Login() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}>
+        }}
+      >
         <Avatar sx={{ m: 1, bgcolor: "#8C2332" }}>
           <LockOutlinedIcon />
         </Avatar>
@@ -171,8 +144,10 @@ export default function Login() {
             sx={{ mt: 3, mb: 2, py: 2 }}
             style={{
               backgroundColor: "primary",
-            }}>
-            {loading === "loading" ? <CircularProgress /> : "Login"}
+            }}
+          >
+            Login
+            {loading === "loading" && <CircularProgress />}
           </Button>
           <Grid container>
             <Grid item xs>

@@ -1,15 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-//import { PayloadAction } from '@reduxjs/toolkit'
+// import { PayloadAction } from '@reduxjs/toolkit'
 import axiosInstance from "../util/axiosInstance";
 
 //Docs: https://redux-toolkit.js.org/api/createAsyncThunk
 //Docs: https://redux-toolkit.js.org/introduction/getting-started
 // First, create the thunk
+
+type LoginDto = {
+  email: string;
+  password: string;
+};
 export const login = createAsyncThunk(
   "user/login",
-  async (payload: FormData, { fulfillWithValue, rejectWithValue }) =>
+  async (payload: LoginDto, { fulfillWithValue, rejectWithValue }) =>
     axiosInstance
-      .post("auth/login", payload)
+      .post("/auth/login", payload)
       .then((res: any) => fulfillWithValue(res))
       .catch((err: any) => rejectWithValue(err))
 );
@@ -29,8 +34,7 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .addCase(login.pending, (state, action) => {
+      .addCase(login.pending, (state) => {
         state.status = "loading";
       })
       .addCase(login.fulfilled, (state, action) => {
@@ -41,8 +45,7 @@ export const userSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.status = "failed";
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        state.error = action.error.message!;
+        state.error = action.error.message ?? "Something went wrong";
       });
   },
 });

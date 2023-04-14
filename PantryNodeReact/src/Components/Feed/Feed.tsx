@@ -61,10 +61,12 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
                       index !== sortedFeedList.length - 1
                         ? "1px solid #ccc"
                         : "none",
-                  }}>
+                  }}
+                >
                   <Typography
                     variant="caption"
-                    style={{ position: "absolute", top: "5px", right: "10px" }}>
+                    style={{ position: "absolute", top: "5px", right: "10px" }}
+                  >
                     Added on: {item.added_date}
                   </Typography>
                   <Typography style={{ width: "70%" }}>
@@ -117,10 +119,12 @@ const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
                       index !== sortedExpiredFeedList.length - 1
                         ? "1px solid #ccc"
                         : "none",
-                  }}>
+                  }}
+                >
                   <Typography
                     variant="caption"
-                    style={{ position: "absolute", top: "5px", right: "10px" }}>
+                    style={{ position: "absolute", top: "5px", right: "10px" }}
+                  >
                     Added on: {item.added_date}
                   </Typography>
                   <Typography style={{ width: "70%" }}>

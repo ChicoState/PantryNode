@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(async (config: any ) => {
   let token = "";
   if (isBrowser) {
-    token = localStorage.getItem("token") ?? ""; // tokens are stored in localstorage with key token
+    token = `Bearer ${localStorage.getItem("token") ?? ""}`; // tokens are stored in localstorage with key token
   }
   config.headers = {
     ...config.headers,
@@ -19,7 +19,10 @@ axiosInstance.interceptors.request.use(async (config: any ) => {
 
 axiosInstance.interceptors.response.use(
   (res) => res.data,
-  (err) => Promise.reject(err?.response?.data)
+  (err) => {
+    console.log(err);
+    return Promise.reject(err?.response?.data);
+  }
 );
 
 export default axiosInstance;

@@ -10,6 +10,15 @@ import Summary from "./pages/summary";
 import Signup from "./pages/register";
 import ProtectedRoute from "./Components/ProtectedRoute";
 
+import { makeServer } from "./mirage";
+
+makeServer({ environment: "development" });
+
+// Enable this after all the APIs' are ready
+// if (process.env.NODE_ENV === "development") {
+//   makeServer({ environment: "development" });
+// }
+
 function App() {
   // this needs to be replaced with a check to see if the user is logged in from state
   const isLoggedIn = true;
