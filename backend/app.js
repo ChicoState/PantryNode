@@ -10,6 +10,7 @@ require('./config/passport')(passport);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
+var saleFeed = require('./routes/feed');
 var app = express();
 
 var con_string = require('./config/keys').PostgresURI;
@@ -65,6 +66,7 @@ app.get('/checkout', saleRouter);
 app.get('/charts', saleRouter);
 app.post('/checkout', saleRouter);
 
+app.get('/feed', feedRouter);
 
 app.get('/checkout_success', function(req, res, next) {
 
