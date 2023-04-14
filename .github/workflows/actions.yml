@@ -27,8 +27,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - env:
-          CI: false
       - run: |
           cd PantryNodeReact 
           npm ci
