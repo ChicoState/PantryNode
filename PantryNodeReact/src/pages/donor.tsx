@@ -116,8 +116,8 @@ const Donor = () => {
     <div>
       <div style={{ width: "100%", display: "flex" }}>
         <div style={{ flex: "1", textAlign: "left" }}>
-          <Typography variant="h6" align="left" sx={{ color: "#8c2332" }}>
-            <h2> Donor List</h2>
+          <Typography variant="h4" align="left" sx={{ color: "#8c2332" }}>
+            <b>Donor List</b>
           </Typography>
         </div>
 
