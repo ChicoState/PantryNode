@@ -14,9 +14,10 @@ const { storage_type: _storage_type } = require("./storage_type");
 const { trans_items: _trans_items } = require("./trans_items");
 const { transaction: _transaction } = require("./transaction");
 
+
 const {
   addressAttributes,
-  addressCreationAttributes,
+  addressCreationAttributes
 } = require("./address");
 const { aisleAttributes, aisleCreationAttributes } = require("./aisle");
 const {
