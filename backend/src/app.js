@@ -15,8 +15,10 @@ var summaryRouter = require('./routes/summary');
 var stockRouter = require('./routes/stock');
 var barcodeRouter = require('./routes/barcode');
 
+// v1 Backend API
+var apiV1_EmployeeRouter = require('./routes/api/v1/employee')
+
 var app = express();
-require("uuid");
 
 const cors = require('cors');
 // TODO(#119): Specifiy origin with an EnvVar.
@@ -90,19 +92,19 @@ app.get('/soontoexpire', summaryRouter);
 app.get('/stock', stockRouter);
 
 app.get('/checkout_success', function(req, res, next) {
-
     res.render('checkout_success', { title: 'Success' });
-
 });
-
-
-
 
 app.get('/s', function(req, res, next) {
-
     res.render('signup_success', { title: 'Home' });
-
 });
+
+
+// Backend API Endpoints
+// To add a new set of endpoints ("transaction," for example), use the same form
+// as "employee" below (see also ./routes/api/v1)
+app.use('/api/v1/employee', apiV1_EmployeeRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
