@@ -1,21 +1,12 @@
 import React, { useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableContainer,
-  Paper,
-  TableCell,
-  Grid,
-  ToggleButton,
-  ToggleButtonGroup,
-} from "@mui/material";
+import { Table,TableBody,TableHead, TableRow,TableContainer,Paper,TableCell,Grid,ToggleButton,ToggleButtonGroup,} from "@mui/material";
 import { Box } from "@mui/system";
 import SummaryBarChart from "../Components/Summary/BarChart";
 
 const Summary = () => {
   const [alignment, setAlignment] = useState("table"); //Used for the purpose of MUI toggle button
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeComponent, setActiveComponent] = useState<string>("tables");
   const [tableVisibility, setTableVisibility] = useState<boolean>(true); //based on boolean data visibility changes, Tables have default visibility
   const [chartVisibility, setChartVisibility] = useState<boolean>(false); //based on boolean data visibility changes,Chart is initially not visible

@@ -55,7 +55,7 @@ const Sale = () => {
         marginBottom={5}
       >
         {categoryList.map((category) => (
-          <Grid key={category.id} item width={"150px"}>
+          <Grid key={category.id} item width={"120px"}>
             <Button
               key={category.id}
               onClick={() => setSelectedCategory(category)}

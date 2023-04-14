@@ -183,7 +183,7 @@ const Donor = () => {
                 type="submit"
                 color="primary"
                 disabled={
-                  isEmailError || newEntry.location == "" || newEntry.name == ""
+                  isEmailError || newEntry.location === "" || newEntry.name === ""
                 }
               >
                 Add
