@@ -9,6 +9,7 @@ import ImageDebug from './common/image_debug';
 import ResultCollector from './analytics/result_collector';
 import Config from './config/config';
 import Quagga from '@ericblade/quagga2';
+require('dotenv').config();
 
 const instance = new Quagga();
 const _context = instance.context;
@@ -101,7 +102,7 @@ const QuaggaJSStaticInterface = {
                 size: 800,
                 src: config.src,
             },
-            numOfWorkers: (ENV.development && config.debug) ? 0 : 1,
+            numOfWorkers: (process.env.NODE_ENV.development && config.debug) ? 0 : 1,
             locator: {
                 halfSample: false,
             },
