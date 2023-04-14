@@ -8,6 +8,7 @@ import Sale from "./pages/sale";
 import Stock from "./pages/stock";
 import Summary from "./pages/summary";
 import Signup from "./pages/register";
+import Scanner from "./pages/scanner";
 import ProtectedRoute from "./Components/ProtectedRoute";
 
 import { makeServer } from "./mirage";
@@ -36,6 +37,7 @@ function App() {
         <Route path="donor" element={<Donor />} />
         <Route path="sale" element={<Sale />} />
         <Route path="expiry" element={<Expiry />} />
+        <Route path="scanner" element={<Scanner />} />
       </Route>
     </Routes>
   );
