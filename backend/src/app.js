@@ -16,6 +16,8 @@ var apiV1_EmployeeRouter = require('./routes/api/v1/employee')
 
 var app = express();
 
+require("uuid");
+
 const cors = require('cors');
 // TODO(#119): Specifiy origin with an EnvVar.
 app.use(cors({

@@ -33,8 +33,7 @@ services:
       target: node
     container_name: node
     volumes:
-       - ./backend:/app/backend
-       - /app/backend/node_modules
+       - ./backend/src:/app/backend/src
     platform: linux/amd64
     depends_on:
       - database
@@ -58,7 +57,7 @@ services:
     networks:
       - local
     volumes:
-       - ./PantryNodeReact:/app/frontend
-       - /app/frontend/node_modules
+       - ./PantryNodeReact/src:/app/frontend/src
+       - ./PantryNodeReact/public:/app/frontend/public
 networks:
   local:
