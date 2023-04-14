@@ -11,7 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
 var app = express();
-
+require("uuid");
 
 const cors = require('cors');
 // TODO(#119): Specifiy origin with an EnvVar.
