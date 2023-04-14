@@ -1,3 +1,6 @@
+/* eslint-env node */
+/* global ENV */
+
 import merge from 'lodash/merge';
 import TypeDefs from './common/typedefs'; // eslint-disable-line no-unused-vars
 import ImageWrapper from './common/image_wrapper';
@@ -10,8 +13,6 @@ import ResultCollector from './analytics/result_collector';
 import Config from './config/config';
 import Quagga from '@ericblade/quagga2';
 
-/* eslint-env node */
-/* global ENV */
 
 const instance = new Quagga();
 const _context = instance.context;
@@ -104,6 +105,7 @@ const QuaggaJSStaticInterface = {
                 size: 800,
                 src: config.src,
             },
+            /* eslint-disable-next-line no-undef */
             numOfWorkers: (ENV.development && config.debug) ? 0 : 1,
             locator: {
                 halfSample: false,
