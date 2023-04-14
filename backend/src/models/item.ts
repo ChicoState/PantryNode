@@ -29,6 +29,11 @@ export class item extends Model<itemAttributes, itemCreationAttributes> implemen
   setStor!: Sequelize.BelongsToSetAssociationMixin<storage_type, storage_typeId>;
   createStor!: Sequelize.BelongsToCreateAssociationMixin<storage_type>;
   
+  static async LookUpbarcode(barcode_num: string): Promise<item | null> {
+    const result = await item.findOne({ where: { barcode_num } });
+    return result || null;
+  }
+  
   static initModel(sequelize: Sequelize.Sequelize): typeof item {
     return item.init({
     item_id: {
@@ -84,10 +89,5 @@ export class item extends Model<itemAttributes, itemCreationAttributes> implemen
       },
     ]
   });
-
-
-  static async LookUpbarcode(barcode_num: string): Promise<item | null> {
-    const result = await item.findOne({ where: { barcode_num } });
-    return result || null;
   }
 }
