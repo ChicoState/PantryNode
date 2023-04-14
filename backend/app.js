@@ -10,7 +10,7 @@ require('./config/passport')(passport);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
-var saleFeed = require('./routes/feed');
+var feedRouter = require('./routes/feed');
 var app = express();
 
 var con_string = require('./config/keys').PostgresURI;
