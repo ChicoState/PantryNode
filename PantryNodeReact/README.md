@@ -25,3 +25,9 @@ To build the application
 ```
 npm run build
 ```
+
+To run the lint
+
+```
+npm run lint
+```
