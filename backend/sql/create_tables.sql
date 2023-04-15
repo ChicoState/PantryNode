@@ -153,3 +153,17 @@ ALTER TABLE Site ADD CONSTRAINT FK_Site_addr_id
 alter table Person ADD CONSTRAINT FK_Person_pri_addr
   FOREIGN KEY (pri_addr_id)
     REFERENCES Address(addr_id);
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS stock
+AS
+SELECT
+	item.name
+	,category.name as category 
+	,sum(trans_items.quantity) as quantity
+FROM trans_items
+JOIN item 
+  ON trans_items.item_id = item.item_id
+JOIN category 
+  ON item.category_id = category.category_id
+GROUP BY item.name, category
+WITH DATA;
