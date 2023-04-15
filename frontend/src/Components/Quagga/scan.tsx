@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import Quagga from "quagga";
 
-const Scanner = (props) => {
-  const { onDetected } = props;
+interface ScannerProps {
+  onDetected: (code: string) => void;
+}
 
+const Scanner:React.FC<ScannerProps> = ({ onDetected }) => {
+  
   useEffect(() => {
     const config = {
       inputStream: {
