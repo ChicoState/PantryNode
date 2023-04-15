@@ -63,7 +63,7 @@ app.get('/register', usersRouter);
 app.post('/login', usersRouter);
 app.get('/logout', usersRouter);
 app.get('/sale', saleRouter);
-app.get('/stock', saleRouter);
+app.get('/categories', saleRouter);
 
 app.get('/donor', saleRouter);
 app.post('/add_donor', saleRouter);
