@@ -2,7 +2,7 @@
 import * as React from "react";
 import { Quagga } from "quagga";
 
-const Scanner = () => {
+const scanner = () => {
   const handleBarcodeScan = (data: any) => {
     console.log("Barcode detected:", data.codeResult.code);
     // Do something with the barcode data
@@ -12,7 +12,6 @@ const Scanner = () => {
     console.error("Barcode error:", error.message);
     // Handle any errors that occur during scanning
   };
-
   return (
     <div>
       <h1>Barcode Scanner</h1>
@@ -36,4 +35,4 @@ const Scanner = () => {
   );
 };
 
-export default Scanner;
+export default scanner;

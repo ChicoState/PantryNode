@@ -34,10 +34,10 @@ function App() {
         <Route index element={<Index />} />
         <Route path="/stock" element={<Stock />} />
         <Route path="/summary" element={<Summary />} />
-        <Route path="donor" element={<Donor />} />
-        <Route path="sale" element={<Sale />} />
-        <Route path="expiry" element={<Expiry />} />
-        <Route path="scanner" element={<Scanner />} />
+        <Route path="/donor" element={<Donor />} />
+        <Route path="/sale" element={<Sale />} />
+        <Route path="/expiry" element={<Expiry />} />
+        <Route path="/scanner" element={<Scanner />} />
       </Route>
     </Routes>
   );
