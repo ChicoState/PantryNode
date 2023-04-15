@@ -1,38 +1,26 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import * as React from "react";
-import { Quagga } from "quagga";
+import React, { useState } from "react";
+import QuaggaScanner from "../Components/Quagga/scan";
 
-const scanner = () => {
-  const handleBarcodeScan = (data: any) => {
-    console.log("Barcode detected:", data.codeResult.code);
-    // Do something with the barcode data
+
+function Scanner() {
+  const [camera, setCamera] = useState(false);
+  const [result, setResult] = useState<string | null>(null);
+
+  const onDetected = (result: string) => {
+    setResult(result);
   };
 
-  const handleBarcodeError = (error: any) => {
-    console.error("Barcode error:", error.message);
-    // Handle any errors that occur during scanning
-  };
   return (
-    <div>
-      <h1>Barcode Scanner</h1>
-      <Quagga
-        onDetected={handleBarcodeScan}
-        onError={handleBarcodeError}
-        style={{ width: "100%", height: "auto" }}
-        config={{
-          inputStream: {
-            name: "Live",
-            type: "LiveStream",
-            target: "#barcode-scanner",
-          },
-          decoder: {
-            readers: ["ean_reader"],
-          },
-        }}
-      />
-      <div id="barcode-scanner"></div>
+    <div className="App">
+      <p>{result ? result : "Scanning..."}</p>
+      <button onClick={() => setCamera(!camera)}>
+        {camera ? "Stop" : "Start"}
+      </button>
+      <div className="container">
+        {camera && <QuaggaScanner onDetected={onDetected} />}
+      </div>
     </div>
   );
-};
+}
 
-export default scanner;
+export default Scanner;
