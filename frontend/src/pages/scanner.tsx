@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import QuaggaScanner from "../Components/Quagga/scan";
+import AddIcon from "@mui/icons-material/Add";
+import {
+  Button,
+} from "@mui/material";
+
 
 
 function Scanner() {
@@ -12,10 +17,16 @@ function Scanner() {
 
   return (
     <div className="App">
-      <p>{result ? result : "Scanning..."}</p>
-      <button onClick={() => setCamera(!camera)}>
-        {camera ? "Stop" : "Start"}
-      </button>
+      <h2>{result ? result : "Ready to Scan"}</h2>
+      <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setCamera(!camera)}
+          sx={{ marginLeft: "auto", paddingRight: 2 }}
+          >
+         <AddIcon />
+        {camera ? "Stop" : "Start"} 
+            </Button>
       <div className="container">
         {camera && <QuaggaScanner onDetected={onDetected} />}
       </div>
