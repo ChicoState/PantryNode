@@ -153,3 +153,5 @@ ALTER TABLE Site ADD CONSTRAINT FK_Site_addr_id
 alter table Person ADD CONSTRAINT FK_Person_pri_addr
   FOREIGN KEY (pri_addr_id)
     REFERENCES Address(addr_id);
+
+ALTER TABLE Item ADD COLUMN barcode INT;
