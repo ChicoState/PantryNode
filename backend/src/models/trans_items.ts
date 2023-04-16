@@ -2,6 +2,7 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { shelf_contents, shelf_contentsId } from './shelf_contents';
 import type { transaction, transactionId } from './transaction';
+import type { item, itemId } from './item';
 
 export interface trans_itemsAttributes {
   trans_id: number;
@@ -35,11 +36,18 @@ export class trans_items extends Model<trans_itemsAttributes, trans_itemsCreatio
   hasShelf_content!: Sequelize.HasManyHasAssociationMixin<shelf_contents, shelf_contentsId>;
   hasShelf_contents!: Sequelize.HasManyHasAssociationsMixin<shelf_contents, shelf_contentsId>;
   countShelf_contents!: Sequelize.HasManyCountAssociationsMixin;
+  
   // trans_items belongsTo transaction via trans_id
   tran!: transaction;
   getTran!: Sequelize.BelongsToGetAssociationMixin<transaction>;
   setTran!: Sequelize.BelongsToSetAssociationMixin<transaction, transactionId>;
   createTran!: Sequelize.BelongsToCreateAssociationMixin<transaction>;
+
+  // trans_items belongsTo transaction via trans_id
+  item!: item;
+  getItem!: Sequelize.BelongsToGetAssociationMixin<item>;
+  setItem!: Sequelize.BelongsToSetAssociationMixin<item, itemId>;
+  createItem!: Sequelize.BelongsToCreateAssociationMixin<item>;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof trans_items {
     return trans_items.init({
