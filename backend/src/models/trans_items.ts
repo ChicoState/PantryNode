@@ -49,6 +49,7 @@ export class trans_items extends Model<trans_itemsAttributes, trans_itemsCreatio
   setItem!: Sequelize.BelongsToSetAssociationMixin<item, itemId>;
   createItem!: Sequelize.BelongsToCreateAssociationMixin<item>;
 
+  
   static initModel(sequelize: Sequelize.Sequelize): typeof trans_items {
     return trans_items.init({
     trans_id: {
