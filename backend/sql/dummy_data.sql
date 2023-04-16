@@ -98,3 +98,5 @@ VALUES ((SELECT MAX(trans_id) FROM Transaction), (SELECT MAX(item_id) FROM Item)
 INSERT INTO Shelf_contents (trans_item_id, shelf_id, store_date, quantity)
 VALUES ((SELECT MAX(trans_item_id) FROM Trans_items), (SELECT MAX(shelf_id) FROM Shelf), NOW(), 5),
        ((SELECT MAX(trans_item_id) FROM Trans_items), (SELECT MAX(shelf_id) FROM Shelf), NOW(), 10);
+
+REFRESH MATERIALIZED VIEW stock;
