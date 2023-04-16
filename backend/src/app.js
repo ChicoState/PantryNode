@@ -10,6 +10,8 @@ require('./config/passport')(passport);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
+var summaryRouter = require('./routes/summary');
+
 var app = express();
 require("uuid");
 
@@ -72,6 +74,10 @@ app.get('/checkout', saleRouter);
 app.get('/charts', saleRouter);
 app.post('/checkout', saleRouter);
 
+app.get('/purchases', summaryRouter);
+app.get('/currentstock', summaryRouter);
+app.get('/wastemanagement', summaryRouter);
+app.get('/soontoexpire', summaryRouter);
 
 app.get('/checkout_success', function(req, res, next) {
 
