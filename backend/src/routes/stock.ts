@@ -9,7 +9,7 @@ const sequelize = new Sequelize(require('../config/keys').PostgresURI);
 
 initModels(sequelize);
 
-router.get('/feed', ensureAuthenticated, function (req: any, res: any) {
+router.get('/stock', ensureAuthenticated, function (req: any, res: any) {
     if (!req.isAuthenticated()) {
         const errors = [];
         res.post('Unauthenticated');
