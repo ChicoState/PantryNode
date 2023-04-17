@@ -81,7 +81,7 @@ router.get("/donor", ensureAuthenticated, function (req, res) {
   }
 });
 
-router.get("/stock", ensureAuthenticated, function (req, res) {
+router.get("/categories", ensureAuthenticated, function (req, res) {
   if (!req.isAuthenticated()) {
     let errors = [];
     res.redirect("index", { errors });
