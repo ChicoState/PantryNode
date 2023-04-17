@@ -50,6 +50,7 @@ CREATE TABLE Item (
   category category,
   stor_id int NOT NULL,
   size int,
+  barcode_num text UNIQUE,
   PRIMARY KEY (item_id),
   CONSTRAINT FK_Item_stor_id
     FOREIGN KEY (stor_id)
@@ -153,5 +154,3 @@ ALTER TABLE Site ADD CONSTRAINT FK_Site_addr_id
 alter table Person ADD CONSTRAINT FK_Person_pri_addr
   FOREIGN KEY (pri_addr_id)
     REFERENCES Address(addr_id);
-
-ALTER TABLE Item ADD COLUMN barcode INT;

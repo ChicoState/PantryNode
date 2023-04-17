@@ -106,4 +106,8 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
+//barcodelookup
+app.get('/barcode_lookup',indexRouter);
+
+
 module.exports = app;
