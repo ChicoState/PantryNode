@@ -62,16 +62,20 @@ router.get('/login', function (req, res, next) {
   res.render('signup_success', { title: 'Express' });
 });
 
-router.post('/login', (req, res, next) => {
-  // TODO(#118): Remove this log, return real data.
-  console.log("this is login: ", req.body);
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: false
+router.post('/login', function (req, res, next) {
+  passport.authenticate('local', function (err, user, info) {
+    if (err) { return next(err); }
+    if (!user) {
+      // Authentication failed
+      res.status(401).json({ message: "Authentication failed", error: info.message });
+    }
+    else {
+      res.json({ message: "Success", email: user.email });
+    }
+    // Authentication successful
   })(req, res, next);
-
 });
+
 
 router.get('/logout', function (req, res) {
   req.logout();
