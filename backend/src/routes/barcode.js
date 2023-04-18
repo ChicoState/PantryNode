@@ -1,5 +1,13 @@
 var express = require('express');
 var router = express.Router();
+const { ensureAuthenticated } = require('../config/auth');
+
+var { Sequelize, Op } = require('sequelize');
+var { initModels, item} = require("../models/init-models");
+
+const sequelize = new Sequelize(require('../config/keys').PostgresURI);
+
+initModels(sequelize);
 
 router.get('/barcode/:barcode', async (req, res) => {
     const barcode_var = req.params.barcode;
