@@ -12,7 +12,11 @@ var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
 
 // v1 Backend API
-var apiV1_EmployeeRouter = require('./routes/api/v1/employee')
+var apiV1_EmployeeRouter = require('./routes/api/v1/employee');
+
+var feedRouter = require('./routes/feed');
+var summaryRouter = require('./routes/summary');
+var stockRouter = require('./routes/stock');
 
 var app = express();
 
@@ -65,7 +69,7 @@ app.get('/register', usersRouter);
 app.post('/login', usersRouter);
 app.get('/logout', usersRouter);
 app.get('/sale', saleRouter);
-app.get('/stock', saleRouter);
+app.get('/categories', saleRouter);
 
 app.get('/donor', saleRouter);
 app.post('/add_donor', saleRouter);
@@ -77,6 +81,14 @@ app.get('/checkout', saleRouter);
 app.get('/charts', saleRouter);
 app.post('/checkout', saleRouter);
 
+app.get('/feed', feedRouter);
+
+app.get('/purchases', summaryRouter);
+app.get('/currentstock', summaryRouter);
+app.get('/wastemanagement', summaryRouter);
+app.get('/soontoexpire', summaryRouter);
+
+app.get('/stock', stockRouter);
 
 app.get('/checkout_success', function(req, res, next) {
     res.render('checkout_success', { title: 'Success' });

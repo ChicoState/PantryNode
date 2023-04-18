@@ -1,7 +1,7 @@
 {
   "exclude": [
     "node_modules",
-    "PantryNodeReact",
+    "frontend",
     "dist",
     "build",
     "coverage",
