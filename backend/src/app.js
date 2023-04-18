@@ -67,6 +67,9 @@ app.get('/logout', usersRouter);
 app.get('/sale', saleRouter);
 app.get('/categories', saleRouter);
 
+//barcodelookup
+app.use('/', barcodeRouter);
+
 app.get('/donor', saleRouter);
 app.post('/add_donor', saleRouter);
 
@@ -117,8 +120,8 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-//barcodelookup
-app.get('/barcode_lookup',barcodeRouter);
+
+
 
 
 module.exports = app;
