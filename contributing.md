@@ -1,6 +1,12 @@
 # Project Personnel
 
-PantryNode was founded by [Subhed Chavan](https://github.com/subhed), [Jayesh Sathe](https://github.com/Jayesh-sathe), and [Gopal Singh](https://github.com/gopalsingh112) under the supervision of [Dr. Kevin Buffardi](https://github.com/kbuffardi).
+PantryNode was started by [Subhed Chavan](https://github.com/subhed), [Jayesh Sathe](https://github.com/Jayesh-sathe),
+and [Gopal Singh](https://github.com/gopalsingh112) in the Spring of 2020 under the supervision of
+[Dr. Kevin Buffardi](https://github.com/kbuffardi).
+
+It was then picked up by a class of about 40 during the Spring of 2023 which included the following students
+(alphabetically listed):
+* [James Krepelka](https://github.com/Jooms)
 
 It is a [Free and Open Source Software project](LICENSE).
 
