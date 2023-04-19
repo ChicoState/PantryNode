@@ -8,11 +8,12 @@ export interface itemAttributes {
   category?: "produce" | "fruit" | "meat" | "dairy" | "baked goods" | "canned" | "snacks" | "beverage" | "condiments & spices" | "processed foods" | "other";
   stor_id: number;
   size?: number;
+  barcode?:string;  // adding the barcode field
 }
 
 export type itemPk = "item_id";
 export type itemId = item[itemPk];
-export type itemOptionalAttributes = "item_id" | "name" | "category" | "size";
+export type itemOptionalAttributes = "item_id" | "name" | "category" | "size" | "barcode";
 export type itemCreationAttributes = Optional<itemAttributes, itemOptionalAttributes>;
 
 export class item extends Model<itemAttributes, itemCreationAttributes> implements itemAttributes {
@@ -21,13 +22,18 @@ export class item extends Model<itemAttributes, itemCreationAttributes> implemen
   category?: "produce" | "fruit" | "meat" | "dairy" | "baked goods" | "canned" | "snacks" | "beverage" | "condiments & spices" | "processed foods" | "other";
   stor_id!: number;
   size?: number;
-
+  barcode?: string;
   // item belongsTo storage_type via stor_id
   stor!: storage_type;
   getStor!: Sequelize.BelongsToGetAssociationMixin<storage_type>;
   setStor!: Sequelize.BelongsToSetAssociationMixin<storage_type, storage_typeId>;
   createStor!: Sequelize.BelongsToCreateAssociationMixin<storage_type>;
-
+  
+  static async LookUpbarcode(barcode: string): Promise<item | null> {
+    const result = await item.findOne({ where: { barcode } });
+    return result || null;
+  }
+  
   static initModel(sequelize: Sequelize.Sequelize): typeof item {
     return item.init({
     item_id: {
@@ -55,6 +61,10 @@ export class item extends Model<itemAttributes, itemCreationAttributes> implemen
     },
     size: {
       type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    barcode: {
+      type: DataTypes.STRING,
       allowNull: true
     }
   }, {

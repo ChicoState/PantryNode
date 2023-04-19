@@ -13,6 +13,7 @@ var saleRouter = require('./routes/sale');
 var feedRouter = require('./routes/feed');
 var summaryRouter = require('./routes/summary');
 var stockRouter = require('./routes/stock');
+var barcodeRouter = require('./routes/barcode');
 
 var app = express();
 require("uuid");
@@ -66,6 +67,9 @@ app.get('/logout', usersRouter);
 app.get('/sale', saleRouter);
 app.get('/categories', saleRouter);
 
+//barcodelookup
+app.get('/barcode', barcodeRouter);
+
 app.get('/donor', saleRouter);
 app.post('/add_donor', saleRouter);
 
@@ -115,5 +119,9 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+
+
+
 
 module.exports = app;

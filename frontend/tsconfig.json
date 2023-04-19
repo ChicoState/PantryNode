@@ -37,6 +37,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src/**/*"
+    "src/**/*", "public/quagga/quagga.js"
   ]
 }
