@@ -8,9 +8,11 @@ export function makeServer({ environment = "test" }) {
     environment,
     routes() {
       this.namespace = "api";
+      this.urlPrefix = "http://localhost:3001";
       getAuthRoutes(this);
       getSaleRoutes(this);
       getFeedRoutes(this);
+      this.passthrough();
     },
   });
 }
