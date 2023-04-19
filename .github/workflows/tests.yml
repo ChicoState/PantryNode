@@ -1,8 +1,6 @@
 name: Testing
 
 on:
-  push:
-    branches: [main, testingCheck]
   pull_request:
     branches: [main, testingCheck]
 
