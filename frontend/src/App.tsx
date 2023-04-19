@@ -10,10 +10,7 @@ import Summary from "./pages/summary";
 import Signup from "./pages/register";
 import Scanner from "./pages/scanner";
 import ProtectedRoute from "./Components/ProtectedRoute";
-
-import selectStatus from "./redux-features/user";
-import type { RootState } from './store'
-import { useSelector, useDispatch } from 'react-redux'
+import getToken from "./Components/useToken";
 
 // import { makeServer } from "./mirage";
 
@@ -25,15 +22,11 @@ import { useSelector, useDispatch } from 'react-redux'
 // }
 
 function App() {
-  const test = useSelector((state: RootState) => state.user.status);
-  const dispatch = useDispatch()
+  const token = getToken();
   var isLoggedIn = false;
-  if (test === "authenticated"){
+  if (token) {
     isLoggedIn = true;
   }
-  // this needs to be replaced with a check to see if the user is logged in from state
-
-  console.log("test0", test, isLoggedIn);
   
   return (
     <Routes>

@@ -20,6 +20,7 @@ const Navigation = () => {
   const [activeLink, setActiveLink] = useState(path);
 
   const handleLogout = () => {
+    localStorage.removeItem('token');
     return navigate("/login");
   };
 

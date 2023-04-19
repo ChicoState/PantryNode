@@ -9,7 +9,7 @@ type ProtectedRouteProps = {
 
 const ProtectedRoute = ({
   isLoggedIn,
-  redirectPath = "/landing",
+  redirectPath = "/login",
 }: ProtectedRouteProps) => {
   if (!isLoggedIn) {
     return <Navigate to={redirectPath} replace />;

@@ -19,7 +19,6 @@ export const login = createAsyncThunk(
       .catch((err: any) => rejectWithValue(err))
 );
 
-
 const initialState = {
   name: "",
   email: "",
