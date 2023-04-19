@@ -8,4 +8,14 @@ describe('Donor Page', () => {
         const AddDonor = screen.getByText('Add Donor');
         expect(AddDonor).toBeInTheDocument(); // assert that the button is in the document
     });
+    it('should render a button with text "Donate"', () => {
+        render(<Donor />);
+        const AddDonor = screen.getByText('Add Donor');
+        expect(AddDonor).toBeInTheDocument(); // assert that the button is in the document
+    });
+    it('should render a button with text "Donate"', () => {
+        render(<Donor />);
+        const AddDonor = screen.getByText('Add Donor');
+        expect(AddDonor).toBeInTheDocument(); // assert that the button is in the document
+    });
 });
