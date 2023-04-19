@@ -12,9 +12,9 @@ import Scanner from "./pages/scanner";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import getToken from "./Components/useToken";
 
-// import { makeServer } from "./mirage";
+import { makeServer } from "./mirage";
 
-// makeServer({ environment: "development" });
+makeServer({ environment: "development" });
 
 // Enable this after all the APIs' are ready
 // if (process.env.NODE_ENV === "development") {

@@ -24,9 +24,6 @@ const Index = () => {
 
   useEffect(() => {
     if (feedList.length > 0) {
-      console.log("start")
-      console.log(feedList);
-      console.log("end")
       setSortedFeedList(
         feedList.sort((a, b) => {
           return (
