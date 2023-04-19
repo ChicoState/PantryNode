@@ -20,6 +20,9 @@ type FeedProps = {
 };
 
 const Feed = ({ sortedFeedList, sortedExpiredFeedList }: FeedProps) => {
+  console.log("Feed start")
+  console.log(sortedFeedList)
+  console.log("Feed end")
   return (
     <Box sx={{ width: "100%", bgcolor: "", p: 2 }}>
       <Typography variant="h4" gutterBottom style={{ textAlign: "center" }}>

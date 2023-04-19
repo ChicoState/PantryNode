@@ -43,12 +43,21 @@ router.get('/feed', ensureAuthenticated, function (req, res) {
                 required: true,
                 attributes: ['name']
             }],
-            attributes: ['trans_item_id', 'quantity', 'expiration'],
+            attributes: ['trans_item_id','quantity', 'expiration'],
         }).then((allItems) => {
+            allItems = allItems.map(item => {
+                return {
+                id: item.trans_item_id,
+                item: item.item.name,
+                expiry_date: item.expiration,
+                quantity: item.quantity,
+                added_date:item.tran.date
+                };
+            });
             if (allItems == null) {
                 console.log("THIS IS ERROR " + allItems);
             } else {
-                res.json(JSON.stringify(allItems));
+                res.json(allItems);
             }
         });
     }

@@ -14,7 +14,7 @@ export const login = createAsyncThunk(
   "user/login",
   async (payload: LoginDto, { fulfillWithValue, rejectWithValue }) =>
     axiosInstance
-      .post("/auth/login", payload)
+      .post("login", payload)
       .then((res: any) => fulfillWithValue(res))
       .catch((err: any) => rejectWithValue(err))
 );
@@ -38,10 +38,12 @@ export const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(login.fulfilled, (state, action) => {
+        localStorage.setItem('token',  action.payload.token)
+        axiosInstance.defaults.headers.common['Authorization'] = action.payload.token;
         state.email = action.payload.email;
         state.name = action.payload.name;
         state.token = action.payload.token;
-        state.status = "idle";
+        state.status = "authenticated";
       })
       .addCase(login.rejected, (state, action) => {
         state.status = "failed";

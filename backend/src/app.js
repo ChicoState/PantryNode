@@ -52,7 +52,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        expires: 60 * 60 * 24,
+        httpOnly: false,
+        secure: true,
+      },
 }));
 
 

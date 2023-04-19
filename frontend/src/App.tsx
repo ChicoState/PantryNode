@@ -11,9 +11,13 @@ import Signup from "./pages/register";
 import Scanner from "./pages/scanner";
 import ProtectedRoute from "./Components/ProtectedRoute";
 
-import { makeServer } from "./mirage";
+import selectStatus from "./redux-features/user";
+import type { RootState } from './store'
+import { useSelector, useDispatch } from 'react-redux'
 
-makeServer({ environment: "development" });
+// import { makeServer } from "./mirage";
+
+// makeServer({ environment: "development" });
 
 // Enable this after all the APIs' are ready
 // if (process.env.NODE_ENV === "development") {
@@ -21,9 +25,16 @@ makeServer({ environment: "development" });
 // }
 
 function App() {
+  const test = useSelector((state: RootState) => state.user.status);
+  const dispatch = useDispatch()
+  var isLoggedIn = false;
+  if (test === "authenticated"){
+    isLoggedIn = true;
+  }
   // this needs to be replaced with a check to see if the user is logged in from state
-  const isLoggedIn = true;
 
+  console.log("test0", test, isLoggedIn);
+  
   return (
     <Routes>
       <Route path="/login" element={<Login />} />

@@ -62,12 +62,13 @@ export default function Login() {
       // password
       if (passwordValue.trim() === "") {
         errors.password = "Password is required";
-      } else if (passwordValue.length < 8) {
-        errors.password = "Password must be at least 8 characters long";
-      } else if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
-        errors.password =
-          "Password must contain at least one number and one special character";
-      }
+      } 
+      // else if (passwordValue.length < 8) {
+      //   errors.password = "Password must be at least 8 characters long";
+      // } else if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
+      //   errors.password =
+      //     "Password must contain at least one number and one special character";
+      // }
       return errors;
     },
   });
