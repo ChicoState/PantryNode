@@ -3,8 +3,8 @@ const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth');
 const { item } = require("../models/init-models");
 
-router.get('/barcode/:barcode', async (req, res) => {
-  const barcode = req.params.barcode;
+router.get('/barcode', async (req, res) => {
+  const barcode = req.query.barcode;
   const result = await item.LookUpbarcode(barcode);
 
   if (!result) {

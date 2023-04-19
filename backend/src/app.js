@@ -68,7 +68,7 @@ app.get('/sale', saleRouter);
 app.get('/categories', saleRouter);
 
 //barcodelookup
-app.use('/', barcodeRouter);
+app.get('/barcode', barcodeRouter);
 
 app.get('/donor', saleRouter);
 app.post('/add_donor', saleRouter);
