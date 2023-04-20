@@ -1,17 +1,17 @@
 import * as React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Layout from "./Layout";
+import { useAppSelector } from '../hooks';
 
 type ProtectedRouteProps = {
-  isLoggedIn: boolean;
   redirectPath?: string;
 };
 
 const ProtectedRoute = ({
-  isLoggedIn,
   redirectPath = "/login",
 }: ProtectedRouteProps) => {
-  if (!isLoggedIn) {
+  const status = useAppSelector(state => state.user.status);
+  if (status !== "authenticated") {
     return <Navigate to={redirectPath} replace />;
   }
   return (

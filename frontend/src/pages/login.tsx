@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,6 +19,7 @@ import { login } from "../redux-features/user";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 import { useFormik } from "formik";
+import { logout } from "../redux-features/user";
 
 interface LoginFormInput {
   email?: string;
@@ -26,10 +28,12 @@ interface LoginFormInput {
 
 export default function Login() {
   const [remember, setRemember] = useState(false);
-
+  
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  useEffect(() => {
+    dispatch(logout());
+  }, []);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -75,7 +79,7 @@ export default function Login() {
   const handleRememberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRemember(event.target.checked);
   };
-
+  
   const loading = useAppSelector((state) => state.user.status);
   return (
     <Container component="main" maxWidth="xs">

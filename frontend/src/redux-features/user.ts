@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import { PayloadAction } from '@reduxjs/toolkit'
 import axiosInstance from "../util/axiosInstance";
+import { getToken, removeToken } from "../Components/Authentication/useToken";
 
 //Docs: https://redux-toolkit.js.org/api/createAsyncThunk
 //Docs: https://redux-toolkit.js.org/introduction/getting-started
@@ -19,18 +20,37 @@ export const login = createAsyncThunk(
       .catch((err: any) => rejectWithValue(err))
 );
 
+const token = getToken();
+var init_token;
+var init_status
+if(token) {
+    init_token = token
+    init_status = "authenticated";
+} else {
+    init_token = ""
+    init_status = "idle";
+}
 const initialState = {
   name: "",
   email: "",
-  token: "",
-  status: "idle",
+  token: init_token,
+  status: init_status,
   error: "",
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logout(state) {
+      removeToken();
+      state.name = "";
+      state.token = "";
+      state.token = "";
+      state.status = "idle";
+      state.error = ""
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -52,5 +72,5 @@ export const userSlice = createSlice({
 });
 
 export const selectStatus = (state: any) => state.user.status;
-export const userAction = userSlice.actions;
+export const { logout } = userSlice.actions;
 export default userSlice.reducer;
