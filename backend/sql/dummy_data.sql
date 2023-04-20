@@ -5,8 +5,9 @@ INSERT INTO Storage_type (stor_type) VALUES
   ('Frozen');
 
 -- Insert test data for Person
+-- Password for user is password
 INSERT INTO Person (fname, lname, password, email, phone)
-VALUES ('John', 'Doe', 'password', 'johndoe@example.com', 1234567890);
+VALUES ('John', 'Doe', '$2a$10$p3igL0pzl1DyxOmMYu7qFOvnffCqn.X1xOkfeEEKOrFwJB5B9Kcsy', 'johndoe@example.com', 1234567890);
 
 -- Insert test data for Address
 INSERT INTO Address (person_id, addr_1, city, state, zip, country)
@@ -16,8 +17,9 @@ UPDATE Person SET pri_addr_id = (SELECT MAX(addr_id) FROM Address)
 WHERE email = 'johndoe@example.com';
 
 -- Insert test data for Person
+-- Password for user is password
 INSERT INTO Person (fname, lname, password, email, phone)
-VALUES ('Jane', 'Smith', 'password', 'janesmith@example.com', 1234567890);
+VALUES ('Jane', 'Smith', '$2a$10$p3igL0pzl1DyxOmMYu7qFOvnffCqn.X1xOkfeEEKOrFwJB5B9Kcsy', 'janesmith@example.com', 1234567890);
 
 -- Insert test data for Address
 INSERT INTO Address (person_id, addr_1, city, state, zip, country)
@@ -65,11 +67,11 @@ VALUES ((SELECT MAX(section_id) FROM Section), 100),
        ((SELECT MAX(section_id) FROM Section)-1, 150);
 
 -- Insert test data for Item
-INSERT INTO Item (name, category, stor_id, size)
-VALUES ('Apples', 'produce', (SELECT MAX(stor_id) FROM Storage_type)-1, 10),
-       ('Oranges', 'produce', (SELECT MAX(stor_id) FROM Storage_type), 15),
-       ('Milk', 'dairy', (SELECT MAX(stor_id) FROM Storage_type)-2, 1),
-       ('Cheese', 'dairy', (SELECT MAX(stor_id) FROM Storage_type)-2, 0.5);
+INSERT INTO Item (name, category, stor_id, size, barcode)
+VALUES ('Apples', 'produce', (SELECT MAX(stor_id) FROM Storage_type)-1, 10, '123456789'),
+       ('Oranges', 'produce', (SELECT MAX(stor_id) FROM Storage_type), 15,'223456789'),
+       ('Milk', 'dairy', (SELECT MAX(stor_id) FROM Storage_type)-2, 1, '323456789'),
+       ('Cheese', 'dairy', (SELECT MAX(stor_id) FROM Storage_type)-2, 0.5, '423456789');
 
 -- Insert test data for Permissions
 INSERT INTO Permissions (perm_num, description)
@@ -96,3 +98,5 @@ VALUES ((SELECT MAX(trans_id) FROM Transaction), (SELECT MAX(item_id) FROM Item)
 INSERT INTO Shelf_contents (trans_item_id, shelf_id, store_date, quantity)
 VALUES ((SELECT MAX(trans_item_id) FROM Trans_items), (SELECT MAX(shelf_id) FROM Shelf), NOW(), 5),
        ((SELECT MAX(trans_item_id) FROM Trans_items), (SELECT MAX(shelf_id) FROM Shelf), NOW(), 10);
+
+REFRESH MATERIALIZED VIEW stock;
