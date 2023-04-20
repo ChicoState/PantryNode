@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
 var feedRouter = require('./routes/feed');
+var itemsRouter = require('./routes/items');
 var summaryRouter = require('./routes/summary');
 var stockRouter = require('./routes/stock');
 var barcodeRouter = require('./routes/barcode');
@@ -86,6 +87,9 @@ app.post('/checkout', saleRouter);
 
 app.get('/feed', feedRouter);
 
+app.get('/items', itemsRouter);
+app.get('/items/expired', itemsRouter);
+
 app.get('/purchases', summaryRouter);
 app.get('/currentstock', summaryRouter);
 app.get('/wastemanagement', summaryRouter);
@@ -99,7 +103,7 @@ app.get('/checkout_success', function(req, res, next) {
 
 app.get('/s', function(req, res, next) {
     res.render('signup_success', { title: 'Home' });
-})
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -116,9 +120,5 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
-
-
-
 
 module.exports = app;
