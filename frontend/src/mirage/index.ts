@@ -17,7 +17,6 @@ export function makeServer({ environment = "test" }) {
       };
       // End fix
 
-      this.namespace = "";
       this.urlPrefix = "http://localhost:3001";
       getAuthRoutes(this);
       getSaleRoutes(this);
