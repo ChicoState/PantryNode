@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Donor from "./pages/donor";
 import Expiry from "./pages/expiry";
@@ -10,7 +10,7 @@ import Summary from "./pages/summary";
 import Signup from "./pages/register";
 import Scanner from "./pages/scanner";
 import ProtectedRoute from "./Components/ProtectedRoute";
-import getToken from "./Components/useToken";
+import { getToken } from "./Components/useToken";
 
 import { makeServer } from "./mirage";
 
@@ -22,19 +22,24 @@ makeServer({ environment: "development" });
 // }
 
 function App() {
-  const token = getToken();
-  var isLoggedIn = false;
-  if (token) {
-    isLoggedIn = true;
-  }
+  const [is_logged_in, set_is_logged_in] = useState(false);
+  useEffect(() => {
+    console.log("Setting state");
+    const token = getToken();
+    if (token) {
+      set_is_logged_in(true);
+      console.log("Setting to true");
+    }
+  }, [is_logged_in]);
   
+  console.log(is_logged_in);
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
       {/* All the routes that are restricted and need authorization */}
-      <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+      <Route element={<ProtectedRoute isLoggedIn={is_logged_in} />}>
         <Route index element={<Index />} />
         <Route path="/stock" element={<Stock />} />
         <Route path="/summary" element={<Summary />} />

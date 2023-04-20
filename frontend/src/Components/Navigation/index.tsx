@@ -11,6 +11,7 @@ import { useState } from "react";
 import { ListItemIcon } from "@mui/material";
 import paths from "./paths";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { removeToken } from "../useToken";
 const drawerWidth = 240;
 const Navigation = () => {
   const location = useLocation();
@@ -20,7 +21,9 @@ const Navigation = () => {
   const [activeLink, setActiveLink] = useState(path);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    if(!removeToken()){
+      console.log("Token Removal Failed");
+    }
     return navigate("/login");
   };
 
