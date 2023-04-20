@@ -49,7 +49,8 @@ router.get('/feed', ensureAuthenticated, function (req, res) {
             if (allItems == null) {
                 console.log("THIS IS ERROR " + allItems);
             } else {
-                res.json(allItems);
+                res.json(allItems); 
+                
             }
         });
     }
