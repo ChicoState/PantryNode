@@ -2,7 +2,7 @@ import axios from "axios";
 import isBrowser from "./isBrowser";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3001/api",
+  baseURL: "http://localhost:3001",
 });
 
 axiosInstance.interceptors.request.use(async (config: any) => {
