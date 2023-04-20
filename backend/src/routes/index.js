@@ -46,6 +46,7 @@ router.get('/home', ensureAuthenticated, function(req, res) {
           res.json({ name: req.user, allItems });
         } else {
           res.json({ name: req.user });
+        
         }
       }
     }
