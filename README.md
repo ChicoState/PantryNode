@@ -81,6 +81,43 @@ In this section we'll use docker-compose to get the full application running.
 
 ### First Run
 
+=======
+
+#### Front-End
+
+More Info: [Front-End README](frontend/README.md)
+
+- React
+- Material UI
+
+### Features
+
+#### Dashboard System
+
+This project implements a dashboard system for various operations, like checkout students, stock management, and
+donation tracking.
+
+#### Stock Management
+
+This functionality allows to add the stock and maintain the record for various type of donations by category i.e.,
+Anonymous, Organization, and Pantry Purchased.
+
+Additionally, Allowing to manage the purchase and expiry of the stock.
+
+#### Sales Report
+
+The sales report allows the admin or the pantry organization to visualize the stock, expiry, and waste management. It
+also helps to keep the count of various parameters such as students count, expired item count, available item count, and
+utilized item count.
+
+## Development
+
+This project is currently build with 3 major components. A database, a backend, and a frontend. All are able to run
+inside of containers. You can find instructions to run each locally, outside of containers, in their respective READMEs.
+In this section we'll use docker-compose to get the full application running.
+
+### First Run
+
 Clone this repo to your local machine.
 
 ```shell
