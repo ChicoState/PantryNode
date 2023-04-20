@@ -13,7 +13,7 @@ import {
 function Scanner() {
   const [camera, setCamera] = useState(false);
   const [result, setResult] = useState<string | null>(null);
-  const loading = useAppSelector((state) => state.user.status);
+  const searching = useAppSelector((state) => state.user.status);
 
   const onDetected = (result: string) => {
     setResult(result);
@@ -25,6 +25,9 @@ function Scanner() {
     }, 
     onSubmit: (values) => { 
       alert(JSON.stringify(values, null, 2)); 
+      //TO-DO: Update alert to show values from model.
+      //TO-DO: Create functions mentioned in subtasks from issue #174
+      //https://github.com/ChicoState/PantryNode/issues/174
     },
   });
 
@@ -70,7 +73,7 @@ function Scanner() {
             }}
           >
             Lookup
-            {loading === "loading" && <CircularProgress />}
+            {searching === "searching" && <CircularProgress />}
           </Button>
     </Box>
     </div>
