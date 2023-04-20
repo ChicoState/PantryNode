@@ -6,7 +6,8 @@
     "start": "ts-node-dev --respawn src/bin/www",
     "build": "tsc -p .",
     "test": "jest",
-    "lint": "eslint --fix --ext .ts,.js ."
+    "lint": "eslint --fix --ext .ts,.js .",
+    "ts-coverage": "typescript-coverage-report"
   },
   "dependencies": {
     "@ericblade/quagga2": "^1.8.2",
