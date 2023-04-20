@@ -1,8 +1,6 @@
 name: Coverage Report
 
 on:
-  push:
-    branches: [coverage_report]
   pull_request:
     branches: [main]
 
