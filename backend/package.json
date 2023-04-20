@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "ts-node-dev --respawn src/bin/www",
+    "start": "ts-node-dev --poll --respawn src/bin/www",
     "build": "tsc -p .",
     "test": "jest",
     "lint": "eslint --fix --ext .ts,.js ."

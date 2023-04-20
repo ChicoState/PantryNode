@@ -53,6 +53,8 @@ services:
       context: ./frontend
     ports:
       - "3000:3000"
+    environment:
+      - WATCHPACK_POLLING=true
     container_name: react
     networks:
       - local
