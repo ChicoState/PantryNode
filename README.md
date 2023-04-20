@@ -5,6 +5,8 @@
 
 [![Build Node](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml/badge.svg)](https://github.com/ChicoState/PantryNode/actions/workflows/actions.yml)
 
+[![Coverage Report](https://github.com/ChicoState/PantryNode/actions/workflows/coverage_report.yml/badge.svg)](https://github.com/ChicoState/PantryNode/actions/workflows/coverage_report.yml)
+
 ## Description
 
 In this project, we have implemented food pantry management using a NodeJS-based web framework. This project allows the
