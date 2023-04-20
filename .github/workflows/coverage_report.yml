@@ -1,0 +1,39 @@
+name: Coverage Report
+
+on:
+  push:
+    branches: [coverage_report]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm install --save-dev typescript-coverage-report
+      - name: Generate coverage report
+        run: |
+          cd backend
+          npm run ts-coverage
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install --save-dev typescript-coverage-report
+      - name: Generate coverage report
+        run: |
+          cd frontend
+          npm run ts-coverage
