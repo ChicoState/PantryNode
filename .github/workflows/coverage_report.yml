@@ -2,7 +2,7 @@ name: Coverage Report
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main , frontend_testing]
 
 jobs:
   backend:
@@ -30,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: |
           cd frontend
-          npm install --save-dev typescript-coverage-report
+          npm install
       - name: Generate coverage report
         run: |
           cd frontend
-          npm run ts-coverage
+          npm run coverage
