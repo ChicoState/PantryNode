@@ -2,7 +2,7 @@ name: Testing
 
 on:
   pull_request:
-    branches: [main , frontend_testing]
+    branches: [main]
 
 jobs:
   backend:
