@@ -33,7 +33,7 @@ export default function Login() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(logout());
-  }, []);
+  }, [dispatch]);
   const formik = useFormik({
     initialValues: {
       email: "",
