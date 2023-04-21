@@ -10,10 +10,35 @@ describe('Donor Page', () => {
         const AddDonor = screen.getByText('Add Donor');
         expect(AddDonor).toBeInTheDocument(); // assert that the button is in the document
     });
-    it("Displays a dialog box for adding a new donor when the 'Add Donor' button is clicked", () => {
-        const { getByRole, queryByText } = render(<Donor />);
-        const addButton = getByRole("button", { name: "Add Donor" });
-        fireEvent.click(addButton);
-        expect(queryByText("Add New Entry")).toBeInTheDocument();
+
+    describe("Donor component", () => {
+        it("Renders the Donor List title with pre-exisiting data", () => {
+            const { getByText } = render(<Donor />);
+            expect(getByText("Donor List")).toBeInTheDocument();
+        });
+        it("displays a dialog for adding a new donor when the 'Add Donor' button is clicked", () => {
+            const { getByRole, queryByText } = render(<Donor />);
+            const addButton = getByRole("button", { name: "Add Donor" });
+            fireEvent.click(addButton);
+            expect(queryByText("Add New Entry")).toBeInTheDocument();
+        });
+        it("Adds a new donor to the table when the 'Add' button is clicked in the Add New Entry dialog", () => {
+            const { getByRole, getByLabelText, getByText, queryByText } = render(
+                <Donor />
+            );
+            const addButton = getByRole("button", { name: "Add Donor" });
+            fireEvent.click(addButton);
+            const nameInput = getByLabelText("Name");
+            const emailInput = getByLabelText("Email");
+            const locationInput = getByLabelText("Location");
+            fireEvent.change(nameInput, { target: { value: "Tanveeee" } });
+            fireEvent.change(emailInput, { target: { value: "mahajan@gmail.com" } });
+            fireEvent.change(locationInput, { target: { value: "Mehico" } });
+            const addDonorrButton = getByText("Add");
+            fireEvent.click(addDonorrButton);
+            expect(queryByText("Tanveeee")).toBeInTheDocument();
+            expect(queryByText("mahajan@gmail.com")).toBeInTheDocument();
+            expect(queryByText("Mehico")).toBeInTheDocument();
+        });
     });
 });
