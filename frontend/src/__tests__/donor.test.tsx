@@ -31,14 +31,64 @@ describe('Donor Page', () => {
             const nameInput = getByLabelText("Name");
             const emailInput = getByLabelText("Email");
             const locationInput = getByLabelText("Location");
-            fireEvent.change(nameInput, { target: { value: "Tanveeee" } });
+            fireEvent.change(nameInput, { target: { value: "Tanvi" } });
             fireEvent.change(emailInput, { target: { value: "mahajan@gmail.com" } });
-            fireEvent.change(locationInput, { target: { value: "Mehico" } });
+            fireEvent.change(locationInput, { target: { value: "Mexico" } });
             const addDonorrButton = getByText("Add");
             fireEvent.click(addDonorrButton);
-            expect(queryByText("Tanveeee")).toBeInTheDocument();
+            expect(queryByText("Tanvi")).toBeInTheDocument();
             expect(queryByText("mahajan@gmail.com")).toBeInTheDocument();
-            expect(queryByText("Mehico")).toBeInTheDocument();
+            expect(queryByText("Mexico")).toBeInTheDocument();
+        });
+        it("displays an error message if the email address is invalid in the add donor dialog", () => {
+            const { getByRole, getByLabelText, getByText, queryByText } = render(
+                <Donor />
+            );
+            const addDonorButton = getByRole("button", { name: "Add Donor" });
+            fireEvent.click(addDonorButton);
+            const emailInput = getByLabelText("Email");
+            const addButton = getByText("Add");
+            //Save button should be initially disabled
+            expect(addButton).toBeDisabled();
+            //Entering an invalid email
+            fireEvent.change(emailInput, { target: { value: "invalid_email" } });
+            fireEvent.click(addButton);
+            //Error message should be displayed
+            expect(queryByText("Email is invalid")).toBeInTheDocument();
+        });
+
+        it("displays an error message if the no email address is provided in the Email Address field of the add donor dialog", () => {
+            const { getByRole, getByLabelText, getByText, queryByText } = render(
+                <Donor />
+            );
+            const addDonorButton = getByRole("button", { name: "Add Donor" });
+            fireEvent.click(addDonorButton);
+            const emailInput = getByLabelText("Email");
+            const addButton = getByText("Add");
+            expect(addButton).toBeDisabled();
+            //First we put in dummy text
+            fireEvent.change(emailInput, { target: { value: "zyzz" } });
+            //Removing the dummy text to initiate warning message
+            fireEvent.change(emailInput, { target: { value: "" } });
+            fireEvent.click(addButton);
+            expect(queryByText("Email is required")).toBeInTheDocument();
+        });
+
+        it("Sorts the donor list in ascending order by name when the name header is clicked once", () => {
+            const { getByText, queryByText } = render(<Donor />);
+            const nameHeader = getByText("Name");
+            fireEvent.click(nameHeader);
+            expect(queryByText("Danny")).toBeInTheDocument();
+            expect(queryByText("John")).toBeInTheDocument();
+        });
+
+        it("sorts the donor list in descending order by name when the name header is clicked twice", () => {
+            const { getByText, queryByText } = render(<Donor />);
+            const nameHeader = getByText("Name");
+            fireEvent.click(nameHeader);
+            fireEvent.click(nameHeader);
+            expect(queryByText("John")).toBeInTheDocument();
+            expect(queryByText("Danny")).toBeInTheDocument();
         });
     });
 });
