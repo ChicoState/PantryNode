@@ -21,14 +21,11 @@ export const login = createAsyncThunk(
 );
 
 const token = getToken();
-var init_token;
-var init_status
+let init_token = "";
+let init_status = "idle"
 if(token) {
     init_token = token
     init_status = "authenticated";
-} else {
-    init_token = ""
-    init_status = "idle";
 }
 const initialState = {
   name: "",
