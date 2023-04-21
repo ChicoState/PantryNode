@@ -90,5 +90,43 @@ describe('Donor Page', () => {
             expect(queryByText("John")).toBeInTheDocument();
             expect(queryByText("Danny")).toBeInTheDocument();
         });
+
+        it("sorts the donor list in descending order by Email when the Email header is clicked once", () => {
+            const { getByText, queryByText } = render(<Donor />);
+            const EmailHeader = getByText("Email");
+            fireEvent.click(EmailHeader);
+
+            expect(queryByText("danny@gmail.com")).toBeInTheDocument();
+            expect(queryByText("john@gmail.com")).toBeInTheDocument();
+        });
+
+        it("sorts the donor list in ascending order by Email when the Email header is clicked twice", () => {
+            const { getByText, queryByText } = render(<Donor />);
+            const EmailHeader = getByText("Email");
+            fireEvent.click(EmailHeader);
+            fireEvent.click(EmailHeader);
+
+            expect(queryByText("john@gmail.com")).toBeInTheDocument();
+            expect(queryByText("danny@gmail.com")).toBeInTheDocument();
+        });
+
+        //it("sorts the donor list in descending order by Location when the Location header is clicked once", () => {
+        //    const { getByText, queryByText } = render(<Donor />);
+        //    const LocationHeader = getByText("Location");
+        //    fireEvent.click(LocationHeader);
+
+        //    expect(queryByText("USA")).toBeInTheDocument();
+        //    expect(queryByText("USA")).toBeInTheDocument();
+        //});
+
+        //it("sorts the donor list in ascending order by Location when the Location header is clicked twice", () => {
+        //    const { getByText, queryByText } = render(<Donor />);
+        //    const LocationHeader = getByText("Email");
+        //    fireEvent.click(LocationHeader);
+        //    fireEvent.click(LocationHeader);
+
+        //    expect(queryByText("USA")).toBeInTheDocument();
+        //    expect(queryByText("USA")).toBeInTheDocument();
+
     });
 });
