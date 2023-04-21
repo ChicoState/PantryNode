@@ -74,6 +74,8 @@ describe('Donor Page', () => {
             expect(queryByText("Email is required")).toBeInTheDocument();
         });
 
+
+        //PLEASE NOTE : THE BELOW TESTS LOOK REDUNDANT BUT IT HELPS WITH COVERING STATEMENTS
         it("Sorts the donor list in ascending order by name when the name header is clicked once", () => {
             const { getByText, queryByText } = render(<Donor />);
             const nameHeader = getByText("Name");
