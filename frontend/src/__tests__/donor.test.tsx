@@ -48,7 +48,7 @@ describe('Donor Page', () => {
             fireEvent.click(addDonorButton);
             const emailInput = getByLabelText("Email");
             const addButton = getByText("Add");
-            //Save button should be initially disabled
+            //Add button should be initially disabled
             expect(addButton).toBeDisabled();
             //Entering an invalid email
             fireEvent.change(emailInput, { target: { value: "invalid_email" } });
