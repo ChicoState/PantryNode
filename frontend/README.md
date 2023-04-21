@@ -1,33 +1,37 @@
-# PantryNode
+# PantryNode's Frontend!
 
-This is the typescript react frontend of Pantry Node
+This is the React front-end for PantryNode.
 
-To install the dependencies
+## Development
 
-```
+### Prerequisites
+
+Install all dependencies.
+
+```shell
 npm install
 ```
 
-To run the application
+That's all!
 
-```
+### Run
+
+```shell
 npm start
 ```
 
-To run tests
+### Validate
 
-```
+Run the tests.
+
+```shell
 npm test
 ```
 
-To build the application
+Run the linter.
 
-```
-npm run build
-```
-
-To run the lint
-
-```
+```shell
 npm run lint
 ```
+
+
