@@ -10,7 +10,6 @@ import Summary from "./pages/summary";
 import Signup from "./pages/register";
 import Scanner from "./pages/scanner";
 import ProtectedRoute from "./Components/ProtectedRoute";
-
 import { makeServer } from "./mirage";
 
 makeServer({ environment: "development" });
@@ -21,16 +20,15 @@ makeServer({ environment: "development" });
 // }
 
 function App() {
-  // this needs to be replaced with a check to see if the user is logged in from state
-  const isLoggedIn = true;
-
+  
+  
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
       {/* All the routes that are restricted and need authorization */}
-      <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+      <Route element={<ProtectedRoute/>}>
         <Route index element={<Index />} />
         <Route path="/stock" element={<Stock />} />
         <Route path="/summary" element={<Summary />} />

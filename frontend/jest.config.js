@@ -13,5 +13,7 @@ module.exports = {
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
   ],
-
+  collectCoverage: true,
+  collectCoverageFrom: ["src/pages/**/*.tsx", '!**/node_modules/**'],
+  verbose: true
 };

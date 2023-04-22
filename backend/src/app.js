@@ -16,7 +16,6 @@ var stockRouter = require('./routes/stock');
 var barcodeRouter = require('./routes/barcode');
 
 var app = express();
-require("uuid");
 
 const cors = require('cors');
 // TODO(#119): Specifiy origin with an EnvVar.
@@ -50,7 +49,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        expires: 60 * 60 * 24,
+        httpOnly: false,
+        secure: true,
+      },
 }));
 
 
@@ -90,19 +94,12 @@ app.get('/soontoexpire', summaryRouter);
 app.get('/stock', stockRouter);
 
 app.get('/checkout_success', function(req, res, next) {
-
     res.render('checkout_success', { title: 'Success' });
-
 });
-
-
-
 
 app.get('/s', function(req, res, next) {
-
     res.render('signup_success', { title: 'Home' });
-
-});
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
