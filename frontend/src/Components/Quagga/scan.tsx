@@ -47,7 +47,7 @@ const Scanner: React.FC<ScannerProps> = ({ onDetected }) => {
       }
       setCameraOn(true);
     };
-
+    // eslint-disable-next-line
     const stopCamera = () => {
       Quagga.stop();
       setCameraOn(false);
