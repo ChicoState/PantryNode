@@ -8,6 +8,7 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Paper,
 } from "@mui/material";
 
 interface categoryListType {
@@ -38,9 +39,13 @@ const SaleTable = ({ category, categorydata }: SaleTableProps) => {
       <Typography variant="h6" align="center">
         {category.name}
       </Typography>
-      <TableContainer>
+      <TableContainer component={Paper}>
         <Table>
-          <TableHead>
+          <TableHead
+            sx={{
+              "& th": { color: "white", backgroundColor: "#8C2332" },
+            }}
+          >
             <TableRow>
               <TableCell>Product Name</TableCell>
               <TableCell>Price</TableCell>
