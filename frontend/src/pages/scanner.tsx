@@ -32,34 +32,34 @@ function Scanner() {
     <div className="App">
       <h2>{result ? result : "Ready to Scan"}</h2>
       <Button
-          variant="contained"
-          color="primary"
-          onClick={() => setCamera(!camera)}
-          sx={{ marginLeft: "auto", paddingRight: 2 }}
-          >
-         <AddIcon />
-        {camera ? "Stop" : "Start"} 
-            </Button>
+        variant="contained"
+        color="primary"
+        onClick={() => setCamera(!camera)}
+        sx={{ marginLeft: "auto", paddingRight: 2 }}
+      >
+        <AddIcon />
+        {camera ? "Stop" : "Start"}
+      </Button>
       <div className="container">
         {camera && <QuaggaScanner onDetected={onDetected} />}
       </div>
-    <div className="FormInput">
-    <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
-    <TextField
-      margin="normal"
-      fullWidth
-      id="barcode"
-      label="Barcode"
-      name="barcode"
-      autoComplete="barcode"
-      // autoFocus
-      value={formik.values.barcode}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      error={formik.touched.barcode && formik.errors.barcode !== undefined}
-      helperText={formik.touched.barcode ? formik.errors.barcode : ""}
-    />
-    <Button
+      <div className="FormInput">
+        <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            fullWidth
+            id="barcode"
+            label="Barcode"
+            name="barcode"
+            autoComplete="barcode"
+            // autoFocus
+            value={formik.values.barcode}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.barcode && formik.errors.barcode !== undefined}
+            helperText={formik.touched.barcode ? formik.errors.barcode : ""}
+          />
+          <Button
             type="submit"
             fullWidth
             variant="contained"
@@ -72,8 +72,8 @@ function Scanner() {
             Lookup
             {loading === "loading" && <CircularProgress />}
           </Button>
-    </Box>
-    </div>
+        </Box>
+      </div>
     </div>
   );
 }
