@@ -2,6 +2,16 @@ import React, { useEffect, useState } from "react";
 import Expiry from "../Components/Expiry/ExpiryTable";
 import axiosInstance from "../util/axiosInstance";
 
+import {
+  AppBar,
+  Toolbar,
+  Select,
+  MenuItem,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
+
 type expiryFeed = {
   id: number;
   item: string;
@@ -56,13 +66,24 @@ const ExpiryIndex = () => {
 
   return (
     <div>
-      <select value={selectedCategory} onChange={handleCategoryChange}>
-        {categories.map((category) => (
-          <option key={category} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
+      <AppBar position="static" style={{marginBottom: 10}}>
+      <Toolbar>
+        <div style={{flexDirection: "column", justifyContent: "center", display: "flex", alignItems: "center"}}>
+        <Typography>
+          Category
+        </Typography>
+        <select value={selectedCategory} onChange={handleCategoryChange}>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              <MenuItem key={category} value={category}>
+                {category}
+              </MenuItem>
+            </option>
+          ))}
+        </select>
+        </div>
+        </Toolbar>
+        </AppBar>
       <Expiry expiredFeedList={expiredFeedList} />
     </div>
   );
