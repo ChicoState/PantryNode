@@ -10,6 +10,7 @@ import Summary from "./pages/summary";
 import Signup from "./pages/register";
 import Scanner from "./pages/scanner";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import PasswordReset from "./pages/resetpasssword";
 import { makeServer } from "./mirage";
 
 makeServer({ environment: "development" });
@@ -26,6 +27,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/resetpasssword" element={<PasswordReset />} />
 
       {/* All the routes that are restricted and need authorization */}
       <Route element={<ProtectedRoute/>}>
