@@ -44,4 +44,36 @@ router.get('/items/expired', ensureAuthenticated, function (req, res) {
     });
 });
 
+router.get('/items/nearly_expired', ensureAuthenticated, function (req, res) {
+    // TODO(@parthpandey1): This returns ids, enrich the return with actual item data.
+    const today = new Date();
+    return trans_items.findAll({
+        where: {
+            expiration: {
+                [Op.lte]: today.getDate() + 2
+            }
+        },
+        include: [{
+            model: transaction,
+            as: 'tran',
+            required: true,
+            attributes: ['date']
+        }, {
+            model: item,
+            as: 'item',
+            required: true,
+            attributes: ['name']
+        }],
+        attributes: ['trans_item_id', 'quantity', 'expiration'],
+    }).then((allItems) => {
+        if (allItems == null) {
+            console.log("THIS IS ERROR " + allItems);
+        } else {
+            res.json(JSON.stringify(allItems));
+        }
+    });
+});
+
+module.exports = router;
+
 module.exports = router;
