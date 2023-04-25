@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Quagga from "quagga";
+import CameraToggleButton from "./CameraToggleButton";
+import { CircularProgress, Stack } from "@mui/material";
 
 interface ScannerProps {
   onDetected: (code: string) => void;
@@ -7,7 +9,7 @@ interface ScannerProps {
 
 const Scanner: React.FC<ScannerProps> = ({ onDetected }) => {
   const [cameraOn, setCameraOn] = useState(false);
-
+  const [loadingCamera, setLoadingCamera] = useState(true);
   useEffect(() => {
     let quaggaInitialized = false;
 
@@ -45,11 +47,13 @@ const Scanner: React.FC<ScannerProps> = ({ onDetected }) => {
       } else {
         Quagga.start();
       }
+      setLoadingCamera(false);
       setCameraOn(true);
     };
     // eslint-disable-next-line
     const stopCamera = () => {
       Quagga.stop();
+      setLoadingCamera(false);
       setCameraOn(false);
     };
 
@@ -65,20 +69,23 @@ const Scanner: React.FC<ScannerProps> = ({ onDetected }) => {
   }, [cameraOn, onDetected]);
 
   const handleToggleCamera = () => {
-    if (cameraOn) {
-      setCameraOn(false);
-    } else {
-      setCameraOn(true);
-    }
+    setLoadingCamera((s) => !s);
+    setTimeout(() => {
+      setLoadingCamera((s) => !s);
+      setCameraOn((s) => !s);
+    }, 1000);
   };
 
   return (
-    <div>
-      <button onClick={handleToggleCamera}>
-        {cameraOn ? "Stop" : "Start"} Camera
-      </button>
+    <Stack sx={{ flexDirection: "column", alignItems: "flex-start" }}>
+      <CameraToggleButton
+        cameraStatus={cameraOn}
+        handleToggleCamera={handleToggleCamera}
+      />
+
+      <CircularProgress />
       <div id="interactive" className="viewport" />
-    </div>
+    </Stack>
   );
 };
 

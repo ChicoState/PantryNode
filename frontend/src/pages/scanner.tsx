@@ -6,9 +6,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAppSelector } from "../hooks";
-import {
-  Button,
-} from "@mui/material";
+import { Button } from "@mui/material";
 
 function Scanner() {
   const [camera, setCamera] = useState(false);
@@ -21,28 +19,18 @@ function Scanner() {
 
   const formik = useFormik({
     initialValues: {
-      barcode: ""
-    }, 
-    onSubmit: (values) => { 
-      alert(JSON.stringify(values, null, 2)); 
+      barcode: "",
+    },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
     },
   });
 
   return (
-    <div className="App">
+    <div className="container">
       <h2>{result ? result : "Ready to Scan"}</h2>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => setCamera(!camera)}
-        sx={{ marginLeft: "auto", paddingRight: 2 }}
-      >
-        <AddIcon />
-        {camera ? "Stop" : "Start"}
-      </Button>
-      <div className="container">
-        {camera && <QuaggaScanner onDetected={onDetected} />}
-      </div>
+
+      <QuaggaScanner onDetected={onDetected} />
       <div className="FormInput">
         <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
           <TextField
@@ -56,7 +44,9 @@ function Scanner() {
             value={formik.values.barcode}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.touched.barcode && formik.errors.barcode !== undefined}
+            error={
+              formik.touched.barcode && formik.errors.barcode !== undefined
+            }
             helperText={formik.touched.barcode ? formik.errors.barcode : ""}
           />
           <Button
@@ -67,8 +57,7 @@ function Scanner() {
             sx={{ mt: 3, mb: 2, py: 2 }}
             style={{
               backgroundColor: "primary",
-            }}
-          >
+            }}>
             Lookup
             {loading === "loading" && <CircularProgress />}
           </Button>
