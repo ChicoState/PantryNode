@@ -32,6 +32,11 @@ const paths: Path[] = [
     key: "Expiry",
     icon: <TimerIcon />,
   },
+  {
+    path: "/scanner",
+    key: "Scanner",
+    icon: <TimerIcon />,
+  },
 ];
 
 type Path = {

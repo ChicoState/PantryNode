@@ -17,10 +17,9 @@ var apiV1_EmployeeRouter = require('./routes/api/v1/employee');
 var feedRouter = require('./routes/feed');
 var summaryRouter = require('./routes/summary');
 var stockRouter = require('./routes/stock');
+var barcodeRouter = require('./routes/barcode');
 
 var app = express();
-
-require("uuid");
 
 const cors = require('cors');
 // TODO(#119): Specifiy origin with an EnvVar.
@@ -54,7 +53,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        expires: 60 * 60 * 24,
+        httpOnly: false,
+        secure: true,
+      },
 }));
 
 
@@ -70,6 +74,9 @@ app.post('/login', usersRouter);
 app.get('/logout', usersRouter);
 app.get('/sale', saleRouter);
 app.get('/categories', saleRouter);
+
+//barcodelookup
+app.get('/barcode', barcodeRouter);
 
 app.get('/donor', saleRouter);
 app.post('/add_donor', saleRouter);
@@ -120,5 +127,9 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+
+
+
 
 module.exports = app;

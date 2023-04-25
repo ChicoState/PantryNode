@@ -6,9 +6,11 @@
     "start": "ts-node-dev --respawn src/bin/www",
     "build": "tsc -p .",
     "test": "jest",
-    "lint": "eslint --fix --ext .ts,.js ."
+    "lint": "eslint --fix --ext .ts,.js .",
+    "ts-coverage": "typescript-coverage-report"
   },
   "dependencies": {
+    "@ericblade/quagga2": "^1.8.2",
     "@types/passport": "^1.0.12",
     "axios": "^1.3.4",
     "bcrypt": "^5.0.0",
@@ -20,7 +22,7 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
-    "ejs": "^3.1.2",
+    "ejs": "^3.1.9",
     "expres": "^0.0.5",
     "express": "^4.18.2",
     "express-favicon": "^2.0.1",
@@ -30,6 +32,7 @@
     "jade": "~1.11.0",
     "jshint-reporter-badge": "^0.1.0",
     "jslint": "^0.12.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.9.11",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.22",
@@ -37,12 +40,18 @@
     "passport-local": "^1.0.0",
     "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
+    "prop-types": "^15.7.2",
+    "quagga": "^0.12.1",
     "randomstring": "^1.1.5",
+    "react-dom": "^16.13.1",
+    "react-qr-reader": "^2.2.1",
     "sequelize": "^6.29.1",
     "session-file-store": "^1.4.0",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.0",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
@@ -52,6 +61,6 @@
     "jshint": "^2.13.6",
     "ts-jest": "^29.0.5",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.0.4"
+    "typescript": "^4.9.5"
   }
 }

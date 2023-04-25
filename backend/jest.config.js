@@ -5,5 +5,5 @@ module.exports = {
     //"/node_modules/",
     //"\\.pc/",
     // "/frontend/",
-  ],
+  ]
 };
