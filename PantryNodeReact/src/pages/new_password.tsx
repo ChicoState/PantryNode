@@ -65,6 +65,7 @@ export default function Passwordreset(){
       setCNpassword(value);
       if(npassword!==value){
       setCNpasswordError("New password and confirm password do not match");
+      setIsDisabled(true);
       }
       else
       {
