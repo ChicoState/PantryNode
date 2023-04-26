@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Donor from "./pages/donor";
+import Donor from "./pages/donors";
 import Expiry from "./pages/expiry";
 import Index from "./pages/index";
 import Login from "./pages/login";
@@ -20,19 +20,17 @@ makeServer({ environment: "development" });
 // }
 
 function App() {
-  
-  
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
       {/* All the routes that are restricted and need authorization */}
-      <Route element={<ProtectedRoute/>}>
+      <Route element={<ProtectedRoute />}>
         <Route index element={<Index />} />
         <Route path="/stock" element={<Stock />} />
         <Route path="/summary" element={<Summary />} />
-        <Route path="/donor" element={<Donor />} />
+        <Route path="/donors" element={<Donor />} />
         <Route path="/sale" element={<Sale />} />
         <Route path="/expiry" element={<Expiry />} />
         <Route path="/scanner" element={<Scanner />} />

@@ -4,22 +4,23 @@ import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import CategoryIcon from "@mui/icons-material/Category";
 import StackedBarChartIcon from "@mui/icons-material/StackedBarChart";
 import TimerIcon from "@mui/icons-material/Timer";
+import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 
 // Add new paths here along with imported icons
 const paths: Path[] = [
   {
     path: "/stock",
-    key: "Stock",
+    key: "Current Stock",
     icon: <Inventory2Icon />,
   },
   {
-    path: "/donor",
-    key: "Donor",
+    path: "/donors",
+    key: "Donors",
     icon: <VolunteerActivismIcon />,
   },
   {
     path: "/sale",
-    key: "Sale",
+    key: "On Sale",
     icon: <CategoryIcon />,
   },
   {
@@ -34,8 +35,8 @@ const paths: Path[] = [
   },
   {
     path: "/scanner",
-    key: "Scanner",
-    icon: <TimerIcon />,
+    key: "Scan",
+    icon: <QrCodeScannerIcon />,
   },
 ];
 
