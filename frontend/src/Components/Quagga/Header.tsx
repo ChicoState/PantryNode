@@ -1,6 +1,6 @@
 import { Button, Stack, Typography } from "@mui/material";
+import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import React from "react";
-
 // eslint-disable-next-line react/prop-types
 const Header = ({ cameraStatus, handleToggleCamera }) => {
   return (
@@ -19,6 +19,7 @@ const Header = ({ cameraStatus, handleToggleCamera }) => {
         color="primary"
         onClick={handleToggleCamera}
         sx={{ paddingRight: 2, marginY: "auto", alignSelf: "flex-end" }}>
+          <QrCodeScannerIcon sx={{ marginRight: 2 }} />
         {cameraStatus ? "Stop" : "Start"} Camera
       </Button>
     </Stack>
