@@ -12,7 +12,8 @@ mongoose.connect(db, { useNewUrlParser: true });
 router.get('/register', function (req, res, next) {
   if (!req.isAuthenticated()) {
     let errors = [];
-    res.render('signup', { errors });
+    res.json({ errors });
+
   }
   else {
     res.redirect('/home');
@@ -23,7 +24,7 @@ router.post('/sign_up', authSignupController);
 
 
 router.get('/login', function (req, res, next) {
-  res.render('signup_success', { title: 'Express' });
+  res.json({ title: 'Express' });
 });
 
 router.post('/login', (req, res, next) => {
@@ -38,7 +39,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/logout', function (req, res) {
   req.logout();
-  res.render('index', { title: 'Express' });
+  res.json({ title: 'Express' });
 });
 
 
