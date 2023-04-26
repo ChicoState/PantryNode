@@ -1,0 +1,15 @@
+/* .viewport {
+    position: relative;
+    border-radius: 15px;
+  }
+  video,
+  canvas {
+    border-radius: 15px;
+  }
+  canvas.drawing,
+  canvas.drawingBuffer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 15px;
+  } */
