@@ -26,12 +26,12 @@ const style = {
   width: 400,
   bgcolor: 'background.paper',
   border: '1px solid ',
-  borderColor:"primary",
+  borderColor: "primary",
   boxShadow: 24,
   p: 4,
 };
 
-export default function Passwordreset(){
+export default function Passwordreset() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [npassword, setNpassword] = useState("");
@@ -57,18 +57,17 @@ export default function Passwordreset(){
         setNpasswordError(
           "Password must contain at least one uppercase, one number and one special character");
       }
-      else{
+      else {
         setNpasswordError("");
       }
     }
     if (name === "cnpassword") {
       setCNpassword(value);
-      if(npassword!==value){
-      setCNpasswordError("New password and confirm password do not match");
-      setIsDisabled(true);
+      if (npassword !== value) {
+        setCNpasswordError("New password and confirm password do not match");
+        setIsDisabled(true);
       }
-      else
-      {
+      else {
         setCNpasswordError("");
         setIsDisabled(false);
       }
@@ -77,19 +76,19 @@ export default function Passwordreset(){
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
-  
+
   //   if (npassword !== cnpassword) {
   //     alert("New password and confirm password do not match.");
   //     return;
   //   }
-  
+
   // }
-  
+
 
   const handleToggleNPasswordVisibility = () => {
     setShowNPassword(!showNPassword);
   };
-  
+
   const handleToggleCNPasswordVisibility = () => {
     setShowCNPassword(!showCNPassword);
   };
@@ -123,86 +122,86 @@ export default function Passwordreset(){
     // navigate("/passwordsuccessful")
   };
   return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: '#8C2332' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Account Recovery
-          </Typography>
-          <p>Enter you new password</p>
-          <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 }}>
-          
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: '#8C2332' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Account Recovery
+        </Typography>
+        <p>Enter you new password</p>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+
           <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="npassword"
-          label="New Password"
-          name="npassword"
-          autoComplete="npassword"
-          autoFocus
-          type={showNPassword ? "text" : "password"} 
-          value={npassword}
-          onChange={handleChange}
-          error={Boolean(npasswordError)}
-          helperText={npasswordError}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={handleToggleNPasswordVisibility}>
-                  {showNPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-          
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="cnpassword"
-          label="Confirm New Password"
-          name="cnpassword"
-          autoComplete="cnpassword"
-          autoFocus
-          type={showCNPassword ? "text" : "password"} 
-          value={cnpassword}
-          onChange={handleChange}
-          error={Boolean(cnpasswordError)}
-          helperText={cnpasswordError}
-          
-        />
+            margin="normal"
+            required
+            fullWidth
+            id="npassword"
+            label="New Password"
+            name="npassword"
+            autoComplete="npassword"
+            autoFocus
+            type={showNPassword ? "text" : "password"}
+            value={npassword}
+            onChange={handleChange}
+            error={Boolean(npasswordError)}
+            helperText={npasswordError}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleToggleNPasswordVisibility}>
+                    {showNPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="cnpassword"
+            label="Confirm New Password"
+            name="cnpassword"
+            autoComplete="cnpassword"
+            autoFocus
+            type={showCNPassword ? "text" : "password"}
+            value={cnpassword}
+            onChange={handleChange}
+            error={Boolean(cnpasswordError)}
+            helperText={cnpasswordError}
+
+          />
 
 
-            <Button
-              type="submit"
-              fullWidth
-              disabled = {isDisabled}
-              variant="contained"
-              sx={{ mt: 3, mb: 2, py:2 }}
-              style={{
-                backgroundColor: "primary"
-              }}
-              // onClick={handleSubmit}
-            >
-              Set New Password
-            </Button>
-            
-          </Box>
+          <Button
+            type="submit"
+            fullWidth
+            disabled={isDisabled}
+            variant="contained"
+            sx={{ mt: 3, mb: 2, py: 2 }}
+            style={{
+              backgroundColor: "primary"
+            }}
+          // onClick={handleSubmit}
+          >
+            Set New Password
+          </Button>
+
         </Box>
-        {/* Modal code goes here */}
-        <Modal
+      </Box>
+      {/* Modal code goes here */}
+      <Modal
         open={open}
         // onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -216,21 +215,23 @@ export default function Passwordreset(){
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography> */}
+
           <Button
-              type="submit"
-              fullWidth
-              disabled = {isDisabled}
-              variant="contained"
-              sx={{ mt: 3, mb: 2, py:2 }}
-              style={{
-                backgroundColor: "primary"
-              }}
-            >
-              Login
-            </Button>
+            type="submit"
+            fullWidth
+            disabled={isDisabled}
+            variant="contained"
+            sx={{ mt: 3, mb: 2, py: 2 }}
+            style={{
+              backgroundColor: "primary"
+            }}
+            onClick={() => { navigate("/login") }}
+          >
+            Login
+          </Button>
         </Box>
-      </Modal>  
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
+      </Modal>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container >
   );
 }
