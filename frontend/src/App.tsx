@@ -4,6 +4,9 @@ import Donor from "./pages/donor";
 import Expiry from "./pages/expiry";
 import Index from "./pages/index";
 import Login from "./pages/login";
+import Verify from "./Components/ResetPassword/VerifyCode";
+import Passwordreset from "./Components/ResetPassword/NewPassword";
+import EmailResetComponent from "./Components/ResetPassword/EmailVerify";
 import Sale from "./pages/sale";
 import Stock from "./pages/stock";
 import Summary from "./pages/summary";
@@ -20,15 +23,18 @@ makeServer({ environment: "development" });
 // }
 
 function App() {
-  
-  
+
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/verify" element={<Verify />} />
+      <Route path="/newpassword" element={<Passwordreset />} />
+      <Route path="/forgetpassword" element={<EmailResetComponent />} />
 
       {/* All the routes that are restricted and need authorization */}
-      <Route element={<ProtectedRoute/>}>
+      <Route element={<ProtectedRoute />}>
         <Route index element={<Index />} />
         <Route path="/stock" element={<Stock />} />
         <Route path="/summary" element={<Summary />} />
