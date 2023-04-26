@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
@@ -73,17 +72,6 @@ export default function Passwordreset() {
     }
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   if (npassword !== cnpassword) {
-  //     alert("New password and confirm password do not match.");
-  //     return;
-  //   }
-
-  // }
-
-
   const handleToggleNPasswordVisibility = () => {
     setShowNPassword(!showNPassword);
   };
@@ -108,17 +96,10 @@ export default function Passwordreset() {
       console.log('Password:', password);
     }
   };
-
-
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     console.log("Handle Submit");
     setOpen(true);
-    // const data = new FormData(event.currentTarget);
-    // const npasswordValue = data.get("npassword") as string;
-    // const cnpasswordValue = data.get("cnpassword") as string;
-    // navigate("/passwordsuccessful")
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -139,7 +120,6 @@ export default function Passwordreset() {
         </Typography>
         <p>Enter you new password</p>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-
           <TextField
             margin="normal"
             required
@@ -164,7 +144,6 @@ export default function Passwordreset() {
               ),
             }}
           />
-
           <TextField
             margin="normal"
             required
@@ -179,10 +158,7 @@ export default function Passwordreset() {
             onChange={handleChange}
             error={Boolean(cnpasswordError)}
             helperText={cnpasswordError}
-
           />
-
-
           <Button
             type="submit"
             fullWidth
@@ -192,7 +168,6 @@ export default function Passwordreset() {
             style={{
               backgroundColor: "primary"
             }}
-          // onClick={handleSubmit}
           >
             Set New Password
           </Button>
@@ -202,7 +177,6 @@ export default function Passwordreset() {
       {/* Modal code goes here */}
       <Modal
         open={open}
-        // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -210,10 +184,6 @@ export default function Passwordreset() {
           <Typography id="modal-modal-title" variant="h6" component="h2" >
             Password Changed Successfully!
           </Typography>
-
-          {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography> */}
           <Button
             type="submit"
             fullWidth
