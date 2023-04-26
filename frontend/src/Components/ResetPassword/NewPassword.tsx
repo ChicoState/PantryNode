@@ -224,6 +224,7 @@ export default function Passwordreset(){
               style={{
                 backgroundColor: "primary"
               }}
+              onClick={()=>{navigate('/login')}}
             >
               Login
             </Button>
