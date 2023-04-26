@@ -37,9 +37,9 @@ router.post('/sign_up', function (req, res) {
     }
   }).then(([user, created]) => {
       if (!created) {
-        let errors = [];
-        errors.push('User Exist!' );
-        res.render('signup', { errors });
+        // let errors = [];
+        // errors.push('User Exist!' );
+        res.status(409).json({ error: 'User Exist!' });
       }
       else {
         bcrypt.genSalt(10, (err, salt) =>
@@ -52,7 +52,8 @@ router.post('/sign_up', function (req, res) {
 
         
         console.log(user);
-        return res.render('./signup_success', { title: 'Express' });
+        return res.status(201).json({ user });
+
       }
 
     });
