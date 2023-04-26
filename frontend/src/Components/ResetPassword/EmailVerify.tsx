@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useState } from 'react';
-import Verify from './VerifyCode';
+
 
 function EmailResetComponent() {
   const [email, setEmail] = useState('');
@@ -40,7 +40,7 @@ function EmailResetComponent() {
       return;
     }
 
-    navigate('/Verify');
+    navigate('/verify');
   };
 
   return (
