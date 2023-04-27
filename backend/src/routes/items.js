@@ -14,7 +14,7 @@ router.get('/items', ensureAuthenticated, function (req, res) {
     // TODO: Return list of items?
 });
 
-router.get('/items/expired', ensureAuthenticated, function (req, res) {
+router.get('/items/expired', function (req, res) {
     // TODO(@parthpandey1): This returns ids, enrich the return with actual item data.
     const today = new Date();
     return trans_items.findAll({
@@ -44,13 +44,16 @@ router.get('/items/expired', ensureAuthenticated, function (req, res) {
     });
 });
 
-router.get('/items/nearly_expired', ensureAuthenticated, function (req, res) {
-    // TODO(@parthpandey1): This returns ids, enrich the return with actual item data.
+router.get('/items/nearly_expired', function (req, res) {
     const today = new Date();
+    const twoDaysFromNow = new Date();
+    twoDaysFromNow.setTime(today.getTime() + (1000 * 60 * 60 * 24 * 2));
+
     return trans_items.findAll({
         where: {
             expiration: {
-                [Op.lte]: today.getDate() + 2
+                [Op.lte]: twoDaysFromNow,
+                [Op.gte]: today,
             }
         },
         include: [{
