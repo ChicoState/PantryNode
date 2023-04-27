@@ -1,6 +1,6 @@
 //Alphabetical Order imports for better readability
 import '@testing-library/jest-dom'
-import Donor from '../pages/donor';
+import Donor from '../pages/donors';
 import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 
@@ -73,8 +73,8 @@ describe('Donor Page', () => {
             fireEvent.click(addButton);
             expect(queryByText("Email is required")).toBeInTheDocument();
         });
-
-
+   /*
+        //Commenting tests based on dummy data (Keeping for future reference)
         //PLEASE NOTE : THE BELOW TESTS LOOK REDUNDANT BUT IT HELPS WITH COVERING STATEMENTS
         it("Sorts the donor list in ascending order by name when the name header is clicked once", () => {
             const { getByText, queryByText } = render(<Donor />);
@@ -129,6 +129,6 @@ describe('Donor Page', () => {
 
         //    expect(queryByText("USA")).toBeInTheDocument();
         //    expect(queryByText("USA")).toBeInTheDocument();
-
+*/
     });
 });
