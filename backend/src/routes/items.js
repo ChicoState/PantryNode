@@ -9,13 +9,7 @@ const sequelize = new Sequelize(require('../config/keys').PostgresURI);
 
 initModels(sequelize);
 
-router.get('/items', ensureAuthenticated, function (req, res) {
-    console.log("Nothing here yet!");
-    // TODO: Return list of items?
-});
-
-router.get('/items/expired', function (req, res) {
-    // TODO(@parthpandey1): This returns ids, enrich the return with actual item data.
+router.get('/items/expired', ensureAuthenticated, function (req, res) {
     const today = new Date();
     return trans_items.findAll({
         where: {
@@ -37,14 +31,19 @@ router.get('/items/expired', function (req, res) {
         attributes: ['trans_item_id', 'quantity', 'expiration'],
     }).then((allItems) => {
         if (allItems == null) {
-            console.log("THIS IS ERROR " + allItems);
+            console.log("There are no items to return");
+            res.json(JSON.stringify([]));
         } else {
             res.json(JSON.stringify(allItems));
         }
+    }).catch(() => {
+        console.log("There was an error retrieving nearly-expired items");
+        res.status(400);
+        res.send();
     });
 });
 
-router.get('/items/nearly_expired', function (req, res) {
+router.get('/items/nearly_expired', ensureAuthenticated, function (req, res) {
     const today = new Date();
     const twoDaysFromNow = new Date();
     twoDaysFromNow.setTime(today.getTime() + (1000 * 60 * 60 * 24 * 2));
@@ -70,13 +69,16 @@ router.get('/items/nearly_expired', function (req, res) {
         attributes: ['trans_item_id', 'quantity', 'expiration'],
     }).then((allItems) => {
         if (allItems == null) {
-            console.log("THIS IS ERROR " + allItems);
+            console.log("There are no items to return");
+            res.json(JSON.stringify([]));
         } else {
             res.json(JSON.stringify(allItems));
         }
+    }).catch(() => {
+        console.log("There was an error retrieving nearly-expired items");
+        res.status(400);
+        res.send();
     });
 });
-
-module.exports = router;
 
 module.exports = router;
