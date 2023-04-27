@@ -179,3 +179,12 @@ SELECT * FROM person;
 ```
 
 This will show you the emails and hashed passwords for all the registered users in this database.
+
+## TroubleShooting
+
+If there are issues with your docker-compose setup such as packages that are not installed, you can try to rebuild the container.
+
+```shell
+docker-compose up --build
+```
+
