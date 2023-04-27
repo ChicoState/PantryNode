@@ -93,7 +93,10 @@ CREATE TABLE Trans_items (
   PRIMARY KEY (trans_item_id),
   CONSTRAINT FK_Trans_items_trans_id
     FOREIGN KEY (trans_id)
-      REFERENCES Transaction(trans_id)
+      REFERENCES Transaction(trans_id),
+  CONSTRAINT FK_Trans_items_item_id
+    FOREIGN KEY (item_id)
+      REFERENCES Item(item_id)
 );
 
 CREATE TABLE Shelf_contents (
@@ -150,3 +153,15 @@ ALTER TABLE Site ADD CONSTRAINT FK_Site_addr_id
 alter table Person ADD CONSTRAINT FK_Person_pri_addr
   FOREIGN KEY (pri_addr_id)
     REFERENCES Address(addr_id);
+
+CREATE MATERIALIZED VIEW  stock
+AS
+SELECT
+	item.name
+	,item.category 
+	,sum(trans_items.quantity) as quantity
+FROM trans_items
+JOIN item 
+  ON trans_items.item_id = item.item_id
+GROUP BY item.name, item.category 
+WITH DATA;
