@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Quagga from "quagga";
 import CameraToggleButton from "./Header";
-import { Stack } from "@mui/material";
+import { CircularProgress, Stack } from "@mui/material";
 import "../../styles/quagga.css";
 interface QuaggaScannerProps {
   onDetected: (code: string) => void;
@@ -92,7 +92,7 @@ const QuaggaScanner: React.FC<QuaggaScannerProps> = ({ onDetected }) => {
       />
 
       {/* This if for loading icon false && true */}
-      {!cameraOn && loadingCamera }
+      {!cameraOn && loadingCamera && <CircularProgress />}
       {/* This is for camera true && false */}
       {cameraOn && !loadingCamera && (
         <div id="interactive" className="viewport" />
