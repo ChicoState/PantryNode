@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,6 +19,7 @@ import { login } from "../redux-features/user";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 import { useFormik } from "formik";
+import { logout } from "../redux-features/user";
 
 interface LoginFormInput {
   email?: string;
@@ -29,7 +31,9 @@ export default function Login() {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  useEffect(() => {
+    dispatch(logout());
+  }, [dispatch]);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -62,12 +66,13 @@ export default function Login() {
       // password
       if (passwordValue.trim() === "") {
         errors.password = "Password is required";
-      } else if (passwordValue.length < 8) {
-        errors.password = "Password must be at least 8 characters long";
-      } else if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
-        errors.password =
-          "Password must contain at least one number and one special character";
       }
+      // else if (passwordValue.length < 8) {
+      //   errors.password = "Password must be at least 8 characters long";
+      // } else if (!/(?=.*[A-Z])(?=.*[\W_])/.test(passwordValue)) {
+      //   errors.password =
+      //     "Password must contain at least one number and one special character";
+      // }
       return errors;
     },
   });
@@ -151,7 +156,7 @@ export default function Login() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="/forgetpassword" variant="body2">
                 Forgot password?
               </Link>
             </Grid>

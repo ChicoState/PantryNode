@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(async (config: any) => {
   let token = "";
   if (isBrowser) {
-    token = `Bearer ${localStorage.getItem("token") ?? ""}`; // tokens are stored in localstorage with key token
+    token = `${localStorage.getItem("token") ?? ""}`; // tokens are stored in localstorage with key token
   }
   config.headers = {
     ...config.headers,
