@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Donor from "./pages/donor";
+import Donor from "./pages/donors";
 import Expiry from "./pages/expiry";
 import Index from "./pages/index";
 import Login from "./pages/login";
@@ -38,7 +38,7 @@ function App() {
         <Route index element={<Index />} />
         <Route path="/stock" element={<Stock />} />
         <Route path="/summary" element={<Summary />} />
-        <Route path="/donor" element={<Donor />} />
+        <Route path="/donors" element={<Donor />} />
         <Route path="/sale" element={<Sale />} />
         <Route path="/expiry" element={<Expiry />} />
         <Route path="/scanner" element={<Scanner />} />

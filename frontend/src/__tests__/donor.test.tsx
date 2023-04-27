@@ -1,6 +1,6 @@
 //Alphabetical Order imports for better readability
 import '@testing-library/jest-dom'
-import Donor from '../pages/donor';
+import Donor from '../pages/donors';
 import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 

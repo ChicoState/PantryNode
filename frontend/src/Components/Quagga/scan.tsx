@@ -1,44 +1,85 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Quagga from "quagga";
 
 interface ScannerProps {
   onDetected: (code: string) => void;
 }
 
-const Scanner:React.FC<ScannerProps> = ({ onDetected }) => {
-  
+const Scanner: React.FC<ScannerProps> = ({ onDetected }) => {
+  const [cameraOn, setCameraOn] = useState(false);
+
   useEffect(() => {
-    const config = {
-      inputStream: {
-        name: "Live",
-        type: "LiveStream",
-        target: document.querySelector("#interactive"),
-      },
-      decoder: {
-        readers: ["ean_reader"],
-      },
+    let quaggaInitialized = false;
+
+    const initQuagga = () => {
+      const config = {
+        inputStream: {
+          name: "Live",
+          type: "LiveStream",
+          target: document.querySelector("#interactive"),
+        },
+        decoder: {
+          readers: ["ean_reader"],
+        },
+      };
+
+      Quagga.init(config, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Quagga initialization succeeded");
+          Quagga.start();
+          quaggaInitialized = true;
+        }
+      });
+
+      Quagga.onDetected((data) => {
+        console.log("Quagga detection:", data);
+        onDetected(data.codeResult.code);
+      });
     };
 
-    Quagga.init(config, (err) => {
-      if (err) {
-        console.log(err);
+    const startCamera = () => {
+      if (!quaggaInitialized) {
+        initQuagga();
       } else {
-        console.log("Quagga initialization succeeded");
         Quagga.start();
       }
-    });
+      setCameraOn(true);
+    };
+    // eslint-disable-next-line
+    const stopCamera = () => {
+      Quagga.stop();
+      setCameraOn(false);
+    };
 
-    Quagga.onDetected((data) => {
-      console.log("Quagga detection:", data);
-      onDetected(data.codeResult.code);
-    });
+    if (cameraOn) {
+      startCamera();
+    }
 
     return () => {
-      Quagga.stop();
+      if (quaggaInitialized) {
+        Quagga.stop();
+      }
     };
-  }, [onDetected]);
+  }, [cameraOn, onDetected]);
 
-  return <div id="interactive" className="viewport" />;
+  const handleToggleCamera = () => {
+    if (cameraOn) {
+      setCameraOn(false);
+    } else {
+      setCameraOn(true);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={handleToggleCamera}>
+        {cameraOn ? "Stop" : "Start"} Camera
+      </button>
+      <div id="interactive" className="viewport" />
+    </div>
+  );
 };
 
 export default Scanner;
