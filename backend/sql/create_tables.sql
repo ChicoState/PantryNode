@@ -50,6 +50,7 @@ CREATE TABLE Item (
   category category,
   stor_id int NOT NULL,
   size int,
+  barcode text UNIQUE,
   PRIMARY KEY (item_id),
   CONSTRAINT FK_Item_stor_id
     FOREIGN KEY (stor_id)

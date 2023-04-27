@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
 var passport = require('passport');
+const jwt = require('jsonwebtoken');
 var { initModels, person } = require( "../models/init-models");
 var { Sequelize } = require('sequelize');
 
@@ -70,7 +71,8 @@ router.post('/login', function (req, res, next) {
       res.status(401).json({ message: "Authentication failed", error: info.message });
     }
     else {
-      res.json({ message: "Success", email: user.email });
+      token = jwt.sign({ email: user.email }, "secret",{ expiresIn: '1h'})
+      res.json({token:token, message: "Success", email: user.email});
     }
     // Authentication successful
   })(req, res, next);

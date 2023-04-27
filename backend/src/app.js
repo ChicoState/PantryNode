@@ -11,11 +11,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
 var feedRouter = require('./routes/feed');
+var itemsRouter = require('./routes/items');
 var summaryRouter = require('./routes/summary');
 var stockRouter = require('./routes/stock');
+var barcodeRouter = require('./routes/barcode');
 
 var app = express();
-require("uuid");
 
 const cors = require('cors');
 // TODO(#119): Specifiy origin with an EnvVar.
@@ -49,7 +50,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        expires: 60 * 60 * 24,
+        httpOnly: false,
+        secure: true,
+      },
 }));
 
 
@@ -66,6 +72,9 @@ app.get('/logout', usersRouter);
 app.get('/sale', saleRouter);
 app.get('/categories', saleRouter);
 
+//barcodelookup
+app.get('/barcode', barcodeRouter);
+
 app.get('/donor', saleRouter);
 app.post('/add_donor', saleRouter);
 
@@ -78,6 +87,10 @@ app.post('/checkout', saleRouter);
 
 app.get('/feed', feedRouter);
 
+app.get('/items', itemsRouter);
+app.get('/items/expired', itemsRouter);
+app.get('/items/nearly_expired', itemsRouter);
+
 app.get('/purchases', summaryRouter);
 app.get('/currentstock', summaryRouter);
 app.get('/wastemanagement', summaryRouter);
@@ -86,18 +99,11 @@ app.get('/soontoexpire', summaryRouter);
 app.get('/stock', stockRouter);
 
 app.get('/checkout_success', function(req, res, next) {
-
     res.render('checkout_success', { title: 'Success' });
-
 });
 
-
-
-
 app.get('/s', function(req, res, next) {
-
     res.render('signup_success', { title: 'Home' });
-
 });
 
 // catch 404 and forward to error handler

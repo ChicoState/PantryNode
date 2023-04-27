@@ -11,11 +11,11 @@ import { useState } from "react";
 import { ListItemIcon } from "@mui/material";
 import paths from "./paths";
 import LogoutIcon from "@mui/icons-material/Logout";
+
 const drawerWidth = 240;
 const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const path: string = location.pathname;
   const [activeLink, setActiveLink] = useState(path);
 
