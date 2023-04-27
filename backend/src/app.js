@@ -109,16 +109,11 @@ app.get('/checkout_success', function(req, res, next) {
 app.get('/s', function(req, res, next) {
     res.render('signup_success', { title: 'Home' });
 });
-<<<<<<< HEAD
-
 
 // Backend API Endpoints
 // To add a new set of endpoints ("transaction," for example), use the same form
 // as "employee" below (see also ./routes/api/v1)
 app.use('/api/v1/employee', apiV1_EmployeeRouter);
-
-=======
->>>>>>> main
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
