@@ -6,9 +6,9 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAppSelector } from "../hooks";
 import { Button, Typography } from "@mui/material";
+import BarcodeProxy from "../Components/Barcode";
 
 function Scanner() {
-  // const [camera, setCamera] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const searching = useAppSelector((state) => state.user.status);
 
@@ -21,7 +21,7 @@ function Scanner() {
       barcode: "",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      BarcodeProxy.lookup(values); //Link barcodeProxy.ts
     },
   });
 
@@ -70,7 +70,6 @@ function Scanner() {
             type="submit"
             fullWidth
             variant="contained"
-            // disabled={!(formik.dirty && formik.isValid)}
             disabled={!(result || formik.values.barcode)}
             sx={{ mt: 3, mb: 2, py: 2 }}
             style={{
