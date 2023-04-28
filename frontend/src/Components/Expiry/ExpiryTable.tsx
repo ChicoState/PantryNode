@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   TableContainer,
   Table,
@@ -8,18 +9,13 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
+import { expiryFeed } from "../../pages/expiry";
 
-type ExpiryProps = {
-  expiredFeedList: {
-    id: number;
-    item: string;
-    expiry_date: string;
-    added_date: string;
-    quantity: number;
-  }[];
-};
+interface ExpiryProps {
+  ep: expiryFeed[];
+}
 
-const Expiry = ({ expiredFeedList }: ExpiryProps) => {
+const Expiry = (props: ExpiryProps) => {
   let counter = 1;
 
   return (
@@ -39,30 +35,36 @@ const Expiry = ({ expiredFeedList }: ExpiryProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {expiredFeedList.map((item) => {
-            // to change date format 2023-05-04 => May 4, 2023
-            const formattedExpiryDate = new Intl.DateTimeFormat("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            }).format(new Date(item.expiry_date));
-            const formattedAddedDate = new Intl.DateTimeFormat("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            }).format(new Date(item.added_date));
-            return (
-              <TableRow key={item.id}>
-                <TableCell>{counter++}</TableCell>
-                <TableCell>{item.item}</TableCell>
-                <TableCell>{formattedExpiryDate}</TableCell>
-                <TableCell>{formattedAddedDate}</TableCell>
-                <TableCell>
-                  {item.quantity < 1 ? "Not available" : item.quantity}
-                </TableCell>
-              </TableRow>
-            );
-          })}
+          {props.ep.length > 0 ? (
+            props.ep.map((item) => {
+              // to change date format 2023-05-04 => May 4, 2023
+              // const formattedExpiryDate = new Intl.DateTimeFormat("en-US", {
+              //   month: "short",
+              //   day: "numeric",
+              //   year: "numeric",
+              // }).format(new Date(item.expiration));
+              // const formattedAddedDate = new Intl.DateTimeFormat("en-US", {
+              //   month: "short",
+              //   day: "numeric",
+              //   year: "numeric",
+              // }).format(new Date(item.tran.date));
+              return (
+                <TableRow key={item.trans_item_id}>
+                  <TableCell>{counter++}</TableCell>
+                  <TableCell>{item.item.name}</TableCell>
+                  <TableCell>{item.expiration}</TableCell>
+                  <TableCell>{item.tran.date}</TableCell>
+                  <TableCell>
+                    {item.quantity < 1 ? "Not available" : item.quantity}
+                  </TableCell>
+                </TableRow>
+              );
+            })
+          ) : (
+            <TableRow>
+              <p>No items</p>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </TableContainer>
