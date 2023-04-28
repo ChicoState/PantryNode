@@ -2,23 +2,19 @@ import React, { useEffect, useState } from "react";
 import Expiry from "../Components/Expiry/ExpiryTable";
 import axiosInstance from "../util/axiosInstance";
 
-import {
-  AppBar,
-  Toolbar,
-  Select,
-  MenuItem,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { AppBar, Toolbar, MenuItem, Typography } from "@mui/material";
+import { Category } from "@mui/icons-material";
 
-type expiryFeed = {
-  id: number;
-  item: string;
-  expiry_date: string;
+export type expiryFeed = {
+  trans_item_id: number;
+  item: {
+    name: string;
+  };
+  tran: {
+    date: string;
+  };
+  expiration: string;
   quantity: number;
-  added_date: string;
-  category: string;
 };
 
 type Category = {
@@ -27,8 +23,34 @@ type Category = {
 };
 
 const ExpiryIndex = () => {
-  const [feedList, setFeedList] = useState<expiryFeed[]>([]);
-  const [expiredFeedList, setExpiredFeedList] = useState<expiryFeed[]>([]);
+  const [feedList, setFeedList] = useState<expiryFeed[]>([
+    {
+      trans_item_id: 0,
+      item: {
+        name: "",
+      },
+      tran: {
+        date: "",
+      },
+      expiration: "",
+      quantity: 0,
+    } as expiryFeed,
+  ]);
+  const [nearlyExpiredFeedList, setNearlyExpiredFeedList] = useState<
+    expiryFeed[]
+  >([
+    {
+      trans_item_id: 1,
+      item: {
+        name: "test",
+      },
+      tran: {
+        date: "test",
+      },
+      expiration: "test",
+      quantity: 1,
+    } as expiryFeed,
+  ]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [categoryList, setCategoryList] = useState<Category[]>([]);
 
@@ -38,27 +60,22 @@ const ExpiryIndex = () => {
     });
   }, []);
 
+  // console.log(Category);
+
   useEffect(() => {
-    axiosInstance.get<expiryFeed[]>("feed").then((res: any) => {
-      setFeedList(res);
+    axiosInstance.get<expiryFeed[]>("/items/expired").then((res: any) => {
+      setFeedList(JSON.parse(res) as expiryFeed[]);
     });
+    axiosInstance
+      .get<expiryFeed[]>("/items/nearly_expired")
+      .then((res: any) => {
+        setNearlyExpiredFeedList(JSON.parse(res) as expiryFeed[]);
+      });
   }, []);
 
-  useEffect(() => {
-    if (feedList.length > 0) {
-      // filter feeds whose expiry date has passed and sort by expiry_date
-      const now = new Date();
-      const filteredFeedList = selectedCategory === "All" ? feedList : feedList.filter((item) => item.category === selectedCategory);
-      const sortedExpiredFeedList = filteredFeedList
-        .filter((item) => new Date(item.expiry_date) < now)
-        .sort((a, b) => new Date(a.expiry_date).getTime() - new Date(b.expiry_date).getTime());
-      setExpiredFeedList(sortedExpiredFeedList);
-    }
-  }, [feedList, selectedCategory]);
-
-  console.log(expiredFeedList);
-
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setSelectedCategory(event.target.value);
   };
 
@@ -66,28 +83,48 @@ const ExpiryIndex = () => {
 
   return (
     <div>
-      <AppBar position="static" style={{marginBottom: 10}}>
-      <Toolbar>
-        <div style={{flexDirection: "column", justifyContent: "center", display: "flex", alignItems: "center"}}>
-        <Typography>
-          Category
-        </Typography>
-        <select value={selectedCategory} onChange={handleCategoryChange}>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              <MenuItem key={category} value={category}>
-                {category}
-              </MenuItem>
-            </option>
-          ))}
-        </select>
-        </div>
+      <h2>ExpiredItems</h2>
+      <AppBar position="static" style={{ marginBottom: 10 }}>
+        <Toolbar>
+          <div
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Typography>Category</Typography>
+            <select value={selectedCategory} onChange={handleCategoryChange}>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                </option>
+              ))}
+            </select>
+          </div>
         </Toolbar>
-        </AppBar>
-      <Expiry expiredFeedList={expiredFeedList} />
+      </AppBar>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gridColumnGap: "20px",
+        }}
+      >
+        <div>
+          <h3>Expired Items</h3>
+          <Expiry ep={feedList} />
+        </div>
+        <div>
+          <h3>Expiring Soon</h3>
+          <Expiry ep={nearlyExpiredFeedList} />
+        </div>
+      </div>
     </div>
   );
 };
-
 
 export default ExpiryIndex;
