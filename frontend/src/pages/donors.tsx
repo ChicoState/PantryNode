@@ -20,6 +20,9 @@ import {
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
+//reconfiguring
+
+
 const Donor = () => {
   interface Entry {
     name: string;
@@ -247,7 +250,7 @@ const Donor = () => {
                     variant="contained"
                     color="primary"
                     onClick={() =>
-                      alert(`Donate button clicked for ${entry.name}`)
+                      alert(`Donate for ${entry.name}`)
                     }
                   >
                     Donate
