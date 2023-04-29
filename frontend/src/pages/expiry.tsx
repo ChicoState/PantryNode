@@ -175,8 +175,8 @@ const ExpiryIndex = () => {
   ]);
 
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [selectedSortBy, setSelectedSortBy] = useState<string>("Item");
-  const [selectedSortBy2, setSelectedSortBy2] = useState<string>("Item");
+  const [selectedSortBy, setSelectedSortBy] = useState<string>("Expiry Date");
+  const [selectedSortBy2, setSelectedSortBy2] = useState<string>("Expiry Date");
   const [categoryList, setCategoryList] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -293,7 +293,7 @@ const ExpiryIndex = () => {
   };
 
   const categories = ["All", ...categoryList.map((category) => category.name)];
-  const sortByList = ["Item", "Expiry Date"];
+  const sortByList = ["Expiry Date", "Item"];
 
 
   return (
