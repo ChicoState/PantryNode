@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAppSelector } from "../hooks";
 import { Button, Typography } from "@mui/material";
-import BarcodeProxy from "../Components/Barcode";
+import lookup from "../Components/Barcode";
 
 function Scanner() {
   const [result, setResult] = useState<string | null>(null);
@@ -21,7 +21,7 @@ function Scanner() {
       barcode: "",
     },
     onSubmit: (values) => {
-      BarcodeProxy.lookup(values); //Link barcodeProxy.ts
+      lookup(values.barcode)
     },
   });
 

@@ -5,7 +5,7 @@ import type { storage_type, storage_typeId } from './storage_type';
 export interface itemAttributes {
   item_id: number;
   name?: string;
-  category?: "produce" | "fruit" | "meat" | "dairy" | "baked goods" | "canned" | "snacks" | "beverage" | "condiments & spices" | "processed foods" | "other";
+  category?: string;
   stor_id: number;
   size?: number;
   barcode?:string;  // adding the barcode field
@@ -19,7 +19,7 @@ export type itemCreationAttributes = Optional<itemAttributes, itemOptionalAttrib
 export class item extends Model<itemAttributes, itemCreationAttributes> implements itemAttributes {
   item_id!: number;
   name?: string;
-  category?: "produce" | "fruit" | "meat" | "dairy" | "baked goods" | "canned" | "snacks" | "beverage" | "condiments & spices" | "processed foods" | "other";
+  category?: string
   stor_id!: number;
   size?: number;
   barcode?: string;
@@ -45,10 +45,9 @@ export class item extends Model<itemAttributes, itemCreationAttributes> implemen
     name: {
       type: DataTypes.TEXT,
       allowNull: true,
-      unique: "item_name_key"
     },
     category: {
-      type: DataTypes.ENUM("produce","fruit","meat","dairy","baked goods","canned","snacks","beverage","condiments & spices","processed foods","other"),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     stor_id: {
@@ -73,13 +72,6 @@ export class item extends Model<itemAttributes, itemCreationAttributes> implemen
     schema: 'public',
     timestamps: false,
     indexes: [
-      {
-        name: "item_name_key",
-        unique: true,
-        fields: [
-          { name: "name" },
-        ]
-      },
       {
         name: "item_pkey",
         unique: true,
