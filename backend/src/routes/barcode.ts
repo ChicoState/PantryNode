@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 const { item } = require("../models/init-models");
 const axios = require("axios");
+var { ensureAuthenticated } = require('../config/auth');
 
 const axiosInstance = axios.create({
-  baseURL: "https://world.openfoodfacts.org/api/v2/search?code=",
+  baseURL: "https://world.openfoodfacts.org/api/v2",
   timeout: 3000
 });
 
@@ -12,45 +13,42 @@ const axiosInstance = axios.create({
   
 async function UPC_lookup(barcode: string) {
     try {
-        var scannedItem = await axiosInstance.get(barcode);
-        var itemJSON = scannedItem.data;
-        console.log(itemJSON.product_name_en); 
+        var scannedItem = await axiosInstance.get('/search', {params: {code: barcode}});
+        var product_name = scannedItem.data.products[0].product_name_en;
+        return product_name;
     } catch (error) {
         console.error(error);
+        return null;
     }
 } 
 
 async function PLU_lookup(barcode: string) {
-    let temp = item.LookUpbarcode(barcode);
-    console.log(temp);
-      //TO-DO: Dependent on Backend
-      //const PLUResult = this.PLUJson.find((row) => row.PLU === barcode);
-      try {
-          /*if(PLUResult == barcode) {
-              //TO-DO: Sequelize to DB
-          } else {
-              promptData();    
-          }*/
-      } catch (error) {
-          console.error(error);
-      }
+    let product = await item.LookUpbarcode(barcode);
+    if (product !== null){
+      return JSON.stringify(product);
+    }
+    else {
+      return null
+    }
   }
 
-router.get('/barcode', async (req: any, res: any) => {
+router.get('/barcode', ensureAuthenticated, async (req: any, res: any) => {
+  if (!req.isAuthenticated()) {
+    const errors = [];
+    res.post('Unauthenticated');
+} else {
   const barcode = req.query.barcode;
   if (barcode.length > 4) {
     const result = await UPC_lookup(barcode);
-    console.log(result);
     res.send(result);
-} else if (barcode.length <= 4) {
+} else if (barcode.length === 4) {
     const result = await PLU_lookup(barcode);
-    console.log(result);
     res.send(result);
 }
   else {
     return res.status(404).send('Item not found');
   }
-   
+}
 });
 
 module.exports = router;

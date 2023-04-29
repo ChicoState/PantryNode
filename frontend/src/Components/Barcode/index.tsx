@@ -1,24 +1,27 @@
-import openFFInstance from "../../util/openFFInstance"; //for handling authorized requests
+import axiosInstance from "../../util/axiosInstance";
 
-export default function lookup(barcode: string) {
-    let openFFData: any;
-
-    openFFInstance.get(`/search?code=${barcode}`)
-    .then(response => {
-      console.log("Response Data: " + response.data);
-      openFFData = response.data;
+export default async function lookup(code: string) {
+    const openFFData = await axiosInstance.get(`/barcode`, {params: {barcode: code}})
+    .then((res: any) => {
+      return res;
     })
     .catch(error => {
       console.log("Error in Scanner: " + error);
     });
-
-    console.log("Found the data: " + openFFData);
-
-    const promptName = window.prompt("Please enter product name", "");
-    if (promptName == null || promptName == "" || promptName.length <= 0)
-    {
-        console.log("Bad Prompt Input");
+    if (openFFData !== "") {
+        console.log("Found the data: ");
+        console.log(openFFData);
+        return openFFData
     }
+    else {
+        console.log("Product not found");
+        const promptName = window.prompt("Please enter product name", "");
+        if (promptName === null || promptName === "" || promptName.length <= 0)
+        {
+            console.log("Bad Prompt Input");
+        }
+    }
+    
             
     //send to backend make it do all the fun stuffs
 }
