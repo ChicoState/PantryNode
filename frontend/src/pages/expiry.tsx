@@ -173,6 +173,7 @@ const ExpiryIndex = () => {
       quantity: 1,
     } as expiryFeed,
   ]);
+
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedSortBy, setSelectedSortBy] = useState<string>("Item");
   const [selectedSortBy2, setSelectedSortBy2] = useState<string>("Item");
@@ -192,7 +193,14 @@ const ExpiryIndex = () => {
       // setFeedList(JSON.parse(res) as expiryFeed[]);
 
       // Comment or Remove the below line for production use
-      setFeedList(JSON.parse(expiryDummyDataString) as expiryFeed[]);
+      const data = JSON.parse(expiryDummyDataString) as expiryFeed[];
+
+        const sortedData = data.sort((a, b) => {
+          const aExpiry = new Date(a.expiration).getTime();
+          const bExpiry = new Date(b.expiration).getTime();
+          return aExpiry - bExpiry;
+        });
+        setFeedList(sortedData);
     });
     axiosInstance
       .get<expiryFeed[]>("/items/nearly_expired")
@@ -201,7 +209,16 @@ const ExpiryIndex = () => {
         // setNearlyExpiredFeedList(JSON.parse(res) as expiryFeed[]);
 
         // Comment or Remove the below line for production use
-        setNearlyExpiredFeedList(JSON.parse(aboutToExpiryDummyDataString) as expiryFeed[]);
+        const data = JSON.parse(aboutToExpiryDummyDataString) as expiryFeed[];
+
+        const sortedData = data.sort((a, b) => {
+          const aExpiry = new Date(a.expiration).getTime();
+          const bExpiry = new Date(b.expiration).getTime();
+          return aExpiry - bExpiry;
+        });
+
+        setNearlyExpiredFeedList(sortedData);
+
       });
   }, []);
 
