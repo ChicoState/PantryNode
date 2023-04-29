@@ -199,7 +199,7 @@ const ExpiryIndex = () => {
         <div>
           <h3>Expiring Soon</h3>
           <Typography>Sort By</Typography>
-            <select value={selectedSortBy} onChange={handleSortByChange2}>
+            <select value={selectedSortBy2} onChange={handleSortByChange2}>
               {sortByList.map((category) => (
                 <option key={category} value={category}>
                   <MenuItem key={category} value={category}>
