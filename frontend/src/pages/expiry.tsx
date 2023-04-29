@@ -22,6 +22,128 @@ type Category = {
   name: string;
 };
 
+const aboutToExpiryDummyData :  expiryFeed[] = [
+  {
+    trans_item_id: 1,
+    item: {
+      name: "Apples",
+    },
+    tran: {
+      date: "2023-04-25",
+    },
+    expiration: "2023-05-01",
+    quantity: 3,
+  },
+  {
+    trans_item_id: 2,
+    item: {
+      name: "Chicken",
+    },
+    tran: {
+      date: "2023-04-23",
+    },
+    expiration: "2023-04-29",
+    quantity: 1,
+  },
+  {
+    trans_item_id: 3,
+    item: {
+      name: "Yogurt",
+    },
+    tran: {
+      date: "2023-04-27",
+    },
+    expiration: "2023-05-03",
+    quantity: 2,
+  },
+  {
+    trans_item_id: 4,
+    item: {
+      name: "Cheese",
+    },
+    tran: {
+      date: "2023-04-26",
+    },
+    expiration: "2023-05-02",
+    quantity: 1,
+  },
+  {
+    trans_item_id: 5,
+    item: {
+      name: "Lettuce",
+    },
+    tran: {
+      date: "2023-04-28",
+    },
+    expiration: "2023-05-04",
+    quantity: 2,
+  },
+];
+
+// Stringifying the dummy data as the database is returning the data as a string.
+const aboutToExpiryDummyDataString = JSON.stringify(aboutToExpiryDummyData);
+
+const expiryDummyData :  expiryFeed[] = [
+  {
+    trans_item_id: 1,
+    item: {
+      name: "Apples",
+    },
+    tran: {
+      date: "2023-04-25",
+    },
+    expiration: "2023-05-01",
+    quantity: 3,
+  },
+  {
+    trans_item_id: 2,
+    item: {
+      name: "Chicken",
+    },
+    tran: {
+      date: "2023-04-23",
+    },
+    expiration: "2023-04-29",
+    quantity: 1,
+  },
+  {
+    trans_item_id: 3,
+    item: {
+      name: "Yogurt",
+    },
+    tran: {
+      date: "2023-04-27",
+    },
+    expiration: "2023-05-03",
+    quantity: 2,
+  },
+  {
+    trans_item_id: 4,
+    item: {
+      name: "Cheese",
+    },
+    tran: {
+      date: "2023-04-26",
+    },
+    expiration: "2023-05-02",
+    quantity: 1,
+  },
+  {
+    trans_item_id: 5,
+    item: {
+      name: "Lettuce",
+    },
+    tran: {
+      date: "2023-04-28",
+    },
+    expiration: "2023-05-04",
+    quantity: 2,
+  },
+];
+
+// Stringifying the dummy data as the database is returning the data as a string.
+const expiryDummyDataString = JSON.stringify(expiryDummyData);
+
 const ExpiryIndex = () => {
   const [feedList, setFeedList] = useState<expiryFeed[]>([
     {
@@ -66,12 +188,20 @@ const ExpiryIndex = () => {
 
   useEffect(() => {
     axiosInstance.get<expiryFeed[]>("/items/expired").then((res: any) => {
-      setFeedList(JSON.parse(res) as expiryFeed[]);
+      // uncomment the below line for production use
+      // setFeedList(JSON.parse(res) as expiryFeed[]);
+
+      // Comment or Remove the below line for production use
+      setFeedList(JSON.parse(expiryDummyDataString) as expiryFeed[]);
     });
     axiosInstance
       .get<expiryFeed[]>("/items/nearly_expired")
       .then((res: any) => {
-        setNearlyExpiredFeedList(JSON.parse(res) as expiryFeed[]);
+        // uncomment the below line for production use
+        // setNearlyExpiredFeedList(JSON.parse(res) as expiryFeed[]);
+
+        // Comment or Remove the below line for production use
+        setNearlyExpiredFeedList(JSON.parse(aboutToExpiryDummyDataString) as expiryFeed[]);
       });
   }, []);
 
