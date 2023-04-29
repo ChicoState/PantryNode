@@ -21,7 +21,8 @@ function Scanner() {
       barcode: "",
     },
     onSubmit: (values) => {
-      lookup(values.barcode)
+      console.log("Barcode: " + values.barcode);
+      lookup(values.barcode);
     },
   });
 
