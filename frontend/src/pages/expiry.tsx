@@ -52,6 +52,8 @@ const ExpiryIndex = () => {
     } as expiryFeed,
   ]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedSortBy, setSelectedSortBy] = useState<string>("Item");
+  const [selectedSortBy2, setSelectedSortBy2] = useState<string>("Item");
   const [categoryList, setCategoryList] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -79,7 +81,73 @@ const ExpiryIndex = () => {
     setSelectedCategory(event.target.value);
   };
 
+  const handleSortByChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedSortBy(event.target.value);
+    console.log(event.target.value)
+    if(event.target.value == "Item") {
+      feedList.sort((a, b) => {
+        if (a.item.name < b.item.name) {
+          return -1;
+        } else if (a.item.name > b.item.name) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    else if(event.target.value == "Expiry Date") {
+      feedList.sort((a, b) => {
+        if (a.expiration < b.expiration) {
+          return -1;
+        } else if (a.expiration > b.expiration) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    
+    console.log(feedList)
+    setFeedList(feedList)
+  };
+
+  const handleSortByChange2 = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedSortBy2(event.target.value);
+    console.log(event.target.value)
+    if(event.target.value == "Item") {
+      nearlyExpiredFeedList.sort((a, b) => {
+        if (a.item.name < b.item.name) {
+          return -1;
+        } else if (a.item.name > b.item.name) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    else if(event.target.value == "Expiry Date") {
+      nearlyExpiredFeedList.sort((a, b) => {
+        if (a.expiration < b.expiration) {
+          return -1;
+        } else if (a.expiration > b.expiration) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    
+    console.log(nearlyExpiredFeedList)
+    setNearlyExpiredFeedList(nearlyExpiredFeedList)
+  };
+
   const categories = ["All", ...categoryList.map((category) => category.name)];
+  const sortByList = ["Item", "Expiry Date"];
+
 
   return (
     <div>
@@ -116,10 +184,30 @@ const ExpiryIndex = () => {
       >
         <div>
           <h3>Expired Items</h3>
+          <Typography>Sort By</Typography>
+            <select value={selectedSortBy} onChange={handleSortByChange}>
+              {sortByList.map((category) => (
+                <option key={category} value={category}>
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                </option>
+              ))}
+            </select>
           <Expiry ep={feedList} />
         </div>
         <div>
           <h3>Expiring Soon</h3>
+          <Typography>Sort By</Typography>
+            <select value={selectedSortBy} onChange={handleSortByChange2}>
+              {sortByList.map((category) => (
+                <option key={category} value={category}>
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                </option>
+              ))}
+            </select>
           <Expiry ep={nearlyExpiredFeedList} />
         </div>
       </div>
