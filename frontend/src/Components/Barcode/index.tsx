@@ -1,6 +1,6 @@
 import openFFInstance from "../../util/openFFInstance"; //for handling authorized requests
 
-export default  function lookup(barcode: string) {
+export default function lookup(barcode: string) {
     let openFFData: any;
 
     openFFInstance.get(`/search?code=${barcode}`)
