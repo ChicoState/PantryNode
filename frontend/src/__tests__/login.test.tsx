@@ -6,6 +6,7 @@ import { store } from "../store";
 import { Provider } from "react-redux";
 
 describe("Login form", () => {
+     // Test case for submitting the form successfully
     it("submits the form successfully", async () => {
         render(
             <Provider store={store}>
