@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { ensureAuthenticated } = require('../config/auth');
+var { ensureAuthenticated } = require('../config/auth');
 
 var { Sequelize } = require('sequelize');
 var { initModels, stock } = require("../models/init-models");

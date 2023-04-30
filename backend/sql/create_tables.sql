@@ -43,11 +43,11 @@ CREATE TABLE Shelf (
     FOREIGN KEY (section_id)
       REFERENCES Section(section_id)
 );
-CREATE TYPE category AS ENUM ('produce', 'fruit', 'meat', 'dairy', 'baked goods', 'canned', 'snacks', 'beverage', 'condiments & spices', 'processed foods', 'other' );
+
 CREATE TABLE Item (
   item_id serial,
-  name text UNIQUE,
-  category category,
+  name text,
+  category text,
   stor_id int NOT NULL,
   size int,
   barcode text UNIQUE,

@@ -6,11 +6,11 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAppSelector } from "../hooks";
 import { Button, Typography } from "@mui/material";
+import lookup from "../Components/Barcode";
 
 function Scanner() {
-  // const [camera, setCamera] = useState(false);
   const [result, setResult] = useState<string | null>(null);
-  const loading = useAppSelector((state) => state.user.status);
+  const searching = useAppSelector((state) => state.user.status);
 
   const onDetected = (result: string) => {
     setResult(result);
@@ -21,7 +21,8 @@ function Scanner() {
       barcode: "",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      console.log("Barcode: " + values.barcode);
+      lookup(values.barcode);
     },
   });
 
@@ -70,14 +71,13 @@ function Scanner() {
             type="submit"
             fullWidth
             variant="contained"
-            // disabled={!(formik.dirty && formik.isValid)}
             disabled={!(result || formik.values.barcode)}
             sx={{ mt: 3, mb: 2, py: 2 }}
             style={{
               backgroundColor: "primary",
             }}>
             Lookup
-            {loading === "loading" && <CircularProgress />}
+            {searching === "searching" && <CircularProgress />}
           </Button>
         </Box>
       </div>

@@ -5,8 +5,10 @@ services:
     image: postgres:latest
     volumes:
       - ./backend/postgres-data:/var/lib/postgresql/data
-      - ./backend/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-      - ./backend/sql/dummy_data.sql:/docker-entrypoint-initdb.d/dummy_data.sql
+      - ./backend/sql/create_tables.sql:/docker-entrypoint-initdb.d/1_create_tables.sql
+      - ./backend/sql/dummy_data.sql:/docker-entrypoint-initdb.d/2_dummy_data.sql
+      - ./backend/sql/PLU_data.sql:/docker-entrypoint-initdb.d/3_PLU_data.sql
+      - ./backend/sql/dummy_data2.sql:/docker-entrypoint-initdb.d/4_dummy_data.sql
     networks:
       - local
     ports:
