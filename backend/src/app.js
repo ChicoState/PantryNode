@@ -19,6 +19,7 @@ var itemsRouter = require('./routes/items');
 var summaryRouter = require('./routes/summary');
 var stockRouter = require('./routes/stock');
 var barcodeRouter = require('./routes/barcode');
+var donorRouter = require('./routes/donor');
 
 var app = express();
 
@@ -94,6 +95,8 @@ app.get('/feed', feedRouter);
 app.get('/items', itemsRouter);
 app.get('/items/expired', itemsRouter);
 app.get('/items/nearly_expired', itemsRouter);
+
+app.get('/donors', donorRouter);
 
 app.get('/purchases', summaryRouter);
 app.get('/currentstock', summaryRouter);
