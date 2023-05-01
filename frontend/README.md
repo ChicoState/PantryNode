@@ -57,11 +57,13 @@ path: /expiry path: items expiry page
 path: /scanner path: scanner page
 
 ### Dependencies 
-The frontend is build using Material UI [Visit MaterialUI](https://www.openai.com/)
-
-packages
-
-
-
+The frontend is styled using Material UI [Visit MaterialUI](https://github.com/mui/material-ui)
+The frontend is leveraging Redux for global state management [Visit Redux](https://react-redux.js.org)
+The frontend is using Axios as a promise-based HTTP library to handle interaction with the backend API. [Visit Axios](https://axios-http.com)
+The frontend is using Json Web Token for Authentication. [Visit JWT](https://jwt.io)
+We are using Quagga for barcode scanning. [Visit Quagga Site](https://serratus.github.io/quaggaJS/)
+We are using Recharts to vizualize charts. [Visit Recharts Github](https://github.com/recharts/recharts)
+We are using Formik to build our web based forms.  [Visit Formik Offical SIte](https://formik.org)
+The frontend is using eslint for linting and CI and CD. [Visit Eslint](https://eslint.org)
 
 
