@@ -159,10 +159,18 @@ CREATE MATERIALIZED VIEW  stock
 AS
 SELECT
 	item.name
-	,item.category 
-	,sum(trans_items.quantity) as quantity
+	,item.category
+	,sum(
+		CASE
+			WHEN transaction.trans_type = 'donation' THEN trans_items.quantity
+			ELSE trans_items.quantity * -1
+		END
+	)
+	as quantity
 FROM trans_items
 JOIN item 
   ON trans_items.item_id = item.item_id
-GROUP BY item.name, item.category 
+JOIN transaction 
+  ON trans_items.trans_id = transaction.trans_id
+GROUP BY item.name, item.category
 WITH DATA;
