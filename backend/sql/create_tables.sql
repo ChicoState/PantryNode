@@ -174,3 +174,6 @@ JOIN transaction
   ON trans_items.trans_id = transaction.trans_id
 GROUP BY item.name, item.category
 WITH DATA;
+
+--Adding extention for fuzzy searching
+CREATE EXTENSION pg_trgm;

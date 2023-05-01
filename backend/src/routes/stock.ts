@@ -14,13 +14,17 @@ router.get('/stock', ensureAuthenticated, function (req: any, res: any) {
         const errors = [];
         res.post('Unauthenticated');
     } else {
-        stock.findAll().then((cur_stock: typeof stock[]) => {
+        if(req.query.item !== undefined) {
+
+        } else {
+            stock.findAll().then((cur_stock: typeof stock[]) => {
             if (cur_stock == null) {
                 console.log("THIS IS ERROR " + cur_stock);
             } else {
                 res.json(JSON.stringify(cur_stock));
             }
-        });
+            });
+        }
     }
 });
 
