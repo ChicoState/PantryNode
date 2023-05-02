@@ -11,7 +11,6 @@ initModels(sequelize);
 
 router.get("/donors", ensureAuthenticated, async (req, res) => {
   if (!req.isAuthenticated()) {
-    // const errors = [];
     res.post("Unauthenticated");
   } else {
     try {
@@ -42,7 +41,7 @@ router.get("/donors", ensureAuthenticated, async (req, res) => {
         };
       });
 
-      res.json(formattedDonors);
+      res.status(200).json(formattedDonors);
     } catch (error) {
       console.error(error);
       res
@@ -54,7 +53,6 @@ router.get("/donors", ensureAuthenticated, async (req, res) => {
 
 router.get("/lookupDonor", ensureAuthenticated, async (req, res) => {
   if (!req.isAuthenticated()) {
-    // const errors = [];
     res.post("Unauthenticated");
   } else {
     try {
