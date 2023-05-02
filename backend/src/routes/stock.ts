@@ -23,7 +23,7 @@ router.get('/stock', ensureAuthenticated, function (req: any, res: any) {
                 if (cur_stock == null) {
                     res.send("No Items Found");
                 } else {
-                    res.json(JSON.stringify(cur_stock));
+                    res.json(cur_stock);
                 }
             });
         } else {
@@ -31,7 +31,7 @@ router.get('/stock', ensureAuthenticated, function (req: any, res: any) {
             if (cur_stock == null) {
                 console.log("THIS IS ERROR " + cur_stock);
             } else {
-                res.json(JSON.stringify(cur_stock));
+                res.json(cur_stock);
             }
             });
         }
