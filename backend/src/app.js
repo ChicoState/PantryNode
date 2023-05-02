@@ -97,6 +97,7 @@ app.get('/items/expired', itemsRouter);
 app.get('/items/nearly_expired', itemsRouter);
 
 app.get('/donors', donorRouter);
+app.get('/lookupDonor', donorRouter);
 
 app.get('/purchases', summaryRouter);
 app.get('/currentstock', summaryRouter);
