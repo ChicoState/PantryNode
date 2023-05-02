@@ -14,8 +14,18 @@ router.get('/stock', ensureAuthenticated, function (req: any, res: any) {
         const errors = [];
         res.post('Unauthenticated');
     } else {
+        console.log(req.query);
         if(req.query.item !== undefined) {
-
+            const filter = ` word_similarity('${req.query.item}', name) > 0.5 ORDER BY name <->> '${req.query.item}'`;
+            stock.findAll({
+                where: Sequelize.literal(filter),
+            }).then((cur_stock: typeof stock[]) => {
+                if (cur_stock == null) {
+                    res.send("No Items Found");
+                } else {
+                    res.json(JSON.stringify(cur_stock));
+                }
+            });
         } else {
             stock.findAll().then((cur_stock: typeof stock[]) => {
             if (cur_stock == null) {
