@@ -81,4 +81,37 @@ router.get('/items/nearly_expired', ensureAuthenticated, function (req, res) {
     });
 });
 
+router.get('/items/total_items', ensureAuthenticated, function (req, res) {
+    return trans_item.findAll({
+        where: {
+            quantity: {
+                [Op.gte]: 1
+            }
+        },
+        include: [{
+            model: transaction,
+            as: 'tran',
+            required: true,
+            attributes: ['date']
+        }, {
+            model: item,
+            as: 'item',
+            required: true,
+            attributes: ['name']
+        }],
+        attributes: ['trans_item_id', 'quantity'],
+    }).then((allItems) => {
+        if (allItems == null) {
+            console.log("There are no items to return");
+            res.json(JSON.stringify([]));
+        } else {
+            res.json(JSON.stringify(allItems));
+        }
+    }).catch(() => {
+        console.log("Error on finding all items");
+        res.status(400);
+        res.send();
+    });
+});
+
 module.exports = router;
