@@ -431,6 +431,121 @@ export const getSaleRoutes = (
     ],
   }));
 
+  mirage.get("/items/expired", () => [
+    {
+      trans_item_id: 1,
+      item: {
+        name: "Apples",
+      },
+      tran: {
+        date: "2023-04-25",
+      },
+      expiration: "2023-05-01",
+      quantity: 3,
+    },
+    {
+      trans_item_id: 2,
+      item: {
+        name: "Chicken",
+      },
+      tran: {
+        date: "2023-04-23",
+      },
+      expiration: "2023-04-29",
+      quantity: 1,
+    },
+    {
+      trans_item_id: 3,
+      item: {
+        name: "Yogurt",
+      },
+      tran: {
+        date: "2023-04-27",
+      },
+      expiration: "2023-05-03",
+      quantity: 2,
+    },
+    {
+      trans_item_id: 4,
+      item: {
+        name: "Cheese",
+      },
+      tran: {
+        date: "2023-04-26",
+      },
+      expiration: "2023-05-02",
+      quantity: 1,
+    },
+    {
+      trans_item_id: 5,
+      item: {
+        name: "Lettuce",
+      },
+      tran: {
+        date: "2023-04-28",
+      },
+      expiration: "2023-05-04",
+      quantity: 2,
+    },
+   ]);
+   mirage.get("/items/nearly_expired", () => [
+    {
+      trans_item_id: 1,
+      item: {
+        name: "Apples",
+      },
+      tran: {
+        date: "2023-04-25",
+      },
+      expiration: "2023-05-01",
+      quantity: 3,
+    },
+    {
+      trans_item_id: 2,
+      item: {
+        name: "Chicken",
+      },
+      tran: {
+        date: "2023-04-23",
+      },
+      expiration: "2023-04-29",
+      quantity: 1,
+    },
+    {
+      trans_item_id: 3,
+      item: {
+        name: "Yogurt",
+      },
+      tran: {
+        date: "2023-04-27",
+      },
+      expiration: "2023-05-03",
+      quantity: 2,
+    },
+    {
+      trans_item_id: 4,
+      item: {
+        name: "Cheese",
+      },
+      tran: {
+        date: "2023-04-26",
+      },
+      expiration: "2023-05-02",
+      quantity: 1,
+    },
+    {
+      trans_item_id: 5,
+      item: {
+        name: "Lettuce",
+      },
+      tran: {
+        date: "2023-04-28",
+      },
+      expiration: "2023-05-04",
+      quantity: 2,
+    },
+   ]);
+
   mirage.get("categories", () => [
     { id: 1, name: "Fruits", image_url: "/images/icons/fruit.png" },
     { id: 2, name: "Vegetables", image_url: "images/icons/vege.png" },
