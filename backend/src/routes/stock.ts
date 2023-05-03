@@ -42,6 +42,7 @@ router.get('/available', ensureAuthenticated, function (req: any, res: any) {
         const errors = [];
         res.post('Unauthenticated');
     } else {
+        console.log(req.query);
         if(req.query.item !== undefined) {
             stock.findOne({
                 where: {
@@ -55,7 +56,7 @@ router.get('/available', ensureAuthenticated, function (req: any, res: any) {
                 }
             });
         } else {
-            res.sendStatus(404);
+            res.send("bad request");
         }
     }
 });
