@@ -94,13 +94,38 @@ router.get('/items/total_donations', ensureAuthenticated, function (req, res) {
         }],
     }).then((allItems) => {
         if (allItems == null) {
-            console.log("There are no items to return");
+            console.log("There are no donated items to return");
             res.json(JSON.stringify([]));
         } else {
             res.json(allItems);
         }
     }).catch(() => {
-        console.log("There was an error retrieving nearly-expired items");
+        console.log("There was an error retrieving total donations");
+        res.status(400);
+        res.send();
+    });
+});
+
+router.get('/items/total_checkouts', ensureAuthenticated, function (req, res) {
+
+    return trans_items.findAll({
+        include: [{
+            model: transaction,
+            as: 'tran',
+            required: true,
+            where: {
+                trans_type: 'purchase'
+            }
+        }],
+    }).then((allItems) => {
+        if (allItems == null) {
+            console.log("There are no checked-out items to return");
+            res.json(JSON.stringify([]));
+        } else {
+            res.json(allItems);
+        }
+    }).catch(() => {
+        console.log("There was an error retrieving total checkouts");
         res.status(400);
         res.send();
     });
