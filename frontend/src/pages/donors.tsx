@@ -164,6 +164,18 @@ const Donor = () => {
             <AddIcon />
             Add Donor
           </Button>
+
+          <Button
+  variant="contained"
+  color="primary"
+  onClick={() => alert("Lookup button clicked")}
+  sx={{ marginLeft: "auto",paddingRight: 2 }}
+>
+  Lookup
+</Button>
+
+
+
         </div>
       </div>
 
