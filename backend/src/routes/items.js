@@ -81,34 +81,26 @@ router.get('/items/nearly_expired', ensureAuthenticated, function (req, res) {
     });
 });
 
-router.get('/items/total_items', ensureAuthenticated, function (req, res) {
-    return trans_item.findAll({
-        where: {
-            quantity: {
-                [Op.gte]: 1
-            }
-        },
+router.get('/items/total_donations', ensureAuthenticated, function (req, res) {
+
+    return trans_items.findAll({
         include: [{
             model: transaction,
             as: 'tran',
             required: true,
-            attributes: ['date']
-        }, {
-            model: item,
-            as: 'item',
-            required: true,
-            attributes: ['name']
+            where: {
+                trans_type: 'donation'
+            }
         }],
-        attributes: ['trans_item_id', 'quantity'],
     }).then((allItems) => {
         if (allItems == null) {
             console.log("There are no items to return");
             res.json(JSON.stringify([]));
         } else {
-            res.json(JSON.stringify(allItems));
+            res.json(allItems);
         }
     }).catch(() => {
-        console.log("Error on finding all items");
+        console.log("There was an error retrieving nearly-expired items");
         res.status(400);
         res.send();
     });
