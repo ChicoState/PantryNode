@@ -3,7 +3,13 @@ var router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
 
 var { Sequelize, Op } = require("sequelize");
-var { initModels, person, transaction } = require("../models/init-models");
+var {
+  initModels,
+  person,
+  transaction,
+  trans_items,
+  item,
+} = require("../models/init-models");
 
 const sequelize = new Sequelize(require("../config/keys").PostgresURI);
 
@@ -56,7 +62,7 @@ router.get("/lookupDonor", ensureAuthenticated, async (req, res) => {
     res.post("Unauthenticated");
   } else {
     try {
-      const { person_id, first_name, last_name } = req.query;
+      const { person_id, fname, lname } = req.query;
 
       const whereCondition = {};
 
@@ -64,12 +70,12 @@ router.get("/lookupDonor", ensureAuthenticated, async (req, res) => {
         whereCondition["person_id"] = person_id;
       }
 
-      if (first_name) {
-        whereCondition["fname"] = { [Op.like]: `%${first_name}%` };
+      if (fname) {
+        whereCondition["fname"] = { [Op.like]: `%${fname}%` };
       }
 
-      if (last_name) {
-        whereCondition["lname"] = { [Op.like]: `%${last_name}%` };
+      if (lname) {
+        whereCondition["lname"] = { [Op.like]: `%${lname}%` };
       }
 
       const persons = await person.findAll({
@@ -90,9 +96,77 @@ router.get("/lookupDonor", ensureAuthenticated, async (req, res) => {
       res.status(200).json(persons);
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .json({ message: "500: An error occurred while fetching requested donor." });
+      res.status(500).json({
+        message: "500: An error occurred while fetching requested donor.",
+      });
+    }
+  }
+});
+
+router.get("/donations/:person_id", ensureAuthenticated, async (req, res) => {
+  if (!req.isAuthenticated()) {
+    res.post("Unauthenticated");
+  } else {
+    const { person_id } = req.params;
+
+    try {
+      const donorTransactions = await transaction.findAll({
+        where: {
+          person_id,
+          trans_type: "donation",
+        },
+        include: [
+          {
+            model: person,
+            as: "person",
+            attributes: ["person_id", "fname", "lname", "email"],
+          },
+          {
+            model: trans_items,
+            as: "trans_items",
+            include: [
+              {
+                model: item,
+                as: "item",
+                attributes: ["item_id", "name"],
+              },
+            ],
+          },
+        ],
+      });
+
+      if (donorTransactions.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "404: No donations found for this person_id" });
+      }
+
+      const personInfo = {
+        person_id: donorTransactions[0].person.person_id,
+        fname: donorTransactions[0].person.fname,
+        lname: donorTransactions[0].person.lname,
+        email: donorTransactions[0].person.email,
+      };
+
+      const formattedTransactions = donorTransactions.map((transaction) => {
+        return {
+          trans_id: transaction.trans_id,
+          date: transaction.date,
+          items: transaction.trans_items.map((trans_item) => ({
+            item_id: trans_item.item.item_id,
+            name: trans_item.item.name,
+            descr: trans_item.item.descr,
+            quantity: trans_item.quantity,
+          })),
+        };
+      });
+
+      res.json({ donor: personInfo, donations: formattedTransactions });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "500: An error occurred while fetching transactions",
+      });
     }
   }
 });
