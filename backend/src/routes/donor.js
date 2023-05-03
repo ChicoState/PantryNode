@@ -9,6 +9,8 @@ var {
   transaction,
   trans_items,
   item,
+  storage_type,
+  site,
 } = require("../models/init-models");
 
 const sequelize = new Sequelize(require("../config/keys").PostgresURI);
@@ -166,6 +168,79 @@ router.get("/donations/:person_id", ensureAuthenticated, async (req, res) => {
       console.error(error);
       res.status(500).json({
         message: "500: An error occurred while fetching transactions",
+      });
+    }
+  }
+});
+
+router.post("/donate", ensureAuthenticated, async (req, res) => {
+  if (!req.isAuthenticated()) {
+    res.post("Unauthenticated");
+  } else {
+    const { person_id, siteDetails, items } = req.body;
+
+    try {
+      const existingPerson = await person.findByPk(person_id);
+      const addressId = existingPerson.pri_addr_id;
+
+      let { Site, Transaction, Items } = await sequelize.transaction(
+        async (t) => {
+          const Site = await site.create(
+            { ...siteDetails, addr_id: addressId },
+            { transaction: t }
+          );
+
+          const Transaction = await transaction.create(
+            {
+              person_id: existingPerson.person_id,
+              date: new Date(),
+              trans_type: "donation",
+              site: Site.site_id,
+            },
+            { transaction: t }
+          );
+
+          const Items = [];
+
+          for (const x of items) {
+            const { transItemsDetails, itemDetails, storageTypeDetails } = x;
+
+            const StorageType = await storage_type.findOrCreate({
+              where: { stor_type: storageTypeDetails.stor_type },
+              defaults: storageTypeDetails,
+              transaction: t,
+            });
+
+            const Item = await item.create(
+              {
+                ...itemDetails,
+                stor_id: StorageType[0].stor_id,
+              },
+              { transaction: t }
+            );
+
+            const TransItem = await trans_items.create(
+              {
+                ...transItemsDetails,
+                trans_id: Transaction.trans_id,
+                item_id: Item.item_id,
+              },
+              { transaction: t }
+            );
+
+            Items.push({ StorageType: StorageType[0], Item, TransItem });
+          }
+
+          return { Site, Transaction, Items };
+        }
+      );
+
+      res.status(201).json({ Site, Transaction, Items });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message:
+          "500: An error occurred while processing the donation transaction",
       });
     }
   }
