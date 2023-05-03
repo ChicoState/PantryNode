@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -19,40 +19,62 @@ import {
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import axiosInstance from "../util/axiosInstance";
+
+
+export type donorFeed = {
+  name: string;
+  email: string;
+  location: string;
+ };
 
 //reconfiguring
-
-
 const Donor = () => {
-  interface Entry {
-    name: string;
-    email: string;
-    location: string;
-  }
+  const [data, setData] = useState<donorFeed[]>([
+  //interface Entry,
+  {
+    name: "",
+    email: "",
+    location: "",
+  } as donorFeed,
+]);
+
 
   interface SortConfig {
-    key: keyof Entry | null;
-    direction: "ascending" | "descending" | null;
+   key: keyof donorFeed | null;
+   direction: "ascending" | "descending" | null;
   }
 
-  const initialData: Entry[] = [
-    { name: "John", email: "john@gmail.com", location: "USA" },
-    { name: "Danny", email: "danny@gmail.com", location: "USA" },
-  ];
+  //const initialData: Entry[] = [
+    //{ name: "John", email: "john@gmail.com", location: "USA" },
+   // { name: "Danny", email: "danny@gmail.com", location: "USA" },
+  //]; 
 
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [data, setData] = useState<Entry[]>(initialData);
+  //const [data, setData] = useState<donorFeed[]>(initialData);
   const [emailError, setEmailError] = useState("");
   const [isEmailError, setIsEmailError] = useState(false);
-  const [newEntry, setNewEntry] = useState<Entry>({
+  
+  const [newEntry, setNewEntry] = useState<donorFeed>({
     name: "",
     email: "",
     location: "",
   });
+  
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: null,
     direction: null,
   });
+
+  useEffect(() => {
+    axiosInstance.get<donorFeed[]>("/donors")
+    .then((res: any) => {
+      // uncomment the below line for production use
+       setData(JSON.parse(res) as donorFeed[]);
+      });
+    }, []);
+    
+  
 
   const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -85,7 +107,7 @@ const Donor = () => {
     setIsEmailError(false);
   };
 
-  const onSort = (key: keyof Entry) => {
+  const onSort = (key: keyof donorFeed) => {
     let direction: "ascending" | "descending" = "ascending";
     if (
       sortConfig &&
@@ -97,10 +119,10 @@ const Donor = () => {
     setSortConfig({ key, direction });
   };
 
-  const sortedData = (): Entry[] => {
+  const sortedData = (): donorFeed[] => {
     const sortedData = [...data];
     if (sortConfig !== null) {
-      sortedData.sort((a: Entry, b: Entry) => {
+      sortedData.sort((a: donorFeed, b: donorFeed) => {
         if (sortConfig.key !== null) {
           if (a[sortConfig.key] < b[sortConfig.key]) {
             return sortConfig.direction === "ascending" ? -1 : 1;
@@ -266,3 +288,4 @@ const Donor = () => {
 };
 
 export default Donor;
+
