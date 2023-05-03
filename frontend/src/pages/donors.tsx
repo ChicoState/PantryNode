@@ -137,6 +137,7 @@ const Donor = () => {
     return sortedData;
   };
 
+
   return (
     <div>
       <div style={{ width: "100%", display: "flex" }}>
@@ -148,29 +149,23 @@ const Donor = () => {
 
         <div
           style={{
-            display: "flex",
-            flex: "1",
-            textAlign: "right",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <Button
+            display: "flex", alignItems: "center" }}>
+            <Button
             variant="contained"
             color="primary"
             onClick={() => setShowModal(true)}
-            sx={{ marginLeft: "auto", paddingRight: 2 }}
-          >
-            <AddIcon />
-            Add Donor
+            sx={{ marginRight: "1rem" }}
+        >
+          <AddIcon/>
+          Add Donor
           </Button>
 
-          <Button
+        
+           <Button
   variant="contained"
   color="primary"
   onClick={() => alert("Lookup button clicked")}
-  sx={{ marginLeft: "auto",paddingRight: 2 }}
->
+  >
   Lookup
 </Button>
 
@@ -301,3 +296,29 @@ const Donor = () => {
 
 export default Donor;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
