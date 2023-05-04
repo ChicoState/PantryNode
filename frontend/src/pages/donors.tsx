@@ -31,12 +31,11 @@ export type donorFeed = {
 //reconfiguring
 const Donor = () => {
   const [data, setData] = useState<donorFeed[]>([
-  //interface Entry,
   {
     name: "",
     email: "",
     location: "",
-  } as donorFeed,
+  }
 ]);
 
 
@@ -69,9 +68,8 @@ const Donor = () => {
   useEffect(() => {
     axiosInstance.get<donorFeed[]>("/donors")
     .then((res: any) => {
-      // uncomment the below line for production use
-       setData(JSON.parse(res) as donorFeed[]);
-      });
+      setData(res?.data as donorFeed[]);     
+    });
     }, []);
     
   
@@ -120,6 +118,9 @@ const Donor = () => {
   };
 
   const sortedData = (): donorFeed[] => {
+      if (!data) {
+    return [];
+  }
     const sortedData = [...data];
     if (sortConfig !== null) {
       sortedData.sort((a: donorFeed, b: donorFeed) => {
@@ -268,7 +269,7 @@ const Donor = () => {
           </TableHead>
 
           <TableBody>
-            {sortedData().map((entry, index) => (
+            {sortedData().map((entry: donorFeed, index: number) => (
               <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{entry.name}</TableCell>
