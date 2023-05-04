@@ -192,7 +192,6 @@ const ExpiryIndex = () => {
      // Comment or Remove the below line for production use
      const data = JSON.parse(expiryDummyDataString) as expiryFeed[];
 
-
      const sortedData = data.sort((a, b) => {
        const aExpiry = new Date(a.expiration).getTime();
        const bExpiry = new Date(b.expiration).getTime();

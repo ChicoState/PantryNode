@@ -23,21 +23,27 @@ import axiosInstance from "../util/axiosInstance";
 
 
 export type donorFeed = {
-  name: string;
+  id: number;
+  fname: string;
+  lname: string;
   email: string;
-  location: string;
  };
 
 //reconfiguring
 const Donor = () => {
   const [data, setData] = useState<donorFeed[]>([
+  //interface Entry,
   {
-    name: "",
+    id: 0,
+    fname: "",
+    lname: "",
     email: "",
-    location: "",
-  }
+  } as donorFeed,
 ]);
 
+    
+const [feedList, setFeedList] = useState<donorFeed[]>([]);
+//const [data, setData] = useState<donorFeed[]>([]);
 
   interface SortConfig {
    key: keyof donorFeed | null;
@@ -50,14 +56,14 @@ const Donor = () => {
   //]; 
 
   const [showModal, setShowModal] = useState<boolean>(false);
-  //const [data, setData] = useState<donorFeed[]>(initialData);
   const [emailError, setEmailError] = useState("");
   const [isEmailError, setIsEmailError] = useState(false);
   
   const [newEntry, setNewEntry] = useState<donorFeed>({
-    name: "",
+    id: 0,
+    fname: "",
+    lname: "",
     email: "",
-    location: "",
   });
   
   const [sortConfig, setSortConfig] = useState<SortConfig>({
@@ -65,22 +71,26 @@ const Donor = () => {
     direction: null,
   });
 
+
   useEffect(() => {
     axiosInstance.get<donorFeed[]>("/donors")
     .then((res: any) => {
-      setData(res?.data as donorFeed[]);     
-    });
+      // uncomment the below line for production use
+      setData(res?.data as donorFeed[]);
+      });
     }, []);
     
-  
 
   const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(data, "Forma data");
     setData([...data, newEntry]);
-    setNewEntry({ name: "", email: "", location: "" });
+    setNewEntry({ id: 0,
+      fname: "",
+      lname:"",
+      email: "" });
     setShowModal(false);
-  };
+  }; 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
@@ -170,8 +180,6 @@ const Donor = () => {
   Lookup
 </Button>
 
-
-
         </div>
       </div>
 
@@ -184,7 +192,7 @@ const Donor = () => {
               margin="dense"
               label="Name"
               name="name"
-              value={newEntry.name}
+              value={newEntry.fname}
               onChange={handleChange}
               fullWidth
             />
@@ -203,7 +211,7 @@ const Donor = () => {
               margin="dense"
               label="Location"
               name="location"
-              value={newEntry.location}
+              value={newEntry.id}
               onChange={handleChange}
               fullWidth
             />
@@ -216,7 +224,7 @@ const Donor = () => {
                 type="submit"
                 color="primary"
                 disabled={
-                  isEmailError || newEntry.location === "" || newEntry.name === ""
+                  isEmailError || newEntry.id === 0 || newEntry.fname === ""
                 }
               >
                 Add
@@ -234,10 +242,10 @@ const Donor = () => {
           <TableHead>
             <TableRow>
               <TableCell>No.</TableCell>
-              <TableCell onClick={() => onSort("name")}>
+              <TableCell onClick={() => onSort("fname")}>
                 <strong>Name</strong>
                 {sortConfig &&
-                  sortConfig.key === "name" &&
+                  sortConfig.key === "fname" &&
                   (sortConfig.direction === "ascending" ? (
                     <ArrowUpwardIcon sx={{ fontSize: 12 }} />
                   ) : (
@@ -254,10 +262,10 @@ const Donor = () => {
                     <ArrowDownwardIcon sx={{ fontSize: 12 }} />
                   ))}
               </TableCell>
-              <TableCell onClick={() => onSort("location")}>
+              <TableCell onClick={() => onSort("id")}>
                 <strong>Location</strong>
                 {sortConfig &&
-                  sortConfig.key === "location" &&
+                  sortConfig.key === "id" &&
                   (sortConfig.direction === "ascending" ? (
                     <ArrowUpwardIcon sx={{ fontSize: 12 }} />
                   ) : (
@@ -272,15 +280,15 @@ const Donor = () => {
             {sortedData().map((entry: donorFeed, index: number) => (
               <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{entry.name}</TableCell>
+                <TableCell>{entry.fname}</TableCell>
                 <TableCell>{entry.email}</TableCell>
-                <TableCell>{entry.location}</TableCell>
+                <TableCell>{entry.id}</TableCell>
                 <TableCell>
                   <Button
                     variant="contained"
                     color="primary"
                     onClick={() =>
-                      alert(`Donate for ${entry.name}`)
+                      alert(`Donate for ${entry.fname}`)
                     }
                   >
                     Donate
