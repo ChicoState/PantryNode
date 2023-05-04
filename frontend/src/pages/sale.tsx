@@ -48,7 +48,6 @@ const Sale = () => {
     <Box sx={{ width: "100%" }}>
       <Typography variant="h4" align="left" sx={{ color: "#8c2332" }}>
         <b>On Sale</b>
-        <br></br>
       </Typography>
       <Grid
         container
