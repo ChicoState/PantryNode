@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table,TableBody,TableHead, TableRow,TableContainer,Paper,TableCell,Grid,ToggleButton,ToggleButtonGroup,} from "@mui/material";
+import { Table,TableBody,TableHead, TableRow,TableContainer,Paper,TableCell,Grid,ToggleButton,ToggleButtonGroup, Typography} from "@mui/material";
 import { Box } from "@mui/system";
 import SummaryBarChart from "../Components/Summary/BarChart";
 
@@ -125,6 +125,10 @@ const Summary = () => {
 
   return (
     <div>
+      <Typography variant="h4" align="left" sx={{ color: "#8c2332" }}>
+        <b>Summary</b>
+      </Typography>
+      <br></br>
       <ToggleButtonGroup
         color="primary"
         fullWidth

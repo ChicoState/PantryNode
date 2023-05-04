@@ -198,9 +198,12 @@ const Donor = () => {
         style={{ marginTop: "1rem", boxShadow: "none" }}
       >
         <Table>
-          <TableHead>
+          <TableHead
+                    sx={{
+                      "& th": { color: "white", backgroundColor: "#8C2332" },
+                    }}>
             <TableRow>
-              <TableCell>No.</TableCell>
+              <TableCell>#</TableCell>
               <TableCell onClick={() => onSort("name")}>
                 <strong>Name</strong>
                 {sortConfig &&

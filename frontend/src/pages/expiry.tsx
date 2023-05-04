@@ -290,14 +290,9 @@ const ExpiryIndex = () => {
 
  return (
    <div>
-     <AppBar
-       position="static"
-       style={{ marginBottom: 10, alignItems: "center" }}
-     >
-       <Toolbar>
-         <h2>Expiry Items</h2>
-       </Toolbar>
-     </AppBar>
+      <Typography variant="h4" align="left" sx={{ color: "#8c2332" }}>
+        <b>Expiry Items</b>
+      </Typography>
      <div
        style={{
          display: "grid",
