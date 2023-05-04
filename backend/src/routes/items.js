@@ -131,4 +131,27 @@ router.get('/items/total_checkouts', ensureAuthenticated, function (req, res) {
     });
 });
 
+router.get('/items/unique_checkouts', ensureAuthenticated, function (req, res) {
+
+    return transaction.findAll({
+        attributes: ['person_id'],
+        distinct: true,
+        col: 'person_id',
+        where: {
+            trans_type: 'purchase'
+        }
+    }).then((allItems) => {
+        if (allItems == null) {
+            console.log("There are no student check-outs to return");
+            res.json(JSON.stringify([]));
+        } else {
+            res.json(allItems);
+        }
+    }).catch(() => {
+        console.log("There was an error retrieving unique student checkouts");
+        res.status(400);
+        res.send();
+    });
+});
+
 module.exports = router;
