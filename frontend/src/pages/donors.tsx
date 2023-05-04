@@ -24,8 +24,8 @@ import axiosInstance from "../util/axiosInstance";
 
 
 export type donorFeed = {
-  id: number;
-  fname: string;
+  person_id: number;
+  full_name: string;
   email: string;
  };
 
@@ -34,14 +34,14 @@ const Donor = () => {
   const [data, setData] = useState<donorFeed[]>([
   //interface Entry,
   {
-    id: 0,
-    fname: "",
+    person_id: 0,
+    full_name: "",
     email: "",
   } as donorFeed,
 ]);
 
     
-const [feedList, setFeedList] = useState<donorFeed[]>([]);
+//const [feedList, setFeedList] = useState<donorFeed[]>([]);
 //const [data, setData] = useState<donorFeed[]>([]);
 
   interface SortConfig {
@@ -59,8 +59,8 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
   const [isEmailError, setIsEmailError] = useState(false);
   
   const [newEntry, setNewEntry] = useState<donorFeed>({
-    id: 0,
-    fname: "",
+    person_id: 0,
+    full_name: "",
     email: "",
   });
   
@@ -73,8 +73,11 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
   useEffect(() => {
     axiosInstance.get<donorFeed[]>("/donors")
     .then((res: any) => {
+     
       console.log(res)
+
       setData(res as donorFeed[]);
+
       });
     }, []);
     
@@ -83,8 +86,8 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
     e.preventDefault();
     console.log(data, "Forma data");
     setData([...data, newEntry]);
-    setNewEntry({ id: 0,
-      fname: "",
+    setNewEntry({ person_id: 0,
+      full_name: "",
       email: "" });
       
     setShowModal(false);
@@ -130,6 +133,7 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
     return [];
   }
     const sortedData = [...data];
+    console.log(sortedData)
     if (sortConfig !== null) {
       sortedData.sort((a: donorFeed, b: donorFeed) => {
         if (sortConfig.key !== null) {
@@ -175,7 +179,7 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
   color="primary"
   onClick={() => alert("Lookup button clicked")}
   >
-  Lookup
+  Lookup Donor
 </Button>
 
         </div>
@@ -190,7 +194,7 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
               margin="dense"
               label="Name"
               name="name"
-              value={newEntry.fname}
+              value={newEntry.full_name}
               onChange={handleChange}
               fullWidth
             />
@@ -214,7 +218,7 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
                 type="submit"
                 color="primary"
                 disabled={
-                  isEmailError || newEntry.id === 0 || newEntry.fname === ""
+                  isEmailError || newEntry.person_id === 0 || newEntry.full_name === ""
                 }
               >
                 Add
@@ -232,10 +236,10 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
           <TableHead>
             <TableRow>
               <TableCell>No.</TableCell>
-              <TableCell onClick={() => onSort("fname")}>
+              <TableCell onClick={() => onSort("full_name")}>
                 <strong>Name</strong>
                 {sortConfig &&
-                  sortConfig.key === "fname" &&
+                  sortConfig.key === "full_name" &&
                   (sortConfig.direction === "ascending" ? (
                     <ArrowUpwardIcon sx={{ fontSize: 12 }} />
                   ) : (
@@ -259,15 +263,15 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
           <TableBody>
             {sortedData().map((entry: donorFeed, index: number) => (
               <TableRow key={index}>
-                <TableCell>{entry.id}</TableCell>
-                <TableCell>{entry.fname}</TableCell>
+                <TableCell>{entry.person_id}</TableCell>
+                <TableCell>{entry.full_name}</TableCell>
                 <TableCell>{entry.email}</TableCell> 
                 <TableCell>
                   <Button
                     variant="contained"
                     color="primary"
                     onClick={() =>
-                      alert(`Donate for ${entry.fname}`)
+                      alert(`Donate for ${entry.full_name}`)
                     }
                   >
                     Donate
