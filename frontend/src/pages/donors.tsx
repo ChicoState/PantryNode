@@ -22,10 +22,10 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import axiosInstance from "../util/axiosInstance";
 
 
+
 export type donorFeed = {
   id: number;
   fname: string;
-  lname: string;
   email: string;
  };
 
@@ -36,7 +36,6 @@ const Donor = () => {
   {
     id: 0,
     fname: "",
-    lname: "",
     email: "",
   } as donorFeed,
 ]);
@@ -62,7 +61,6 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
   const [newEntry, setNewEntry] = useState<donorFeed>({
     id: 0,
     fname: "",
-    lname: "",
     email: "",
   });
   
@@ -75,8 +73,8 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
   useEffect(() => {
     axiosInstance.get<donorFeed[]>("/donors")
     .then((res: any) => {
-      // uncomment the below line for production use
-      setData(res?.data as donorFeed[]);
+      console.log(res)
+      setData(res as donorFeed[]);
       });
     }, []);
     
@@ -87,8 +85,8 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
     setData([...data, newEntry]);
     setNewEntry({ id: 0,
       fname: "",
-      lname:"",
       email: "" });
+      
     setShowModal(false);
   }; 
 
@@ -207,14 +205,6 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
               helperText={emailError}
               fullWidth
             />
-            <TextField
-              margin="dense"
-              label="Location"
-              name="location"
-              value={newEntry.id}
-              onChange={handleChange}
-              fullWidth
-            />
 
             <DialogActions>
               <Button onClick={() => setShowModal(false)} color="primary">
@@ -262,16 +252,6 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
                     <ArrowDownwardIcon sx={{ fontSize: 12 }} />
                   ))}
               </TableCell>
-              <TableCell onClick={() => onSort("id")}>
-                <strong>Location</strong>
-                {sortConfig &&
-                  sortConfig.key === "id" &&
-                  (sortConfig.direction === "ascending" ? (
-                    <ArrowUpwardIcon sx={{ fontSize: 12 }} />
-                  ) : (
-                    <ArrowDownwardIcon sx={{ fontSize: 12 }} />
-                  ))}
-              </TableCell>
               <TableCell>Donation</TableCell>
             </TableRow>
           </TableHead>
@@ -279,10 +259,9 @@ const [feedList, setFeedList] = useState<donorFeed[]>([]);
           <TableBody>
             {sortedData().map((entry: donorFeed, index: number) => (
               <TableRow key={index}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{entry.fname}</TableCell>
-                <TableCell>{entry.email}</TableCell>
                 <TableCell>{entry.id}</TableCell>
+                <TableCell>{entry.fname}</TableCell>
+                <TableCell>{entry.email}</TableCell> 
                 <TableCell>
                   <Button
                     variant="contained"
