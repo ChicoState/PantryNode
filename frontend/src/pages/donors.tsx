@@ -29,6 +29,8 @@ export type donorFeed = {
   email: string;
  };
 
+
+
 //reconfiguring
 const Donor = () => {
   const [data, setData] = useState<donorFeed[]>([
@@ -41,22 +43,17 @@ const Donor = () => {
 ]);
 
     
-//const [feedList, setFeedList] = useState<donorFeed[]>([]);
-//const [data, setData] = useState<donorFeed[]>([]);
-
   interface SortConfig {
    key: keyof donorFeed | null;
    direction: "ascending" | "descending" | null;
   }
 
-  //const initialData: Entry[] = [
-    //{ name: "John", email: "john@gmail.com", location: "USA" },
-   // { name: "Danny", email: "danny@gmail.com", location: "USA" },
-  //]; 
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [emailError, setEmailError] = useState("");
   const [isEmailError, setIsEmailError] = useState(false);
+  
+
   
   const [newEntry, setNewEntry] = useState<donorFeed>({
     person_id: 0,
@@ -73,30 +70,62 @@ const Donor = () => {
   useEffect(() => {
     axiosInstance.get<donorFeed[]>("/donors")
     .then((res: any) => {
-     
       console.log(res)
-
       setData(res as donorFeed[]);
-
       });
     }, []);
-    
 
-  const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+    const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+    
+      const newDonor = {
+        person_id: newEntry.person_id,
+        full_name: newEntry.full_name,
+        email: newEntry.email,
+      };
+    console.log(newDonor);
+      axiosInstance.post('/addDonor', newDonor)
+        .then((response) => {
+          if (!response) {
+            throw new Error('Failed to save new donor');
+          }
+          return response.data;
+        })
+        .then((savedDonor) => {
+          console.log('New donor saved:', savedDonor);
+          setData([...data, newEntry]);
+          setNewEntry({
+            person_id: 0,
+            full_name: '',
+            email: '',
+          });
+          setShowModal(false);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    
+    
+     
+  /*const handleAddEntry = (e: React.FormEvent<HTMLFormElement>) => {
+   e.preventDefault();
     console.log(data, "Forma data");
-    setData([...data, newEntry]);
-    setNewEntry({ person_id: 0,
-      full_name: "",
-      email: "" });
-      
+     setData([...data, newEntry]);
+      setNewEntry({ 
+        person_id: 0,
+        full_name: "",
+        email: "" });   
     setShowModal(false);
-  }; 
+  }; */
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
     console.log(e.target.value, "test");
   };
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
     console.log(e.target.value, "email");
@@ -115,6 +144,8 @@ const Donor = () => {
     setEmailError("");
     setIsEmailError(false);
   };
+
+  
 
   const onSort = (key: keyof donorFeed) => {
     let direction: "ascending" | "descending" = "ascending";
@@ -219,14 +250,14 @@ const Donor = () => {
             />
 
             <DialogActions>
-              <Button onClick={() => setShowModal(false)} color="primary">
+              <Button onClick={() => setShowModal(true)} color="primary">
                 Cancel
               </Button>
               <Button
                 type="submit"
                 color="primary"
                 disabled={
-                  isEmailError || newEntry.person_id === 0 || newEntry.full_name === ""
+                  isEmailError || newEntry.person_id === 0 || newEntry.full_name === "" 
                 }
               >
                 Add

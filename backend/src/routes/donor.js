@@ -246,4 +246,39 @@ router.post("/donate", ensureAuthenticated, async (req, res) => {
   }
 });
 
+
+
+router.post("/addDonor", ensureAuthenticated, async (req, res) => {
+  if (!req.isAuthenticated()) {
+    res.status(401).send("Unauthenticated");
+    return;
+  }
+
+  try {
+    // Extract the donor information from the request body
+    const {person_id, full_name, email} = req.body;
+
+    // Split the full name into first and last name
+    const [fname, lname] = full_name.split(' ');
+    // Create a new donor record in the database
+    const newDonor = await person.create({
+      person_id,
+      fname,
+      lname,
+      email
+    });        
+    res.status(201).json({
+      person_id: newDonor.person_id,
+      full_name: newDonor.full_name,
+      email: newDonor.email,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "500: An error occurred while adding new donor.",
+    });
+  }
+});
+
+
 module.exports = router;

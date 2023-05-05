@@ -100,6 +100,7 @@ app.get('/donors', donorRouter);
 app.get('/lookupDonor', donorRouter);
 app.get('/donations/:person_id', donorRouter);
 app.post('/donate', donorRouter);
+app.post('/addDonor', donorRouter);
 
 app.get('/purchases', summaryRouter);
 app.get('/currentstock', summaryRouter);
