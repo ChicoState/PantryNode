@@ -32,13 +32,13 @@ describe("Donor Page", () => {
       const idInput = getByLabelText("Person ID");
       const nameInput = getByLabelText("Full Name");
       const emailInput = getByLabelText("Email");
-      fireEvent.change(idInput, { target: { value: "006" } });
+      fireEvent.change(idInput, { target: { value: 63 } });
       fireEvent.change(nameInput, { target: { value: "Tanvi" } });
       fireEvent.change(emailInput, { target: { value: "mahajan@gmail.com" } });
         
       const addDonorrButton = getByText("Add");
       fireEvent.click(addDonorrButton);
-      expect(queryByText("006")).toBeInTheDocument();
+      expect(queryByText("63")).toBeInTheDocument();
       expect(queryByText("Tanvi")).toBeInTheDocument();
       expect(queryByText("mahajan@gmail.com")).toBeInTheDocument(); 
            
