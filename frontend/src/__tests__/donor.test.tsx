@@ -22,6 +22,7 @@ describe("Donor Page", () => {
       fireEvent.click(addButton);
       expect(queryByText("Add New Entry")).toBeInTheDocument();
     });
+    //will need to update this with new add donor functionality
     it("Adds a new donor to the table when the 'Add' button is clicked in the Add New Entry dialog", () => {
       const { getByRole, getByLabelText, getByText, queryByText } = render(
         <Donor />
@@ -31,7 +32,7 @@ describe("Donor Page", () => {
       const idInput = getByLabelText("Person ID");
       const nameInput = getByLabelText("Full Name");
       const emailInput = getByLabelText("Email");
-      fireEvent.change(idInput, { target: { value: "23" } });
+      fireEvent.change(idInput, { target: { value: "006" } });
       fireEvent.change(nameInput, { target: { value: "Tanvi" } });
       fireEvent.change(emailInput, { target: { value: "mahajan@gmail.com" } });
         
@@ -39,7 +40,7 @@ describe("Donor Page", () => {
       fireEvent.click(addDonorrButton);
       expect(queryByText("006")).toBeInTheDocument();
       expect(queryByText("Tanvi")).toBeInTheDocument();
-      expect(queryByText("mahajan@gmail.com")).toBeInTheDocument();
+      expect(queryByText("mahajan@gmail.com")).toBeInTheDocument(); 
            
     });
     it("displays an error message if the email address is invalid in the add donor dialog", () => {
