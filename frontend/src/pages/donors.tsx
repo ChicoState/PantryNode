@@ -189,11 +189,19 @@ const Donor = () => {
         <DialogTitle>Add New Entry</DialogTitle>
         <DialogContent>
           <form onSubmit={handleAddEntry}>
+          <TextField
+              margin="dense"
+              label="Person ID"
+              name="person_id"
+              value={newEntry.person_id}
+              onChange={handleChange}
+              fullWidth
+            />
             <TextField
               autoFocus
               margin="dense"
-              label="Name"
-              name="name"
+              label="Full Name"
+              name="full_name"
               value={newEntry.full_name}
               onChange={handleChange}
               fullWidth
