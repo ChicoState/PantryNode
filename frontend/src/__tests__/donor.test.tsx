@@ -28,17 +28,19 @@ describe('Donor Page', () => {
             );
             const addButton = getByRole("button", { name: "Add Donor" });
             fireEvent.click(addButton);
-            const nameInput = getByLabelText("Name");
+            const idInput = getByLabelText("Person ID");
+            const nameInput = getByLabelText("Full Name");
             const emailInput = getByLabelText("Email");
-            const locationInput = getByLabelText("Location");
+            fireEvent.change(idInput, { target: { value: "23" } });
             fireEvent.change(nameInput, { target: { value: "Tanvi" } });
             fireEvent.change(emailInput, { target: { value: "mahajan@gmail.com" } });
-            fireEvent.change(locationInput, { target: { value: "Mexico" } });
+        
             const addDonorrButton = getByText("Add");
             fireEvent.click(addDonorrButton);
+            expect(queryByText("23")).toBeInTheDocument();
             expect(queryByText("Tanvi")).toBeInTheDocument();
             expect(queryByText("mahajan@gmail.com")).toBeInTheDocument();
-            expect(queryByText("Mexico")).toBeInTheDocument();
+           
         });
         it("displays an error message if the email address is invalid in the add donor dialog", () => {
             const { getByRole, getByLabelText, getByText, queryByText } = render(
