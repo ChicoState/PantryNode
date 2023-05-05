@@ -1,26 +1,26 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { useState } from 'react';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { useState } from "react";
 
 
 function EmailResetComponent() {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setEmail(value);
-    setEmailError('');
+    setEmailError("");
   };
 
   const navigate = useNavigate();
@@ -28,19 +28,19 @@ function EmailResetComponent() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const emailValue = data.get('email') as string;
+    const emailValue = data.get("email") as string;
 
-    if (emailValue.trim() === '') {
-      setEmailError('Email is required');
+    if (emailValue.trim() === "") {
+      setEmailError("Email is required");
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(emailValue)) {
-      setEmailError('Email is invalid');
+      setEmailError("Email is invalid");
       return;
     }
 
-    navigate('/verify');
+    navigate("/verify");
   };
 
   return (
@@ -49,12 +49,12 @@ function EmailResetComponent() {
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: '#8C2332' }}>
+        <Avatar sx={{ m: 1, bgcolor: "#8C2332" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -82,7 +82,7 @@ function EmailResetComponent() {
             variant="contained"
             sx={{ mt: 3, mb: 2, py: 2 }}
             style={{
-              backgroundColor: 'primary',
+              backgroundColor: "primary",
             }}
           >
             Get Code

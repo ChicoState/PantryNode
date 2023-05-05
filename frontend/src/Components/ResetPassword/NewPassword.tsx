@@ -1,30 +1,30 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import InputAdornment from '@mui/material/InputAdornment';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useNavigate } from 'react-router-dom';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Copyright from '../Copyright';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import InputAdornment from "@mui/material/InputAdornment";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Copyright from "../Copyright";
 import { useState } from "react";
-import Modal from '@mui/material/Modal';
+import Modal from "@mui/material/Modal";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '1px solid ',
+  bgcolor: "background.paper",
+  border: "1px solid ",
   borderColor: "primary",
   boxShadow: 24,
   p: 4,
@@ -38,7 +38,7 @@ export default function Passwordreset() {
   const [cnpassword, setCNpassword] = useState("");
   const [cnpasswordError, setCNpasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [showNPassword, setShowNPassword] = useState(false);
   const [showCNPassword, setShowCNPassword] = useState(false);
@@ -92,10 +92,10 @@ export default function Passwordreset() {
   };
 
   const handleClick = () => {
-    if (password === '') {
+    if (password === "") {
       setError(true);
     } else {
-      console.log('Password:', password);
+      console.log("Password:", password);
     }
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -109,12 +109,12 @@ export default function Passwordreset() {
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: '#8C2332' }}>
+        <Avatar sx={{ m: 1, bgcolor: "#8C2332" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -195,7 +195,7 @@ export default function Passwordreset() {
             style={{
               backgroundColor: "primary"
             }}
-            onClick={() => { navigate('/login') }}
+            onClick={() => { navigate("/login"); }}
           >
             Login
           </Button>

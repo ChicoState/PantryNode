@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Layout from "./Layout";
-import { useAppSelector } from '../hooks';
+import { useAppSelector } from "../hooks";
 
 type ProtectedRouteProps = {
   redirectPath?: string;

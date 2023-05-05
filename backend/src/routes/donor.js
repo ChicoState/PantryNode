@@ -247,7 +247,7 @@ router.post("/donate", ensureAuthenticated, async (req, res) => {
 });
 
 
-
+//Addind a new Donor to the database
 router.post("/addDonor", ensureAuthenticated, async (req, res) => {
   if (!req.isAuthenticated()) {
     res.status(401).send("Unauthenticated");
