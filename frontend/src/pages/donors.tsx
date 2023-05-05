@@ -195,12 +195,15 @@ const Donor = () => {
 
       <TableContainer
         component={Paper}
-        style={{ marginTop: "1rem", boxShadow: "none" }}
+        style={{ marginTop: "1rem" }}
       >
         <Table>
-          <TableHead>
+          <TableHead
+                    sx={{
+                      "& th": { color: "white", backgroundColor: "#8C2332" },
+                    }}>
             <TableRow>
-              <TableCell>No.</TableCell>
+              <TableCell>#</TableCell>
               <TableCell onClick={() => onSort("name")}>
                 <strong>Name</strong>
                 {sortConfig &&
@@ -237,7 +240,13 @@ const Donor = () => {
 
           <TableBody>
             {sortedData().map((entry, index) => (
-              <TableRow key={index}>
+                <TableRow
+                key={index}
+                style={
+                  index % 2
+                    ? { background: "#fcfcfc" }
+                    : { background: "white" }
+                }>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{entry.name}</TableCell>
                 <TableCell>{entry.email}</TableCell>
