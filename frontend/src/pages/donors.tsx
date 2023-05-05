@@ -350,10 +350,13 @@ const Donor = () => {
 
       <TableContainer
         component={Paper}
-        style={{ marginTop: "1rem", boxShadow: "none" }}
+        style={{ marginTop: "1rem" }}
       >
         <Table>
-          <TableHead>
+          <TableHead
+                    sx={{
+                      "& th": { color: "white", backgroundColor: "#8C2332" },
+                    }}>
             <TableRow>
               <TableCell>Donor ID</TableCell>
               <TableCell onClick={() => onSort("full_name")}>
@@ -382,7 +385,13 @@ const Donor = () => {
 
           <TableBody>
             {sortedData().map((entry: donorFeed, index: number) => (
-              <TableRow key={index}>
+                <TableRow
+                key={index}
+                style={
+                  index % 2
+                    ? { background: "#fcfcfc" }
+                    : { background: "white" }
+                }>
                 <TableCell>{entry.person_id}</TableCell>
                 <TableCell>{entry.full_name}</TableCell>
                 <TableCell>{entry.email}</TableCell>

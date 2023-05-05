@@ -3,7 +3,7 @@ import Expiry from "../Components/Expiry/ExpiryTable";
 import axiosInstance from "../util/axiosInstance";
 
 
-import { AppBar, Toolbar, MenuItem, Typography } from "@mui/material";
+import { AppBar, Toolbar, MenuItem, Typography, Grid } from "@mui/material";
 
 
 export type expiryFeed = {
@@ -287,62 +287,51 @@ const ExpiryIndex = () => {
   const sortByList = ["Expiry Date", "Item"];
 
 
-  return (
-    <div>
-      <AppBar
-        position="static"
-        style={{ marginBottom: 10, alignItems: "center" }}
-      >
-        <Toolbar>
-          <h2>Expiry Items</h2>
-        </Toolbar>
-      </AppBar>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gridColumnGap: "20px",
-        }}
-      >
-        <div>
-          <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-            <h3>Expired Items</h3>
-            <div>
-              <Typography>Sort By</Typography>
-              <select value={selectedSortBy} onChange={handleSortByChange}>
-                {sortByList.map((category) => (
-                  <option key={category} value={category}>
-                    <MenuItem key={category} value={category}>
-                      {category}
-                    </MenuItem>
-                  </option>
-                ))}
-              </select>
-            </div>
-          </Toolbar>
-          <Expiry ep={feedList} />
-        </div>
-        <div>
-          <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-            <h3>Expiring Soon</h3>
-            <div>
-              <Typography>Sort By</Typography>
-              <select value={selectedSortBy2} onChange={handleSortByChange2}>
-                {sortByList.map((category) => (
-                  <option key={category} value={category}>
-                    <MenuItem key={category} value={category}>
-                      {category}
-                    </MenuItem>
-                  </option>
-                ))}
-              </select>
-            </div>
-          </Toolbar>
-          <Expiry ep={nearlyExpiredFeedList} />
-        </div>
-      </div>
-    </div>
-  );
+ return (
+   <div>
+      <Typography variant="h4" align="left" sx={{ color: "#8c2332" }}>
+        <b>Expiry Items</b>
+      </Typography>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid item xs={10} md={6} mt={4}>
+         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
+           <h3>Expired Items</h3>
+           <div>
+             <Typography>Sort By</Typography>
+             <select value={selectedSortBy} onChange={handleSortByChange}>
+               {sortByList.map((category) => (
+                 <option key={category} value={category}>
+                   <MenuItem key={category} value={category}>
+                     {category}
+                   </MenuItem>
+                 </option>
+               ))}
+             </select>
+           </div>
+         </Toolbar>
+         <Expiry ep={feedList} />
+       </Grid>
+       <Grid item xs={10} md={6} mt={4}>
+         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
+           <h3>Expiring Soon</h3>
+           <div>
+             <Typography>Sort By</Typography>
+             <select value={selectedSortBy2} onChange={handleSortByChange2}>
+               {sortByList.map((category) => (
+                 <option key={category} value={category}>
+                   <MenuItem key={category} value={category}>
+                     {category}
+                   </MenuItem>
+                 </option>
+               ))}
+             </select>
+           </div>
+         </Toolbar>
+         <Expiry ep={nearlyExpiredFeedList} />
+        </Grid>
+      </Grid>
+   </div>
+ );
 };
 
 export default ExpiryIndex;
