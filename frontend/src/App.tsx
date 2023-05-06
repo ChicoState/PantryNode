@@ -13,7 +13,10 @@ import Summary from "./pages/summary";
 import Signup from "./pages/register";
 import Scanner from "./pages/scanner";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import DonorView from "./pages/donorView";
 import { makeServer } from "./mirage";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 
 makeServer({ environment: "development" });
 
@@ -26,24 +29,27 @@ function App() {
 
 
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/verify" element={<Verify />} />
-      <Route path="/newpassword" element={<Passwordreset />} />
-      <Route path="/forgetpassword" element={<EmailResetComponent />} />
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/verify" element={<Verify />} />
+        <Route path="/newpassword" element={<Passwordreset />} />
+        <Route path="/forgetpassword" element={<EmailResetComponent />} />
 
-      {/* All the routes that are restricted and need authorization */}
-      <Route element={<ProtectedRoute />}>
-        <Route index element={<Index />} />
-        <Route path="/stock" element={<Stock />} />
-        <Route path="/summary" element={<Summary />} />
-        <Route path="/donors" element={<Donor />} />
-        <Route path="/sale" element={<Sale />} />
-        <Route path="/expiry" element={<Expiry />} />
-        <Route path="/scanner" element={<Scanner />} />
-      </Route>
-    </Routes>
+        {/* All the routes that are restricted and need authorization */}
+        <Route element={<ProtectedRoute />}>
+          <Route index element={<Index />} />
+          <Route path="/stock" element={<Stock />} />
+          <Route path="/summary" element={<Summary />} />
+          <Route path="/donors" element={<Donor />} />
+          <Route path="/sale" element={<Sale />} />
+          <Route path="/expiry" element={<Expiry />} />
+          <Route path="/scanner" element={<Scanner />} />
+          <Route path="/donorView/:id" element={<DonorView />} />
+        </Route>
+      </Routes>
+    </LocalizationProvider>
   );
 }
 
