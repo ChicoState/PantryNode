@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from "@mui/icons-material/Add";
+import EditIcon from '@mui/icons-material/Edit';
 import {
     FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField,
     Table,
@@ -18,7 +19,7 @@ import {
     DialogActions,
 } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import MuiAlert, { AlertColor, AlertProps } from '@mui/material/Alert';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Dayjs } from 'dayjs';
 import axiosInstance from "../util/axiosInstance";
@@ -39,7 +40,7 @@ function DonorView() {
     const { id } = useParams();
     const [openSnack, setOpenSnack] = React.useState(false);
     const [apiResponse, setApiResponse] = useState("");
-    const [severity, setSeverity] = useState("");
+    const [severity, setSeverity] = useState<AlertColor | undefined>(undefined);
     const [donorDetails, setDonorDetails] = useState<any>();
     const [transactions, setTransactions] = useState<any[]>();
     const [addModal, setAddModal] = useState<boolean>(false);
@@ -68,7 +69,7 @@ function DonorView() {
             return;
         }
         setApiResponse("");
-        setSeverity("");
+        setSeverity('error');
         setOpenSnack(false);
     };
 
@@ -79,7 +80,7 @@ function DonorView() {
                 if(!res)
                 {
                     setApiResponse("Failed to retrive donations. Try again later.");
-                    setSeverity("error");
+                    setSeverity('error');
                     setOpenSnack(true);
                 }
                 else
@@ -146,13 +147,13 @@ function DonorView() {
         }
         axiosInstance.post('/donate', payload).then((res) => {
             if (!res) {
-                setSeverity("error");
+                setSeverity('error');
                 setApiResponse("Something Failed!! Try again later.");
                 // throw new Error("Failed to make the donation");
             }
             else {
                 setApiResponse("Successfully made a donation.");
-                setSeverity("success");
+                setSeverity('success');
                 setOpenSnack(true);
                 setNewDonation({
                     person_id: id ? parseInt(id) : 0,
@@ -203,6 +204,7 @@ function DonorView() {
                                 <strong>Name</strong>
                             </TableCell>
                             <TableCell>Quantity</TableCell>
+                            <TableCell>Actions</TableCell>
                         </TableRow>
                     </TableHead>
 
@@ -218,7 +220,21 @@ function DonorView() {
                                 <TableCell>{entry.date}</TableCell>
                                 <TableCell>{entry.name}</TableCell>
                                 <TableCell>{entry.quantity}</TableCell>
-
+                                <TableCell>
+                                <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={() => {
+                                            setApiResponse("Under Works, Stay Tuned.")
+                                            setSeverity('warning')
+                                            setOpenSnack(true);
+                                        }}
+                                        sx={{ marginRight: "1rem" }}
+                                    >
+                                        <EditIcon />
+                                        Edit
+                                </Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -343,7 +359,7 @@ function DonorView() {
                 </DialogContent>
             </Dialog>
             <Snackbar open={openSnack} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                <Alert onClose={handleCloseSnackbar} severity={severity} sx={{ width: '100%' }}>
                     {apiResponse}
                 </Alert>
             </Snackbar>
