@@ -13,7 +13,7 @@ docker run -d --name db -p 5432:5432 -e POSTGRES_DB=pantrynode -e POSTGRES_USER=
 
 ### Installation
 ```
-npm i
+npm run deepinstall
 ```
 
 ### Start
