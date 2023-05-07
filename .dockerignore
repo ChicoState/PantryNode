@@ -17,3 +17,5 @@ node_modules/
 
 # postgres data folder
 postgres-data/
+
+.DS_Store

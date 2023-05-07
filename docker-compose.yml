@@ -1,67 +1,30 @@
 version: "3.9"
-
 services:
-  database:
+  db:
     image: postgres:latest
-    volumes:
-      - ./backend/postgres-data:/var/lib/postgresql/data
-      - ./backend/sql/create_tables.sql:/docker-entrypoint-initdb.d/1_create_tables.sql
-      - ./backend/sql/dummy_data.sql:/docker-entrypoint-initdb.d/2_dummy_data.sql
-      - ./backend/sql/PLU_data.sql:/docker-entrypoint-initdb.d/3_PLU_data.sql
-      - ./backend/sql/dummy_data2.sql:/docker-entrypoint-initdb.d/4_dummy_data.sql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: pantrynode
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    container_name: db
     networks:
       - local
-    ports:
-      - "5432:${DB_PORT}"
-    restart: always
-    environment:
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
-      - PGDATA=/var/lib/pg_data
-  db_admin:
-    image: dpage/pgadmin4
-    ports:
-      - "82:80"
-    restart: always
-    networks:
-      - local
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=$PGADMIN_EMAIL
-      - PGADMIN_DEFAULT_PASSWORD=$PGADMIN_PASSWORD
   node:
     build:
-      context: ./backend
-      dockerfile: ./Dockerfile
-      target: node
-    container_name: node
-    volumes:
-      - ./backend/src:/app/backend/src
-    platform: linux/amd64
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
     depends_on:
-      - database
-    environment:
-      - DB_USER=$DB_USER
-      - DB_PASSWORD=$DB_PASSWORD
-      - DB_NAME=$DB_NAME
-      - DB_HOST=$DB_HOST
-      - DB_PORT=$DB_PORT
+      - db
     restart: always
-    networks:
-      - local
     ports:
-      - 3001:3001
-  react:
-    build:
-      context: ./frontend
-    ports:
-      - "3000:3000"
+      - "3001:3001"
     environment:
-      - WATCHPACK_POLLING=true
-    container_name: react
+      DB_HOST: db
+    command: npm start
     networks:
       - local
-    volumes:
-      - ./frontend/src:/app/frontend/src
-      - ./frontend/public:/app/frontend/public
 networks:
   local:
