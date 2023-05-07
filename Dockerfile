@@ -15,7 +15,7 @@ COPY . .
 
 #RUN lerna exec npm install
 
-RUN npm i
+RUN npm run deepinstall
 
 # Build all packages in the monorepo
 #RUN npm start
