@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -24,6 +25,7 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import axiosInstance from "../util/axiosInstance";
 
 
+
 //JSON type
 export type donorFeed = {
   person_id: number;
@@ -42,6 +44,7 @@ export type lookupFeed = {
 
 //Storing each Donor in an array DonorFeed
 const Donor = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState<donorFeed[]>([
     {
       person_id: 0,
@@ -272,7 +275,7 @@ const Donor = () => {
               fullWidth
             />
             <DialogActions>
-              <Button onClick={() => setlookupShowModal(true)} color="primary">
+              <Button onClick={() => setlookupShowModal(false)} color="primary">
                 Cancel
               </Button>
               <Button
@@ -331,7 +334,7 @@ const Donor = () => {
             />
 
             <DialogActions>
-              <Button onClick={() => setShowModal(true)} color="primary">
+              <Button onClick={() => setShowModal(false)} color="primary">
                 Cancel
               </Button>
               <Button
@@ -400,7 +403,7 @@ const Donor = () => {
                     variant="contained"
                     color="primary"
                     onClick={() =>
-                      alert(`Donate for ${entry.full_name}`)
+                      navigate(`/donorView/${entry.person_id}`)
                     }
                   >
                     Donate
