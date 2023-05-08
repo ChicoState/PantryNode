@@ -22,6 +22,8 @@ var barcodeRouter = require('./routes/barcode');
 
 var app = express();
 
+app.listen(3000, () => console.log("Backend server is up on 3000"))
+
 const cors = require('cors');
 // TODO(#119): Specifiy origin with an EnvVar.
 app.use(cors({

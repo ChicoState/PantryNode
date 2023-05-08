@@ -4,6 +4,8 @@
  */
 var express = require('express');
 var router = express.Router();
+var { initModels, person } = require( "../../../models/init-models");
+const bcrypt = require('bcryptjs');
 
 /**
  * GET: /api/v1/employee
@@ -26,7 +28,35 @@ router.get('/:id(\\d+)', function(req, res) {
  * Creates a new employee
  */
 router.post('/', function(req, res) {
-    res.json({ method: 'POST' });
+    console.log("Body: ", req.body);
+    const { firstName, lastName, phone, email, password } = req.body;
+    person.findOrCreate({
+        where: {
+            email: email
+        },
+        defaults: {
+            fname: firstName,
+            lname: lastName,
+            password: password,
+            phone: phone
+        }
+    }).then(([user, created]) => {
+        if (!created) {
+            return res.json({status: false, message: "User already exists."})
+        }
+        else {
+            bcrypt.genSalt(10, (err, salt) =>
+                bcrypt.hash(password, salt, async (err, hash) => {
+                    user.set({
+                        password: hash,
+                    });
+                    await user.save();
+                }))
+
+            console.log(user);
+            return res.json({status: true, message: "User with email " + email + " created."})
+        }
+    });
 });
 
 /**

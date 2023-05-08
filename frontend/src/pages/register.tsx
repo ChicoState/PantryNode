@@ -19,6 +19,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
 import Success from "./success";
 import { useFormik } from "formik";
+import axios, { AxiosResponse } from "axios";
 
 interface RegisterFormInput {
   firstName?: string;
@@ -33,13 +34,21 @@ export default function SignUp() {
   const [isRegistered, setIsRegistered] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const formik = useFormik({
+    // initialValues: {
+    //   firstName: "",
+    //   lastName: "",
+    //   phone: "",
+    //   email: "",
+    //   password: "",
+    //   confirmPassword: "",
+    // },
     initialValues: {
-      firstName: "",
-      lastName: "",
-      phone: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      firstName: "Test",
+      lastName: "User",
+      phone: "5555555555",
+      email: "test@test.com",
+      password: "Password1!",
+      confirmPassword: "Password1!",
     },
     validate: (values) => {
       const {
@@ -95,12 +104,37 @@ export default function SignUp() {
       return errors;
     },
     onSubmit: (values) => {
-      const data = new FormData();
+      let formData = {};
       for (const value in values) {
-        data.append(value, values[value as keyof typeof values]);
+        formData[value] = values[value as keyof typeof values];
       }
-      // navigate("/")
-      setIsRegistered(true);
+
+      const postRequest = async (data: any): Promise<AxiosResponse> => {
+        console.log("Posting user.")
+        try {
+          const response = await axios.post(
+            "http://localhost:3001/api/v1/employee",
+            data,
+          );
+
+          return response;
+        } catch (error) {
+          console.error(`Error posting data: ${error}`);
+          throw error;
+        }
+      };
+
+      postRequest(formData)
+        .then((response) => {
+          console.log("Successfully posted data:", response.data);
+          if (response.data.status == true) {
+            setIsRegistered(true);
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to post data:", error);
+        });
+      
     },
   });
   const handleTogglePassword = () => {
