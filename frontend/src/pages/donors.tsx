@@ -275,7 +275,7 @@ const Donor = () => {
               fullWidth
             />
             <DialogActions>
-              <Button onClick={() => setlookupShowModal(true)} color="primary">
+              <Button onClick={() => setlookupShowModal(false)} color="primary">
                 Cancel
               </Button>
               <Button
@@ -334,7 +334,7 @@ const Donor = () => {
             />
 
             <DialogActions>
-              <Button onClick={() => setShowModal(true)} color="primary">
+              <Button onClick={() => setShowModal(false)} color="primary">
                 Cancel
               </Button>
               <Button
