@@ -46,6 +46,9 @@ const Sale = () => {
 
   return (
     <Box sx={{ width: "100%" }}>
+      <Typography variant="h4" align="left" sx={{ color: "#8c2332" }}>
+        <b>On Sale</b>
+      </Typography>
       <Grid
         container
         columns={categoryList.length}
