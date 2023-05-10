@@ -154,7 +154,7 @@ router.get('/items/unique_checkouts', ensureAuthenticated, function (req, res) {
         res.post("Unauthenticated");
     } else {
         return transaction.findAll({
-            attributes: ['person_id'],
+            attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('person_id')) ,'person_id']],
             distinct: true,
             col: 'person_id',
             where: {
