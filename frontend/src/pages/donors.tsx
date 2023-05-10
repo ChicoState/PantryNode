@@ -419,29 +419,3 @@ const Donor = () => {
 };
 
 export default Donor;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
