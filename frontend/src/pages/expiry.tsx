@@ -20,61 +20,61 @@ export type expiryFeed = {
 
 
 const aboutToExpiryDummyData: expiryFeed[] = [
-  {
-    trans_item_id: 1,
-    item: {
-      name: "Apples",
-    },
-    tran: {
-      date: "2023-04-25",
-    },
-    expiration: "2023-05-01",
-    quantity: 3,
-  },
-  {
-    trans_item_id: 2,
-    item: {
-      name: "Chicken",
-    },
-    tran: {
-      date: "2023-04-23",
-    },
-    expiration: "2023-04-29",
-    quantity: 1,
-  },
-  {
-    trans_item_id: 3,
-    item: {
-      name: "Yogurt",
-    },
-    tran: {
-      date: "2023-04-27",
-    },
-    expiration: "2023-05-03",
-    quantity: 2,
-  },
-  {
-    trans_item_id: 4,
-    item: {
-      name: "Cheese",
-    },
-    tran: {
-      date: "2023-04-26",
-    },
-    expiration: "2023-05-02",
-    quantity: 1,
-  },
-  {
-    trans_item_id: 5,
-    item: {
-      name: "Lettuce",
-    },
-    tran: {
-      date: "2023-04-28",
-    },
-    expiration: "2023-05-04",
-    quantity: 2,
-  },
+ {
+   trans_item_id: 1,
+   item: {
+     name: "Apples",
+   },
+   tran: {
+     date: "2023-04-25",
+   },
+   expiration: "2023-05-01",
+   quantity: 3,
+ },
+ {
+   trans_item_id: 2,
+   item: {
+     name: "Chicken",
+   },
+   tran: {
+     date: "2023-04-23",
+   },
+   expiration: "2023-04-29",
+   quantity: 1,
+ },
+ {
+   trans_item_id: 3,
+   item: {
+     name: "Yogurt",
+   },
+   tran: {
+     date: "2023-04-27",
+   },
+   expiration: "2023-05-03",
+   quantity: 2,
+ },
+ {
+   trans_item_id: 4,
+   item: {
+     name: "Cheese",
+   },
+   tran: {
+     date: "2023-04-26",
+   },
+   expiration: "2023-05-02",
+   quantity: 1,
+ },
+ {
+   trans_item_id: 5,
+   item: {
+     name: "Lettuce",
+   },
+   tran: {
+     date: "2023-04-28",
+   },
+   expiration: "2023-05-04",
+   quantity: 2,
+ },
 ];
 
 
@@ -83,61 +83,61 @@ const aboutToExpiryDummyDataString = JSON.stringify(aboutToExpiryDummyData);
 
 
 const expiryDummyData: expiryFeed[] = [
-  {
-    trans_item_id: 1,
-    item: {
-      name: "Apples",
-    },
-    tran: {
-      date: "2023-04-25",
-    },
-    expiration: "2023-05-01",
-    quantity: 3,
-  },
-  {
-    trans_item_id: 2,
-    item: {
-      name: "Chicken",
-    },
-    tran: {
-      date: "2023-04-23",
-    },
-    expiration: "2023-04-29",
-    quantity: 1,
-  },
-  {
-    trans_item_id: 3,
-    item: {
-      name: "Yogurt",
-    },
-    tran: {
-      date: "2023-04-27",
-    },
-    expiration: "2023-05-03",
-    quantity: 2,
-  },
-  {
-    trans_item_id: 4,
-    item: {
-      name: "Cheese",
-    },
-    tran: {
-      date: "2023-04-26",
-    },
-    expiration: "2023-05-02",
-    quantity: 1,
-  },
-  {
-    trans_item_id: 5,
-    item: {
-      name: "Lettuce",
-    },
-    tran: {
-      date: "2023-04-28",
-    },
-    expiration: "2023-05-04",
-    quantity: 2,
-  },
+ {
+   trans_item_id: 1,
+   item: {
+     name: "Apples",
+   },
+   tran: {
+     date: "2023-04-25",
+   },
+   expiration: "2023-05-01",
+   quantity: 3,
+ },
+ {
+   trans_item_id: 2,
+   item: {
+     name: "Chicken",
+   },
+   tran: {
+     date: "2023-04-23",
+   },
+   expiration: "2023-04-29",
+   quantity: 1,
+ },
+ {
+   trans_item_id: 3,
+   item: {
+     name: "Yogurt",
+   },
+   tran: {
+     date: "2023-04-27",
+   },
+   expiration: "2023-05-03",
+   quantity: 2,
+ },
+ {
+   trans_item_id: 4,
+   item: {
+     name: "Cheese",
+   },
+   tran: {
+     date: "2023-04-26",
+   },
+   expiration: "2023-05-02",
+   quantity: 1,
+ },
+ {
+   trans_item_id: 5,
+   item: {
+     name: "Lettuce",
+   },
+   tran: {
+     date: "2023-04-28",
+   },
+   expiration: "2023-05-04",
+   quantity: 2,
+ },
 ];
 
 
@@ -146,7 +146,7 @@ const expiryDummyDataString = JSON.stringify(expiryDummyData);
 
 
 const ExpiryIndex = () => {
-  const [feedList, setFeedList] = useState<expiryFeed[]>([
+ const [feedList, setFeedList] = useState<expiryFeed[]>([
    {
      trans_item_id: 0,
      item: {
@@ -158,8 +158,8 @@ const ExpiryIndex = () => {
      expiration: "",
      quantity: 0,
    } as expiryFeed,
-  ]);
-  const [nearlyExpiredFeedList, setNearlyExpiredFeedList] = useState<
+ ]);
+ const [nearlyExpiredFeedList, setNearlyExpiredFeedList] = useState<
    expiryFeed[]
  >([
    {
@@ -176,115 +176,116 @@ const ExpiryIndex = () => {
  ]);
 
 
-  const [selectedSortBy, setSelectedSortBy] = useState<string>("Expiry Date");
-  const [selectedSortBy2, setSelectedSortBy2] = useState<string>("Expiry Date");
+ const [selectedSortBy, setSelectedSortBy] = useState<string>("Expiry Date");
+ const [selectedSortBy2, setSelectedSortBy2] = useState<string>("Expiry Date");
 
 
-  // console.log(Category);
+ // console.log(Category);
 
 
-  useEffect(() => {
-    axiosInstance.get<expiryFeed[]>("/items/expired").then((res: any) => {
-      // uncomment the below line for production use
-      // setFeedList(JSON.parse(res) as expiryFeed[]);
+ useEffect(() => {
+   axiosInstance.get<expiryFeed[]>("/items/expired").then((res: any) => {
+     // uncomment the below line for production use
+     // setFeedList(JSON.parse(res) as expiryFeed[]);
 
 
-      // Comment or Remove the below line for production use
-      const data = JSON.parse(expiryDummyDataString) as expiryFeed[];
-
-      const sortedData = data.sort((a, b) => {
-        const aExpiry = new Date(a.expiration).getTime();
-        const bExpiry = new Date(b.expiration).getTime();
-        return aExpiry - bExpiry;
-      });
-      setFeedList(sortedData);
-    });
-    axiosInstance
-      .get<expiryFeed[]>("/items/nearly_expired")
-      .then((res: any) => {
-        // uncomment the below line for production use
-        // setNearlyExpiredFeedList(JSON.parse(res) as expiryFeed[]);
+     // Comment or Remove the below line for production use
+     const data = JSON.parse(expiryDummyDataString) as expiryFeed[];
 
 
-        // Comment or Remove the below line for production use
-        const data = JSON.parse(aboutToExpiryDummyDataString) as expiryFeed[];
+     const sortedData = data.sort((a, b) => {
+       const aExpiry = new Date(a.expiration).getTime();
+       const bExpiry = new Date(b.expiration).getTime();
+       return aExpiry - bExpiry;
+     });
+     setFeedList(sortedData);
+   });
+   axiosInstance
+     .get<expiryFeed[]>("/items/nearly_expired")
+     .then((res: any) => {
+       // uncomment the below line for production use
+       // setNearlyExpiredFeedList(JSON.parse(res) as expiryFeed[]);
 
 
-        const sortedData = data.sort((a, b) => {
-          const aExpiry = new Date(a.expiration).getTime();
-          const bExpiry = new Date(b.expiration).getTime();
-          return aExpiry - bExpiry;
-        });
+       // Comment or Remove the below line for production use
+       const data = JSON.parse(aboutToExpiryDummyDataString) as expiryFeed[];
 
 
-        setNearlyExpiredFeedList(sortedData);
-      });
-  }, []);
+       const sortedData = data.sort((a, b) => {
+         const aExpiry = new Date(a.expiration).getTime();
+         const bExpiry = new Date(b.expiration).getTime();
+         return aExpiry - bExpiry;
+       });
 
 
-  const handleSortByChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedSortBy(event.target.value);
-    console.log(event.target.value);
-    if (event.target.value == "Item") {
-      feedList.sort((a, b) => {
-        if (a.item.name < b.item.name) {
-          return -1;
-        } else if (a.item.name > b.item.name) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-    } else if (event.target.value == "Expiry Date") {
-      feedList.sort((a, b) => {
-        if (a.expiration < b.expiration) {
-          return -1;
-        } else if (a.expiration > b.expiration) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-    }
+       setNearlyExpiredFeedList(sortedData);
+     });
+ }, []);
 
 
-    console.log(feedList);
-    setFeedList(feedList);
-  };
+ const handleSortByChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+   setSelectedSortBy(event.target.value);
+   console.log(event.target.value);
+   if (event.target.value == "Item") {
+     feedList.sort((a, b) => {
+       if (a.item.name < b.item.name) {
+         return -1;
+       } else if (a.item.name > b.item.name) {
+         return 1;
+       } else {
+         return 0;
+       }
+     });
+   } else if (event.target.value == "Expiry Date") {
+     feedList.sort((a, b) => {
+       if (a.expiration < b.expiration) {
+         return -1;
+       } else if (a.expiration > b.expiration) {
+         return 1;
+       } else {
+         return 0;
+       }
+     });
+   }
 
 
-  const handleSortByChange2 = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedSortBy2(event.target.value);
-    console.log(event.target.value);
-    if (event.target.value == "Item") {
-      nearlyExpiredFeedList.sort((a, b) => {
-        if (a.item.name < b.item.name) {
-          return -1;
-        } else if (a.item.name > b.item.name) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-    } else if (event.target.value == "Expiry Date") {
-      nearlyExpiredFeedList.sort((a, b) => {
-        if (a.expiration < b.expiration) {
-          return -1;
-        } else if (a.expiration > b.expiration) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-    }
+   console.log(feedList);
+   setFeedList(feedList);
+ };
 
 
-    console.log(nearlyExpiredFeedList);
-    setNearlyExpiredFeedList(nearlyExpiredFeedList);
-  };
+ const handleSortByChange2 = (event: React.ChangeEvent<HTMLSelectElement>) => {
+   setSelectedSortBy2(event.target.value);
+   console.log(event.target.value);
+   if (event.target.value == "Item") {
+     nearlyExpiredFeedList.sort((a, b) => {
+       if (a.item.name < b.item.name) {
+         return -1;
+       } else if (a.item.name > b.item.name) {
+         return 1;
+       } else {
+         return 0;
+       }
+     });
+   } else if (event.target.value == "Expiry Date") {
+     nearlyExpiredFeedList.sort((a, b) => {
+       if (a.expiration < b.expiration) {
+         return -1;
+       } else if (a.expiration > b.expiration) {
+         return 1;
+       } else {
+         return 0;
+       }
+     });
+   }
 
 
-  const sortByList = ["Expiry Date", "Item"];
+   console.log(nearlyExpiredFeedList);
+   setNearlyExpiredFeedList(nearlyExpiredFeedList);
+ };
+
+
+ const sortByList = ["Expiry Date", "Item"];
 
 
  return (

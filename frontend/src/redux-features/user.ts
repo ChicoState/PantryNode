@@ -22,10 +22,10 @@ export const login = createAsyncThunk(
 
 const token = getToken();
 let init_token = "";
-let init_status = "idle";
+let init_status = "idle"
 if(token) {
-  init_token = token;
-  init_status = "authenticated";
+    init_token = token
+    init_status = "authenticated";
 }
 const initialState = {
   name: "",
@@ -45,7 +45,7 @@ export const userSlice = createSlice({
       state.token = "";
       state.token = "";
       state.status = "idle";
-      state.error = "";
+      state.error = ""
     }
   },
   extraReducers: (builder) => {
@@ -54,8 +54,8 @@ export const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(login.fulfilled, (state, action) => {
-        localStorage.setItem("token",  action.payload.token);
-        axiosInstance.defaults.headers.common["Authorization"] = action.payload.token;
+        localStorage.setItem('token',  action.payload.token)
+        axiosInstance.defaults.headers.common['Authorization'] = action.payload.token;
         state.email = action.payload.email;
         state.name = action.payload.name;
         state.token = action.payload.token;

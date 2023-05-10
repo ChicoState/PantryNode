@@ -1,5 +1,5 @@
-import React from "react";
-import EmailResetComponent from "../Components/ResetPassword/EmailVerify";
+import React from 'react';
+import EmailResetComponent from '../Components/ResetPassword/EmailVerify';
 
 function PasswordReset() {
   return (
