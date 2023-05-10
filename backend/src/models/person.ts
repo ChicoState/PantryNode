@@ -77,7 +77,8 @@ export class person extends Model<personAttributes, personCreationAttributes> im
     },
     password: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'password'
     },
     email: {
       type: DataTypes.TEXT,
