@@ -158,7 +158,7 @@ router.get('/items/unique_checkouts', ensureAuthenticated, function (req, res) {
             distinct: true,
             col: 'person_id',
             where: {
-                trans_type: 'purchase'
+                trans_type: 'checkout'
             }
         }).then((allItems) => {
             if (allItems == null) {
