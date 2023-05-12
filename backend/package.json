@@ -7,7 +7,7 @@
     "build": "tsc -p .",
     "test": "jest",
     "lint": "eslint --fix --ext .ts,.js .",
-    "ts-coverage": "typescript-coverage-report"
+    "coverage": "jest --coverage"
   },
   "dependencies": {
     "@ericblade/quagga2": "^1.8.2",
