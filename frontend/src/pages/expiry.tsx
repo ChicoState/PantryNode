@@ -3,7 +3,7 @@ import Expiry from "../Components/Expiry/ExpiryTable";
 import axiosInstance from "../util/axiosInstance";
 
 
-import { AppBar, Toolbar, MenuItem, Typography } from "@mui/material";
+import { AppBar, Toolbar, MenuItem, Typography, Grid } from "@mui/material";
 
 
 export type expiryFeed = {
@@ -290,22 +290,11 @@ const ExpiryIndex = () => {
 
  return (
    <div>
-     <AppBar
-       position="static"
-       style={{ marginBottom: 10, alignItems: "center" }}
-     >
-       <Toolbar>
-         <h2>Expiry Items</h2>
-       </Toolbar>
-     </AppBar>
-     <div
-       style={{
-         display: "grid",
-         gridTemplateColumns: "1fr 1fr",
-         gridColumnGap: "20px",
-       }}
-     >
-       <div>
+      <Typography variant="h4" align="left" sx={{ color: "#8c2332" }}>
+        <b>Expiry Items</b>
+      </Typography>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid item xs={10} md={6} mt={4}>
          <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
            <h3>Expired Items</h3>
            <div>
@@ -322,8 +311,8 @@ const ExpiryIndex = () => {
            </div>
          </Toolbar>
          <Expiry ep={feedList} />
-       </div>
-       <div>
+       </Grid>
+       <Grid item xs={10} md={6} mt={4}>
          <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
            <h3>Expiring Soon</h3>
            <div>
@@ -340,8 +329,8 @@ const ExpiryIndex = () => {
            </div>
          </Toolbar>
          <Expiry ep={nearlyExpiredFeedList} />
-       </div>
-     </div>
+        </Grid>
+      </Grid>
    </div>
  );
 };

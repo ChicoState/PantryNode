@@ -77,6 +77,7 @@ export default function Verify() {
             onChange={handleChange}
             error={Boolean(codeError)}
             helperText={codeError}
+            inputProps={{ maxLength: 6 }}
           />
           <Button
             type="submit"

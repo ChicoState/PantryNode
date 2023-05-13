@@ -11,6 +11,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saleRouter = require('./routes/sale');
 
+
+
 // v1 Backend API
 var apiV1_EmployeeRouter = require('./routes/api/v1/employee');
 
@@ -19,6 +21,7 @@ var itemsRouter = require('./routes/items');
 var summaryRouter = require('./routes/summary');
 var stockRouter = require('./routes/stock');
 var barcodeRouter = require('./routes/barcode');
+var donorRouter = require('./routes/donor');
 
 var app = express();
 
@@ -97,6 +100,13 @@ app.get('/items/nearly_expired', itemsRouter);
 app.get('/items/total_donations', itemsRouter);
 app.get('/items/total_checkouts', itemsRouter);
 app.get('/items/unique_checkouts', itemsRouter);
+
+app.get('/donors', donorRouter);
+app.get('/lookupDonor', donorRouter);
+app.get('/donations/:person_id', donorRouter);
+app.post('/donate', donorRouter);
+app.post('/addDonor', donorRouter);
+
 
 app.get('/purchases', summaryRouter);
 app.get('/currentstock', summaryRouter);

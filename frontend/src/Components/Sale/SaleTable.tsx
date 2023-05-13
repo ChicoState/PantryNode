@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Paper } from "@mui/material";
 
 import {
   Table,
@@ -38,9 +39,12 @@ const SaleTable = ({ category, categorydata }: SaleTableProps) => {
       <Typography variant="h6" align="center">
         {category.name}
       </Typography>
-      <TableContainer>
+      <TableContainer component={Paper} style={{}}>
         <Table>
-          <TableHead>
+          <TableHead
+            sx={{
+              "& th": { color: "white", backgroundColor: "#8C2332" },
+            }}>
             <TableRow>
               <TableCell>Product Name</TableCell>
               <TableCell>Price</TableCell>
@@ -49,7 +53,12 @@ const SaleTable = ({ category, categorydata }: SaleTableProps) => {
           </TableHead>
           <TableBody>
             {categorydata.map((product) => (
-              <TableRow key={product.item_id}>
+              <TableRow key={product.item_id}
+                style={
+                  product.item_id % 2
+                    ? { background: "#fcfcfc" }
+                    : { background: "white" }
+                }>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
                 <TableCell>{product.quantity}</TableCell>
