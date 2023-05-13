@@ -37,5 +37,5 @@ module.exports = {
         'backend/src/routes/*.ts',
         '!**/node_modules/**',
     ],
-    coverageReporters: ['html'],
+    coverageReporters: ['html', 'text', 'lcov'],
 };
