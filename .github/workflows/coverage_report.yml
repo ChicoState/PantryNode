@@ -2,8 +2,10 @@ name: Coverage Report
 
 on:
   pull_request:
-    branches: [main , consolidated2]
-
+    branches: [main]
+  push:
+    branches:
+      - main
 jobs:
   Coverage_Report:
     runs-on: ubuntu-latest
