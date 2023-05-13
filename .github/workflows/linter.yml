@@ -2,7 +2,7 @@ name: ES Lint
 
 on:
   pull_request:
-    branches: [main, frontend]
+    branches: [main]
 jobs:
   lint:
     runs-on: ubuntu-latest

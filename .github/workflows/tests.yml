@@ -2,10 +2,10 @@ name: Testing
 
 on:
   pull_request:
-    branches: [main,consolidated2]
+    branches: [main]
 
 jobs:
-  Testing:
+  backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -14,7 +14,24 @@ jobs:
           node-version: 16
       - name: Install dependencies
         run: |
-          npm install
+          cd backend
+          npm ci
       - name: Test
         run: |
+          cd backend
+          npm test
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+      - name: Test
+        run: |
+          cd frontend
           npm test
