@@ -37,6 +37,7 @@
         "express-favicon": "^2.0.1",
         "express-session": "^1.17.1",
         "fontawesome": "^5.6.3",
+        "formik": "^2.2.9",
         "http-errors": "~1.6.3",
         "jade": "~1.11.0",
         "jest": "^29.5.0",
@@ -44,6 +45,7 @@
         "jshint-reporter-badge": "^0.1.0",
         "jslint": "^0.12.1",
         "jsonwebtoken": "^9.0.0",
+        "jwt-decode": "^3.1.2",
         "miragejs": "^0.1.47",
         "mongoose": "^5.9.11",
         "morgan": "~1.9.1",
@@ -63,7 +65,6 @@
         "web-vitals": "^2.1.4"
     },
     "scripts": {
-        "build": "react-scripts build",
         "test": "jest --no-coverage",
         "coverage": "jest --coverage"
     },

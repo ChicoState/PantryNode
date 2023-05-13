@@ -1,12 +1,12 @@
 module.exports = {
     projects: [
         {
-            displayName: 'frontend TEST',
+            displayName: 'FE TEST',
             testEnvironment: 'jsdom',
             testMatch: ['<rootDir>/frontend/__tests__/**/*.{js,jsx,ts,tsx}'],
             rootDir: '.',
             testPathIgnorePatterns: ['<rootDir>/backend'],
-            moduleDirectories: ['frontend/node_modules'],
+            moduleDirectories: ['node_modules'],
             testMatch: [
                 '<rootDir>/frontend/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
                 '<rootDir>/frontend/src/**/*.{spec,test}.{js,jsx,ts,tsx}',
@@ -16,10 +16,10 @@ module.exports = {
             }, setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect']
         },
         {
-            displayName: 'backend TEST',
+            displayName: 'BE TEST',
             testEnvironment: 'node',
             testMatch: ['<rootDir>/backend/__tests__/**/*.{js,jsx,ts,tsx}'],
-            moduleDirectories: ['backend/node_modules'],
+            moduleDirectories: ['node_modules'],
             rootDir: '.',
             //setupFilesAfterEnv: ['@types/express'],
             testMatch: [
@@ -37,5 +37,5 @@ module.exports = {
         'backend/src/routes/*.ts',
         '!**/node_modules/**',
     ],
-    coverageReporters: ['html', 'text', 'lcov'],
+    coverageReporters: ['html'],
 };
