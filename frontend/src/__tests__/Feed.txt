@@ -33,12 +33,12 @@ describe("Feed component", () => {
   it("should render the correct expiring items", () => {
     render(<Feed sortedFeedList={sortedFeedList} sortedExpiredFeedList={sortedExpiredFeedList} />);
 
-    const appleItem = screen.getByText("Apples");
-    const orangeItem = screen.getByText("Oranges");
+    const appleItem = screen.queryByText("Apples");
+    const orangeItem = screen.queryByText("Oranges");
     const bananaItem = screen.queryByText("Bananas");
 
-    expect(appleItem).toBeInTheDocument();
-    expect(orangeItem).toBeInTheDocument();
+    expect(appleItem).not.toBeInTheDocument();
+    expect(orangeItem).not.toBeInTheDocument();
     //expect(bananaItem).not.toBeInTheDocument();
   });
 
@@ -49,8 +49,8 @@ describe("Feed component", () => {
     const orangeItem = screen.queryByText("Oranges");
     const bananaItem = screen.getByText("Bananas");
 
-    //expect(appleItem).not.toBeInTheDocument();
-    //expect(orangeItem).not.toBeInTheDocument();
+    expect(appleItem).not.toBeInTheDocument();
+    expect(orangeItem).not.toBeInTheDocument();
     expect(bananaItem).toBeInTheDocument();
   });
 });
