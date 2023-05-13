@@ -49,8 +49,8 @@ describe("Feed component", () => {
     const orangeItem = screen.queryByText("Oranges");
     const bananaItem = screen.getByText("Bananas");
 
-    //expect(appleItem).not.toBeInTheDocument();
-    //expect(orangeItem).not.toBeInTheDocument();
+    expect(appleItem).not.toBeInTheDocument();
+    expect(orangeItem).not.toBeInTheDocument();
     expect(bananaItem).toBeInTheDocument();
   });
 });
