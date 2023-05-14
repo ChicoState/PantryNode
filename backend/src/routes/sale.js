@@ -35,7 +35,11 @@ router.get("/sale", ensureAuthenticated, function (req, res) {
   }
 });
 
-router.post("/add_donor", function (req, res) {
+router.post("/add_donor", ensureAuthenticated, function (req, res) {
+  if (!req.isAuthenticated()) {
+    const errors = [];
+    res.post('Unauthenticated');
+} else {
   const { name, email, phone } = req.body;
   person
     .findOrCreate({
@@ -55,7 +59,7 @@ router.post("/add_donor", function (req, res) {
         return res.redirect("/donor");
       }
     });
-});
+}});
 
 router.get("/donor", ensureAuthenticated, function (req, res) {
   if (!req.isAuthenticated()) {
@@ -109,7 +113,11 @@ let itemName = item.itemName;
 let itemType = item.itemType;
 let dateExp = item.dateExp;
 
-router.post("/add_stock", function (req, res) {
+router.post("/add_stock", ensureAuthenticated, function (req, res) {
+  if (!req.isAuthenticated()) {
+    const errors = [];
+    res.post('Unauthenticated');
+} else {
   const { itemName, itemType, quantity, dateExp, price, donorID } = req.body;
   item
     .findOrCreate({
@@ -141,10 +149,14 @@ router.post("/add_stock", function (req, res) {
         });
     });
   res.redirect("/stock");
-});
+}});
 
 // will need to think of a way to implement this since cat is an enum
-router.post("/add_cat", function (req, res) {
+router.post("/add_cat", ensureAuthenticated, function (req, res) {
+  if (!req.isAuthenticated()) {
+    const errors = [];
+    res.post('Unauthenticated');
+} else {
   const { categoryName } = req.body;
 
   const newCat = new Category({
@@ -157,9 +169,13 @@ router.post("/add_cat", function (req, res) {
   // console.log(newItem);
 
   res.redirect("/stock");
-});
+}});
 
 router.post("/checkout", ensureAuthenticated, function (req, res) {
+  if (!req.isAuthenticated()) {
+    const errors = [];
+    res.post('Unauthenticated');
+} else {
   console.log("IN BASE...");
   let errors = [];
 
@@ -321,13 +337,13 @@ router.post("/checkout", ensureAuthenticated, function (req, res) {
       }
     }
   });
-});
+}});
 
-router.get("/checkout", function (req, res) {
-  // if (!req.isAuthenticated()) {
-  //     let errors = [];
-  //     res.redirect('index', { errors });
-  // } else
+router.get("/checkout", ensureAuthenticated, function (req, res) {
+  if (!req.isAuthenticated()) {
+    const errors = [];
+    res.post('Unauthenticated');
+} else {
   {
     Item.find({}, function (err, allItems) {
       if (err) {
@@ -344,7 +360,7 @@ router.get("/checkout", function (req, res) {
       console.log("OUTSIDE");
     });
   }
-});
+}});
 
 router.get("/charts", ensureAuthenticated, function (req, res) {
   if (!req.isAuthenticated()) {
