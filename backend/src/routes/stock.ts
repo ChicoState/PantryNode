@@ -14,13 +14,50 @@ router.get('/stock', ensureAuthenticated, function (req: any, res: any) {
         const errors = [];
         res.post('Unauthenticated');
     } else {
-        stock.findAll().then((cur_stock: typeof stock[]) => {
+        if(req.query.item !== undefined) {
+            const filter = ` word_similarity('${req.query.item}', name) > 0.5 ORDER BY name <->> '${req.query.item}'`;
+            stock.findAll({
+                where: Sequelize.literal(filter),
+            }).then((cur_stock: typeof stock[]) => {
+                if (cur_stock == null) {
+                    res.send("No Items Found");
+                } else {
+                    res.json(cur_stock);
+                }
+            });
+        } else {
+            stock.findAll().then((cur_stock: typeof stock[]) => {
             if (cur_stock == null) {
                 console.log("THIS IS ERROR " + cur_stock);
             } else {
-                res.json(JSON.stringify(cur_stock));
+                res.json(cur_stock);
             }
-        });
+            });
+        }
+    }
+});
+
+router.get('/available', ensureAuthenticated, function (req: any, res: any) {
+    if (!req.isAuthenticated()) {
+        const errors = [];
+        res.post('Unauthenticated');
+    } else {
+        console.log(req.query);
+        if(req.query.item !== undefined) {
+            stock.findOne({
+                where: {
+                    name: req.query.item
+                },
+            }).then((cur_stock: typeof stock[]) => {
+                if (cur_stock == null) {
+                    res.send("No Items Found");
+                } else {
+                    res.send(cur_stock);
+                }
+            });
+        } else {
+            res.send("bad request");
+        }
     }
 });
 

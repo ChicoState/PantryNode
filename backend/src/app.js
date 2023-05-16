@@ -111,6 +111,7 @@ app.get('/wastemanagement', summaryRouter);
 app.get('/soontoexpire', summaryRouter);
 
 app.get('/stock', stockRouter);
+app.get('/available', stockRouter);
 
 app.get('/checkout_success', function(req, res, next) {
     res.render('checkout_success', { title: 'Success' });

@@ -37,7 +37,10 @@ WHERE email = 'johndoe@example.com';
 INSERT INTO Transaction (person_id, date, trans_type, site)
 VALUES ((SELECT MAX(person_id) FROM Person), NOW(), 'donation', 1),
        -- Add old transaction with goods that have been expiring.
-       ((SELECT MIN(person_id) FROM Person), NOW() - INTERVAL '3 weeks', 'donation', 1);
+       ((SELECT MIN(person_id) FROM Person), NOW() - INTERVAL '3 weeks', 'donation', 1),
+        -- Other Transaction types
+       ((SELECT MIN(person_id) FROM Person), NOW(), 'purchase', 1),
+       ((SELECT MAX(person_id) FROM Person), NOW(), 'throw out', 1);
 
 -- Insert test data for Trans_items
 INSERT INTO Trans_items (trans_id, item_id, quantity, expiration)
@@ -45,11 +48,15 @@ VALUES ((SELECT MIN(trans_id) FROM Transaction), 4, 5, NOW() + INTERVAL '1 week'
        ((SELECT MIN(trans_id) FROM Transaction), 3, 10, NOW() + INTERVAL '2 weeks'),
        -- Donate goods that expired 3 weeks ago, 1 week ago, and 1 week from now.
        -- Old apples
-       ((SELECT MAX(trans_id) FROM Transaction), 1, 7, NOW() - INTERVAL '3 weeks'),
+       ((SELECT MAX(trans_id)-2 FROM Transaction), 1, 7, NOW() - INTERVAL '3 weeks'),
        -- Old oranges
-       ((SELECT MAX(trans_id) FROM Transaction), 2, 7, NOW() - INTERVAL '1 week'),
+       ((SELECT MAX(trans_id)-2 FROM Transaction), 2, 7, NOW() - INTERVAL '1 week'),
        -- Nearly old Milk
-       ((SELECT MAX(trans_id) FROM Transaction), 3, 7, NOW() + INTERVAL '1 day');
+       ((SELECT MAX(trans_id)-2 FROM Transaction), 3, 7, NOW() + INTERVAL '1 day'),
+       -- purchase trans item
+       ((SELECT MAX(trans_id)-1 FROM Transaction), 3, 2, null),
+       -- throw out for trans item
+       ((SELECT MAX(trans_id) FROM Transaction), 3, 1, null);
 
 -- Insert test data for Shelf_contents
 INSERT INTO Shelf_contents (trans_item_id, shelf_id, store_date, quantity)
