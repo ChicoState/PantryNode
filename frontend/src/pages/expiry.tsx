@@ -175,6 +175,10 @@ const ExpiryIndex = () => {
    } as expiryFeed,
  ]);
 
+ let expiredCount = 0;
+ feedList.forEach(item => {
+  expiredCount += item.quantity;
+ });
 
  const [selectedSortBy, setSelectedSortBy] = useState<string>("Expiry Date");
  const [selectedSortBy2, setSelectedSortBy2] = useState<string>("Expiry Date");
@@ -311,6 +315,7 @@ const ExpiryIndex = () => {
    <div>
       <Typography variant="h4" align="left" sx={{ color: "#8c2332" }}>
         <b>Expiry Items</b>
+        <Typography>Expired Item Quantity: {expiredCount}</Typography>
       </Typography>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={10} md={6} mt={4}>
