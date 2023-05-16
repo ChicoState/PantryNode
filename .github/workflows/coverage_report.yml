@@ -2,12 +2,11 @@ name: Coverage Report
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, coverage_badge]
     types:
       - closed
   push:
-    branches:
-      - main
+    branches: [main, coverage_badge]
 
 jobs:
   Coverage_Report:
