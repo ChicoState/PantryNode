@@ -69,7 +69,7 @@ CREATE TABLE Person (
   PRIMARY KEY (person_id)
 );
 
-CREATE TYPE trans_type AS ENUM ('donation', 'purchase', 'throw out' );
+CREATE TYPE trans_type AS ENUM ('donation', 'purchase', 'throw out', 'checkout');
 CREATE TABLE Transaction (
   trans_id serial,
   person_id int,

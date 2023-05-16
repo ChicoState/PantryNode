@@ -97,6 +97,9 @@ app.get('/feed', feedRouter);
 app.get('/items', itemsRouter);
 app.get('/items/expired', itemsRouter);
 app.get('/items/nearly_expired', itemsRouter);
+app.get('/items/total_donations', itemsRouter);
+app.get('/items/total_checkouts', itemsRouter);
+app.get('/items/unique_checkouts', itemsRouter);
 
 app.get('/donors', donorRouter);
 app.get('/lookupDonor', donorRouter);

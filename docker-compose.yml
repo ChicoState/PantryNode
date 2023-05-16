@@ -9,6 +9,7 @@ services:
       - ./backend/sql/dummy_data.sql:/docker-entrypoint-initdb.d/2_dummy_data.sql
       - ./backend/sql/PLU_data.sql:/docker-entrypoint-initdb.d/3_PLU_data.sql
       - ./backend/sql/dummy_data2.sql:/docker-entrypoint-initdb.d/4_dummy_data.sql
+      - ./backend/sql/dummy_data3.sql:/docker-entrypoint-initdb.d/5_dummy_data.sql
     networks:
       - local
     ports:

@@ -37,7 +37,11 @@ WHERE email = 'johndoe@example.com';
 INSERT INTO Transaction (person_id, date, trans_type, site)
 VALUES ((SELECT MAX(person_id) FROM Person), NOW(), 'donation', 1),
        -- Add old transaction with goods that have been expiring.
-       ((SELECT MIN(person_id) FROM Person), NOW() - INTERVAL '3 weeks', 'donation', 1);
+       ((SELECT MAX(person_id) FROM Person), NOW() - INTERVAL '3 weeks', 'donation', 1),
+       -- Add three purchase transactions of same person_id:
+       ((SELECT MAX(person_id) FROM Person), NOW(), 'checkout', 1),
+       ((SELECT MAX(person_id) FROM Person), NOW(), 'checkout', 1),
+       ((SELECT MAX(person_id) FROM Person), NOW(), 'checkout', 1);
 
 -- Insert test data for Trans_items
 INSERT INTO Trans_items (trans_id, item_id, quantity, expiration)
