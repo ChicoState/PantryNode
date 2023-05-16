@@ -29,8 +29,8 @@ router.get("/sale", ensureAuthenticated, function (req, res) {
     let errors = [];
     res.redirect("index", { errors });
   } else {
-    res.render("sale", {
-      name: req.user.name,
+    res.json({
+      name: req.user.name
     });
   }
 });
@@ -77,9 +77,10 @@ router.get("/donor", ensureAuthenticated, function (req, res) {
         },
       })
       .then((allDonors) => {
-        res.render("donor", {
-          data: { name: req.user.name, donors: allDonors },
-        });
+        res.json({
+          name: req.user.name,
+          donors: allDonors
+        });        
       })
       .catch((err) => console.log(err));
   }
@@ -99,13 +100,11 @@ router.get("/categories", ensureAuthenticated, function (req, res) {
     }
     console.log(donor);
     const allCategories = item.getAttributes().category?.defaultValue;
-    res.render("stock", {
-      data: {
-        name: req.user.name,
-        categories: allCategories,
-        donorId: donor,
-        donorName: donor_name,
-      },
+    res.json({
+      name: req.user.name,
+      categories: allCategories,
+      donorId: donor,
+      donorName: donor_name,
     });
   }
 });
@@ -246,9 +245,11 @@ router.post("/checkout", ensureAuthenticated, function (req, res) {
                 itemName +
                 " has expired. Select other item.",
             });
-            res.render("checkoutdetails", {
-              data: { name: req.user.name, items: allItems, errors },
-            });
+            res.json({
+              name: req.user.name,
+              items: allItems,
+              errors: errors
+            });            
           }
         });
       } else if (chicoId.length != 9) {
@@ -260,9 +261,11 @@ router.post("/checkout", ensureAuthenticated, function (req, res) {
           if (err) {
             console.log("THIS IS ERRROR " + err);
           } else {
-            res.render("checkoutdetails", {
-              data: { name: req.user.name, items: allItems, errors },
-            });
+            res.json({
+              name: req.user.name,
+              items: allItems,
+              errors: errors
+            });            
           }
         });
       } else {
@@ -282,8 +285,9 @@ router.post("/checkout", ensureAuthenticated, function (req, res) {
                 if (err) {
                   console.log("THIS IS ERRROR " + err);
                 } else {
-                  res.render("checkoutdetails", {
-                    data: { name: req.user.name, items: allItems, errors },
+                  res.json({
+                    name: req.user.name,
+                    items: allItems
                   });
                 }
               });
@@ -323,9 +327,7 @@ router.post("/checkout", ensureAuthenticated, function (req, res) {
                   console.log("THIS IS ERRROR " + err);
                 } else {
                   console.log(" ALL ITEMS => " + allItems);
-                  res.render("checkout_success", {
-                    data: { name: req.user.name, items: allItems, errors },
-                  });
+                  res.status(200).json({ items: allItems });
                 }
               });
               //res.render('checkout_success', {data: {}});
@@ -352,9 +354,10 @@ router.get("/checkout", ensureAuthenticated, function (req, res) {
         // console.log(" forward to checkout");
         // console.log(allItems);
 
-        res.render("checkoutdetails", {
-          data: { name: "Subhed", items: allItems },
-        });
+        res.json({
+          name: "Subhed",
+          items: allItems
+        });        
       }
 
       console.log("OUTSIDE");
@@ -394,16 +397,14 @@ router.get("/charts", ensureAuthenticated, function (req, res) {
                       } else {
                         // console.log(allItems1);
 
-                        res.render("charts", {
-                          data: {
-                            name: req.user.name,
-                            allItems,
-                            cat: result,
-                            stock: allItems0,
-                            items: allItems1,
-                            expired: expItems,
-                          },
-                        });
+                        res.json({
+                          name: req.user.name,
+                          allItems: allItems,
+                          cat: result,
+                          stock: allItems0,
+                          items: allItems1,
+                          expired: expItems
+                        });                        
 
                         return;
                       }

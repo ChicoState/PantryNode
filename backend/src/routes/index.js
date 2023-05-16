@@ -14,7 +14,7 @@ initModels(sequelize);
 router.get('/', function(req, res, next) {
     if (!req.isAuthenticated()) {
         let errors = [];
-        res.render('index', { errors });
+        res.json(errors);
     } else {
         res.redirect('/home', { title: 'Home' });
 
@@ -43,13 +43,10 @@ router.get('/home', ensureAuthenticated, function(req, res) {
         // }
         // console.log(ids);
         if (allItems.length > 0) {
-          res.render('dashboard', {
-            data: { name: req.user, allItems }
-          })
+          res.json({ name: req.user, allItems });
         } else {
-          res.render('dashboard', {
-            data: { name: req.user }
-          })
+          res.json({ name: req.user });
+        
         }
       }
     }

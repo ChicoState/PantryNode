@@ -15,12 +15,11 @@ initModels(sequelize);
 
 router.get('/register', function (req, res, next) {
   if (!req.isAuthenticated()) {
-    let errors = [];
-    res.render('signup', { errors });
-  }
-  else {
-    res.redirect('/home');
-  }
+    let errors = ['User not authenticated'];
+    res.status(400).json({ errors });
+  } else {
+    res.status(200).json({ message: 'Redirect to /home' });
+  }  
 });
 
 router.post('/sign_up', function (req, res) {
@@ -37,9 +36,9 @@ router.post('/sign_up', function (req, res) {
     }
   }).then(([user, created]) => {
       if (!created) {
-        let errors = [];
-        errors.push('User Exist!' );
-        res.render('signup', { errors });
+        // let errors = [];
+        // errors.push('User Exist!' );
+        res.status(409).json({ error: 'User Exist!' });
       }
       else {
         bcrypt.genSalt(10, (err, salt) =>
@@ -52,7 +51,8 @@ router.post('/sign_up', function (req, res) {
 
         
         console.log(user);
-        return res.render('./signup_success', { title: 'Express' });
+        return res.status(201).json({ user });
+
       }
 
     });
@@ -60,7 +60,7 @@ router.post('/sign_up', function (req, res) {
 
 
 router.get('/login', function (req, res, next) {
-  res.render('signup_success', { title: 'Express' });
+  res.status(200).json({ message: 'Signup successful'});
 });
 
 router.post('/login', function (req, res, next) {
@@ -80,8 +80,7 @@ router.post('/login', function (req, res, next) {
 
 
 router.get('/logout', function (req, res) {
-  req.logout();
-  res.render('index', { title: 'Express' });
+  res.status(200).send({ title: 'Express' });
 });
 
 
