@@ -246,7 +246,17 @@ const ExpiryIndex = () => {
          return 0;
        }
      });
-   }
+   } else if (event.target.value == "Quantity") {
+    feedList.sort((a, b) => {
+      if (a.quantity > b.quantity) {
+        return -1;
+      } else if (a.quantity < b.quantity) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
 
 
    console.log(feedList);
@@ -277,15 +287,24 @@ const ExpiryIndex = () => {
          return 0;
        }
      });
-   }
-
+   } else if (event.target.value == "Quantity") {
+    nearlyExpiredFeedList.sort((a, b) => {
+      if (a.quantity > b.quantity) {
+        return -1;
+      } else if (a.quantity < b.quantity) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
 
    console.log(nearlyExpiredFeedList);
    setNearlyExpiredFeedList(nearlyExpiredFeedList);
  };
 
 
- const sortByList = ["Expiry Date", "Item"];
+ const sortByList = ["Expiry Date", "Item", "Quantity"];
 
 
  return (
