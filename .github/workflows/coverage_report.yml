@@ -3,9 +3,12 @@ name: Coverage Report
 on:
   pull_request:
     branches: [main]
+    types:
+      - closed
   push:
     branches:
       - main
+
 jobs:
   Coverage_Report:
     runs-on: ubuntu-latest
@@ -15,8 +18,27 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-        run: |
-          npm install
+        run: npm install
+
+      - name: Check if changes are accepted into main
+        id: check-main
+        run: echo ::set-output name=accepted::$(if [ "${{ github.event_name }}" == 'pull_request' ] && [ "${{ github.event.action }}" == 'closed' ] && [ "${{ github.event.pull_request.merged }}" == 'true' ] && [ "${{ github.ref }}" == 'refs/heads/main' ]; then echo 'true'; else echo 'false'; fi)
+
       - name: Generate coverage report
+        if: steps.check-main.outputs.accepted == 'true'
+        run: npm run coverage
+
+      - name: Commit coverage report and update badge
+        if: steps.check-main.outputs.accepted == 'true'
         run: |
-          npm run coverage
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git checkout ${{ github.ref }}
+          git add ./path/to/coverage/report.html  # Replace with the actual path to your coverage report HTML file
+          git commit -m "Update coverage report"
+          git push origin ${{ github.ref }}
+
+      - name: Update badge in README.md
+        run: |
+          npm install -g istanbul-coveralls
+          istanbul-coveralls --report=lcov --dir=./path/to/coverage --badge-url=https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/<your_gist_id>&style=flat
