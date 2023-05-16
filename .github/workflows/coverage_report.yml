@@ -33,7 +33,8 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git checkout ${{ github.ref }}
-          git add ./docs/coverage/index.html  #Replaced actual path to coverage report HTML file
+          git add ./docs/coverage/index.html  #coverage report HTML file added
+
           git commit -m "Update coverage report"
           git push origin ${{ github.ref }}
 
