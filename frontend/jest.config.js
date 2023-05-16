@@ -15,5 +15,15 @@ module.exports = {
   ],
   collectCoverage: true,
   collectCoverageFrom: ["src/pages/**/*.tsx", "src/Components/**/*.tsx", '!**/node_modules/**'],
-  verbose: true
+  verbose: true,
+  coverageReporters: ['lcov', 'text'],
+  coverageThreshold: {
+    global: {
+      // Set your desired coverage thresholds here
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80,
+    },
+  },
 };
